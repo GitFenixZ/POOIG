@@ -8,10 +8,22 @@ import java.util.Scanner;
 public class PlateauView extends Carre {
     private PlateauModel model;
 
+    /**
+     * Constructeur
+     * 
+     * @param model
+     */
     public void setModel(PlateauModel model) {
         this.model = model;
     }
 
+    /**
+     * Retourne un String avec un caractere qui se repete un certain nombre de fois
+     * 
+     * @param c caractere a repeter
+     * @param n nombre de fois a repeter
+     * @return un String avec n fois le caractere c
+     */
     public static String repeatChar(char c, int n) {
         String res = "";
         for (int i = 0; i < n; i++) {
@@ -20,6 +32,12 @@ public class PlateauView extends Carre {
         return res;
     }
 
+    /**
+     * Creer un String qui represente une partie du plateau.
+     * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la
+     * position ou l'on est. Si il y a des piece dans les positions affichees, cela
+     * les affiches.
+     */
     public String afficher() {
         int xdepart = 0;
         int xfin = 3;
@@ -58,6 +76,10 @@ public class PlateauView extends Carre {
         return res;
     }
 
+    /**
+     * Affiche l'intégralité des pièce du tableau.
+     * Ligne par ligne.
+     */
     @Override
     public String toString() {
         String[] affichage = new String[model.getHauteur() * model.getHauteurPiece()];
@@ -88,6 +110,13 @@ public class PlateauView extends Carre {
         return res;
     }
 
+    /**
+     * Methode qui permet de demander une direction dans le terminal.
+     * 
+     * @param sc       System.in permettra de lire la reponse de l'utilisateur
+     * @param question La question qui vas être posee.
+     * @return retourn le cote correpondant a la reponse.
+     */
     public static Direction demandeDirection(Scanner sc, String question) {
         System.out.println(question);
         String demande = sc.nextLine();
@@ -105,6 +134,13 @@ public class PlateauView extends Carre {
         }
     }
 
+    /**
+     * Methode qui permet de demander un boolean.
+     * 
+     * @param sc       System.in permettra de lire la reponse de l'utilisateur
+     * @param question La question qui vas être posee.
+     * @return retourn le boolean correpondant a la reponse.
+     */
     public static boolean demandeBoolean(Scanner sc, String question) {
         System.out.println(question);
         String demande = sc.nextLine();
@@ -117,23 +153,5 @@ public class PlateauView extends Carre {
                 System.out.println("Erreur : réponse invalide.");
                 return demandeBoolean(sc, question);
         }
-    }
-
-    public static int demandeInt(Scanner sc, int max, String question) {
-        System.out.println(question);
-        String reponse = sc.nextLine();
-        for (int i = 0; i < reponse.length(); i++) {
-            if ('0' > reponse.charAt(i) || '9' < reponse.charAt(i)) {
-                System.out.println("Erreur : réponse invalide");
-                return demandeInt(sc, max, question);
-            }
-        }
-        int resultat = Integer.valueOf(reponse);
-        if (resultat > 0 && resultat <= max) {
-            return resultat;
-        } else {
-            return demandeInt(sc, max, question);
-        }
-
     }
 }

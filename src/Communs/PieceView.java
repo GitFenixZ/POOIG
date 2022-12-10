@@ -6,10 +6,17 @@ package Communs;
 public class PieceView {
     PieceModel model;
 
+    // setter
+
     public void setModel(PieceModel model) {
         this.model = model;
     }
 
+    /**
+     * retourne un String représentant une pièce.
+     * C'est a dire un String composé de plusieurs lignes avec tout les valeur de a
+     * pièce. Et des espace la ou il faut.
+     */
     @Override
     public String toString() {
         String res = "";
