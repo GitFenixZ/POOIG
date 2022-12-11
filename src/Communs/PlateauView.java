@@ -39,6 +39,8 @@ public class PlateauView extends Carre {
      * les affiches.
      */
     public String afficher() {
+        String res = repeatChar('-', ((model.getLargeurPiece() * 2 + 2) * 3 + 1)) + "\n";
+
         int xdepart = 0;
         int xfin = 3;
         int ydepart = 0;
@@ -55,9 +57,6 @@ public class PlateauView extends Carre {
         if (model.getActuelY() == model.getHauteur() - 1) {
             yfin--;
         }
-
-        String res = repeatChar('-', (model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
-                + "\n";
         for (int y = ydepart; y < yfin; y++) {
             for (int i = 0; i < model.getLargeurPiece(); i++) {
                 res += "|";
@@ -70,7 +69,7 @@ public class PlateauView extends Carre {
                 }
                 res += "\n";
             }
-            res += repeatChar('-', (model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
+            res += repeatChar('-', ((model.getLargeurPiece() * 2 + 2) * (xfin - xdepart) + 1))
                     + "\n";
         }
         return res;

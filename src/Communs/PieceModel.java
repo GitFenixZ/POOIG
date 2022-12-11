@@ -124,11 +124,7 @@ public class PieceModel extends Carre {
     private int[] getCoteLeft() {
         int[] res = new int[hauteur];
         for (int i = 0; i < hauteur; i++) {
-            for (int j = 0; j < largeur; j++) {
-                if (j == 0) {
-                    res[i] = valeurs[i][j];
-                }
-            }
+            res[i] = valeurs[i][0];
         }
         return res;
     }
@@ -142,11 +138,7 @@ public class PieceModel extends Carre {
     private int[] getCoteRight() {
         int[] res = new int[hauteur];
         for (int i = 0; i < hauteur; i++) {
-            for (int j = 0; j < largeur; j++) {
-                if (j == largeur - 1) {
-                    res[i] = valeurs[i][j];
-                }
-            }
+            res[i] = valeurs[i][largeur - 1];
         }
         return res;
     }
@@ -248,7 +240,9 @@ public class PieceModel extends Carre {
     public int somme(Direction cote) {
         int res = 0;
         for (int valeur : this.getCote(cote)) {
-            res += valeur;
+            if (valeur != -1) {
+                res += valeur;
+            }
         }
         return res;
     }
