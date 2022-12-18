@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class qui represente un tableau en 2D qui contient des objet de type T et qui
  * est de taille infini. C'est a dire qui est entendable tant que l'on souhaite.
  */
-public class Extendable<T> implements Carre {
+public abstract class Extendable<T> implements Carre {
 
     /** Tableau de jeu en 2D qui contient des T */
     protected ArrayList<ArrayList<T>> tableau;
