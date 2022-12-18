@@ -1,9 +1,9 @@
 package Communs;
 
 /**
- * Class permettant définir un objet avec 4 faces.
+ * Interface permettant définir un objet avec 4 faces.
  */
-public abstract class Carre {
+public interface Carre {
     /**
      * Cotés possibles
      */

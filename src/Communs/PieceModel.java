@@ -5,7 +5,7 @@ package Communs;
  * Ainsi que ses dimensions.
  */
 
-public class PieceModel extends Carre {
+public class PieceModel implements Carre {
     /** Valeurs contenue dans la piece */
     protected int[][] valeurs;
     /** Hauteur de la piece */
@@ -77,12 +77,12 @@ public class PieceModel extends Carre {
 
     /**
      * Getter d'un cote sous forme d'un tableau contenant les valeur du coté
-     * souhaite.
+     * souhaite. En faisant une copie.
      * 
      * @param cote le cote dont on veut obtenir les valeurs
      * @return un tableau avec les valeur du cote
      */
-    public int[] getCote(Direction cote) {
+    public int[] getCote(Direction cote) throws directionInvalide {
         switch (cote) {
             case UP:
                 return getCoteUp();
@@ -93,30 +93,38 @@ public class PieceModel extends Carre {
             case RIGHT:
                 return getCoteRight();
             default:
-                return new int[0];
+                throw new directionInvalide();
         }
     }
 
     /**
-     * Retourn le cote haut de la piece
+     * Retourn le cote haut de la piece en faisant une copie
      * 
      * @return la premiere ligne du tableau de valeur
      */
     private int[] getCoteUp() {
-        return this.valeurs[0];
+        int[] res = new int[largeur];
+        for (int i = 0; i < hauteur; i++) {
+            res[i] = valeurs[0][i];
+        }
+        return res;
     }
 
     /**
-     * Retourn le cote bas de la piece
+     * Retourn le cote bas de la piece en faisant une copie
      * 
      * @return la derniere ligne du tableau de valeurs
      */
     private int[] getCoteDown() {
-        return this.valeurs[this.valeurs.length - 1];
+        int[] res = new int[largeur];
+        for (int i = 0; i < hauteur; i++) {
+            res[i] = valeurs[this.valeurs.length - 1][i];
+        }
+        return res;
     }
 
     /**
-     * Retourne le cote gauche de la piece
+     * Retourne le cote gauche de la piece en faisant une copie
      * 
      * @return un tableau contenant chaque premiere valeur de chaque ligne du
      *         tableau valeurs.
@@ -130,7 +138,7 @@ public class PieceModel extends Carre {
     }
 
     /**
-     * Retourne le cote droit de la piece
+     * Retourne le cote droit de la piece en faisant une copie
      * 
      * @return un tableau contenant chaque derniere valeur de chaque ligne du
      *         tableau valeurs.
@@ -152,7 +160,7 @@ public class PieceModel extends Carre {
      * @param piece Pièce avec la quel je veux comparer le coté.
      * @return Si les deux coté sont bien identique
      */
-    public boolean comparer(Direction cote, PieceModel piece) {
+    public boolean comparer(Direction cote, PieceModel piece) throws directionInvalide {
         int[] cote1 = {};
         int[] cote2 = {};
         switch (cote) {
@@ -176,17 +184,8 @@ public class PieceModel extends Carre {
                 cote1 = this.getCoteDown();
                 cote2 = piece.getCoteUp();
                 break;
-            case ACTUEL:
-                // compare l'integralite du contenue des 2 pieces (les deux piece sont
-                // identique)
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        if (getValeurs()[i][j] != piece.getValeurs()[i][j]) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
+            default:
+                throw new directionInvalide();
         }
         // compare les deux cote selectionnees.
         for (int j = 0; j < cote1.length; j++) {
@@ -238,12 +237,16 @@ public class PieceModel extends Carre {
      * @return La somme de toutes les valeur d'un cote
      */
     public int somme(Direction cote) {
-        int res = 0;
-        for (int valeur : this.getCote(cote)) {
-            if (valeur != -1) {
-                res += valeur;
+        try {
+            int res = 0;
+            for (int valeur : this.getCote(cote)) {
+                if (valeur != -1) {
+                    res += valeur;
+                }
             }
+            return res;
+        } catch (directionInvalide e) {
+            return 0;
         }
-        return res;
     }
 }

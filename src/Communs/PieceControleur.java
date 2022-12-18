@@ -4,7 +4,7 @@ package Communs;
  * Class modélisant le controleur d'un pièce de jeu permettant les interractions
  * vue modèle.
  */
-public class PieceControleur extends Carre {
+public class PieceControleur implements Carre {
     PieceModel model;
     PieceView view;
 
@@ -21,7 +21,11 @@ public class PieceControleur extends Carre {
     // getters
 
     public int[] getCote(Direction cote) {
-        return model.getCote(cote);
+        try {
+            return model.getCote(cote);
+        } catch (directionInvalide e) {
+            return new int[0];
+        }
     }
 
     /**
@@ -44,7 +48,11 @@ public class PieceControleur extends Carre {
      * @return Si les deux coté sont bien identique
      */
     public boolean comparer(Direction cote, PieceControleur piece) {
-        return model.comparer(cote, piece.model);
+        try {
+            return model.comparer(cote, piece.model);
+        } catch (directionInvalide e) {
+            return false;
+        }
     }
 
     /**

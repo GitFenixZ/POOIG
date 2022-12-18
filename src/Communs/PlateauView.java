@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Class modélisant la vue du plateau
  */
-public class PlateauView extends Carre {
+public class PlateauView implements Carre {
     private PlateauModel model;
 
     /**
@@ -18,28 +18,13 @@ public class PlateauView extends Carre {
     }
 
     /**
-     * Retourne un String avec un caractere qui se repete un certain nombre de fois
-     * 
-     * @param c caractere a repeter
-     * @param n nombre de fois a repeter
-     * @return un String avec n fois le caractere c
-     */
-    public static String repeatChar(char c, int n) {
-        String res = "";
-        for (int i = 0; i < n; i++) {
-            res += c;
-        }
-        return res;
-    }
-
-    /**
      * Creer un String qui represente une partie du plateau.
      * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
      */
     public String afficher() {
-        String res = repeatChar('-', ((model.getLargeurPiece() * 2 + 2) * 3 + 1)) + "\n";
+        String res = "";
 
         int xdepart = 0;
         int xfin = 3;
@@ -57,19 +42,26 @@ public class PlateauView extends Carre {
         if (model.getActuelY() == model.getHauteur() - 1) {
             yfin--;
         }
+
+        res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (xfin - xdepart) + 1) + "\n";
+
         for (int y = ydepart; y < yfin; y++) {
             for (int i = 0; i < model.getLargeurPiece(); i++) {
                 res += "|";
                 for (int x = xdepart; x < xfin; x++) {
-                    if (model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1) != null) {
-                        res += model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1).getligne(i) + "|";
-                    } else {
-                        res += repeatChar(' ', model.getLargeurPiece() * 2 + 1) + "|";
+                    try {
+                        if (model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1) != null) {
+                            res += model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1).getligne(i)
+                                    + "|";
+                        } else {
+                            res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
+                        }
+                    } catch (positionInvalide e) {
                     }
                 }
                 res += "\n";
             }
-            res += repeatChar('-', ((model.getLargeurPiece() * 2 + 2) * (xfin - xdepart) + 1))
+            res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (xfin - xdepart) + 1)
                     + "\n";
         }
         return res;
@@ -88,21 +80,24 @@ public class PlateauView extends Carre {
                     if (affichage[i * model.getHauteurPiece() + k] == null) {
                         affichage[i * model.getHauteurPiece() + k] = "";
                     }
-                    if (model.getPiece(j, i) != null) {
-                        affichage[i * model.getHauteurPiece() + k] += model.getPiece(j, i).getligne(k) + "|";
-                    } else {
-                        affichage[i * model.getHauteurPiece() + k] += repeatChar(' ', model.getLargeurPiece() * 2 + 1)
-                                + "|";
+                    try {
+                        if (model.getPiece(j, i) != null) {
+                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(j, i).getligne(k) + "|";
+                        } else {
+                            affichage[i * model.getHauteurPiece() + k] += " ".repeat(model.getLargeurPiece() * 2 + 1)
+                                    + "|";
+                        }
+                    } catch (positionInvalide e) {
                     }
                 }
             }
         }
-        String res = repeatChar('-', (model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
+        String res = "-".repeat((model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
                 + "\n";
         for (int i = 0; i < affichage.length; i++) {
             res += "|" + affichage[i] + "\n";
             if (i % model.getHauteurPiece() == 4) {
-                res += repeatChar('-', (model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
+                res += "-".repeat((model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
                         + "\n";
             }
         }

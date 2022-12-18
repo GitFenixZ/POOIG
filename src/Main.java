@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import Communs.PlateauModel;
-import Communs.PlateauView;
 import Domino.PlayDomino;
 
 /**
