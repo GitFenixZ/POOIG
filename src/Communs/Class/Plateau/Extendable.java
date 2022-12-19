@@ -1,12 +1,17 @@
-package Communs;
+package Communs.Class.Plateau;
 
 import java.util.ArrayList;
+
+import Communs.Exceptions.directionInvalide;
+import Communs.Exceptions.positionInvalide;
+import Communs.Interfaces.Carre;
+import Communs.Interfaces.Plateau.InterfaceExtendable;
 
 /**
  * Class qui represente un tableau en 2D qui contient des objet de type T et qui
  * est de taille infini. C'est a dire qui est entendable tant que l'on souhaite.
  */
-public abstract class Extendable<T> implements Carre {
+public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
 
     /** Tableau de jeu en 2D qui contient des T */
     protected ArrayList<ArrayList<T>> tableau;
@@ -41,18 +46,22 @@ public abstract class Extendable<T> implements Carre {
     }
 
     // getters
+    @Override
     public int getActuelX() {
         return actuelX;
     }
 
+    @Override
     public int getActuelY() {
         return actuelY;
     }
 
+    @Override
     public int getHauteur() {
         return tableau.size();
     }
 
+    @Override
     public int getLargeur() {
         if (tableau.size() >= 1) {
             return tableau.get(0).size();
@@ -60,6 +69,7 @@ public abstract class Extendable<T> implements Carre {
         return 0;
     }
 
+    @Override
     /**
      * Getter permettant d'obtenir la piece de la colonne x et de la ligne y du
      * plateau.
@@ -67,6 +77,8 @@ public abstract class Extendable<T> implements Carre {
      * @param x colonne
      * @param y ligne
      * @return la piece de la colonne x et de la ligne y
+     * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
+     *                          tableau.
      */
     public T getPiece(int x, int y) throws positionInvalide {
         if (x < 0 || x >= getLargeur() || y < 0 || y >= getHauteur()) {
@@ -75,6 +87,7 @@ public abstract class Extendable<T> implements Carre {
         return tableau.get(y).get(x);
     }
 
+    @Override
     /**
      * Setter permettant de placer la piece sur la colonne x et de la ligne y du
      * plateau.
@@ -82,6 +95,8 @@ public abstract class Extendable<T> implements Carre {
      * @param x     colonne
      * @param y     ligne
      * @param piece La piece a placer
+     * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
+     *                          tableau.
      */
     public void setPiece(int x, int y, T piece) throws positionInvalide {
         if (x < 0 || x > getLargeur() || y < 0 || y > getHauteur()) {
@@ -90,8 +105,11 @@ public abstract class Extendable<T> implements Carre {
         tableau.get(y).set(x, piece);
     }
 
+    @Override
     /**
      * Permet de se deplacer d'une colonne sur la droite sur le plateau.
+     * 
+     * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
     public void allerADroite() throws positionInvalide {
         if (actuelX < getLargeur() - 1) {
@@ -101,8 +119,11 @@ public abstract class Extendable<T> implements Carre {
         }
     }
 
+    @Override
     /**
      * Permet de se deplacer d'une colonne sur la gauche sur le plateau.
+     * 
+     * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
     public void allerAGauche() throws positionInvalide {
         if (actuelX > 0) {
@@ -112,8 +133,11 @@ public abstract class Extendable<T> implements Carre {
         }
     }
 
+    @Override
     /**
      * Permet de se deplacer d'une ligne vers le bas sur le plateau.
+     * 
+     * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
     public void allerEnBas() throws positionInvalide {
         if (actuelY < getHauteur() - 1) {
@@ -123,8 +147,11 @@ public abstract class Extendable<T> implements Carre {
         }
     }
 
+    @Override
     /**
      * Permet de se deplacer d'une ligne vers le haut sur le plateau.
+     * 
+     * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
     public void allerEnHaut() throws positionInvalide {
         if (actuelY > 0) {
@@ -134,6 +161,7 @@ public abstract class Extendable<T> implements Carre {
         }
     }
 
+    @Override
     /**
      * Verifie si le tableau est vide
      * 
@@ -150,10 +178,12 @@ public abstract class Extendable<T> implements Carre {
         return true;
     }
 
+    @Override
     /**
      * Permet d'etendre le tableau du plateau dans une direction donnee
      * 
      * @param dir cote que l'on souhaite agrandir.
+     * @throws directionInvalide Si la direction est ACTUEL
      */
     public void ajouterUnCote(Direction dir) throws directionInvalide {
         switch (dir) {

@@ -1,4 +1,4 @@
-package Communs;
+package Communs.Exceptions;
 
 /**
  * Class qui represente un exception si la direction donner dans une methode n'a

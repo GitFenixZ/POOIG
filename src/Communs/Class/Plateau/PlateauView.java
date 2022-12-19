@@ -1,22 +1,22 @@
-package Communs;
+package Communs.Class.Plateau;
 
-import java.util.Scanner;
+import Communs.Exceptions.positionInvalide;
+import Communs.Interfaces.Carre;
+import Communs.Interfaces.Plateau.InterfacePlateauView;
 
 /**
  * Class modélisant la vue du plateau
  */
-public class PlateauView implements Carre {
+public class PlateauView implements Carre, InterfacePlateauView {
     private PlateauModel model;
 
-    /**
-     * Constructeur
-     * 
-     * @param model
-     */
+    // setter
+    @Override
     public void setModel(PlateauModel model) {
         this.model = model;
     }
 
+    @Override
     /**
      * Creer un String qui represente une partie du plateau.
      * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la
@@ -102,50 +102,5 @@ public class PlateauView implements Carre {
             }
         }
         return res;
-    }
-
-    /**
-     * Methode qui permet de demander une direction dans le terminal.
-     * 
-     * @param sc       System.in permettra de lire la reponse de l'utilisateur
-     * @param question La question qui vas être posee.
-     * @return retourn le cote correpondant a la reponse.
-     */
-    public static Direction demandeDirection(Scanner sc, String question) {
-        System.out.println(question);
-        String demande = sc.nextLine();
-        switch (demande.toUpperCase()) {
-            case "DROITE":
-                return Direction.RIGHT;
-            case "GAUCHE":
-                return Direction.LEFT;
-            case "HAUT":
-                return Direction.UP;
-            case "BAS":
-                return Direction.DOWN;
-            default:
-                return Direction.ACTUEL;
-        }
-    }
-
-    /**
-     * Methode qui permet de demander un boolean.
-     * 
-     * @param sc       System.in permettra de lire la reponse de l'utilisateur
-     * @param question La question qui vas être posee.
-     * @return retourn le boolean correpondant a la reponse.
-     */
-    public static boolean demandeBoolean(Scanner sc, String question) {
-        System.out.println(question);
-        String demande = sc.nextLine();
-        switch (demande.toUpperCase()) {
-            case "OUI":
-                return true;
-            case "NON":
-                return false;
-            default:
-                System.out.println("Erreur : réponse invalide.");
-                return demandeBoolean(sc, question);
-        }
     }
 }

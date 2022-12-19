@@ -1,13 +1,15 @@
-package Communs;
+package Communs.Class.Piece;
+
+import Communs.Interfaces.Piece.InterfacePieceView;
 
 /**
  * Class modélisant la vue d'une piece de jeu.
  */
-public class PieceView {
+public class PieceView implements InterfacePieceView {
     PieceModel model;
 
     // setter
-
+    @Override
     public void setModel(PieceModel model) {
         this.model = model;
     }

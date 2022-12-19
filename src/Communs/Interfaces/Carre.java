@@ -1,4 +1,4 @@
-package Communs;
+package Communs.Interfaces;
 
 /**
  * Interface permettant définir un objet avec 4 faces.

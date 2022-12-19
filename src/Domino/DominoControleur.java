@@ -1,8 +1,8 @@
 package Domino;
 
-import Communs.PieceControleur;
-import Communs.PieceModel;
-import Communs.PieceView;
+import Communs.Class.Piece.PieceControleur;
+import Communs.Class.Piece.PieceModel;
+import Communs.Class.Piece.PieceView;
 
 /**
  * Class modélisant le contoleur du domino. Qui permet les interactions vue

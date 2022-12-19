@@ -2,7 +2,9 @@ package Domino;
 
 import java.util.Scanner;
 
-import Communs.*;
+import Communs.Class.Player;
+import Communs.Class.Sac;
+import Communs.Class.Plateau.PlateauControleur;
 
 /**
  * Class modélisant une partie de domino qui se joue.

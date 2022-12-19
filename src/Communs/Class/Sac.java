@@ -1,14 +1,17 @@
-package Communs;
+package Communs.Class;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import Communs.Class.Piece.PieceControleur;
+import Communs.Interfaces.InterfaceSac;
 
 /**
  * Class modélisant un sac, qui contient des pieces, et dans le quel on peut
  * tirer aléatoirement.
  */
 
-public class Sac {
+public class Sac implements InterfaceSac {
     /**
      * Contenur du sac
      */
@@ -33,6 +36,7 @@ public class Sac {
      * 
      * @return un piece du sac
      */
+    @Override
     public PieceControleur tire() {
         if (!isEmpty()) {
             Random rd = new Random();
@@ -47,6 +51,7 @@ public class Sac {
     /**
      * Methode qui ajoute une piece dans le sac
      */
+    @Override
     public void ajouter(PieceControleur piece) {
         sac.add(piece);
     }
@@ -54,6 +59,7 @@ public class Sac {
     /**
      * @return le nombre de piece dans le sac en se moment
      */
+    @Override
     public int getNombreDePiece() {
         return sac.size();
     }
@@ -61,6 +67,7 @@ public class Sac {
     /**
      * @return si le sac est vide
      */
+    @Override
     public boolean isEmpty() {
         return sac.size() == 0;
     }
@@ -68,6 +75,7 @@ public class Sac {
     /**
      * @return si le sac est plein
      */
+    @Override
     public boolean isFull() {
         return sac.size() == nombreDePieceMax;
     }

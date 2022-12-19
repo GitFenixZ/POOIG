@@ -1,9 +1,13 @@
-package Communs;
+package Communs.Class.Plateau;
+
+import Communs.Exceptions.positionInvalide;
+import Communs.Interfaces.Plateau.InterfacePlateauModel;
+import Communs.Class.Piece.PieceControleur;
 
 /**
  * Class modélisant le plateau de jeu. C'est un tableau de tableau de piece.
  */
-public class PlateauModel extends Extendable<PieceControleur> {
+public class PlateauModel extends Extendable<PieceControleur> implements InterfacePlateauModel {
     /** Hauteur des pieces contenue par le plateau */
     private int hauteurPiece;
     /** Largeur des pieces contenue par le plateau */
@@ -24,15 +28,17 @@ public class PlateauModel extends Extendable<PieceControleur> {
     }
 
     // getters
-
+    @Override
     public int getHauteurPiece() {
         return hauteurPiece;
     }
 
+    @Override
     public int getLargeurPiece() {
         return largeurPiece;
     }
 
+    @Override
     /**
      * Methode qui permet de calculer le nombre de point que repporte une piece
      * quand elle vient d'être placer.
@@ -71,6 +77,7 @@ public class PlateauModel extends Extendable<PieceControleur> {
         return res;
     }
 
+    @Override
     /**
      * Verifie si il est possible de placer la piece quelque parts sur la plateau
      * 
@@ -100,6 +107,7 @@ public class PlateauModel extends Extendable<PieceControleur> {
         return false;
     }
 
+    @Override
     /**
      * Regarde si l'on peut placer une piece a de certaine coordonnee
      * 

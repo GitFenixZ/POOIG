@@ -1,11 +1,15 @@
-package Communs;
+package Communs.Class.Piece;
+
+import Communs.Exceptions.directionInvalide;
+import Communs.Interfaces.Carre;
+import Communs.Interfaces.Piece.InterfacePieceModel;
 
 /**
  * Class modélisant une piece de jeu, c'est à dire les vauleurs qu'elle prends.
  * Ainsi que ses dimensions.
  */
 
-public class PieceModel implements Carre {
+public class PieceModel implements Carre, InterfacePieceModel {
     /** Valeurs contenue dans la piece */
     protected int[][] valeurs;
     /** Hauteur de la piece */
@@ -33,15 +37,17 @@ public class PieceModel implements Carre {
     }
 
     // getters
-
+    @Override
     public int getLargeur() {
         return largeur;
     }
 
+    @Override
     public int getHauteur() {
         return hauteur;
     }
 
+    @Override
     /**
      * Getters du tableau de valeur
      * 
@@ -57,6 +63,7 @@ public class PieceModel implements Carre {
         return res;
     }
 
+    @Override
     /**
      * Getter d'une ligne du tableau sous form de String
      * 
@@ -75,12 +82,14 @@ public class PieceModel implements Carre {
         return res;
     }
 
+    @Override
     /**
      * Getter d'un cote sous forme d'un tableau contenant les valeur du coté
      * souhaite. En faisant une copie.
      * 
      * @param cote le cote dont on veut obtenir les valeurs
      * @return un tableau avec les valeur du cote
+     * @throws directionInvalide Si la valeur de cote est ACTUEL.
      */
     public int[] getCote(Direction cote) throws directionInvalide {
         switch (cote) {
@@ -151,6 +160,7 @@ public class PieceModel implements Carre {
         return res;
     }
 
+    @Override
     /**
      * Compare le coté adjacent de deux pièce.
      * Par exemple si je fait this.comparer (LEFT, piece) je vais comparer le cote
@@ -159,6 +169,7 @@ public class PieceModel implements Carre {
      * @param cote  Le coté que je veux comparer de la pièce this.
      * @param piece Pièce avec la quel je veux comparer le coté.
      * @return Si les deux coté sont bien identique
+     * @throws directionInvalide Si la direction est ACTUEL
      */
     public boolean comparer(Direction cote, PieceModel piece) throws directionInvalide {
         int[] cote1 = {};
@@ -196,6 +207,7 @@ public class PieceModel implements Carre {
         return true;
     }
 
+    @Override
     /**
      * Methode qui tourne une piece à 90 degrès sur la droite.
      * Les valeur qui etait en haut seront à droite.
@@ -213,6 +225,7 @@ public class PieceModel implements Carre {
         valeurs = res;
     }
 
+    @Override
     /**
      * Methode qui tourne une piece à 90 degrès sur la gauche.
      * Les valeur qui etait en haut seront à gauche.
@@ -230,6 +243,7 @@ public class PieceModel implements Carre {
         valeurs = res;
     }
 
+    @Override
     /**
      * Somme toutes la valeur d'un coté de la piece
      * 

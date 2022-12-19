@@ -2,7 +2,7 @@ package Domino;
 
 import java.util.Random;
 
-import Communs.PieceModel;
+import Communs.Class.Piece.PieceModel;
 
 public class DominoModel extends PieceModel {
 

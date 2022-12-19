@@ -1,9 +1,12 @@
-package Communs;
+package Communs.Class;
+
+import Communs.Class.Piece.PieceControleur;
+import Communs.Interfaces.InterfacePlayer;
 
 /**
  * Class modélisant un joueur avec un nom, une main et un score.
  */
-public class Player {
+public class Player implements InterfacePlayer {
     /** Piece qu'a le joueur en main */
     private PieceControleur main;
     /** Nom du joueur */
@@ -33,6 +36,7 @@ public class Player {
      * 
      * @param sac Sac dans lequel pioche le joueur.
      */
+    @Override
     public void piocher(Sac sac) {
         main = sac.tire();
     }
@@ -40,6 +44,7 @@ public class Player {
     /**
      * Methode qui supprime la main d'un joueur.
      */
+    @Override
     public void jeter() {
         main = null;
     }
@@ -49,19 +54,23 @@ public class Player {
      * 
      * @param i Valeur a ajouter au score
      */
+    @Override
     public void scoreadd(int i) {
         score += i;
     }
 
     // Getters
+    @Override
     public PieceControleur getMain() {
         return main;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public int getscore() {
         return score;
     }

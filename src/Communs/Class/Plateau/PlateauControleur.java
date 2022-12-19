@@ -1,13 +1,20 @@
-package Communs;
+package Communs.Class.Plateau;
 
 import java.util.Scanner;
+
+import Communs.Exceptions.directionInvalide;
+import Communs.Exceptions.positionInvalide;
+import Communs.Interfaces.Carre;
+import Communs.Interfaces.Plateau.InterfacePlateauControleur;
+import Communs.Class.Player;
+import Communs.Class.Piece.PieceControleur;
 
 /**
  * Class permtant de modéliser le controleur du plateau permettant les
  * interractions vue modèle.
  */
 
-public class PlateauControleur implements Carre {
+public class PlateauControleur implements Carre, InterfacePlateauControleur {
     PlateauModel model;
     PlateauView view;
 
@@ -34,6 +41,7 @@ public class PlateauControleur implements Carre {
         return view.toString();
     }
 
+    @Override
     /**
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
@@ -182,6 +190,7 @@ public class PlateauControleur implements Carre {
         player.scoreadd(model.calculePoint(model.getActuelX(), model.getActuelY()));
     }
 
+    @Override
     /**
      * Verifie si on peut placer une piece a l'emplacement actuel
      * 
@@ -192,6 +201,7 @@ public class PlateauControleur implements Carre {
         return model.possibleDePlacer(piece);
     }
 
+    @Override
     /**
      * Creer un String qui represente une partie du plateau.
      * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la

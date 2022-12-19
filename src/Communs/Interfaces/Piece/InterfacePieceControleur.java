@@ -1,32 +1,22 @@
-package Communs;
+package Communs.Interfaces.Piece;
+
+import Communs.Class.Piece.PieceControleur;
+import Communs.Class.Piece.PieceModel;
+import Communs.Class.Piece.PieceView;
+import Communs.Interfaces.Carre.Direction;
 
 /**
- * Class modélisant le controleur d'un pièce de jeu permettant les interractions
- * vue modèle.
+ * Interface du controleur des Pieces
  */
-public class PieceControleur implements Carre {
-    PieceModel model;
-    PieceView view;
+public interface InterfacePieceControleur {
 
-    // setters
+    public void setModel(PieceModel model);
 
-    public void setModel(PieceModel model) {
-        this.model = model;
-    }
-
-    public void setView(PieceView view) {
-        this.view = view;
-    }
+    public void setView(PieceView view);
 
     // getters
 
-    public int[] getCote(Direction cote) {
-        try {
-            return model.getCote(cote);
-        } catch (directionInvalide e) {
-            return new int[0];
-        }
-    }
+    public int[] getCote(Direction cote);
 
     /**
      * Somme toutes la valeur d'un coté de la piece
@@ -34,9 +24,7 @@ public class PieceControleur implements Carre {
      * @param cote cote que l'on veut sommer
      * @return La somme de toutes les valeur d'un cote
      */
-    public int somme(Direction cote) {
-        return model.somme(cote);
-    }
+    public int somme(Direction cote);
 
     /**
      * Compare le coté adjacent de deux pièce.
@@ -47,13 +35,7 @@ public class PieceControleur implements Carre {
      * @param piece Pièce avec la quel je veux comparer le coté.
      * @return Si les deux coté sont bien identique
      */
-    public boolean comparer(Direction cote, PieceControleur piece) {
-        try {
-            return model.comparer(cote, piece.model);
-        } catch (directionInvalide e) {
-            return false;
-        }
-    }
+    public boolean comparer(Direction cote, PieceControleur piece);
 
     /**
      * Methode qui tourne une piece à 90 degrès sur la droite.
@@ -62,9 +44,7 @@ public class PieceControleur implements Carre {
      * Les valeur qui etait en bas seront à gauche.
      * Les valeur qui etait a gauche seront en haut.
      */
-    public void pivotDroite() {
-        model.pivotDroite();
-    }
+    public void pivotDroite();
 
     /**
      * Methode qui tourne une piece à 90 degrès sur la gauche.
@@ -73,9 +53,7 @@ public class PieceControleur implements Carre {
      * Les valeur qui etait en bas seront à droite.
      * Les valeur qui etait a droite seront en haut.
      */
-    public void pivotGauche() {
-        model.pivotGauche();
-    }
+    public void pivotGauche();
 
     /**
      * Creer un String avec les elements de la lignes d'indice 'indice' Si ce n'est
@@ -87,15 +65,5 @@ public class PieceControleur implements Carre {
      * @param indice indice de la ligne a recuperer
      * @return une String avec les element de la ligne indice
      */
-    public String getligne(int indice) {
-        return model.getligne(indice);
-    }
-
-    /**
-     * retourne un String représentant une pièce.
-     */
-    @Override
-    public String toString() {
-        return view.toString();
-    }
+    public String getligne(int indice);
 }
