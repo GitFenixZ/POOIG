@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import Domino.PlayDomino;
+import domino.PlayDomino;
 
 /**
  * Class permetant l'éxécution des parties.
