@@ -54,12 +54,9 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @return le nombre de point que la piece fait gagner
      */
     public int calculePoint(int x, int y) {
-        System.out.println("Test !");
         if (this instanceof DominoPlateauModel) {
-            System.out.println("Mais t es ou !");
             return ((DominoPlateauModel) this).calculePoint(x, y);
         }
-        System.out.println("PAS LA !");
         return 0;
     }
 
