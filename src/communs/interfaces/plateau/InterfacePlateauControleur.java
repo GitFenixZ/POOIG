@@ -7,8 +7,12 @@ import communs.objets.piece.PieceControleur;
 
 /**
  * Interface du controleur du Plateau de jeu.
+ * 
+ * V est le types des valeur qui apparaissent sur les pièces qui
+ * pourront être placé sur le plateau.
+ * Exemple : Integer dans le domino.
  */
-public interface InterfacePlateauControleur {
+public interface InterfacePlateauControleur<V> {
     /**
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
@@ -16,7 +20,7 @@ public interface InterfacePlateauControleur {
      * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
      *               savoir si le joueur veux placer sa piece.
      */
-    public void placerPiece(Player player, Scanner sc);
+    public void placerPiece(Player<PieceControleur<V>> player, Scanner sc);
 
     /**
      * Verifie si on peut placer une piece a l'emplacement actuel
@@ -24,7 +28,7 @@ public interface InterfacePlateauControleur {
      * @param piece piece que l'on veut placer
      * @return si on peut placer la piece ici.
      */
-    public boolean possibleDePlacer(PieceControleur piece);
+    public boolean possibleDePlacer(PieceControleur<V> piece);
 
     /**
      * Creer un String qui represente une partie du plateau.

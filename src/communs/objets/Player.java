@@ -1,14 +1,16 @@
 package communs.objets;
 
 import communs.interfaces.InterfacePlayer;
-import communs.objets.piece.PieceControleur;
 
 /**
  * Class modélisant un joueur avec un nom, une main et un score.
+ * 
+ * P est le type de l'objet que le joueur a dans la main.
+ * Exemple : PieceControleur<Integer> dans le domino.
  */
-public class Player implements InterfacePlayer {
+public class Player<P> implements InterfacePlayer<P> {
     /** Piece qu'a le joueur en main */
-    private PieceControleur main;
+    private P main;
     /** Nom du joueur */
     private String name;
     /** Score actuel du joueur */
@@ -37,7 +39,7 @@ public class Player implements InterfacePlayer {
      * @param sac Sac dans lequel pioche le joueur.
      */
     @Override
-    public void piocher(Sac sac) {
+    public void piocher(Sac<P> sac) {
         main = sac.tire();
     }
 
@@ -61,7 +63,7 @@ public class Player implements InterfacePlayer {
 
     // Getters
     @Override
-    public PieceControleur getMain() {
+    public P getMain() {
         return main;
     }
 

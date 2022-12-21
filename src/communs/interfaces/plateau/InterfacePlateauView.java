@@ -4,10 +4,14 @@ import communs.objets.plateau.PlateauModel;
 
 /**
  * Interface de la vue du Plateau de jeu.
+ * 
+ * V est le types des valeur qui apparaissent sur les pièces qui
+ * pourront être placé sur le plateau.
+ * Exemple : Integer dans le domino.
  */
-public interface InterfacePlateauView {
+public interface InterfacePlateauView<V> {
     // setter
-    public void setModel(PlateauModel model);
+    public void setModel(PlateauModel<V> model);
 
     /**
      * Creer un String qui represente une partie du plateau.

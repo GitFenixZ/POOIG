@@ -1,13 +1,18 @@
 package communs.interfaces.piece;
 
+import java.util.ArrayList;
+
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Carre.Direction;
+import communs.interfaces.Direction;
 import communs.objets.piece.PieceModel;
 
 /**
- * Interface du Model des Pieces
+ * Interface du Model des Pieces.
+ * 
+ * V represente le type des valeurs qui apparait sur les pièces du jeu.
+ * Exemple : Integer dans le domino.
  */
-public interface InterfacePieceModel {
+public interface InterfacePieceModel<V> {
 
     // getters
 
@@ -20,7 +25,7 @@ public interface InterfacePieceModel {
      * 
      * @return une copy du tableau.
      */
-    public int[][] getValeurs();
+    public ArrayList<ArrayList<V>> getValeurs();
 
     /**
      * Getter d'une ligne du tableau sous form de String
@@ -38,7 +43,7 @@ public interface InterfacePieceModel {
      * @return un tableau avec les valeur du cote
      * @throws directionInvalide Si la valeur de cote est ACTUEL.
      */
-    public int[] getCote(Direction cote) throws directionInvalide;
+    public ArrayList<V> getCote(Direction cote) throws directionInvalide;
 
     /**
      * Compare le coté adjacent de deux pièce.
@@ -50,7 +55,7 @@ public interface InterfacePieceModel {
      * @return Si les deux coté sont bien identique
      * @throws directionInvalide Si la direction est ACTUEL
      */
-    public boolean comparer(Direction cote, PieceModel piece) throws directionInvalide;
+    public boolean comparer(Direction cote, PieceModel<V> piece) throws directionInvalide;
 
     /**
      * Methode qui tourne une piece à 90 degrès sur la droite.
@@ -69,12 +74,4 @@ public interface InterfacePieceModel {
      * Les valeur qui etait a droite seront en haut.
      */
     public void pivotGauche();
-
-    /**
-     * Somme toutes la valeur d'un coté de la piece
-     * 
-     * @param cote cote que l'on veut sommer
-     * @return La somme de toutes les valeur d'un cote
-     */
-    public int somme(Direction cote);
 }

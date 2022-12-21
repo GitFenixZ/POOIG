@@ -1,23 +1,24 @@
 package communs.interfaces;
 
-import communs.objets.piece.PieceControleur;
-
 /**
  * Interface du Sac dans lequel se trouve des pieces du jeu.
+ * 
+ * P est le type des objets dans le sac.
+ * Exemple : PieceControleur<Integer> dans domino.
  */
-public interface InterfaceSac {
+public interface InterfaceSac<P> {
 
     /**
      * Methode qui tire une piece aleatoire dans le sac
      * 
      * @return un piece du sac
      */
-    public PieceControleur tire();
+    public P tire();
 
     /**
      * Methode qui ajoute une piece dans le sac
      */
-    public void ajouter(PieceControleur piece);
+    public void ajouter(P piece);
 
     /**
      * @return le nombre de piece dans le sac en se moment

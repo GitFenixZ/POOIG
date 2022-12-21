@@ -3,11 +3,17 @@ package communs.objets.plateau;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauModel;
 import communs.objets.piece.PieceControleur;
+import domino.DominoPlateauModel;
+import communs.interfaces.Direction;
 
 /**
  * Class modélisant le plateau de jeu. C'est un tableau de tableau de piece.
+ * 
+ * V est le types des valeurs qui apparaissent sur les pièces qui
+ * pourront être placé sur le plateau.
+ * Exemple : Integer dans le domino.
  */
-public class PlateauModel extends Extendable<PieceControleur> implements InterfacePlateauModel {
+public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements InterfacePlateauModel<V> {
     /** Hauteur des pieces contenue par le plateau */
     private int hauteurPiece;
     /** Largeur des pieces contenue par le plateau */
@@ -48,33 +54,13 @@ public class PlateauModel extends Extendable<PieceControleur> implements Interfa
      * @return le nombre de point que la piece fait gagner
      */
     public int calculePoint(int x, int y) {
-        int res = 0;
-        // fait la somme de chaque cote qui a une piece adjacente
-        try {
-            if (getPiece(x + 1, y) != null) {
-                res += getPiece(x + 1, y).somme(Direction.LEFT);
-            }
-        } catch (positionInvalide e) {
+        System.out.println("Test !");
+        if (this instanceof DominoPlateauModel) {
+            System.out.println("Mais t es ou !");
+            return ((DominoPlateauModel) this).calculePoint(x, y);
         }
-        try {
-            if (getPiece(x - 1, y) != null) {
-                res += getPiece(x - 1, y).somme(Direction.RIGHT);
-            }
-        } catch (positionInvalide e) {
-        }
-        try {
-            if (getPiece(x, y + 1) != null) {
-                res += getPiece(x, y + 1).somme(Direction.UP);
-            }
-        } catch (positionInvalide e) {
-        }
-        try {
-            if (getPiece(x, y - 1) != null) {
-                res += getPiece(x, y - 1).somme(Direction.DOWN);
-            }
-        } catch (positionInvalide e) {
-        }
-        return res;
+        System.out.println("PAS LA !");
+        return 0;
     }
 
     @Override
@@ -85,7 +71,7 @@ public class PlateauModel extends Extendable<PieceControleur> implements Interfa
      * @return si il y a un endroit sur le plateau ou l'on peut placer la piece en
      *         respectant les regles.
      */
-    public boolean possibleDePlacer(PieceControleur piece) {
+    public boolean possibleDePlacer(PieceControleur<V> piece) {
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
@@ -116,7 +102,7 @@ public class PlateauModel extends Extendable<PieceControleur> implements Interfa
      * @param y     ligne a laquel on veut la placer
      * @return si c'est possible de placer la piece en respcetant les regles.
      */
-    public boolean possibleDePlacer(PieceControleur piece, int x, int y) {
+    public boolean possibleDePlacer(PieceControleur<V> piece, int x, int y) {
         // si il y a deja une piece a cette emplacement ce n'est pas possible
         try {
             if (getPiece(x, y) != null) {
