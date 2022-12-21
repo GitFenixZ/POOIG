@@ -1,5 +1,6 @@
 package communs.interfaces.plateau;
 
+import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
 /**
@@ -45,4 +46,18 @@ public interface InterfacePlateauModel<V> {
      */
     public boolean possibleDePlacer(PieceControleur<V> piece, int x, int y);
 
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    public void start(Sac<PieceControleur<V>> sac);
+
+    /**
+     * Donnes un coordonnée ou l'on peut placer la piece.
+     * 
+     * @param piece Piece a placer
+     * @return des coordonnée ou l'on peut placer la pièce
+     */
+    public int[] peutPlacer(PieceControleur<V> piece);
 }

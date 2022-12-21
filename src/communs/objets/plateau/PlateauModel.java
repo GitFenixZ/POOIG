@@ -2,6 +2,7 @@ package communs.objets.plateau;
 
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauModel;
+import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import domino.DominoPlateauModel;
 import communs.interfaces.Direction;
@@ -54,12 +55,9 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @return le nombre de point que la piece fait gagner
      */
     public int calculePoint(int x, int y) {
-        System.out.println("Test !");
         if (this instanceof DominoPlateauModel) {
-            System.out.println("Mais t es ou !");
             return ((DominoPlateauModel) this).calculePoint(x, y);
         }
-        System.out.println("PAS LA !");
         return 0;
     }
 
@@ -188,5 +186,44 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
         }
         // si le plateau est vide on peut la placer n'importe ou !
         return true;
+    }
+
+    @Override
+    /**
+     * Donnes un coordonnée ou l'on peut placer la piece.
+     * 
+     * @param piece Piece a placer
+     * @return des coordonnée ou l'on peut placer la pièce
+     */
+    public int[] peutPlacer(PieceControleur<V> piece) {
+        for (int pivot = 0; pivot < 4; pivot++) {
+            for (int i = 0; i < getHauteur(); i++) {
+                for (int j = 0; j < getLargeur(); j++) {
+                    // regarde si l'on peu placer la piece a ses coordonnee
+                    if (possibleDePlacer(piece, j, i)) {
+                        int[] res = { j, i };
+                        return res;
+                    }
+                }
+            }
+            // si l'on ne peut pas la placer sur le plateau comme tel,
+            // on fait pivote la piece puis regarde a nouveau si on peut la placer avec
+            // cette nouvelle orientation
+            piece.pivotDroite();
+        }
+        return null;
+    }
+
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    @Override
+    public void start(Sac<PieceControleur<V>> sac) {
+        try {
+            setPiece(actuelX, actuelY, sac.tire());
+        } catch (positionInvalide e) {
+        }
     }
 }

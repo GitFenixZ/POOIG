@@ -2,11 +2,12 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
-import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauControleur;
+import communs.objets.Bot;
 import communs.objets.Player;
+import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
 /**
@@ -172,27 +173,6 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
                 }
             }
         }
-
-        /*
-         * Tableau infini :
-         * Si la piece est pose sur un cote. On elargie la tableau sur ce cote en
-         * question.
-         */
-        try {
-            if (model.getActuelX() == model.getLargeur() - 1) {
-                model.ajouterUnCote(Direction.RIGHT);
-            }
-            if (model.getActuelX() == 0) {
-                model.ajouterUnCote(Direction.LEFT);
-            }
-            if (model.getActuelY() == model.getHauteur() - 1) {
-                model.ajouterUnCote(Direction.DOWN);
-            }
-            if (model.getActuelY() == 0) {
-                model.ajouterUnCote(Direction.UP);
-            }
-        } catch (directionInvalide e) {
-        }
         // On ajoute les points gagne au joueur
         player.scoreadd(model.calculePoint(model.getActuelX(), model.getActuelY()));
     }
@@ -217,5 +197,42 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     public String afficher() {
         return view.afficher();
+    }
+
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    @Override
+    public void start(Sac<PieceControleur<V>> sac) {
+        model.start(sac);
+    }
+
+    @Override
+    /**
+     * Donnes un coordonnée ou l'on peut placer la piece.
+     * 
+     * @param piece Piece a placer
+     * @return des coordonnée ou l'on peut placer la pièce
+     */
+    public int[] peutPlacer(PieceControleur<V> piece) {
+        return model.peutPlacer(piece);
+    }
+
+    @Override
+    /**
+     * Permet a un bot de placer une pièce ou il le veut.
+     * 
+     * @param bot bot qui vas jouer
+     * @param x   colonne a laquel on veut la placer
+     * @param y   ligne a laquel on veut la placer
+     */
+    public void setPiece(Bot<V> bot, int x, int y) {
+        try {
+            model.setPiece(x, y, bot.getMain());
+            bot.scoreadd(model.calculePoint(x, y));
+        } catch (positionInvalide e) {
+        }
     }
 }

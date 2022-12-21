@@ -102,7 +102,7 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
                 + "\n";
         for (int i = 0; i < affichage.length; i++) {
             res += "|" + affichage[i] + "\n";
-            if (i % model.getHauteurPiece() == 4) {
+            if (i % model.getHauteurPiece() == model.getHauteurPiece() - 1) {
                 res += "-".repeat((model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
                         + "\n";
             }

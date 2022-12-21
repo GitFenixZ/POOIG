@@ -106,6 +106,26 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             throw new positionInvalide();
         }
         tableau.get(y).set(x, piece);
+        /*
+         * Tableau infini :
+         * Si la piece est pose sur un cote. On elargie la tableau sur ce cote en
+         * question.
+         */
+        try {
+            if (x == getLargeur() - 1) {
+                ajouterUnCote(Direction.RIGHT);
+            }
+            if (x == 0) {
+                ajouterUnCote(Direction.LEFT);
+            }
+            if (y == getHauteur() - 1) {
+                ajouterUnCote(Direction.DOWN);
+            }
+            if (y == 0) {
+                ajouterUnCote(Direction.UP);
+            }
+        } catch (directionInvalide e) {
+        }
     }
 
     @Override

@@ -42,8 +42,13 @@ public class PlayDomino {
         joueurs = new ArrayList<Player<PieceControleur<Integer>>>();
         // intialise les joueurs
         for (int i = 0; i < nombreJoueur; i++) {
-            System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
-            joueurs.add(new Player<PieceControleur<Integer>>(sc.nextLine()));
+            System.out.println("Est ce une joueur ?");
+            if (sc.nextLine().equals("oui")) {
+                System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
+                joueurs.add(new Player<PieceControleur<Integer>>(sc.nextLine()));
+            } else {
+                joueurs.add(new DominoBot("Joueur" + i));
+            }
         }
         // initialise le plateau
         plateau = new DominoPlateauControleur(hauteurPlateau, largeurPlateau, 5, 5);
@@ -65,6 +70,9 @@ public class PlayDomino {
      * @param sc System.in permettra de lire la reponse de l'utilisateur
      */
     public void play(Scanner sc) {
+        if (!sac.isEmpty()) {
+            plateau.start(sac);
+        }
         int indice = 0;
         System.out.println(plateau);
         String rep = "";
@@ -75,28 +83,40 @@ public class PlayDomino {
             }
             piocherPiece(joueurs.get(indice));
             System.out.print(joueurs.get(indice));
-            System.out.println("Pensez vous pouvoir jouer ?");
-            rep = sc.nextLine();
-            if (rep.equals("oui")) {
-                if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
-                    System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
-                    plateau.placerPiece(joueurs.get(indice), sc);
-                } else {
-                    System.out.println("Vous vous trompez, aucune solution n'est valide!");
+            if (joueurs.get(indice) instanceof DominoBot) {
+                if (!((DominoBot) joueurs.get(indice)).jouer(plateau)) { // fait jouer le bot. Si il ne peut pas jouer
+                                                                         // la pièce
+                    indice--; // il rejoue.
                 }
             } else {
-                if (rep.equals("non")) {
+                System.out.println("Pensez vous pouvoir jouer ?");
+                rep = sc.nextLine();
+                if (rep.equals("oui")) {
                     if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
-                        System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
+                        System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
                         plateau.placerPiece(joueurs.get(indice), sc);
+                        joueurs.get(indice).jeter();
                     } else {
-                        System.out.println("Et oui aucune solution n'est valide.");
+                        System.out.println("Vous vous trompez, aucune solution n'est valide!");
+                        joueurs.get(indice).jeter();
+                        indice--;// il rejoue.
+                    }
+                } else {
+                    if (rep.equals("non")) {
+                        if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
+                            System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
+                            plateau.placerPiece(joueurs.get(indice), sc);
+                            joueurs.get(indice).jeter();
+                        } else {
+                            System.out.println("Et oui aucune solution n'est valide.");
+                            joueurs.get(indice).jeter();
+                            indice--;// il rejoue.
+                        }
                     }
                 }
             }
-            joueurs.get(indice).jeter();
             indice++;
-            System.out.println(plateau.afficher());
+            System.out.println(plateau/* .afficher() */);
         }
         System.out.println("Bravo  à tous!!!");
 

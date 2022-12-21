@@ -45,7 +45,6 @@ public class DominoPlateauModel extends PlateauModel<Integer> {
             }
         } catch (positionInvalide e) {
         }
-        System.out.println("DOMINO : " + res);
         return res;
     }
 }

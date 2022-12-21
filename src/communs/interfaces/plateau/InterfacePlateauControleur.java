@@ -2,7 +2,9 @@ package communs.interfaces.plateau;
 
 import java.util.Scanner;
 
+import communs.objets.Bot;
 import communs.objets.Player;
+import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
 /**
@@ -37,4 +39,28 @@ public interface InterfacePlateauControleur<V> {
      * les affiches.
      */
     public String afficher();
+
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    public void start(Sac<PieceControleur<V>> sac);
+
+    /**
+     * Donnes un coordonnée ou l'on peut placer la piece.
+     * 
+     * @param piece Piece a placer
+     * @return des coordonnée ou l'on peut placer la pièce
+     */
+    public int[] peutPlacer(PieceControleur<V> piece);
+
+    /**
+     * Permet a un bot de placer une pièce ou il le veut.
+     * 
+     * @param bot bot qui vas jouer
+     * @param x   colonne a laquel on veut la placer
+     * @param y   ligne a laquel on veut la placer
+     */
+    public void setPiece(Bot<V> bot, int x, int y);
 }
