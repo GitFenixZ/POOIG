@@ -5,6 +5,7 @@ import java.util.Scanner;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauView;
+import communs.objets.Point;
 
 /**
  * Class modélisant la vue du plateau
@@ -56,8 +57,9 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
                 res += "|";
                 for (int x = xdepart; x < xfin; x++) {
                     try {
-                        if (model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1) != null) {
-                            res += model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1).getligne(i)
+                        Point point = new Point(model.getActuelX() + x - 1, model.getActuelY() + y - 1);
+                        if (model.getPiece(point) != null) {
+                            res += model.getPiece(point).getligne(i)
                                     + "|";
                         } else {
                             res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
@@ -87,8 +89,9 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
                         affichage[i * model.getHauteurPiece() + k] = "";
                     }
                     try {
-                        if (model.getPiece(j, i) != null) {
-                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(j, i).getligne(k) + "|";
+                        Point point = new Point(j, i);
+                        if (model.getPiece(point) != null) {
+                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(point).getligne(k) + "|";
                         } else {
                             affichage[i * model.getHauteurPiece() + k] += " ".repeat(model.getLargeurPiece() * 2 + 1)
                                     + "|";

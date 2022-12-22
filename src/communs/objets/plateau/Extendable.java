@@ -6,6 +6,7 @@ import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfaceExtendable;
+import communs.objets.Point;
 
 /**
  * Class qui represente un tableau en 2D qui contient des objet de type V et qui
@@ -18,10 +19,9 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     /** Tableau de jeu en 2D qui contient des V */
     protected ArrayList<ArrayList<P>> tableau;
-    /** Colonne sur laquel le plateau est centree */
-    protected int actuelX;
-    /** Ligne sur laquel le plateau est centree */
-    protected int actuelY;
+
+    /** Position ou le tableau est centré a l'affichage */
+    protected Point actuelPosition;
 
     /**
      * Constructeur
@@ -44,19 +44,23 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
                 tableau.get(i).add(null);
             }
         }
-        actuelX = 0;
-        actuelY = 0;
+        actuelPosition = new Point(0, 0);
     }
 
     // getters
     @Override
+    public Point getActuelPosition() {
+        return actuelPosition;
+    }
+
+    @Override
     public int getActuelX() {
-        return actuelX;
+        return actuelPosition.getX();
     }
 
     @Override
     public int getActuelY() {
-        return actuelY;
+        return actuelPosition.getY();
     }
 
     @Override
@@ -74,55 +78,55 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Getter permettant d'obtenir la piece de la colonne x et de la ligne y du
+     * Getter permettant d'obtenir la piece à la position point du
      * plateau.
      * 
-     * @param x colonne
-     * @param y ligne
-     * @return la piece de la colonne x et de la ligne y
+     * @param point position que l'on soihaite
+     * @return la piece de position point
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public P getPiece(int x, int y) throws positionInvalide {
-        if (x < 0 || x >= getLargeur() || y < 0 || y >= getHauteur()) {
+    public P getPiece(Point point) throws positionInvalide {
+        if (point.getX() < 0 || point.getX() >= getLargeur() || point.getY() < 0 || point.getY() >= getHauteur()) {
             throw new positionInvalide();
         }
-        return tableau.get(y).get(x);
+        return tableau.get(point.getY()).get(point.getX());
     }
 
     @Override
     /**
-     * Setter permettant de placer la piece sur la colonne x et de la ligne y du
+     * Setter permettant de placer la piece le point p du
      * plateau.
      * 
-     * @param x     colonne
-     * @param y     ligne
+     * @param point position sur laquel la piece vas etre placee
      * @param piece La piece a placer
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public void setPiece(int x, int y, P piece) throws positionInvalide {
-        if (x < 0 || x > getLargeur() || y < 0 || y > getHauteur()) {
+    public void setPiece(Point point, P piece) throws positionInvalide {
+        if (point.getX() < 0 || point.getX() > getLargeur() || point.getY() < 0 || point.getY() > getHauteur()) {
             throw new positionInvalide();
         }
-        tableau.get(y).set(x, piece);
+        tableau.get(point.getY()).set(point.getX(), piece);
         /*
          * Tableau infini :
          * Si la piece est pose sur un cote. On elargie la tableau sur ce cote en
          * question.
          */
         try {
-            if (x == getLargeur() - 1) {
+            if (point.getX() == getLargeur() - 1) {
                 ajouterUnCote(Direction.RIGHT);
             }
-            if (x == 0) {
+            if (point.getX() == 0) {
                 ajouterUnCote(Direction.LEFT);
+                point.allerADroite();
             }
-            if (y == getHauteur() - 1) {
+            if (point.getY() == getHauteur() - 1) {
                 ajouterUnCote(Direction.DOWN);
             }
-            if (y == 0) {
+            if (point.getY() == 0) {
                 ajouterUnCote(Direction.UP);
+                point.allerEnBas();
             }
         } catch (directionInvalide e) {
         }
@@ -135,8 +139,9 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
      * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
     public void allerADroite() throws positionInvalide {
-        if (actuelX < getLargeur() - 1) {
-            actuelX++;
+        if (actuelPosition.getX() < getLargeur() - 1) {
+            actuelPosition.allerADroite();
+            ;
         } else {
             throw new positionInvalide();
         }
@@ -149,8 +154,8 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
      * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
     public void allerAGauche() throws positionInvalide {
-        if (actuelX > 0) {
-            actuelX--;
+        if (actuelPosition.getX() > 0) {
+            actuelPosition.allerAGauche();
         } else {
             throw new positionInvalide();
         }
@@ -163,8 +168,8 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
      * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
     public void allerEnBas() throws positionInvalide {
-        if (actuelY < getHauteur() - 1) {
-            actuelY++;
+        if (actuelPosition.getY() < getHauteur() - 1) {
+            actuelPosition.allerEnBas();
         } else {
             throw new positionInvalide();
         }
@@ -177,8 +182,8 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
      * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
     public void allerEnHaut() throws positionInvalide {
-        if (actuelY > 0) {
-            actuelY--;
+        if (actuelPosition.getY() > 0) {
+            actuelPosition.allerEnHaut();
         } else {
             throw new positionInvalide();
         }
@@ -247,8 +252,6 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             // supprimer le premiere element
             ligne.set(0, null);
         }
-        // deplacer la position actuel vers la droite.
-        actuelX++;
     }
 
     private void ajouterUnCoteBas() {
@@ -274,7 +277,5 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
         }
         // remplacer la ligne du debut par une ligne vide
         tableau.set(0, newLine);
-        // deplacer la position actuel vers le bas.
-        actuelY++;
     }
 }

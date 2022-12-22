@@ -7,6 +7,7 @@ import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Bot;
 import communs.objets.Player;
+import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
@@ -158,13 +159,13 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             placerPiece = PlateauView.demandeBoolean(sc, "Voulez vous placer la pièce ici ?(oui/non)");
             if (placerPiece) {
                 // verifie si la position est valide
-                valide = model.possibleDePlacer(player.getMain(), model.getActuelX(), model.getActuelY());
+                valide = model.possibleDePlacer(player.getMain(), model.getActuelPosition());
                 if (!valide) {
                     System.out.println("Erreur : position utilisé invalide.");
                 } else {
                     // place la piece a la position demande.
                     try {
-                        model.setPiece(model.getActuelX(), model.getActuelY(), player.getMain());
+                        model.setPiece(model.getActuelPosition(), player.getMain());
                     } catch (positionInvalide e) {
                         // si il rencontre un problème lors du depot de la pièce (ne doit jamais arrivé)
                         valide = false;
@@ -174,7 +175,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             }
         }
         // On ajoute les points gagne au joueur
-        player.scoreadd(model.calculePoint(model.getActuelX(), model.getActuelY()));
+        player.scoreadd(model.calculePoint(model.getActuelPosition()));
     }
 
     @Override
@@ -216,7 +217,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public int[] peutPlacer(PieceControleur<V> piece) {
+    public Point peutPlacer(PieceControleur<V> piece) {
         return model.peutPlacer(piece);
     }
 
@@ -224,14 +225,13 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     /**
      * Permet a un bot de placer une pièce ou il le veut.
      * 
-     * @param bot bot qui vas jouer
-     * @param x   colonne a laquel on veut la placer
-     * @param y   ligne a laquel on veut la placer
+     * @param bot   bot qui vas jouer
+     * @param point position sur laquel la piece vas etre placee
      */
-    public void setPiece(Bot<V> bot, int x, int y) {
+    public void setPiece(Bot<V> bot, Point p) {
         try {
-            model.setPiece(x, y, bot.getMain());
-            bot.scoreadd(model.calculePoint(x, y));
+            model.setPiece(p, bot.getMain());
+            bot.scoreadd(model.calculePoint(p));
         } catch (positionInvalide e) {
         }
     }

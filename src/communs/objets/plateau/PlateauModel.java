@@ -2,9 +2,9 @@ package communs.objets.plateau;
 
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauModel;
+import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
-import domino.DominoPlateauModel;
 import communs.interfaces.Direction;
 
 /**
@@ -47,17 +47,13 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
 
     @Override
     /**
-     * Methode qui permet de calculer le nombre de point que repporte une piece
-     * quand elle vient d'être placer.
+     * Methode qui permet de calculer le nombre de point que repporte une piece.
      * 
-     * @param x la colonne sur laquel la piece a ete placee
-     * @param y la ligne sur laquel la piece a ete placee
+     * @param point position de la piece
      * @return le nombre de point que la piece fait gagner
      */
-    public int calculePoint(int x, int y) {
-        if (this instanceof DominoPlateauModel) {
-            return ((DominoPlateauModel) this).calculePoint(x, y);
-        }
+    public int calculePoint(Point point) {
+        System.out.println("COUCOU");
         return 0;
     }
 
@@ -74,7 +70,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
                     // regarde si l'on peu placer la piece a ses coordonnee
-                    if (possibleDePlacer(piece, j, i)) {
+                    if (possibleDePlacer(piece, new Point(j, i))) {
                         // fait pivoter la piece jusqu'a ce qu'elle revienne a sa position de depart.
                         for (int pivot2 = pivot; pivot2 < 4; pivot2++) {
                             piece.pivotDroite();
@@ -96,14 +92,13 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * Regarde si l'on peut placer une piece a de certaine coordonnee
      * 
      * @param piece Piece a placer
-     * @param x     colonne a laquel on veut la placer
-     * @param y     ligne a laquel on veut la placer
+     * @param point Position ou l'on souhaite essayer de placer la piece.
      * @return si c'est possible de placer la piece en respcetant les regles.
      */
-    public boolean possibleDePlacer(PieceControleur<V> piece, int x, int y) {
+    public boolean possibleDePlacer(PieceControleur<V> piece, Point point) {
         // si il y a deja une piece a cette emplacement ce n'est pas possible
         try {
-            if (getPiece(x, y) != null) {
+            if (getPiece(point) != null) {
                 return false;
             }
         } catch (positionInvalide e) {
@@ -116,10 +111,18 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             boolean cote3 = false;
             boolean cote4 = false;
 
+            Point haut = new Point(point.getX(), point.getY() - 1);
+            Point bas = new Point(point.getX(), point.getY() + 1);
+            ;
+            Point droite = new Point(point.getX() + 1, point.getY());
+            ;
+            Point gauche = new Point(point.getX() - 1, point.getY());
+            ;
+
             // si chaque cote adjacent et soit vide soit possede un cote adjacent commun a
             // la piece.
             try {
-                if (getPiece(x, y - 1) == null || piece.comparer(Direction.UP, getPiece(x, y - 1))) {
+                if (getPiece(haut) == null || piece.comparer(Direction.UP, getPiece(haut))) {
                     cote1 = true;
                 }
             } catch (positionInvalide e) {
@@ -127,7 +130,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             }
 
             try {
-                if (getPiece(x - 1, y) == null || piece.comparer(Direction.LEFT, getPiece(x - 1, y))) {
+                if (getPiece(gauche) == null || piece.comparer(Direction.LEFT, getPiece(gauche))) {
                     cote2 = true;
                 }
             } catch (positionInvalide e) {
@@ -135,7 +138,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             }
 
             try {
-                if (getPiece(x, y + 1) == null || piece.comparer(Direction.DOWN, getPiece(x, y + 1))) {
+                if (getPiece(bas) == null || piece.comparer(Direction.DOWN, getPiece(bas))) {
                     cote3 = true;
                     ;
                 }
@@ -144,7 +147,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             }
 
             try {
-                if (getPiece(x + 1, y) == null || piece.comparer(Direction.RIGHT, getPiece(x + 1, y))) {
+                if (getPiece(droite) == null || piece.comparer(Direction.RIGHT, getPiece(droite))) {
                     cote4 = true;
                 }
             } catch (positionInvalide e) {
@@ -158,25 +161,25 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             // voisins mais qu'elle est independante des autres.
             if (cote1 && cote2 && cote3 && cote4) {
                 try {
-                    if (getPiece(x, y - 1) != null) {
+                    if (getPiece(haut) != null) {
                         return true;
                     }
                 } catch (positionInvalide e) {
                 }
                 try {
-                    if (getPiece(x - 1, y) != null) {
+                    if (getPiece(gauche) != null) {
                         return true;
                     }
                 } catch (positionInvalide e) {
                 }
                 try {
-                    if (getPiece(x, y + 1) != null) {
+                    if (getPiece(bas) != null) {
                         return true;
                     }
                 } catch (positionInvalide e) {
                 }
                 try {
-                    if (getPiece(x + 1, y) != null) {
+                    if (getPiece(droite) != null) {
                         return true;
                     }
                 } catch (positionInvalide e) {
@@ -195,13 +198,13 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public int[] peutPlacer(PieceControleur<V> piece) {
+    public Point peutPlacer(PieceControleur<V> piece) {
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
                     // regarde si l'on peu placer la piece a ses coordonnee
-                    if (possibleDePlacer(piece, j, i)) {
-                        int[] res = { j, i };
+                    Point res = new Point(j, i);
+                    if (possibleDePlacer(piece, res)) {
                         return res;
                     }
                 }
@@ -222,7 +225,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     @Override
     public void start(Sac<PieceControleur<V>> sac) {
         try {
-            setPiece(actuelX, actuelY, sac.tire());
+            setPiece(actuelPosition, sac.tire());
         } catch (positionInvalide e) {
         }
     }

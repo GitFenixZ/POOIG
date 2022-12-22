@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import communs.objets.Bot;
 import communs.objets.Player;
+import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
@@ -53,14 +54,13 @@ public interface InterfacePlateauControleur<V> {
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public int[] peutPlacer(PieceControleur<V> piece);
+    public Point peutPlacer(PieceControleur<V> piece);
 
     /**
      * Permet a un bot de placer une pièce ou il le veut.
      * 
-     * @param bot bot qui vas jouer
-     * @param x   colonne a laquel on veut la placer
-     * @param y   ligne a laquel on veut la placer
+     * @param bot   bot qui vas jouer
+     * @param point position de l'objet
      */
-    public void setPiece(Bot<V> bot, int x, int y);
+    public void setPiece(Bot<V> bot, Point p);
 }

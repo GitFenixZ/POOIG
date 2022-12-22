@@ -9,9 +9,9 @@ public class Bot<V> extends Player<PieceControleur<V>> {
     }
 
     public boolean jouer(PlateauControleur<V> plateauControleur) {
-        int[] position = plateauControleur.peutPlacer(getMain());
+        Point position = plateauControleur.peutPlacer(getMain());
         if (position != null) {
-            plateauControleur.setPiece(this, position[0], position[1]);
+            plateauControleur.setPiece(this, position);
             System.out.println("Le bot " + getName() + " a joué.");
             return true;
         } else {
