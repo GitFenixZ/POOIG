@@ -1,10 +1,14 @@
-package domino;
+package domino.plateau;
 
 import communs.objets.Point;
 import communs.objets.plateau.PlateauModel;
+import domino.piece.DominoPieceControleur;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
 
+/**
+ * Class modélisant le model du plateau du jeu de domino.
+ */
 public class DominoPlateauModel extends PlateauModel<Integer> {
     DominoPlateauModel(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
         super(hauteur, largeur, hauteurPiece, largeurPiece);
@@ -28,25 +32,25 @@ public class DominoPlateauModel extends PlateauModel<Integer> {
         // fait la somme de chaque cote qui a une piece adjacente
         try {
             if (getPiece(droite) != null) {
-                res += ((DominoPieceControleur) getPiece(actuelPosition)).somme(Direction.RIGHT);
+                res += ((DominoPieceControleur) getPiece(point)).somme(Direction.RIGHT);
             }
         } catch (positionInvalide e) {
         }
         try {
             if (getPiece(gauche) != null) {
-                res += ((DominoPieceControleur) getPiece(actuelPosition)).somme(Direction.LEFT);
+                res += ((DominoPieceControleur) getPiece(point)).somme(Direction.LEFT);
             }
         } catch (positionInvalide e) {
         }
         try {
             if (getPiece(bas) != null) {
-                res += ((DominoPieceControleur) getPiece(actuelPosition)).somme(Direction.DOWN);
+                res += ((DominoPieceControleur) getPiece(point)).somme(Direction.DOWN);
             }
         } catch (positionInvalide e) {
         }
         try {
             if (getPiece(haut) != null) {
-                res += ((DominoPieceControleur) getPiece(actuelPosition)).somme(Direction.UP);
+                res += ((DominoPieceControleur) getPiece(point)).somme(Direction.UP);
             }
         } catch (positionInvalide e) {
         }

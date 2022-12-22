@@ -23,6 +23,14 @@ public interface InterfacePieceControleur<V> {
 
     public ArrayList<V> getCote(Direction cote);
 
+    public int getLargeur();
+
+    public int getHauteur();
+
+    public PieceModel<V> getModel();
+
+    public PieceView<V> getView();
+
     /**
      * Compare le coté adjacent de deux pièce.
      * Par exemple si je fait this.comparer (LEFT, piece) je vais comparer le cote

@@ -5,7 +5,6 @@ import java.util.Scanner;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauControleur;
-import communs.objets.Bot;
 import communs.objets.Player;
 import communs.objets.Point;
 import communs.objets.Sac;
@@ -223,15 +222,15 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
     @Override
     /**
-     * Permet a un bot de placer une pièce ou il le veut.
+     * Permet a un joueur de placer une pièce ou il le veut.
      * 
-     * @param bot   bot qui vas jouer
-     * @param point position sur laquel la piece vas etre placee
+     * @param player joueur qui vas jouer
+     * @param point  position sur laquel la piece vas etre placee
      */
-    public void setPiece(Bot<V> bot, Point p) {
+    public void setPiece(Player<PieceControleur<V>> player, Point p) {
         try {
-            model.setPiece(p, bot.getMain());
-            bot.scoreadd(model.calculePoint(p));
+            model.setPiece(p, player.getMain());
+            player.scoreadd(model.calculePoint(p));
         } catch (positionInvalide e) {
         }
     }

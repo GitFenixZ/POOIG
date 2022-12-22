@@ -1,4 +1,4 @@
-package domino;
+package domino.piece;
 
 import java.util.Random;
 
@@ -6,6 +6,9 @@ import communs.exceptions.directionInvalide;
 import communs.objets.piece.PieceModel;
 import communs.interfaces.Direction;
 
+/**
+ * Class modélisant le model des pièces du jeu de domino.
+ */
 public class DominoPieceModel extends PieceModel<Integer> {
 
     /**
@@ -40,7 +43,7 @@ public class DominoPieceModel extends PieceModel<Integer> {
         try {
             int res = 0;
             for (int valeur : this.getCote(cote)) {
-                if (valeur != vide) {
+                if (valeur != getVide()) {
                     res += valeur;
                 }
             }

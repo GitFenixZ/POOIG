@@ -2,7 +2,6 @@ package communs.interfaces.plateau;
 
 import java.util.Scanner;
 
-import communs.objets.Bot;
 import communs.objets.Player;
 import communs.objets.Point;
 import communs.objets.Sac;
@@ -57,10 +56,10 @@ public interface InterfacePlateauControleur<V> {
     public Point peutPlacer(PieceControleur<V> piece);
 
     /**
-     * Permet a un bot de placer une pièce ou il le veut.
+     * Permet a un joueur de placer une pièce ou il le veut.
      * 
-     * @param bot   bot qui vas jouer
-     * @param point position de l'objet
+     * @param player joueur qui vas jouer
+     * @param point  position de l'objet
      */
-    public void setPiece(Bot<V> bot, Point p);
+    public void setPiece(Player<PieceControleur<V>> player, Point p);
 }

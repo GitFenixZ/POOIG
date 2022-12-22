@@ -53,7 +53,6 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @return le nombre de point que la piece fait gagner
      */
     public int calculePoint(Point point) {
-        System.out.println("COUCOU");
         return 0;
     }
 

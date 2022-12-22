@@ -11,4 +11,14 @@ import communs.objets.piece.PieceModel;
 public interface InterfacePieceView<V> {
     // setter
     public void setModel(PieceModel<V> model);
+
+    public PieceModel<V> getModel();
+
+    /**
+     * Getter d'une ligne du tableau sous form de String
+     * 
+     * @param indice indice de la ligne voulu
+     * @return un String representant une ligne du tableau
+     */
+    public String getligne(int indice);
 }

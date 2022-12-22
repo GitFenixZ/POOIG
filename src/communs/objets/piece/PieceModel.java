@@ -16,13 +16,13 @@ import communs.interfaces.piece.InterfacePieceModel;
 
 public abstract class PieceModel<V> implements InterfacePieceModel<V> {
     /** Element vide par defaut */
-    protected V vide;
+    private V vide;
     /** Valeurs contenue dans la piece */
     protected ArrayList<ArrayList<V>> valeurs;
     /** Hauteur de la piece */
-    protected int hauteur;
+    private int hauteur;
     /** Largeur de la piece */
-    protected int largeur;
+    private int largeur;
 
     /**
      * Constructeur
@@ -46,6 +46,7 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
     }
 
     // getters
+
     @Override
     public int getLargeur() {
         return largeur;
@@ -54,6 +55,11 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
     @Override
     public int getHauteur() {
         return hauteur;
+    }
+
+    @Override
+    public V getVide() {
+        return vide;
     }
 
     @Override
@@ -68,25 +74,6 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
             res.add(new ArrayList<V>());
             for (int j = 0; j < largeur; j++) {
                 res.get(i).add(valeurs.get(i).get(j));
-            }
-        }
-        return res;
-    }
-
-    @Override
-    /**
-     * Getter d'une ligne du tableau sous form de String
-     * 
-     * @param indice indice de la ligne voulu
-     * @return un String representant une ligne du tableau
-     */
-    public String getligne(int indice) {
-        String res = " ";
-        for (V e : valeurs.get(indice)) {
-            if (e != vide) {
-                res += e + " ";
-            } else {
-                res += "  ";
             }
         }
         return res;

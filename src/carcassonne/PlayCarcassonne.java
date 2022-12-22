@@ -1,28 +1,22 @@
 package carcassonne;
 
-import java.util.ArrayList;
+import java.awt.Color;
 import java.util.Scanner;
 
+import carcassonne.joueurs.CarcassonneBot;
+import carcassonne.joueurs.CarcassonnePlayer;
+import carcassonne.piece.CarcassonnePieceControleur;
+import carcassonne.piece.CarcassonnePieceModel;
+import carcassonne.piece.Terrain;
+import communs.PlayGame;
 import communs.objets.Player;
-import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 
 /**
  * Class modélisant une partie de carcassonne qui se joue.
  */
-public class PlayCarcassonne {
-    /* Sac de piece de la partie */
-    private Sac<PieceControleur<Terrain>> sac;
-    /**
-     * Liste des joueurs autour de la table
-     */
-    private ArrayList<Player<PieceControleur<Terrain>>> joueurs;
-    /**
-     * Plateau de jeu pour la partie en cours
-     */
-    private PlateauControleur<Terrain> plateau;
-
+public class PlayCarcassonne extends PlayGame<Terrain> {
     /**
      * Constructeur
      * 
@@ -32,93 +26,87 @@ public class PlayCarcassonne {
      * @param largeurPlateau Largeur du plateau de jeu
      */
     public PlayCarcassonne(int nombreDePiece, int nombreJoueur, int hauteurPlateau, int largeurPlateau, Scanner sc) {
-        sac = new Sac<PieceControleur<Terrain>>(nombreDePiece);
-        // remplis le sac de piece de domino
-        for (int i = 0; i < 9; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.un));
-        }
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.deux));
-        }
-        for (int i = 0; i < 2; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.trois));
-        }
-        sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.quatre));
-        sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.cinq));
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.six));
-        }
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.sept));
-        }
-        for (int i = 0; i < 8; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.huit));
-        }
-        for (int i = 0; i < 4; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.neuf));
-        }
-        for (int i = 0; i < 5; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.dix));
-        }
-        for (int i = 0; i < 2; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.onze));
-        }
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.douze));
-        }
-        for (int i = 0; i < 4; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.treize));
-        }
-        for (int i = 0; i < 2; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.quatroze));
-        }
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.quize));
-        }
-        for (int i = 0; i < 2; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.seize));
-        }
-        for (int i = 0; i < 4; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.dixsept));
-        }
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.dixhuit));
-        }
-        sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.dixneuf));
-        for (int i = 0; i < 2; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.vingt));
-        }
-        sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.vingtun));
-        sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.vingtdeux));
-        for (int i = 0; i < 2; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.vingttrois));
-        }
-        for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcasonnePieceControleur(CarcassonnePieceModel.vingtquatre));
-        }
+        super(nombreDePiece, hauteurPlateau, largeurPlateau);
 
-        joueurs = new ArrayList<Player<PieceControleur<Terrain>>>();
+        // initialise le plateau
+        plateau = new PlateauControleur<Terrain>(hauteurPlateau, largeurPlateau, 5, 5);
         // intialise les joueurs
+
+        // Faire un sorte que les joueurs puissent choisir leur couleur et si ils sont
+        // des Robots
         for (int i = 0; i < nombreJoueur; i++) {
             System.out.println("Est ce une joueur ?");
             if (sc.nextLine().equals("oui")) {
                 System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
-                joueurs.add(new CarcassonnePlayer(sc.nextLine()));
+                joueurs.add(new CarcassonnePlayer(sc.nextLine(), Color.BLUE));
             } else {
-                joueurs.add(new CarcassonneBot("Joueur" + i));
+                joueurs.add(new CarcassonneBot("Joueur" + i, Color.RED));
             }
         }
-        // initialise le plateau
-        plateau = new PlateauControleur<Terrain>(hauteurPlateau, largeurPlateau, 5, 5);
-    }
 
-    /**
-     * Methode qui permet de faire piocher un joueur dans le sac
-     * 
-     * @param player joueur a faire piocher
-     */
-    public void piocherPiece(Player<PieceControleur<Terrain>> player) {
-        player.piocher(sac);
+        // remplis le sac de piece de Carcassonne
+        for (int i = 0; i < 9; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.un));
+        }
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.deux));
+        }
+        for (int i = 0; i < 2; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.trois));
+        }
+        sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quatre));
+        sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.cinq));
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.six));
+        }
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.sept));
+        }
+        for (int i = 0; i < 8; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.huit));
+        }
+        for (int i = 0; i < 4; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.neuf));
+        }
+        for (int i = 0; i < 5; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.dix));
+        }
+        for (int i = 0; i < 2; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.onze));
+        }
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.douze));
+        }
+        for (int i = 0; i < 4; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.treize));
+        }
+        for (int i = 0; i < 2; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quatroze));
+        }
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quize));
+        }
+        for (int i = 0; i < 2; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.seize));
+        }
+        for (int i = 0; i < 4; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.dixsept));
+        }
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.dixhuit));
+        }
+        sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.dixneuf));
+        for (int i = 0; i < 2; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.vingt));
+        }
+        sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.vingtun));
+        sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.vingtdeux));
+        for (int i = 0; i < 2; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.vingttrois));
+        }
+        for (int i = 0; i < 3; i++) {
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.vingtquatre));
+        }
     }
 
     /**
@@ -133,45 +121,25 @@ public class PlayCarcassonne {
         }
         int indice = 0;
         System.out.println(plateau);
-        String rep = "";
+
         // tant que le sac n'est pas vide
-        while (!sac.isEmpty()) {
+        int tours = 0;
+        while (!sac.isEmpty() && tours < 10) {
+            tours++;
             if (indice >= joueurs.size()) {
                 indice = 0;
             }
-            piocherPiece(joueurs.get(indice));
-            System.out.print(joueurs.get(indice));
-            if (joueurs.get(indice) instanceof CarcassonneBot) {
-                if (!((CarcassonneBot) joueurs.get(indice)).jouer(plateau)) { // fait jouer le bot. Si il ne peut pas
-                                                                              // jouer
-                    // la pièce
-                    indice--; // il rejoue.
-                }
-            } else {
-                System.out.println("Pensez vous pouvoir jouer ?");
-                rep = sc.nextLine();
-                if (rep.equals("oui")) {
-                    if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
-                        System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
-                        plateau.placerPiece(joueurs.get(indice), sc);
-                        joueurs.get(indice).jeter();
-                    } else {
-                        System.out.println("Vous vous trompez, aucune solution n'est valide!");
-                        joueurs.get(indice).jeter();
-                        indice--;// il rejoue.
+            if (!((CarcassonnePlayer) joueurs.get(indice)).partisantsIsEmpty()) {
+                // si le joueur à toujours des partisant, il peut jouer son tour.
+                piocherPiece(joueurs.get(indice));
+                System.out.print(joueurs.get(indice));
+                if (joueurs.get(indice) instanceof CarcassonneBot) {
+                    if (!((CarcassonneBot) joueurs.get(indice)).jouer(plateau)) {
+                        // fait jouer le bot. Si il ne peut pas jouer la pièce
+                        indice--; // il rejoue.
                     }
                 } else {
-                    if (rep.equals("non")) {
-                        if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
-                            System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
-                            plateau.placerPiece(joueurs.get(indice), sc);
-                            joueurs.get(indice).jeter();
-                        } else {
-                            System.out.println("Et oui aucune solution n'est valide.");
-                            joueurs.get(indice).jeter();
-                            indice--;// il rejoue.
-                        }
-                    }
+                    // c'est un joueur donc à gérer dans la fenetre
                 }
             }
             indice++;

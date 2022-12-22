@@ -20,20 +20,14 @@ public interface InterfacePieceModel<V> {
 
     public int getHauteur();
 
+    public V getVide();
+
     /**
      * Getters du tableau de valeur
      * 
      * @return une copy du tableau.
      */
     public ArrayList<ArrayList<V>> getValeurs();
-
-    /**
-     * Getter d'une ligne du tableau sous form de String
-     * 
-     * @param indice indice de la ligne voulu
-     * @return un String representant une ligne du tableau
-     */
-    public String getligne(int indice);
 
     /**
      * Getter d'un cote sous forme d'un tableau contenant les valeur du coté

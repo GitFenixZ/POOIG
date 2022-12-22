@@ -1,4 +1,4 @@
-package domino;
+package domino.piece;
 
 import communs.interfaces.Direction;
 import communs.objets.piece.PieceControleur;
@@ -37,6 +37,6 @@ public class DominoPieceControleur extends PieceControleur<Integer> {
      * @return La somme de toutes les valeur d'un cote
      */
     public int somme(Direction cote) {
-        return ((DominoPieceModel) model).somme(cote);
+        return ((DominoPieceModel) getModel()).somme(cote);
     }
 }
