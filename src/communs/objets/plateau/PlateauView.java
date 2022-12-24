@@ -1,11 +1,19 @@
 package communs.objets.plateau;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.awt.GridLayout;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauView;
 import communs.objets.Point;
+import communs.objets.piece.PieceControleur;
 
 /**
  * Class modélisant la vue du plateau
@@ -16,11 +24,52 @@ import communs.objets.Point;
  */
 public class PlateauView<V> implements InterfacePlateauView<V> {
     private PlateauModel<V> model;
+    private final JPanel imagePlateau;
+
+    public PlateauView() {
+        imagePlateau = new JPanel();
+    }
+
+    @Override
+    /**
+     * Raffraichi l'affichage graphique.
+     */
+    public void refreshGridLayout() {
+        imagePlateau.removeAll();
+        imagePlateau.setLayout(new GridLayout(model.getHauteur(), model.getLargeur(), 0, 0));
+        for (ArrayList<PieceControleur<V>> ligne : model.getTableau()) {
+            for (PieceControleur<V> v : ligne) {
+                if (v != null) {
+                    v.getView().getImagePiece().setSize(new Dimension(50, 50));
+                    imagePlateau.add(v.getView().getImagePiece());
+                } else {
+                    imagePlateau.add(new JLabel());
+                }
+            }
+        }
+        imagePlateau.validate();
+        imagePlateau.repaint();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+
+        }
+    }
 
     // setter
     @Override
     public void setModel(PlateauModel<V> model) {
         this.model = model;
+    }
+
+    @Override
+    public void setPiece() {
+        refreshGridLayout();
+    }
+
+    @Override
+    public JPanel getImagePlateau() {
+        return imagePlateau;
     }
 
     @Override

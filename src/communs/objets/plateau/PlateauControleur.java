@@ -35,9 +35,18 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         model = new PlateauModel<V>(hauteur, largeur, hauteurPiece, largeurPiece);
         view = new PlateauView<V>();
         view.setModel(model);
+        view.refreshGridLayout();
     }
 
     public PlateauControleur() {
+    }
+
+    public PlateauModel<V> getModel() {
+        return model;
+    }
+
+    public PlateauView<V> getView() {
+        return view;
     }
 
     /**
@@ -199,16 +208,6 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         return view.afficher();
     }
 
-    /**
-     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
-     * 
-     * @param sac sac du quel est tiré la pièce.
-     */
-    @Override
-    public void start(Sac<PieceControleur<V>> sac) {
-        model.start(sac);
-    }
-
     @Override
     /**
      * Donnes un coordonnée ou l'on peut placer la piece.
@@ -229,8 +228,26 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     public void setPiece(Player<PieceControleur<V>> player, Point p) {
         try {
+            player.getMain().getView().setimagePiece();
             model.setPiece(p, player.getMain());
             player.scoreadd(model.calculePoint(p));
+            view.setPiece();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    @Override
+    public void start(Sac<PieceControleur<V>> sac) {
+        try {
+            PieceControleur<V> piece = sac.tire();
+            piece.getView().setimagePiece();
+            model.setPiece(new Point(0, 0), piece);
+            view.setPiece();
         } catch (positionInvalide e) {
         }
     }

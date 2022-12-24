@@ -1,5 +1,7 @@
 package communs.interfaces.plateau;
 
+import java.util.ArrayList;
+
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Direction;
@@ -35,6 +37,13 @@ public interface InterfaceExtendable<P> {
      *                          tableau.
      */
     public P getPiece(Point point) throws positionInvalide;
+
+    /**
+     * Getters du tableau de valeur
+     * 
+     * @return une copy du tableau.
+     */
+    public ArrayList<ArrayList<P>> getTableau();
 
     /**
      * Setter permettant de placer l'objet a un point du

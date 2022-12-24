@@ -17,6 +17,14 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
     private PieceModel<V> model;
     private PieceView<V> view;
 
+    public PieceControleur() {
+    }
+
+    PieceControleur(PieceControleur<V> pieceControleur) {
+        this.model = new PieceModel<V>(pieceControleur.model);
+        this.view = pieceControleur.view;
+    }
+
     // setters
 
     @Override

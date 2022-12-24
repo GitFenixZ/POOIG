@@ -78,6 +78,24 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
+     * Getters du tableau de valeur
+     * 
+     * @return une copy du tableau.
+     */
+
+    public ArrayList<ArrayList<P>> getTableau() {
+        ArrayList<ArrayList<P>> res = new ArrayList<ArrayList<P>>();
+        for (int i = 0; i < getHauteur(); i++) {
+            res.add(new ArrayList<P>());
+            for (int j = 0; j < getLargeur(); j++) {
+                res.get(i).add(tableau.get(i).get(j));
+            }
+        }
+        return res;
+    }
+
+    @Override
+    /**
      * Getter permettant d'obtenir la piece à la position point du
      * plateau.
      * 
@@ -120,6 +138,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             if (point.getX() == 0) {
                 ajouterUnCote(Direction.LEFT);
                 point.allerADroite();
+                actuelPosition.allerADroite();
             }
             if (point.getY() == getHauteur() - 1) {
                 ajouterUnCote(Direction.DOWN);
@@ -127,6 +146,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             if (point.getY() == 0) {
                 ajouterUnCote(Direction.UP);
                 point.allerEnBas();
+                actuelPosition.allerEnBas();
             }
         } catch (directionInvalide e) {
         }

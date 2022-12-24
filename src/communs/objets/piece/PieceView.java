@@ -1,5 +1,10 @@
 package communs.objets.piece;
 
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import communs.interfaces.piece.InterfacePieceView;
 
 /**
@@ -10,6 +15,11 @@ import communs.interfaces.piece.InterfacePieceView;
  */
 public class PieceView<V> implements InterfacePieceView<V> {
     private PieceModel<V> model;
+    private final JPanel imagePiece;
+
+    public PieceView() {
+        imagePiece = new JPanel();
+    }
 
     // setter
     @Override
@@ -17,10 +27,34 @@ public class PieceView<V> implements InterfacePieceView<V> {
         this.model = model;
     }
 
+    @Override
+    /**
+     * Créer un affichage correct pour la fenetre
+     */
+    public void setimagePiece() {
+        imagePiece.setLayout(new GridLayout(model.getHauteur(), 1));
+        for (int i = 0; i < model.getHauteur(); i++) {
+            String res = " ";
+            for (V e : model.getValeurs().get(i)) {
+                if (e != model.getVide()) {
+                    res += e.toString() + " ";
+                } else {
+                    res += "   ";
+                }
+            }
+            imagePiece.add(new JLabel(res));
+        }
+    }
+
     // getter
     @Override
     public PieceModel<V> getModel() {
         return model;
+    }
+
+    @Override
+    public JPanel getImagePiece() {
+        return imagePiece;
     }
 
     /**
@@ -54,5 +88,4 @@ public class PieceView<V> implements InterfacePieceView<V> {
         }
         return res;
     }
-
 }

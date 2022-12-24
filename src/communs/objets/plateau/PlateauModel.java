@@ -3,7 +3,6 @@ package communs.objets.plateau;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauModel;
 import communs.objets.Point;
-import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.interfaces.Direction;
 
@@ -214,18 +213,5 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             piece.pivotDroite();
         }
         return null;
-    }
-
-    /**
-     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
-     * 
-     * @param sac sac du quel est tiré la pièce.
-     */
-    @Override
-    public void start(Sac<PieceControleur<V>> sac) {
-        try {
-            setPiece(actuelPosition, sac.tire());
-        } catch (positionInvalide e) {
-        }
     }
 }

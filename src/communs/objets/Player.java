@@ -1,5 +1,6 @@
 package communs.objets;
 
+import communs.PlayGame;
 import communs.interfaces.InterfacePlayer;
 
 /**
@@ -75,5 +76,18 @@ public class Player<P> implements InterfacePlayer<P> {
     @Override
     public int getscore() {
         return score;
+    }
+
+    /**
+     * Methode a utiliser pour jouer sans le terminal.
+     * n'affiche aucune informations.
+     * Permet de laisser un joueur jouer.
+     * 
+     * @param plateauControleur Plateau sur lequel on joue en se moment.
+     * @return si le robot a pu jouer
+     */
+    public void jouer(PlayGame game) {
+        while (!game.getTourSuivant()) {
+        }
     }
 }

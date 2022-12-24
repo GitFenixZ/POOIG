@@ -36,6 +36,7 @@ public class DominoBot extends Player<PieceControleur<Integer>> {
     /**
      * Methode a utiliser pour jouer sans le terminal.
      * n'affiche aucune informations.
+     * Permet de faire jouer un joueur automatiquement.
      * 
      * @param plateauControleur Plateau sur lequel on joue en se moment.
      * @return si le robot a pu jouer

@@ -7,14 +7,14 @@ import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceModel;
 
 /**
- * Class modélisant une piece de jeu, c'est à dire les vauleurs qu'elle prends.
+ * Class modélisant une piece de jeu, c'est à dire les valeurs qu'elle prends.
  * Ainsi que ses dimensions.
  * 
  * V est le types des valeur qui apparaissent sur la pièce.
  * Exemple : Integer dans le domino.
  */
 
-public abstract class PieceModel<V> implements InterfacePieceModel<V> {
+public class PieceModel<V> implements InterfacePieceModel<V> {
     /** Element vide par defaut */
     private V vide;
     /** Valeurs contenue dans la piece */
@@ -43,6 +43,17 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
                 valeurs.get(i).add(vide);
             }
         }
+    }
+
+    /**
+     * Constructeur
+     * Produit une copie du model
+     */
+    public PieceModel(PieceModel<V> model) {
+        hauteur = model.hauteur;
+        largeur = model.largeur;
+        vide = model.vide;
+        model.valeurs = model.getValeurs();
     }
 
     // getters

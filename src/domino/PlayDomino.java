@@ -47,9 +47,11 @@ public class PlayDomino extends PlayGame<Integer> {
      * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
      * dans le sac.
      * 
+     * Se joue dans le termianal.
+     * 
      * @param sc System.in permettra de lire la reponse de l'utilisateur
      */
-    public void play(Scanner sc) {
+    public void playTerminal(Scanner sc) {
         if (!sac.isEmpty()) {
             plateau.start(sac);
         }
@@ -97,6 +99,38 @@ public class PlayDomino extends PlayGame<Integer> {
             }
             indice++;
             System.out.println(plateau.afficher());
+        }
+        System.out.println("Bravo  à tous!!!");
+
+        // affiche les score de tout le monde
+        for (Player<PieceControleur<Integer>> p : joueurs) {
+            System.out.println(p.getName() + " : " + p.getscore());
+        }
+    }
+
+    /**
+     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * dans le sac.
+     * 
+     * Avec interface Graphique
+     */
+    public void play() {
+        if (!sac.isEmpty()) {
+            plateau.start(sac);
+        }
+        // tant que le sac n'est pas vide
+        while (!sac.isEmpty()) {
+            piocherPiece(joueurs.get(getIndice()));
+            System.out.print(joueurs.get(getIndice()));
+            if (joueurs.get(getIndice()) instanceof DominoBot) {
+                if (!((DominoBot) joueurs.get(getIndice())).jouerTerminal((DominoPlateauControleur) plateau)) {
+                    // fait jouer le bot. Si il ne peut pas jouer la pièce
+                    this.rejouer(); // il rejoue.
+                }
+            } else {
+                joueurs.get(getIndice()).jouer(this);
+            }
+            this.nextPlayer();
         }
         System.out.println("Bravo  à tous!!!");
 

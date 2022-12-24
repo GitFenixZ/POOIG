@@ -3,7 +3,6 @@ package carcassonne.piece;
 import carcassonne.joueurs.CarcassonnePlayer;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
-import communs.objets.piece.PieceView;
 
 /**
  * Modelise le controleur des piece de plateau de carcassonne.
@@ -14,6 +13,7 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
      * Initialise une piece du jeu de carcassonne
      */
     public CarcassonnePieceControleur(Terrain[][] map) {
+        super();
         CarcassonnePieceModel model = new CarcassonnePieceModel(map);
         CarcassonnePieceView view = new CarcassonnePieceView();
         view.setModel(model);

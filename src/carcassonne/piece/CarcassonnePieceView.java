@@ -4,6 +4,10 @@ import communs.objets.piece.PieceView;
 
 public class CarcassonnePieceView extends PieceView<Terrain> {
 
+    public CarcassonnePieceView() {
+        super();
+    }
+
     @Override
     /**
      * Getter d'une ligne du tableau sous form de String
