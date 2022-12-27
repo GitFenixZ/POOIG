@@ -1,7 +1,6 @@
 package communs.interfaces.plateau;
 
 import communs.objets.Point;
-import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
 /**
