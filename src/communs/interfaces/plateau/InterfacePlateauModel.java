@@ -1,5 +1,6 @@
 package communs.interfaces.plateau;
 
+import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 
 /**
@@ -20,11 +21,10 @@ public interface InterfacePlateauModel<V> {
      * Methode qui permet de calculer le nombre de point que repporte une piece
      * quand elle vient d'être placer.
      * 
-     * @param x la colonne sur laquel la piece a ete placee
-     * @param y la ligne sur laquel la piece a ete placee
+     * @param point position sur laquel la piece a ete placee
      * @return le nombre de point que la piece fait gagner
      */
-    public int calculePoint(int x, int y);
+    public int calculePoint(Point point);
 
     /**
      * Verifie si il est possible de placer la piece quelque parts sur la plateau
@@ -39,10 +39,16 @@ public interface InterfacePlateauModel<V> {
      * Regarde si l'on peut placer une piece a de certaine coordonnee
      * 
      * @param piece Piece a placer
-     * @param x     colonne a laquel on veut la placer
-     * @param y     ligne a laquel on veut la placer
+     * @param point position sur laquel on veut essayer de placer la piece
      * @return si c'est possible de placer la piece en respcetant les regles.
      */
-    public boolean possibleDePlacer(PieceControleur<V> piece, int x, int y);
+    public boolean possibleDePlacer(PieceControleur<V> piece, Point point);
 
+    /**
+     * Donnes un coordonnée ou l'on peut placer la piece.
+     * 
+     * @param piece Piece a placer
+     * @return des coordonnée ou l'on peut placer la pièce
+     */
+    public Point peutPlacer(PieceControleur<V> piece);
 }

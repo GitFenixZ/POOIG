@@ -2,11 +2,12 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
-import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauControleur;
+import communs.objets.Direction;
 import communs.objets.Player;
+import communs.objets.Point;
+import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 
 /**
@@ -30,13 +31,22 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param hauteurPiece La hauteur d'une pièce
      * @param largeurPiece La largeur d'une pièce
      */
-    public PlateauControleur(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
-        model = new PlateauModel<V>(hauteur, largeur, hauteurPiece, largeurPiece);
+    public PlateauControleur(int hauteurPiece, int largeurPiece) {
+        model = new PlateauModel<V>(hauteurPiece, largeurPiece);
         view = new PlateauView<V>();
         view.setModel(model);
+        view.refreshGridLayout();
     }
 
     public PlateauControleur() {
+    }
+
+    public PlateauModel<V> getModel() {
+        return model;
+    }
+
+    public PlateauView<V> getView() {
+        return view;
     }
 
     /**
@@ -157,13 +167,13 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             placerPiece = PlateauView.demandeBoolean(sc, "Voulez vous placer la pièce ici ?(oui/non)");
             if (placerPiece) {
                 // verifie si la position est valide
-                valide = model.possibleDePlacer(player.getMain(), model.getActuelX(), model.getActuelY());
+                valide = model.possibleDePlacer(player.getMain(), model.getActuelPosition());
                 if (!valide) {
                     System.out.println("Erreur : position utilisé invalide.");
                 } else {
                     // place la piece a la position demande.
                     try {
-                        model.setPiece(model.getActuelX(), model.getActuelY(), player.getMain());
+                        model.setPiece(model.getActuelPosition(), player.getMain());
                     } catch (positionInvalide e) {
                         // si il rencontre un problème lors du depot de la pièce (ne doit jamais arrivé)
                         valide = false;
@@ -172,29 +182,8 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
                 }
             }
         }
-
-        /*
-         * Tableau infini :
-         * Si la piece est pose sur un cote. On elargie la tableau sur ce cote en
-         * question.
-         */
-        try {
-            if (model.getActuelX() == model.getLargeur() - 1) {
-                model.ajouterUnCote(Direction.RIGHT);
-            }
-            if (model.getActuelX() == 0) {
-                model.ajouterUnCote(Direction.LEFT);
-            }
-            if (model.getActuelY() == model.getHauteur() - 1) {
-                model.ajouterUnCote(Direction.DOWN);
-            }
-            if (model.getActuelY() == 0) {
-                model.ajouterUnCote(Direction.UP);
-            }
-        } catch (directionInvalide e) {
-        }
         // On ajoute les points gagne au joueur
-        player.scoreadd(model.calculePoint(model.getActuelX(), model.getActuelY()));
+        player.scoreadd(model.calculePoint(model.getActuelPosition()));
     }
 
     @Override
@@ -217,5 +206,49 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     public String afficher() {
         return view.afficher();
+    }
+
+    @Override
+    /**
+     * Donnes un coordonnée ou l'on peut placer la piece.
+     * 
+     * @param piece Piece a placer
+     * @return des coordonnée ou l'on peut placer la pièce
+     */
+    public Point peutPlacer(PieceControleur<V> piece) {
+        return model.peutPlacer(piece);
+    }
+
+    @Override
+    /**
+     * Permet a un joueur de placer une pièce ou il le veut.
+     * 
+     * @param player joueur qui vas jouer
+     * @param point  position sur laquel la piece vas etre placee
+     */
+    public void setPiece(Player<PieceControleur<V>> player, Point p) {
+        try {
+            player.getMain().getView().setimagePiece();
+            model.setPiece(p, player.getMain());
+            player.scoreadd(model.calculePoint(p));
+            view.setPiece();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    @Override
+    public void start(Sac<PieceControleur<V>> sac) {
+        try {
+            PieceControleur<V> piece = sac.tire();
+            piece.getView().setimagePiece();
+            model.setPiece(new Point(0, 0), piece);
+            view.setPiece();
+        } catch (positionInvalide e) {
+        }
     }
 }

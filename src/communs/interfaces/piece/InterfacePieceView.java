@@ -1,5 +1,7 @@
 package communs.interfaces.piece;
 
+import javax.swing.JPanel;
+
 import communs.objets.piece.PieceModel;
 
 /**
@@ -11,4 +13,21 @@ import communs.objets.piece.PieceModel;
 public interface InterfacePieceView<V> {
     // setter
     public void setModel(PieceModel<V> model);
+
+    /**
+     * Créer un affichage correct pour la fenetre
+     */
+    public void setimagePiece();
+
+    public PieceModel<V> getModel();
+
+    public JPanel getImagePiece();
+
+    /**
+     * Getter d'une ligne du tableau sous form de String
+     * 
+     * @param indice indice de la ligne voulu
+     * @return un String representant une ligne du tableau
+     */
+    public String getligne(int indice);
 }

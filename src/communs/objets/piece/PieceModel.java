@@ -3,26 +3,26 @@ package communs.objets.piece;
 import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceModel;
+import communs.objets.Direction;
 
 /**
- * Class modélisant une piece de jeu, c'est à dire les vauleurs qu'elle prends.
+ * Class modélisant une piece de jeu, c'est à dire les valeurs qu'elle prends.
  * Ainsi que ses dimensions.
  * 
  * V est le types des valeur qui apparaissent sur la pièce.
  * Exemple : Integer dans le domino.
  */
 
-public abstract class PieceModel<V> implements InterfacePieceModel<V> {
+public class PieceModel<V> implements InterfacePieceModel<V> {
     /** Element vide par defaut */
-    protected V vide;
+    private V vide;
     /** Valeurs contenue dans la piece */
     protected ArrayList<ArrayList<V>> valeurs;
     /** Hauteur de la piece */
-    protected int hauteur;
+    private int hauteur;
     /** Largeur de la piece */
-    protected int largeur;
+    private int largeur;
 
     /**
      * Constructeur
@@ -45,7 +45,19 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
         }
     }
 
+    /**
+     * Constructeur
+     * Produit une copie du model
+     */
+    public PieceModel(PieceModel<V> model) {
+        hauteur = model.hauteur;
+        largeur = model.largeur;
+        vide = model.vide;
+        model.valeurs = model.getValeurs();
+    }
+
     // getters
+
     @Override
     public int getLargeur() {
         return largeur;
@@ -54,6 +66,11 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
     @Override
     public int getHauteur() {
         return hauteur;
+    }
+
+    @Override
+    public V getVide() {
+        return vide;
     }
 
     @Override
@@ -68,25 +85,6 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
             res.add(new ArrayList<V>());
             for (int j = 0; j < largeur; j++) {
                 res.get(i).add(valeurs.get(i).get(j));
-            }
-        }
-        return res;
-    }
-
-    @Override
-    /**
-     * Getter d'une ligne du tableau sous form de String
-     * 
-     * @param indice indice de la ligne voulu
-     * @return un String representant une ligne du tableau
-     */
-    public String getligne(int indice) {
-        String res = " ";
-        for (V e : valeurs.get(indice)) {
-            if (e != vide) {
-                res += e + " ";
-            } else {
-                res += "  ";
             }
         }
         return res;
@@ -209,6 +207,16 @@ public abstract class PieceModel<V> implements InterfacePieceModel<V> {
                 throw new directionInvalide();
         }
         // compare les deux cote selectionnees.
+        if (cote1.size() != cote2.size()) {
+            return false;
+        }
+        return (compare(cote1, cote2));
+    }
+
+    /**
+     * Methode qui compare si deux coté son campatibles
+     */
+    protected boolean compare(ArrayList<V> cote1, ArrayList<V> cote2) {
         if (cote1.size() != cote2.size()) {
             return false;
         }

@@ -3,8 +3,8 @@ package communs.objets.piece;
 import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceControleur;
+import communs.objets.Direction;
 
 /**
  * Class modélisant le controleur d'un pièce de jeu permettant les interractions
@@ -14,8 +14,16 @@ import communs.interfaces.piece.InterfacePieceControleur;
  * Exemple : Integer dans le domino.
  */
 public class PieceControleur<V> implements InterfacePieceControleur<V> {
-    protected PieceModel<V> model;
-    protected PieceView<V> view;
+    private PieceModel<V> model;
+    private PieceView<V> view;
+
+    public PieceControleur() {
+    }
+
+    PieceControleur(PieceControleur<V> pieceControleur) {
+        this.model = new PieceModel<V>(pieceControleur.model);
+        this.view = pieceControleur.view;
+    }
 
     // setters
 
@@ -37,6 +45,26 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
         } catch (directionInvalide e) {
             return new ArrayList<V>();
         }
+    }
+
+    @Override
+    public int getLargeur() {
+        return model.getLargeur();
+    }
+
+    @Override
+    public int getHauteur() {
+        return model.getHauteur();
+    }
+
+    @Override
+    public PieceModel<V> getModel() {
+        return model;
+    }
+
+    @Override
+    public PieceView<V> getView() {
+        return view;
     }
 
     @Override
@@ -93,7 +121,7 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      * @return une String avec les element de la ligne indice
      */
     public String getligne(int indice) {
-        return model.getligne(indice);
+        return view.getligne(indice);
     }
 
     @Override

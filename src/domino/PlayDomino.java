@@ -1,30 +1,19 @@
 package domino;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
+import communs.PlayGame;
 import communs.objets.Player;
-import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
+import domino.joueurs.DominoBot;
+import domino.piece.DominoPieceControleur;
+import domino.plateau.DominoPlateauControleur;
 
 /**
  * Class modélisant une partie de domino qui se joue.
  */
 
-public class PlayDomino {
-    /**
-     * Sac de piece de la partie
-     */
-    private Sac<PieceControleur<Integer>> sac;
-    /**
-     * Liste des joueurs autour de la table
-     */
-    private ArrayList<Player<PieceControleur<Integer>>> joueurs;
-    /**
-     * Plateau de jeu pour la partie en cours
-     */
-    private DominoPlateauControleur plateau;
-
+public class PlayDomino extends PlayGame<Integer> {
     /**
      * Constructeur
      * 
@@ -33,69 +22,79 @@ public class PlayDomino {
      * @param hauteurPlateau Hauteur du plateau de jeu
      * @param largeurPlateau Largeur du plateau de jeu
      */
-    public PlayDomino(int nombreDePiece, int nombreJoueur, int hauteurPlateau, int largeurPlateau, Scanner sc) {
-        sac = new Sac<PieceControleur<Integer>>(nombreDePiece);
+    public PlayDomino(int nombreDePiece, int nombreJoueur, Scanner sc) {
+        super(nombreDePiece);
+
+        // initialise le plateau
+        plateau = new DominoPlateauControleur(5, 5);
+        // intialise les joueurs
+        for (int i = 0; i < nombreJoueur; i++) {
+            System.out.println("Est ce une joueur ?");
+            if (sc.nextLine().equals("oui")) {
+                System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
+                joueurs.add(new Player<PieceControleur<Integer>>(sc.nextLine()));
+            } else {
+                joueurs.add(new DominoBot("Joueur" + i));
+            }
+        }
         // remplis le sac de piece de domino
         for (int i = 0; i < nombreDePiece; i++) {
             sac.ajouter(new DominoPieceControleur());
         }
-        joueurs = new ArrayList<Player<PieceControleur<Integer>>>();
-        // intialise les joueurs
-        for (int i = 0; i < nombreJoueur; i++) {
-            System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
-            joueurs.add(new Player<PieceControleur<Integer>>(sc.nextLine()));
-        }
-        // initialise le plateau
-        plateau = new DominoPlateauControleur(hauteurPlateau, largeurPlateau, 5, 5);
-    }
-
-    /**
-     * Methode qui permet de faire piocher un joueur dans le sac
-     * 
-     * @param player joueur a faire piocher
-     */
-    public void piocherPiece(Player<PieceControleur<Integer>> player) {
-        player.piocher(sac);
     }
 
     /**
      * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
      * dans le sac.
      * 
+     * Se joue dans le termianal.
+     * 
      * @param sc System.in permettra de lire la reponse de l'utilisateur
      */
-    public void play(Scanner sc) {
-        int indice = 0;
+    public void playTerminal(Scanner sc) {
+        if (!sac.isEmpty()) {
+            plateau.start(sac);
+        }
         System.out.println(plateau);
         String rep = "";
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
-            if (indice >= joueurs.size()) {
-                indice = 0;
-            }
-            piocherPiece(joueurs.get(indice));
-            System.out.print(joueurs.get(indice));
-            System.out.println("Pensez vous pouvoir jouer ?");
-            rep = sc.nextLine();
-            if (rep.equals("oui")) {
-                if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
-                    System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
-                    plateau.placerPiece(joueurs.get(indice), sc);
-                } else {
-                    System.out.println("Vous vous trompez, aucune solution n'est valide!");
+            piocherPiece(joueurs.get(getIndice()));
+            System.out.print(joueurs.get(getIndice()));
+            if (joueurs.get(getIndice()) instanceof DominoBot) {
+                if (!((DominoBot) joueurs.get(getIndice())).jouerTerminal((DominoPlateauControleur) plateau)) {
+                    // fait jouer le bot. Si il ne peut pas jouer la pièce
+                    rejouer();
+                    ; // il rejoue.
                 }
             } else {
-                if (rep.equals("non")) {
-                    if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
-                        System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
-                        plateau.placerPiece(joueurs.get(indice), sc);
+                System.out.println("Pensez vous pouvoir jouer ?");
+                rep = sc.nextLine();
+                if (rep.equals("oui")) {
+                    if (((DominoPlateauControleur) plateau).possibleDePlacer(joueurs.get(getIndice()).getMain())) {
+                        System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
+                        ((DominoPlateauControleur) plateau).placerPiece(joueurs.get(getIndice()), sc);
+                        joueurs.get(getIndice()).jeter();
                     } else {
-                        System.out.println("Et oui aucune solution n'est valide.");
+                        System.out.println("Vous vous trompez, aucune solution n'est valide!");
+                        joueurs.get(getIndice()).jeter();
+                        rejouer();// il rejoue.
+                    }
+                } else {
+                    if (rep.equals("non")) {
+                        if (((DominoPlateauControleur) plateau).possibleDePlacer(joueurs.get(getIndice()).getMain())) {
+                            System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
+                            ((DominoPlateauControleur) plateau).placerPiece(joueurs.get(getIndice()), sc);
+                            joueurs.get(getIndice()).jeter();
+                        } else {
+                            System.out.println("Et oui aucune solution n'est valide.");
+                            joueurs.get(getIndice()).jeter();
+                            rejouer();// il rejoue.
+                        }
                     }
                 }
             }
-            joueurs.get(indice).jeter();
-            indice++;
+            nextPlayer();
             System.out.println(plateau.afficher());
         }
         System.out.println("Bravo  à tous!!!");
@@ -104,5 +103,32 @@ public class PlayDomino {
         for (Player<PieceControleur<Integer>> p : joueurs) {
             System.out.println(p.getName() + " : " + p.getscore());
         }
+    }
+
+    /**
+     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * dans le sac.
+     * 
+     * Avec interface Graphique
+     */
+    public void play() {
+        if (!sac.isEmpty()) {
+            plateau.start(sac);
+        }
+        // tant que le sac n'est pas vide
+        while (!sac.isEmpty()) {
+            piocherPiece(joueurs.get(getIndice()));
+            System.out.print(joueurs.get(getIndice()));
+            if (joueurs.get(getIndice()) instanceof DominoBot) {
+                if (!((DominoBot) joueurs.get(getIndice())).jouerTerminal((DominoPlateauControleur) plateau)) {
+                    // fait jouer le bot. Si il ne peut pas jouer la pièce
+                    this.rejouer(); // il rejoue.
+                }
+            } else {
+                joueurs.get(getIndice()).jouer(this);
+            }
+            this.nextPlayer();
+        }
+        System.out.println("Bravo  à tous!!!");
     }
 }

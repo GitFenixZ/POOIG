@@ -1,8 +1,11 @@
 package communs.interfaces.plateau;
 
+import java.util.ArrayList;
+
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
+import communs.objets.Direction;
+import communs.objets.Point;
 
 /**
  * Interface qui permet d'etendre un tableau en 2D.
@@ -14,6 +17,8 @@ import communs.interfaces.Direction;
 public interface InterfaceExtendable<P> {
 
     // getters
+    public Point getActuelPosition();
+
     public int getActuelX();
 
     public int getActuelY();
@@ -23,28 +28,33 @@ public interface InterfaceExtendable<P> {
     public int getLargeur();
 
     /**
-     * Getter permettant d'obtenir l'objet de la colonne x et de la ligne y du
+     * Getter permettant d'obtenir l'objet à la position point du
      * tableau.
      * 
-     * @param x colonne
-     * @param y ligne
-     * @return la piece de la colonne x et de la ligne y
+     * @param point position de l'objet que l'on veut
+     * @return la piece de la position point
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public P getPiece(int x, int y) throws positionInvalide;
+    public P getPiece(Point point) throws positionInvalide;
 
     /**
-     * Setter permettant de placer l'objet sur la colonne x et de la ligne y du
+     * Getters du tableau de valeur
+     * 
+     * @return une copy du tableau.
+     */
+    public ArrayList<ArrayList<P>> getTableau();
+
+    /**
+     * Setter permettant de placer l'objet a un point du
      * tableau.
      * 
-     * @param x     colonne
-     * @param y     ligne
+     * @param point position de l'objet
      * @param piece La piece a placer
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public void setPiece(int x, int y, P piece) throws positionInvalide;
+    public void setPiece(Point point, P piece) throws positionInvalide;
 
     /**
      * Permet de se deplacer d'une colonne sur la droite sur le tableau.

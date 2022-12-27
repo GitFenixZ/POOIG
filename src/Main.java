@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import carcassonne.PlayCarcassonne;
 import domino.PlayDomino;
 
 /**
@@ -10,7 +11,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // lance une partie de Domino
-        PlayDomino p = new PlayDomino(7, 1, 1, 1, sc);
-        p.play(sc);
+        PlayDomino p = new PlayDomino(15, 3, sc);
+        // lance une partie de Carcassonne
+        // PlayCarcassonne p = new PlayCarcassonne(3, sc);
+        p.playTerminal(sc);
     }
 }

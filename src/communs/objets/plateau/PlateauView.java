@@ -1,10 +1,19 @@
 package communs.objets.plateau;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.awt.GridLayout;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauView;
+import communs.objets.Direction;
+import communs.objets.Point;
+import communs.objets.piece.PieceControleur;
 
 /**
  * Class modélisant la vue du plateau
@@ -15,11 +24,52 @@ import communs.interfaces.plateau.InterfacePlateauView;
  */
 public class PlateauView<V> implements InterfacePlateauView<V> {
     private PlateauModel<V> model;
+    private final JPanel imagePlateau;
+
+    public PlateauView() {
+        imagePlateau = new JPanel();
+    }
+
+    @Override
+    /**
+     * Raffraichi l'affichage graphique.
+     */
+    public void refreshGridLayout() {
+        imagePlateau.removeAll();
+        imagePlateau.setLayout(new GridLayout(model.getHauteur(), model.getLargeur(), 0, 0));
+        for (ArrayList<PieceControleur<V>> ligne : model.getTableau()) {
+            for (PieceControleur<V> v : ligne) {
+                if (v != null) {
+                    v.getView().getImagePiece().setSize(new Dimension(50, 50));
+                    imagePlateau.add(v.getView().getImagePiece());
+                } else {
+                    imagePlateau.add(new JLabel());
+                }
+            }
+        }
+        imagePlateau.validate();
+        imagePlateau.repaint();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+
+        }
+    }
 
     // setter
     @Override
     public void setModel(PlateauModel<V> model) {
         this.model = model;
+    }
+
+    @Override
+    public void setPiece() {
+        refreshGridLayout();
+    }
+
+    @Override
+    public JPanel getImagePlateau() {
+        return imagePlateau;
     }
 
     @Override
@@ -56,8 +106,9 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
                 res += "|";
                 for (int x = xdepart; x < xfin; x++) {
                     try {
-                        if (model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1) != null) {
-                            res += model.getPiece(model.getActuelX() + x - 1, model.getActuelY() + y - 1).getligne(i)
+                        Point point = new Point(model.getActuelX() + x - 1, model.getActuelY() + y - 1);
+                        if (model.getPiece(point) != null) {
+                            res += model.getPiece(point).getligne(i)
                                     + "|";
                         } else {
                             res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
@@ -87,8 +138,9 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
                         affichage[i * model.getHauteurPiece() + k] = "";
                     }
                     try {
-                        if (model.getPiece(j, i) != null) {
-                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(j, i).getligne(k) + "|";
+                        Point point = new Point(j, i);
+                        if (model.getPiece(point) != null) {
+                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(point).getligne(k) + "|";
                         } else {
                             affichage[i * model.getHauteurPiece() + k] += " ".repeat(model.getLargeurPiece() * 2 + 1)
                                     + "|";
@@ -102,7 +154,7 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
                 + "\n";
         for (int i = 0; i < affichage.length; i++) {
             res += "|" + affichage[i] + "\n";
-            if (i % model.getHauteurPiece() == 4) {
+            if (i % model.getHauteurPiece() == model.getHauteurPiece() - 1) {
                 res += "-".repeat((model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
                         + "\n";
             }
