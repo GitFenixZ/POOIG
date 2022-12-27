@@ -2,12 +2,16 @@ package communs.interfaces.plateau;
 
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Carre.Direction;
+import communs.interfaces.Direction;
 
 /**
- * Interface qui permet d'etendre un tableau en 2D
+ * Interface qui permet d'etendre un tableau en 2D.
+ * 
+ * P represente le type des des element qui seront placer dans le tableau.
+ * Exemple : PieceControleur<Integer> pour le domino.
+ * Est généralisé pour répondre a un problème plus grands.
  */
-public interface InterfaceExtendable<T> {
+public interface InterfaceExtendable<P> {
 
     // getters
     public int getActuelX();
@@ -28,7 +32,7 @@ public interface InterfaceExtendable<T> {
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public T getPiece(int x, int y) throws positionInvalide;
+    public P getPiece(int x, int y) throws positionInvalide;
 
     /**
      * Setter permettant de placer l'objet sur la colonne x et de la ligne y du
@@ -40,7 +44,7 @@ public interface InterfaceExtendable<T> {
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public void setPiece(int x, int y, T piece) throws positionInvalide;
+    public void setPiece(int x, int y, P piece) throws positionInvalide;
 
     /**
      * Permet de se deplacer d'une colonne sur la droite sur le tableau.

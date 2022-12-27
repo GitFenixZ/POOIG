@@ -4,17 +4,20 @@ import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Carre;
+import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfaceExtendable;
 
 /**
- * Class qui represente un tableau en 2D qui contient des objet de type T et qui
+ * Class qui represente un tableau en 2D qui contient des objet de type V et qui
  * est de taille infini. C'est a dire qui est entendable tant que l'on souhaite.
+ * 
+ * P est le types des objet qui seront placer dans la tableau.
+ * Exemple: PieceControleur<Integer>
  */
-public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
+public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
-    /** Tableau de jeu en 2D qui contient des T */
-    protected ArrayList<ArrayList<T>> tableau;
+    /** Tableau de jeu en 2D qui contient des V */
+    protected ArrayList<ArrayList<P>> tableau;
     /** Colonne sur laquel le plateau est centree */
     protected int actuelX;
     /** Ligne sur laquel le plateau est centree */
@@ -33,10 +36,10 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
         if (largeur <= 0) {
             largeur = 1;
         }
-        tableau = new ArrayList<ArrayList<T>>();
+        tableau = new ArrayList<ArrayList<P>>();
         // initialise chaque piece du plateau par null
         for (int i = 0; i < hauteur; i++) {
-            tableau.add(new ArrayList<T>());
+            tableau.add(new ArrayList<P>());
             for (int j = 0; j < largeur; j++) {
                 tableau.get(i).add(null);
             }
@@ -80,7 +83,7 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public T getPiece(int x, int y) throws positionInvalide {
+    public P getPiece(int x, int y) throws positionInvalide {
         if (x < 0 || x >= getLargeur() || y < 0 || y >= getHauteur()) {
             throw new positionInvalide();
         }
@@ -98,7 +101,7 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
      * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
      *                          tableau.
      */
-    public void setPiece(int x, int y, T piece) throws positionInvalide {
+    public void setPiece(int x, int y, P piece) throws positionInvalide {
         if (x < 0 || x > getLargeur() || y < 0 || y > getHauteur()) {
             throw new positionInvalide();
         }
@@ -168,8 +171,8 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
      * @return true si le tableau est vide,false si il y a au moins une piece.
      */
     public boolean isEmpty() {
-        for (ArrayList<T> ligne : tableau) {
-            for (T piece : ligne) {
+        for (ArrayList<P> ligne : tableau) {
+            for (P piece : ligne) {
                 if (piece != null) {
                     return false;
                 }
@@ -208,13 +211,13 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
      * Methode qui extends
      */
     private void ajouterUnCoteDroit() {
-        for (ArrayList<T> ligne : tableau) {
+        for (ArrayList<P> ligne : tableau) {
             ligne.add(null);
         }
     }
 
     private void ajouterUnCoteGauche() {
-        for (ArrayList<T> ligne : tableau) {
+        for (ArrayList<P> ligne : tableau) {
             // ajouter un element a la fin de chaque ligne
             ligne.add(null);
             for (int i = getLargeur() - 1; i > 0; i--) {
@@ -230,7 +233,7 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
 
     private void ajouterUnCoteBas() {
         // ajouter une ligne a la fin du plateau
-        tableau.add(new ArrayList<T>());
+        tableau.add(new ArrayList<P>());
         // remplir cette ligne d'autant de colone qu'il faut
         for (int i = 0; i < getLargeur(); i++) {
             tableau.get(tableau.size() - 1).add(null);
@@ -239,7 +242,7 @@ public abstract class Extendable<T> implements Carre, InterfaceExtendable<T> {
 
     private void ajouterUnCoteHaut() {
         // ajouter une nouvelle ligne a la fin du plateau
-        ArrayList<T> newLine = new ArrayList<T>();
+        ArrayList<P> newLine = new ArrayList<P>();
         tableau.add(newLine);
         // ajoute autant de colonne qu'il faut
         for (int i = 0; i < getLargeur(); i++) {

@@ -1,16 +1,21 @@
 package communs.objets.piece;
 
+import java.util.ArrayList;
+
 import communs.interfaces.piece.InterfacePieceView;
 
 /**
  * Class modélisant la vue d'une piece de jeu.
+ * 
+ * V est le types des valeur qui apparaissent sur la pièce.
+ * Exemple : Integer dans le domino.
  */
-public class PieceView implements InterfacePieceView {
-    PieceModel model;
+public class PieceView<V> implements InterfacePieceView<V> {
+    protected PieceModel<V> model;
 
     // setter
     @Override
-    public void setModel(PieceModel model) {
+    public void setModel(PieceModel<V> model) {
         this.model = model;
     }
 
@@ -22,9 +27,9 @@ public class PieceView implements InterfacePieceView {
     @Override
     public String toString() {
         String res = "";
-        for (int[] ligne : model.getValeurs()) {
-            for (int colonne : ligne) {
-                if (colonne == -1) {
+        for (ArrayList<V> ligne : model.getValeurs()) {
+            for (V colonne : ligne) {
+                if (colonne == model.vide) {
                     res += "  ";
                 } else {
                     res += colonne + " ";

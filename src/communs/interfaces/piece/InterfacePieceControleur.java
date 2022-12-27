@@ -1,30 +1,27 @@
 package communs.interfaces.piece;
 
-import communs.interfaces.Carre.Direction;
+import java.util.ArrayList;
+
+import communs.interfaces.Direction;
 import communs.objets.piece.PieceControleur;
 import communs.objets.piece.PieceModel;
 import communs.objets.piece.PieceView;
 
 /**
- * Interface du controleur des Pieces
+ * Interface du controleur des Pieces.
+ * 
+ * V represente le type des valeurs qui apparait sur les pièces du jeu.
+ * Exemple : Integer dans le domino.
  */
-public interface InterfacePieceControleur {
+public interface InterfacePieceControleur<V> {
 
-    public void setModel(PieceModel model);
+    public void setModel(PieceModel<V> model);
 
-    public void setView(PieceView view);
+    public void setView(PieceView<V> view);
 
     // getters
 
-    public int[] getCote(Direction cote);
-
-    /**
-     * Somme toutes la valeur d'un coté de la piece
-     * 
-     * @param cote cote que l'on veut sommer
-     * @return La somme de toutes les valeur d'un cote
-     */
-    public int somme(Direction cote);
+    public ArrayList<V> getCote(Direction cote);
 
     /**
      * Compare le coté adjacent de deux pièce.
@@ -35,7 +32,7 @@ public interface InterfacePieceControleur {
      * @param piece Pièce avec la quel je veux comparer le coté.
      * @return Si les deux coté sont bien identique
      */
-    public boolean comparer(Direction cote, PieceControleur piece);
+    public boolean comparer(Direction cote, PieceControleur<V> piece);
 
     /**
      * Methode qui tourne une piece à 90 degrès sur la droite.

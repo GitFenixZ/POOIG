@@ -1,17 +1,24 @@
 package communs.objets.piece;
 
+import java.util.ArrayList;
+
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Carre;
+import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceModel;
 
 /**
  * Class modélisant une piece de jeu, c'est à dire les vauleurs qu'elle prends.
  * Ainsi que ses dimensions.
+ * 
+ * V est le types des valeur qui apparaissent sur la pièce.
+ * Exemple : Integer dans le domino.
  */
 
-public class PieceModel implements Carre, InterfacePieceModel {
+public abstract class PieceModel<V> implements InterfacePieceModel<V> {
+    /** Element vide par defaut */
+    protected V vide;
     /** Valeurs contenue dans la piece */
-    protected int[][] valeurs;
+    protected ArrayList<ArrayList<V>> valeurs;
     /** Hauteur de la piece */
     protected int hauteur;
     /** Largeur de la piece */
@@ -23,15 +30,17 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * @param hauteur La hauteur de la pièce
      * @param largeur La largeur de la pièce
      */
-    public PieceModel(int hauteur, int largeur) {
+    public PieceModel(int hauteur, int largeur, V vide) {
+        this.vide = vide;
         this.hauteur = hauteur;
         this.largeur = largeur;
-        valeurs = new int[hauteur][largeur];
+        valeurs = new ArrayList<ArrayList<V>>();
         // initialise le tableau par des -1. Par conséquent -1 signifie que la case n'a
         // pas de valeur spécifié.
         for (int i = 0; i < hauteur; i++) {
+            valeurs.add(new ArrayList<V>());
             for (int j = 0; j < largeur; j++) {
-                valeurs[i][j] = -1;
+                valeurs.get(i).add(vide);
             }
         }
     }
@@ -53,11 +62,12 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * 
      * @return une copy du tableau.
      */
-    public int[][] getValeurs() {
-        int[][] res = new int[hauteur][largeur];
+    public ArrayList<ArrayList<V>> getValeurs() {
+        ArrayList<ArrayList<V>> res = new ArrayList<ArrayList<V>>();
         for (int i = 0; i < hauteur; i++) {
+            res.add(new ArrayList<V>());
             for (int j = 0; j < largeur; j++) {
-                res[i][j] = valeurs[i][j];
+                res.get(i).add(valeurs.get(i).get(j));
             }
         }
         return res;
@@ -72,8 +82,8 @@ public class PieceModel implements Carre, InterfacePieceModel {
      */
     public String getligne(int indice) {
         String res = " ";
-        for (int e : valeurs[indice]) {
-            if (e != -1) {
+        for (V e : valeurs.get(indice)) {
+            if (e != vide) {
                 res += e + " ";
             } else {
                 res += "  ";
@@ -91,7 +101,7 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * @return un tableau avec les valeur du cote
      * @throws directionInvalide Si la valeur de cote est ACTUEL.
      */
-    public int[] getCote(Direction cote) throws directionInvalide {
+    public ArrayList<V> getCote(Direction cote) throws directionInvalide {
         switch (cote) {
             case UP:
                 return getCoteUp();
@@ -111,10 +121,10 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * 
      * @return la premiere ligne du tableau de valeur
      */
-    private int[] getCoteUp() {
-        int[] res = new int[largeur];
-        for (int i = 0; i < hauteur; i++) {
-            res[i] = valeurs[0][i];
+    private ArrayList<V> getCoteUp() {
+        ArrayList<V> res = new ArrayList<V>();
+        for (V v : valeurs.get(0)) {
+            res.add(v);
         }
         return res;
     }
@@ -124,10 +134,10 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * 
      * @return la derniere ligne du tableau de valeurs
      */
-    private int[] getCoteDown() {
-        int[] res = new int[largeur];
-        for (int i = 0; i < hauteur; i++) {
-            res[i] = valeurs[this.valeurs.length - 1][i];
+    private ArrayList<V> getCoteDown() {
+        ArrayList<V> res = new ArrayList<V>();
+        for (V v : valeurs.get(hauteur - 1)) {
+            res.add(v);
         }
         return res;
     }
@@ -138,10 +148,10 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * @return un tableau contenant chaque premiere valeur de chaque ligne du
      *         tableau valeurs.
      */
-    private int[] getCoteLeft() {
-        int[] res = new int[hauteur];
-        for (int i = 0; i < hauteur; i++) {
-            res[i] = valeurs[i][0];
+    private ArrayList<V> getCoteLeft() {
+        ArrayList<V> res = new ArrayList<V>();
+        for (ArrayList<V> v : valeurs) {
+            res.add(v.get(0));
         }
         return res;
     }
@@ -152,10 +162,10 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * @return un tableau contenant chaque derniere valeur de chaque ligne du
      *         tableau valeurs.
      */
-    private int[] getCoteRight() {
-        int[] res = new int[hauteur];
-        for (int i = 0; i < hauteur; i++) {
-            res[i] = valeurs[i][largeur - 1];
+    private ArrayList<V> getCoteRight() {
+        ArrayList<V> res = new ArrayList<V>();
+        for (ArrayList<V> v : valeurs) {
+            res.add(v.get(largeur - 1));
         }
         return res;
     }
@@ -171,9 +181,9 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * @return Si les deux coté sont bien identique
      * @throws directionInvalide Si la direction est ACTUEL
      */
-    public boolean comparer(Direction cote, PieceModel piece) throws directionInvalide {
-        int[] cote1 = {};
-        int[] cote2 = {};
+    public boolean comparer(Direction cote, PieceModel<V> piece) throws directionInvalide {
+        ArrayList<V> cote1;
+        ArrayList<V> cote2;
         switch (cote) {
             case LEFT:
                 // compare le cote LEFT de this avec le cote RIGHT de piece.
@@ -199,8 +209,11 @@ public class PieceModel implements Carre, InterfacePieceModel {
                 throw new directionInvalide();
         }
         // compare les deux cote selectionnees.
-        for (int j = 0; j < cote1.length; j++) {
-            if (cote1[j] != cote2[j]) {
+        if (cote1.size() != cote2.size()) {
+            return false;
+        }
+        for (int j = 0; j < cote1.size(); j++) {
+            if (!cote1.get(j).equals(cote2.get(j))) {
                 return false;
             }
         }
@@ -216,10 +229,16 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * Les valeur qui etait a gauche seront en haut.
      */
     public void pivotDroite() {
-        int[][] res = new int[hauteur][largeur];
+        ArrayList<ArrayList<V>> res = new ArrayList<ArrayList<V>>();
+        for (int i = 0; i < hauteur; i++) {
+            res.add(new ArrayList<V>());
+            for (int j = 0; j < largeur; j++) {
+                res.get(i).add(vide);
+            }
+        }
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
-                res[j][largeur - 1 - i] = valeurs[i][j];
+                res.get(j).set(largeur - 1 - i, valeurs.get(i).get(j));
             }
         }
         valeurs = res;
@@ -234,33 +253,18 @@ public class PieceModel implements Carre, InterfacePieceModel {
      * Les valeur qui etait a droite seront en haut.
      */
     public void pivotGauche() {
-        int[][] res = new int[hauteur][largeur];
+        ArrayList<ArrayList<V>> res = new ArrayList<ArrayList<V>>();
+        for (int i = 0; i < hauteur; i++) {
+            res.add(new ArrayList<V>());
+            for (int j = 0; j < largeur; j++) {
+                res.get(i).add(vide);
+            }
+        }
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
-                res[i][j] = valeurs[j][largeur - 1 - i];
+                res.get(i).set(j, valeurs.get(j).get(largeur - 1 - i));
             }
         }
         valeurs = res;
-    }
-
-    @Override
-    /**
-     * Somme toutes la valeur d'un coté de la piece
-     * 
-     * @param cote cote que l'on veut sommer
-     * @return La somme de toutes les valeur d'un cote
-     */
-    public int somme(Direction cote) {
-        try {
-            int res = 0;
-            for (int valeur : this.getCote(cote)) {
-                if (valeur != -1) {
-                    res += valeur;
-                }
-            }
-            return res;
-        } catch (directionInvalide e) {
-            return 0;
-        }
     }
 }

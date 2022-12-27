@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import communs.interfaces.InterfaceSac;
-import communs.objets.piece.PieceControleur;
 
 /**
  * Class modélisant un sac, qui contient des pieces, et dans le quel on peut
  * tirer aléatoirement.
+ * 
+ * P est le type des objets dans le sac.
+ * Exemple : PieceControleur<Integer> dans le domino.
  */
 
-public class Sac implements InterfaceSac {
+public class Sac<P> implements InterfaceSac<P> {
     /**
      * Contenur du sac
      */
-    private ArrayList<PieceControleur> sac;
+    private ArrayList<P> sac;
     /**
      * Capacite de piece que peut contenur le sac
      */
@@ -27,7 +29,7 @@ public class Sac implements InterfaceSac {
      * @param nombreDePieceMax Capacite de piece que peut contenur le sac
      */
     public Sac(int nombreDePieceMax) {
-        sac = new ArrayList<PieceControleur>();
+        sac = new ArrayList<P>();
         this.nombreDePieceMax = nombreDePieceMax;
     }
 
@@ -37,11 +39,11 @@ public class Sac implements InterfaceSac {
      * @return un piece du sac
      */
     @Override
-    public PieceControleur tire() {
+    public P tire() {
         if (!isEmpty()) {
             Random rd = new Random();
             int indice = rd.nextInt(sac.size());
-            PieceControleur piece = sac.get(indice);
+            P piece = sac.get(indice);
             sac.remove(indice);
             return piece;
         }
@@ -52,7 +54,7 @@ public class Sac implements InterfaceSac {
      * Methode qui ajoute une piece dans le sac
      */
     @Override
-    public void ajouter(PieceControleur piece) {
+    public void ajouter(P piece) {
         sac.add(piece);
     }
 

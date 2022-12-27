@@ -1,48 +1,42 @@
 package communs.objets.piece;
 
+import java.util.ArrayList;
+
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Carre;
+import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceControleur;
 
 /**
  * Class modélisant le controleur d'un pièce de jeu permettant les interractions
  * vue modèle.
+ * 
+ * V est le types des valeur qui apparaissent sur la pièce.
+ * Exemple : Integer dans le domino.
  */
-public class PieceControleur implements Carre, InterfacePieceControleur {
-    PieceModel model;
-    PieceView view;
+public class PieceControleur<V> implements InterfacePieceControleur<V> {
+    protected PieceModel<V> model;
+    protected PieceView<V> view;
 
     // setters
 
     @Override
-    public void setModel(PieceModel model) {
+    public void setModel(PieceModel<V> model) {
         this.model = model;
     }
 
     @Override
-    public void setView(PieceView view) {
+    public void setView(PieceView<V> view) {
         this.view = view;
     }
 
     // getters
     @Override
-    public int[] getCote(Direction cote) {
+    public ArrayList<V> getCote(Direction cote) {
         try {
             return model.getCote(cote);
         } catch (directionInvalide e) {
-            return new int[0];
+            return new ArrayList<V>();
         }
-    }
-
-    @Override
-    /**
-     * Somme toutes la valeur d'un coté de la piece
-     * 
-     * @param cote cote que l'on veut sommer
-     * @return La somme de toutes les valeur d'un cote
-     */
-    public int somme(Direction cote) {
-        return model.somme(cote);
     }
 
     @Override
@@ -55,7 +49,7 @@ public class PieceControleur implements Carre, InterfacePieceControleur {
      * @param piece Pièce avec la quel je veux comparer le coté.
      * @return Si les deux coté sont bien identique
      */
-    public boolean comparer(Direction cote, PieceControleur piece) {
+    public boolean comparer(Direction cote, PieceControleur<V> piece) {
         try {
             return model.comparer(cote, piece.model);
         } catch (directionInvalide e) {

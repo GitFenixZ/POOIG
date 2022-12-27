@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Carre;
+import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Player;
 import communs.objets.piece.PieceControleur;
@@ -12,11 +12,15 @@ import communs.objets.piece.PieceControleur;
 /**
  * Class permtant de modéliser le controleur du plateau permettant les
  * interractions vue modèle.
+ * 
+ * V est le types des valeurs qui apparaissent sur les pièces qui
+ * pourront être placé sur le plateau.
+ * Exemple : Integer dans le domino.
  */
 
-public class PlateauControleur implements Carre, InterfacePlateauControleur {
-    PlateauModel model;
-    PlateauView view;
+public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
+    protected PlateauModel<V> model;
+    protected PlateauView<V> view;
 
     /**
      * Constructeur
@@ -27,9 +31,12 @@ public class PlateauControleur implements Carre, InterfacePlateauControleur {
      * @param largeurPiece La largeur d'une pièce
      */
     public PlateauControleur(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
-        model = new PlateauModel(hauteur, largeur, hauteurPiece, largeurPiece);
-        view = new PlateauView();
+        model = new PlateauModel<V>(hauteur, largeur, hauteurPiece, largeurPiece);
+        view = new PlateauView<V>();
         view.setModel(model);
+    }
+
+    public PlateauControleur() {
     }
 
     /**
@@ -49,7 +56,7 @@ public class PlateauControleur implements Carre, InterfacePlateauControleur {
      * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
      *               savoir si le joueur veux placer sa piece.
      */
-    public void placerPiece(Player player, Scanner sc) {
+    public void placerPiece(Player<PieceControleur<V>> player, Scanner sc) {
         /** valide permet de verifier si la position choisi est valide */
         boolean valide = false;
 
@@ -197,7 +204,7 @@ public class PlateauControleur implements Carre, InterfacePlateauControleur {
      * @param piece piece que l'on veut placer
      * @return si on peut placer la piece ici.
      */
-    public boolean possibleDePlacer(PieceControleur piece) {
+    public boolean possibleDePlacer(PieceControleur<V> piece) {
         return model.possibleDePlacer(piece);
     }
 

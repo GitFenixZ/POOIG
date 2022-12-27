@@ -1,10 +1,11 @@
 package domino;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import communs.objets.Player;
 import communs.objets.Sac;
-import communs.objets.plateau.PlateauControleur;
+import communs.objets.piece.PieceControleur;
 
 /**
  * Class modélisant une partie de domino qui se joue.
@@ -14,15 +15,15 @@ public class PlayDomino {
     /**
      * Sac de piece de la partie
      */
-    private Sac sac;
+    private Sac<PieceControleur<Integer>> sac;
     /**
      * Liste des joueurs autour de la table
      */
-    private Player[] joueurs;
+    private ArrayList<Player<PieceControleur<Integer>>> joueurs;
     /**
      * Plateau de jeu pour la partie en cours
      */
-    private PlateauControleur plateau;
+    private DominoPlateauControleur plateau;
 
     /**
      * Constructeur
@@ -33,19 +34,19 @@ public class PlayDomino {
      * @param largeurPlateau Largeur du plateau de jeu
      */
     public PlayDomino(int nombreDePiece, int nombreJoueur, int hauteurPlateau, int largeurPlateau, Scanner sc) {
-        sac = new Sac(nombreDePiece);
+        sac = new Sac<PieceControleur<Integer>>(nombreDePiece);
         // remplis le sac de piece de domino
         for (int i = 0; i < nombreDePiece; i++) {
-            sac.ajouter(new DominoControleur());
+            sac.ajouter(new DominoPieceControleur());
         }
-        joueurs = new Player[nombreJoueur];
+        joueurs = new ArrayList<Player<PieceControleur<Integer>>>();
         // intialise les joueurs
         for (int i = 0; i < nombreJoueur; i++) {
             System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
-            joueurs[i] = new Player(sc.nextLine());
+            joueurs.add(new Player<PieceControleur<Integer>>(sc.nextLine()));
         }
         // initialise le plateau
-        plateau = new PlateauControleur(hauteurPlateau, largeurPlateau, 5, 5);
+        plateau = new DominoPlateauControleur(hauteurPlateau, largeurPlateau, 5, 5);
     }
 
     /**
@@ -53,7 +54,7 @@ public class PlayDomino {
      * 
      * @param player joueur a faire piocher
      */
-    public void piocherPiece(Player player) {
+    public void piocherPiece(Player<PieceControleur<Integer>> player) {
         player.piocher(sac);
     }
 
@@ -69,38 +70,38 @@ public class PlayDomino {
         String rep = "";
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
-            if (indice >= joueurs.length) {
+            if (indice >= joueurs.size()) {
                 indice = 0;
             }
-            piocherPiece(joueurs[indice]);
-            System.out.print(joueurs[indice]);
+            piocherPiece(joueurs.get(indice));
+            System.out.print(joueurs.get(indice));
             System.out.println("Pensez vous pouvoir jouer ?");
             rep = sc.nextLine();
             if (rep.equals("oui")) {
-                if (plateau.possibleDePlacer(joueurs[indice].getMain())) {
+                if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
                     System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
-                    plateau.placerPiece(joueurs[indice], sc);
+                    plateau.placerPiece(joueurs.get(indice), sc);
                 } else {
                     System.out.println("Vous vous trompez, aucune solution n'est valide!");
                 }
             } else {
                 if (rep.equals("non")) {
-                    if (plateau.possibleDePlacer(joueurs[indice].getMain())) {
+                    if (plateau.possibleDePlacer(joueurs.get(indice).getMain())) {
                         System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
-                        plateau.placerPiece(joueurs[indice], sc);
+                        plateau.placerPiece(joueurs.get(indice), sc);
                     } else {
                         System.out.println("Et oui aucune solution n'est valide.");
                     }
                 }
             }
-            joueurs[indice].jeter();
+            joueurs.get(indice).jeter();
             indice++;
             System.out.println(plateau.afficher());
         }
         System.out.println("Bravo  à tous!!!");
 
         // affiche les score de tout le monde
-        for (Player p : joueurs) {
+        for (Player<PieceControleur<Integer>> p : joueurs) {
             System.out.println(p.getName() + " : " + p.getscore());
         }
     }

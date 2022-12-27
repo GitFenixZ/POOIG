@@ -3,18 +3,22 @@ package communs.objets.plateau;
 import java.util.Scanner;
 
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Carre;
+import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauView;
 
 /**
  * Class modélisant la vue du plateau
+ * 
+ * V est le types des valeurs qui apparaissent sur les pièces qui
+ * pourront être placé sur le plateau.
+ * Exemple : Integer dans le domino.
  */
-public class PlateauView implements Carre, InterfacePlateauView {
-    private PlateauModel model;
+public class PlateauView<V> implements InterfacePlateauView<V> {
+    private PlateauModel<V> model;
 
     // setter
     @Override
-    public void setModel(PlateauModel model) {
+    public void setModel(PlateauModel<V> model) {
         this.model = model;
     }
 
