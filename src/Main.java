@@ -11,9 +11,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // lance une partie de Domino
-        // PlayDomino p = new PlayDomino(15, 3, sc);
+        PlayDomino p = new PlayDomino(15, 3, sc);
         // lance une partie de Carcassonne
-        PlayCarcassonne p = new PlayCarcassonne(3, sc);
+        // PlayCarcassonne p = new PlayCarcassonne(3, sc);
         p.playTerminal(sc);
     }
 }

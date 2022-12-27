@@ -217,6 +217,9 @@ public class PieceModel<V> implements InterfacePieceModel<V> {
      * Methode qui compare si deux coté son campatibles
      */
     protected boolean compare(ArrayList<V> cote1, ArrayList<V> cote2) {
+        if (cote1.size() != cote2.size()) {
+            return false;
+        }
         for (int j = 0; j < cote1.size(); j++) {
             if (!cote1.get(j).equals(cote2.get(j))) {
                 return false;

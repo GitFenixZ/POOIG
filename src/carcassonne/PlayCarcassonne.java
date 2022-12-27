@@ -118,30 +118,26 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
         if (!sac.isEmpty()) {
             plateau.start(sac);
         }
-        int indice = 0;
         System.out.println(plateau);
 
         // tant que le sac n'est pas vide
         int tours = 0;
         while (!sac.isEmpty() && tours < 10) {
             tours++;
-            if (indice >= joueurs.size()) {
-                indice = 0;
-            }
-            if (!((CarcassonnePlayer) joueurs.get(indice)).partisantsIsEmpty()) {
+            if (!((CarcassonnePlayer) joueurs.get(getIndice())).partisantsIsEmpty()) {
                 // si le joueur à toujours des partisant, il peut jouer son tour.
-                piocherPiece(joueurs.get(indice));
-                System.out.print(joueurs.get(indice));
-                if (joueurs.get(indice) instanceof CarcassonneBot) {
-                    if (!((CarcassonneBot) joueurs.get(indice)).jouer(plateau)) {
+                piocherPiece(joueurs.get(getIndice()));
+                System.out.print(joueurs.get(getIndice()));
+                if (joueurs.get(getIndice()) instanceof CarcassonneBot) {
+                    if (!((CarcassonneBot) joueurs.get(getIndice())).jouer(plateau)) {
                         // fait jouer le bot. Si il ne peut pas jouer la pièce
-                        indice--; // il rejoue.
+                        rejouer(); // il rejoue.
                     }
                 } else {
                     // c'est un joueur donc à gérer dans la fenetre
                 }
             }
-            indice++;
+            nextPlayer();
             System.out.println(plateau.afficher());
         }
         System.out.println("Bravo  à tous!!!");

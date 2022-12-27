@@ -52,6 +52,9 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
          */
         @Override
         protected boolean compare(ArrayList<Terrain> cote1, ArrayList<Terrain> cote2) {
+                if (cote1.size() != cote2.size()) {
+                        return false;
+                }
                 for (int j = 0; j < cote1.size(); j++) {
                         if (cote1.get(j).getValeur() != cote2.get(j).getValeur()) {
                                 return false;
