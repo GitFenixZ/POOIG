@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfaceExtendable;
+import communs.objets.Direction;
 import communs.objets.Point;
 
 /**

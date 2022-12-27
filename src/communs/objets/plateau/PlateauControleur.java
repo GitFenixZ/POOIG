@@ -3,8 +3,8 @@ package communs.objets.plateau;
 import java.util.Scanner;
 
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauControleur;
+import communs.objets.Direction;
 import communs.objets.Player;
 import communs.objets.Point;
 import communs.objets.Sac;
@@ -31,8 +31,8 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param hauteurPiece La hauteur d'une pièce
      * @param largeurPiece La largeur d'une pièce
      */
-    public PlateauControleur(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
-        model = new PlateauModel<V>(hauteur, largeur, hauteurPiece, largeurPiece);
+    public PlateauControleur(int hauteurPiece, int largeurPiece) {
+        model = new PlateauModel<V>(hauteurPiece, largeurPiece);
         view = new PlateauView<V>();
         view.setModel(model);
         view.refreshGridLayout();

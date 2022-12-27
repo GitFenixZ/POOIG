@@ -17,6 +17,11 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
          */
         private ArrayList<ArrayList<Partissant>> partisant;
 
+        // valeur a utiliser. Comme ça on peut modifier les pièces comme on veut, on
+        // aura juste a modifier ça aussi.
+        public static final int largeurPiece = 5;
+        public static final int hauteurPiece = 5;
+
         CarcassonnePieceModel(Terrain[][] map) {
                 super(5, 5, Terrain.NONE);
                 partisant = new ArrayList<ArrayList<Partissant>>();
@@ -36,7 +41,9 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
          * @param player joueur qui va placer un partisant
          */
         public void placerPartisant(Point point, CarcassonnePlayer player) {
-                partisant.get(point.getY()).set(point.getX(), player.peekPartisant());
+                if (!player.partisantsIsEmpty()) {
+                        partisant.get(point.getY()).set(point.getX(), player.peekPartisant());
+                }
         }
 
         /**

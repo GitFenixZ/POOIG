@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.plateau.InterfacePlateauView;
+import communs.objets.Direction;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 

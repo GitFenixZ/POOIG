@@ -3,8 +3,8 @@ package communs.objets.piece;
 import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceModel;
+import communs.objets.Direction;
 
 /**
  * Class modélisant une piece de jeu, c'est à dire les valeurs qu'elle prends.

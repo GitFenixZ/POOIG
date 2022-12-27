@@ -3,8 +3,8 @@ package communs.objets.piece;
 import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Direction;
 import communs.interfaces.piece.InterfacePieceControleur;
+import communs.objets.Direction;
 
 /**
  * Class modélisant le controleur d'un pièce de jeu permettant les interractions

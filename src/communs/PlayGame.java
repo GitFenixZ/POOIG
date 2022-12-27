@@ -37,16 +37,12 @@ public class PlayGame<V> {
     /**
      * Constructeur
      * 
-     * @param nombreDePiece  Nombre de piece presente dans le sac pour la partie
-     * @param nombreJoueur   Nombre de joueur qui vont jouer
-     * @param hauteurPlateau Hauteur du plateau de jeu
-     * @param largeurPlateau Largeur du plateau de jeu
+     * @param nombreDePiece Nombre de piece presente dans le sac pour la
+     *                      partie
      */
-    public PlayGame(int nombreDePiece, int hauteurPlateau, int largeurPlateau) {
+    public PlayGame(int nombreDePiece) {
         sac = new Sac<>(nombreDePiece);
         joueurs = new ArrayList<>();
-        // initialise le plateau
-        plateau = new PlateauControleur<V>(hauteurPlateau, largeurPlateau, 5, 5);
         tourSuivant = false;
     }
 
@@ -66,6 +62,9 @@ public class PlayGame<V> {
         this.tourSuivant = tourSuivant;
     }
 
+    /**
+     * Met l'indice au joueur suivant
+     */
     public void nextPlayer() {
         indice++;
         if (indice >= joueurs.size()) {
@@ -73,6 +72,9 @@ public class PlayGame<V> {
         }
     }
 
+    /**
+     * Met l'indice au joueur précédent.
+     */
     public void rejouer() {
         indice--;
         if (indice < 0) {

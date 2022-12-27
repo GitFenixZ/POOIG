@@ -1,14 +1,14 @@
 package domino;
 
+import communs.objets.Direction;
 import communs.objets.Point;
 import communs.objets.plateau.PlateauModel;
 import domino.piece.DominoPieceControleur;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 
 public class DominoPlateauModel extends PlateauModel<Integer> {
     DominoPlateauModel(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
-        super(hauteur, largeur, hauteurPiece, largeurPiece);
+        super(hauteurPiece, largeurPiece);
     }
 
     @Override
@@ -16,8 +16,7 @@ public class DominoPlateauModel extends PlateauModel<Integer> {
      * Methode qui permet de calculer le nombre de point que repporte une piece
      * quand elle vient d'être placer.
      * 
-     * @param x la colonne sur laquel la piece a ete placee
-     * @param y la ligne sur laquel la piece a ete placee
+     * @param point coordonnees sur laquel la piece a ete placee.
      * @return le nombre de point que la piece fait gagner
      */
     public int calculePoint(Point point) {

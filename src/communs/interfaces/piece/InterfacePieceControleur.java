@@ -2,7 +2,7 @@ package communs.interfaces.piece;
 
 import java.util.ArrayList;
 
-import communs.interfaces.Direction;
+import communs.objets.Direction;
 import communs.objets.piece.PieceControleur;
 import communs.objets.piece.PieceModel;
 import communs.objets.piece.PieceView;

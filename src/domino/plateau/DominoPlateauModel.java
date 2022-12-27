@@ -1,17 +1,17 @@
 package domino.plateau;
 
+import communs.objets.Direction;
 import communs.objets.Point;
 import communs.objets.plateau.PlateauModel;
 import domino.piece.DominoPieceControleur;
 import communs.exceptions.positionInvalide;
-import communs.interfaces.Direction;
 
 /**
  * Class modélisant le model du plateau du jeu de domino.
  */
 public class DominoPlateauModel extends PlateauModel<Integer> {
-    DominoPlateauModel(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
-        super(hauteur, largeur, hauteurPiece, largeurPiece);
+    DominoPlateauModel(int hauteurPiece, int largeurPiece) {
+        super(hauteurPiece, largeurPiece);
     }
 
     @Override

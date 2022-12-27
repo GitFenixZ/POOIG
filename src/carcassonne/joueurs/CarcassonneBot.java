@@ -30,7 +30,8 @@ public class CarcassonneBot extends CarcassonnePlayer {
             plateauControleur.setPiece(this, position);
             Random rd = new Random();
             // Veut-il placer un partisant
-            if (rd.nextInt(2) == 0) { // si 0, il place un partissant aléatoirement sur la pièce.
+            if (rd.nextInt(2) == 0 && !partisantsIsEmpty()) { // si 0, il place un partissant aléatoirement sur la
+                                                              // pièce.
                 ((CarcassonnePieceControleur) getMain()).placerPartisant(
                         new Point(rd.nextInt(getMain().getLargeur()), rd.nextInt(getMain().getHauteur())), this);
             } // si 1 il ne place pas de partisant

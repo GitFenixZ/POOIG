@@ -3,8 +3,8 @@ package domino.piece;
 import java.util.Random;
 
 import communs.exceptions.directionInvalide;
+import communs.objets.Direction;
 import communs.objets.piece.PieceModel;
-import communs.interfaces.Direction;
 
 /**
  * Class modélisant le model des pièces du jeu de domino.

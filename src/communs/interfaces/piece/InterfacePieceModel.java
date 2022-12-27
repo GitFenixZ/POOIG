@@ -3,7 +3,7 @@ package communs.interfaces.piece;
 import java.util.ArrayList;
 
 import communs.exceptions.directionInvalide;
-import communs.interfaces.Direction;
+import communs.objets.Direction;
 import communs.objets.piece.PieceModel;
 
 /**

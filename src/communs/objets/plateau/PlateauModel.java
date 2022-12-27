@@ -2,9 +2,9 @@ package communs.objets.plateau;
 
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauModel;
+import communs.objets.Direction;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
-import communs.interfaces.Direction;
 
 /**
  * Class modélisant le plateau de jeu. C'est un tableau de tableau de piece.
@@ -27,8 +27,8 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @param hauteurPiece Hauteur des pieces contenue par le plateau
      * @param largeurPiece Largeur des pieces contenue par le plateau
      */
-    public PlateauModel(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
-        super(hauteur, largeur);
+    public PlateauModel(int hauteurPiece, int largeurPiece) {
+        super(1, 1);
         this.hauteurPiece = hauteurPiece;
         this.largeurPiece = largeurPiece;
     }

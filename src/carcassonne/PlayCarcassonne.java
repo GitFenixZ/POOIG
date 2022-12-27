@@ -20,16 +20,15 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
     /**
      * Constructeur
      * 
-     * @param nombreDePiece  Nombre de piece presente dans le sac pour la partie
-     * @param nombreJoueur   Nombre de joueur qui vont jouer
-     * @param hauteurPlateau Hauteur du plateau de jeu
-     * @param largeurPlateau Largeur du plateau de jeu
+     * @param nombreJoueur Nombre de joueur qui vont jouer
+     * @param sc           scanner qui lit les entrées
      */
-    public PlayCarcassonne(int nombreDePiece, int nombreJoueur, int hauteurPlateau, int largeurPlateau, Scanner sc) {
-        super(nombreDePiece, hauteurPlateau, largeurPlateau);
+    public PlayCarcassonne(int nombreJoueur, Scanner sc) {
+        super(72);
 
         // initialise le plateau
-        plateau = new PlateauControleur<Terrain>(hauteurPlateau, largeurPlateau, 5, 5);
+        plateau = new PlateauControleur<Terrain>(CarcassonnePieceModel.hauteurPiece,
+                CarcassonnePieceModel.largeurPiece);
         // intialise les joueurs
 
         // Faire un sorte que les joueurs puissent choisir leur couleur et si ils sont
@@ -115,7 +114,7 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
      * 
      * @param sc System.in permettra de lire la reponse de l'utilisateur
      */
-    public void play(Scanner sc) {
+    public void playTerminal(Scanner sc) {
         if (!sac.isEmpty()) {
             plateau.start(sac);
         }
@@ -151,5 +150,32 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
         for (Player<PieceControleur<Terrain>> p : joueurs) {
             System.out.println(p.getName() + " : " + p.getscore());
         }
+    }
+
+    /**
+     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * dans le sac.
+     * 
+     * Avec interface Graphique
+     */
+    public void play() {
+        if (!sac.isEmpty()) {
+            plateau.start(sac);
+        }
+        // tant que le sac n'est pas vide
+        while (!sac.isEmpty()) {
+            piocherPiece(joueurs.get(getIndice()));
+            System.out.print(joueurs.get(getIndice()));
+            if (joueurs.get(getIndice()) instanceof CarcassonneBot) {
+                if (!((CarcassonneBot) joueurs.get(getIndice())).jouer(plateau)) {
+                    // fait jouer le bot. Si il ne peut pas jouer la pièce
+                    this.rejouer(); // il rejoue.
+                }
+            } else {
+                joueurs.get(getIndice()).jouer(this);
+            }
+            this.nextPlayer();
+        }
+        System.out.println("Bravo  à tous!!!");
     }
 }

@@ -7,9 +7,9 @@ import communs.objets.plateau.PlateauView;
  * Class modélisant le controleur du plateau du jeu de domino.
  */
 public class DominoPlateauControleur extends PlateauControleur<Integer> {
-    public DominoPlateauControleur(int hauteur, int largeur, int hauteurPiece, int largeurPiece) {
+    public DominoPlateauControleur(int hauteurPiece, int largeurPiece) {
         super();
-        model = new DominoPlateauModel(hauteur, largeur, hauteurPiece, largeurPiece);
+        model = new DominoPlateauModel(hauteurPiece, largeurPiece);
         view = new PlateauView<Integer>();
         view.setModel(model);
     }

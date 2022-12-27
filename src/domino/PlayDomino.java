@@ -22,11 +22,11 @@ public class PlayDomino extends PlayGame<Integer> {
      * @param hauteurPlateau Hauteur du plateau de jeu
      * @param largeurPlateau Largeur du plateau de jeu
      */
-    public PlayDomino(int nombreDePiece, int nombreJoueur, int hauteurPlateau, int largeurPlateau, Scanner sc) {
-        super(nombreDePiece, hauteurPlateau, largeurPlateau);
+    public PlayDomino(int nombreDePiece, int nombreJoueur, Scanner sc) {
+        super(nombreDePiece);
 
         // initialise le plateau
-        plateau = new DominoPlateauControleur(hauteurPlateau, largeurPlateau, 5, 5);
+        plateau = new DominoPlateauControleur(5, 5);
         // intialise les joueurs
         for (int i = 0; i < nombreJoueur; i++) {
             System.out.println("Est ce une joueur ?");
@@ -55,49 +55,46 @@ public class PlayDomino extends PlayGame<Integer> {
         if (!sac.isEmpty()) {
             plateau.start(sac);
         }
-        int indice = 0;
         System.out.println(plateau);
         String rep = "";
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
-            if (indice >= joueurs.size()) {
-                indice = 0;
-            }
-            piocherPiece(joueurs.get(indice));
-            System.out.print(joueurs.get(indice));
-            if (joueurs.get(indice) instanceof DominoBot) {
-                if (!((DominoBot) joueurs.get(indice)).jouerTerminal((DominoPlateauControleur) plateau)) {
+            piocherPiece(joueurs.get(getIndice()));
+            System.out.print(joueurs.get(getIndice()));
+            if (joueurs.get(getIndice()) instanceof DominoBot) {
+                if (!((DominoBot) joueurs.get(getIndice())).jouerTerminal((DominoPlateauControleur) plateau)) {
                     // fait jouer le bot. Si il ne peut pas jouer la pièce
-                    indice--; // il rejoue.
+                    rejouer();
+                    ; // il rejoue.
                 }
             } else {
                 System.out.println("Pensez vous pouvoir jouer ?");
                 rep = sc.nextLine();
                 if (rep.equals("oui")) {
-                    if (((DominoPlateauControleur) plateau).possibleDePlacer(joueurs.get(indice).getMain())) {
+                    if (((DominoPlateauControleur) plateau).possibleDePlacer(joueurs.get(getIndice()).getMain())) {
                         System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
-                        ((DominoPlateauControleur) plateau).placerPiece(joueurs.get(indice), sc);
-                        joueurs.get(indice).jeter();
+                        ((DominoPlateauControleur) plateau).placerPiece(joueurs.get(getIndice()), sc);
+                        joueurs.get(getIndice()).jeter();
                     } else {
                         System.out.println("Vous vous trompez, aucune solution n'est valide!");
-                        joueurs.get(indice).jeter();
-                        indice--;// il rejoue.
+                        joueurs.get(getIndice()).jeter();
+                        rejouer();// il rejoue.
                     }
                 } else {
                     if (rep.equals("non")) {
-                        if (((DominoPlateauControleur) plateau).possibleDePlacer(joueurs.get(indice).getMain())) {
+                        if (((DominoPlateauControleur) plateau).possibleDePlacer(joueurs.get(getIndice()).getMain())) {
                             System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
-                            ((DominoPlateauControleur) plateau).placerPiece(joueurs.get(indice), sc);
-                            joueurs.get(indice).jeter();
+                            ((DominoPlateauControleur) plateau).placerPiece(joueurs.get(getIndice()), sc);
+                            joueurs.get(getIndice()).jeter();
                         } else {
                             System.out.println("Et oui aucune solution n'est valide.");
-                            joueurs.get(indice).jeter();
-                            indice--;// il rejoue.
+                            joueurs.get(getIndice()).jeter();
+                            rejouer();// il rejoue.
                         }
                     }
                 }
             }
-            indice++;
+            nextPlayer();
             System.out.println(plateau.afficher());
         }
         System.out.println("Bravo  à tous!!!");
@@ -133,10 +130,5 @@ public class PlayDomino extends PlayGame<Integer> {
             this.nextPlayer();
         }
         System.out.println("Bravo  à tous!!!");
-
-        // affiche les score de tout le monde
-        for (Player<PieceControleur<Integer>> p : joueurs) {
-            System.out.println(p.getName() + " : " + p.getscore());
-        }
     }
 }
