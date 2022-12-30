@@ -1,5 +1,3 @@
-import java.util.TimerTask;
-
 import javax.swing.JFrame;
 
 public class MenuControleur extends JFrame {
