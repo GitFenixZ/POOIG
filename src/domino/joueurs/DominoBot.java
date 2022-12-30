@@ -1,6 +1,6 @@
 package domino.joueurs;
 
-import communs.objets.Player;
+import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
@@ -9,7 +9,7 @@ import communs.objets.plateau.PlateauControleur;
  * Class modélisant un Robot capable de jouer au domino de manière très
  * standart.
  */
-public class DominoBot extends Player<PieceControleur<Integer>> {
+public class DominoBot extends PlayerControleur<PieceControleur<Integer>> {
     public DominoBot(String name) {
         super(name);
     }

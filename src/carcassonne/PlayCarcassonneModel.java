@@ -4,26 +4,26 @@ import java.awt.Color;
 import java.util.Scanner;
 
 import carcassonne.joueurs.CarcassonneBot;
-import carcassonne.joueurs.CarcassonnePlayer;
+import carcassonne.joueurs.CarcassonnePlayerControleur;
 import carcassonne.piece.CarcassonnePieceControleur;
 import carcassonne.piece.CarcassonnePieceModel;
 import carcassonne.piece.Terrain;
-import communs.PlayGame;
-import communs.objets.Player;
+import communs.PlayGameModel;
+import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 
 /**
  * Class modélisant une partie de carcassonne qui se joue.
  */
-public class PlayCarcassonne extends PlayGame<Terrain> {
+public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
     /**
      * Constructeur
      * 
      * @param nombreJoueur Nombre de joueur qui vont jouer
      * @param sc           scanner qui lit les entrées
      */
-    public PlayCarcassonne(int nombreJoueur, Scanner sc) {
+    public PlayCarcassonneModel(int nombreJoueur, Scanner sc) {
         super(72);
 
         // initialise le plateau
@@ -37,7 +37,7 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
             System.out.println("Est ce une joueur ?");
             if (sc.nextLine().equals("oui")) {
                 System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
-                joueurs.add(new CarcassonnePlayer(sc.nextLine(), Color.BLUE));
+                joueurs.add(new CarcassonnePlayerControleur(sc.nextLine(), Color.BLUE));
             } else {
                 joueurs.add(new CarcassonneBot("Joueur" + i, Color.RED));
             }
@@ -124,12 +124,12 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
         int tours = 0;
         while (!sac.isEmpty() && tours < 10) {
             tours++;
-            if (!((CarcassonnePlayer) joueurs.get(getIndice())).partisantsIsEmpty()) {
+            if (!((CarcassonnePlayerControleur) getactuelPlayer()).partisantsIsEmpty()) {
                 // si le joueur à toujours des partisant, il peut jouer son tour.
-                piocherPiece(joueurs.get(getIndice()));
-                System.out.print(joueurs.get(getIndice()));
-                if (joueurs.get(getIndice()) instanceof CarcassonneBot) {
-                    if (!((CarcassonneBot) joueurs.get(getIndice())).jouer(plateau)) {
+                piocherPiece(getactuelPlayer());
+                System.out.print(getactuelPlayer());
+                if (getactuelPlayer() instanceof CarcassonneBot) {
+                    if (!((CarcassonneBot) getactuelPlayer()).jouer(plateau)) {
                         // fait jouer le bot. Si il ne peut pas jouer la pièce
                         rejouer(); // il rejoue.
                     }
@@ -143,7 +143,7 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
         System.out.println("Bravo  à tous!!!");
 
         // affiche les score de tout le monde
-        for (Player<PieceControleur<Terrain>> p : joueurs) {
+        for (PlayerControleur<PieceControleur<Terrain>> p : joueurs) {
             System.out.println(p.getName() + " : " + p.getscore());
         }
     }
@@ -160,15 +160,15 @@ public class PlayCarcassonne extends PlayGame<Terrain> {
         }
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
-            piocherPiece(joueurs.get(getIndice()));
-            System.out.print(joueurs.get(getIndice()));
-            if (joueurs.get(getIndice()) instanceof CarcassonneBot) {
-                if (!((CarcassonneBot) joueurs.get(getIndice())).jouer(plateau)) {
+            piocherPiece(getactuelPlayer());
+            System.out.print(getactuelPlayer());
+            if (getactuelPlayer() instanceof CarcassonneBot) {
+                if (!((CarcassonneBot) getactuelPlayer()).jouer(plateau)) {
                     // fait jouer le bot. Si il ne peut pas jouer la pièce
                     this.rejouer(); // il rejoue.
                 }
             } else {
-                joueurs.get(getIndice()).jouer(this);
+                getactuelPlayer().jouer(this);
             }
             this.nextPlayer();
         }

@@ -22,12 +22,12 @@ import communs.objets.piece.PieceControleur;
  * pourront être placé sur le plateau.
  * Exemple : Integer dans le domino.
  */
-public class PlateauView<V> implements InterfacePlateauView<V> {
+public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
     private PlateauModel<V> model;
-    private final JPanel imagePlateau;
 
     public PlateauView() {
-        imagePlateau = new JPanel();
+        super();
+        setVisible(true);
     }
 
     @Override
@@ -35,24 +35,17 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
      * Raffraichi l'affichage graphique.
      */
     public void refreshGridLayout() {
-        imagePlateau.removeAll();
-        imagePlateau.setLayout(new GridLayout(model.getHauteur(), model.getLargeur(), 0, 0));
+        removeAll();
+        setLayout(new GridLayout(model.getHauteur(), model.getLargeur(), 0, 0));
         for (ArrayList<PieceControleur<V>> ligne : model.getTableau()) {
             for (PieceControleur<V> v : ligne) {
                 if (v != null) {
-                    v.getView().getImagePiece().setSize(new Dimension(50, 50));
-                    imagePlateau.add(v.getView().getImagePiece());
+                    v.getView().setSize(new Dimension(50, 50));
+                    add(v.getView());
                 } else {
-                    imagePlateau.add(new JLabel());
+                    add(new JLabel());
                 }
             }
-        }
-        imagePlateau.validate();
-        imagePlateau.repaint();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-
         }
     }
 
@@ -65,11 +58,7 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
     @Override
     public void setPiece() {
         refreshGridLayout();
-    }
-
-    @Override
-    public JPanel getImagePlateau() {
-        return imagePlateau;
+        revalidate();
     }
 
     @Override

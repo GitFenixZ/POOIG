@@ -1,7 +1,5 @@
 package communs.interfaces.plateau;
 
-import javax.swing.JPanel;
-
 import communs.objets.plateau.PlateauModel;
 
 /**
@@ -16,8 +14,6 @@ public interface InterfacePlateauView<V> {
     public void setModel(PlateauModel<V> model);
 
     public void setPiece();
-
-    public JPanel getImagePlateau();
 
     /**
      * Raffraichi l'affichage graphique.

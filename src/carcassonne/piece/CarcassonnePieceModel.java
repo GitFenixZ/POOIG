@@ -3,7 +3,7 @@ package carcassonne.piece;
 import java.util.ArrayList;
 
 import carcassonne.Partissant;
-import carcassonne.joueurs.CarcassonnePlayer;
+import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceModel;
 
@@ -40,7 +40,7 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
          * @param point  coordonnees auquel sera placer le partisant sur la piece
          * @param player joueur qui va placer un partisant
          */
-        public void placerPartisant(Point point, CarcassonnePlayer player) {
+        public void placerPartisant(Point point, CarcassonnePlayerControleur player) {
                 if (!player.partisantsIsEmpty()) {
                         partisant.get(point.getY()).set(point.getX(), player.peekPartisant());
                 }

@@ -2,7 +2,9 @@ package communs;
 
 import java.util.ArrayList;
 
-import communs.objets.Player;
+import javax.swing.JPanel;
+
+import communs.objets.PlayerControleur;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
@@ -12,7 +14,7 @@ import communs.objets.plateau.PlateauControleur;
  * V est le type des valeur présente sur les pièces du jeu.
  */
 
-public class PlayGame<V> {
+public class PlayGameModel<V> {
     /**
      * Sac de piece de la partie
      */
@@ -20,7 +22,7 @@ public class PlayGame<V> {
     /**
      * Liste des joueurs autour de la table
      */
-    protected ArrayList<Player<PieceControleur<V>>> joueurs;
+    protected ArrayList<PlayerControleur<PieceControleur<V>>> joueurs;
     /**
      * indice du jouer en train de jouer dans la liste des joueurs
      */
@@ -40,26 +42,22 @@ public class PlayGame<V> {
      * @param nombreDePiece Nombre de piece presente dans le sac pour la
      *                      partie
      */
-    public PlayGame(int nombreDePiece) {
+    public PlayGameModel(int nombreDePiece) {
         sac = new Sac<>(nombreDePiece);
         joueurs = new ArrayList<>();
         tourSuivant = false;
     }
 
-    public PlateauControleur<V> getPlateau() {
-        return plateau;
+    public void setTourSuivant(boolean tourSuivant) {
+        this.tourSuivant = tourSuivant;
     }
 
-    public int getIndice() {
-        return indice;
-    }
-
-    public boolean getTourSuivant() {
+    public Boolean getTourSuivant() {
         return tourSuivant;
     }
 
-    public void setTourSuivant(boolean tourSuivant) {
-        this.tourSuivant = tourSuivant;
+    public PlayerControleur<PieceControleur<V>> getactuelPlayer() {
+        return joueurs.get(indice);
     }
 
     /**
@@ -87,7 +85,11 @@ public class PlayGame<V> {
      * 
      * @param player joueur a faire piocher
      */
-    public void piocherPiece(Player<PieceControleur<V>> player) {
+    public void piocherPiece(PlayerControleur<PieceControleur<V>> player) {
         player.piocher(sac);
+    }
+
+    public JPanel getImagePlateau() {
+        return plateau.getView();
     }
 }

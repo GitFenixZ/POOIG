@@ -5,7 +5,7 @@ import java.util.Scanner;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;
-import communs.objets.Player;
+import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
@@ -66,7 +66,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
      *               savoir si le joueur veux placer sa piece.
      */
-    public void placerPiece(Player<PieceControleur<V>> player, Scanner sc) {
+    public void placerPiece(PlayerControleur<PieceControleur<V>> player, Scanner sc) {
         /** valide permet de verifier si la position choisi est valide */
         boolean valide = false;
 
@@ -226,7 +226,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param player joueur qui vas jouer
      * @param point  position sur laquel la piece vas etre placee
      */
-    public void setPiece(Player<PieceControleur<V>> player, Point p) {
+    public void setPiece(PlayerControleur<PieceControleur<V>> player, Point p) {
         try {
             player.getMain().getView().setimagePiece();
             model.setPiece(p, player.getMain());

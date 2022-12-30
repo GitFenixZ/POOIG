@@ -13,12 +13,12 @@ import communs.interfaces.piece.InterfacePieceView;
  * V est le types des valeur qui apparaissent sur la pièce.
  * Exemple : Integer dans le domino.
  */
-public class PieceView<V> implements InterfacePieceView<V> {
+public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
     private PieceModel<V> model;
-    private final JPanel imagePiece;
 
     public PieceView() {
-        imagePiece = new JPanel();
+        super(null);
+        setVisible(true);
     }
 
     // setter
@@ -32,7 +32,7 @@ public class PieceView<V> implements InterfacePieceView<V> {
      * Créer un affichage correct pour la fenetre
      */
     public void setimagePiece() {
-        imagePiece.setLayout(new GridLayout(model.getHauteur(), 1));
+        setLayout(new GridLayout(model.getHauteur(), 1));
         for (int i = 0; i < model.getHauteur(); i++) {
             String res = " ";
             for (V e : model.getValeurs().get(i)) {
@@ -42,19 +42,15 @@ public class PieceView<V> implements InterfacePieceView<V> {
                     res += "   ";
                 }
             }
-            imagePiece.add(new JLabel(res));
+            add(new JLabel(res));
         }
+        revalidate();
     }
 
     // getter
     @Override
     public PieceModel<V> getModel() {
         return model;
-    }
-
-    @Override
-    public JPanel getImagePiece() {
-        return imagePiece;
     }
 
     /**

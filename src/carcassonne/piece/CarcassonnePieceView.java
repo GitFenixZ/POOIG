@@ -42,7 +42,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
      */
     public void setimagePiece() {
         ArrayList<ArrayList<Terrain>> valeurs = getModel().getValeurs();
-        getImagePiece().setLayout(new GridLayout(getModel().getHauteur(), 1));
+        setLayout(new GridLayout(getModel().getHauteur(), 1));
         for (int i = 0; i < getModel().getHauteur(); i++) {
             String res = " ";
             for (int j = 0; j < getModel().getLargeur(); j++) {
@@ -56,7 +56,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
                     }
                 }
             }
-            getImagePiece().add(new JLabel(res));
+            add(new JLabel(res));
         }
     }
 

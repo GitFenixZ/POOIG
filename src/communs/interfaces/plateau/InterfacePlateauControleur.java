@@ -2,7 +2,7 @@ package communs.interfaces.plateau;
 
 import java.util.Scanner;
 
-import communs.objets.Player;
+import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
@@ -22,7 +22,7 @@ public interface InterfacePlateauControleur<V> {
      * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
      *               savoir si le joueur veux placer sa piece.
      */
-    public void placerPiece(Player<PieceControleur<V>> player, Scanner sc);
+    public void placerPiece(PlayerControleur<PieceControleur<V>> player, Scanner sc);
 
     /**
      * Verifie si on peut placer une piece a l'emplacement actuel
@@ -61,5 +61,5 @@ public interface InterfacePlateauControleur<V> {
      * @param player joueur qui vas jouer
      * @param point  position de l'objet
      */
-    public void setPiece(Player<PieceControleur<V>> player, Point p);
+    public void setPiece(PlayerControleur<PieceControleur<V>> player, Point p);
 }

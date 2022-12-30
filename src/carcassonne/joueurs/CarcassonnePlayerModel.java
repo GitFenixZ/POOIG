@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 import carcassonne.Partissant;
 import carcassonne.piece.Terrain;
-import carcassonne.piece.CarcassonnePieceControleur;
-import communs.objets.Player;
+import communs.objets.PlayerModel;
 import communs.objets.piece.PieceControleur;
 
-public class CarcassonnePlayer extends Player<PieceControleur<Terrain>> {
+/**
+ * Class modélisant un joueur de carcassonne
+ */
+public class CarcassonnePlayerModel extends PlayerModel<PieceControleur<Terrain>> {
 
     /**
      * Couleur de l'équipe
@@ -20,22 +22,13 @@ public class CarcassonnePlayer extends Player<PieceControleur<Terrain>> {
      */
     private ArrayList<Partissant> partissants;
 
-    public CarcassonnePlayer(String name, Color couleur) {
+    public CarcassonnePlayerModel(String name, Color couleur) {
         super(name);
         this.couleur = couleur;
         partissants = new ArrayList<Partissant>();
         for (int i = 0; i < 8; i++) {
             partissants.add(new Partissant(couleur));
         }
-    }
-
-    /**
-     * Retourne un String decrivant le joueur actuel
-     */
-    @Override
-    public String toString() {
-        return "Nom : " + getName() + " Score : " + getscore() + "\nMain :\n"
-                + ((CarcassonnePieceControleur) getMain());
     }
 
     /**
@@ -50,5 +43,12 @@ public class CarcassonnePlayer extends Player<PieceControleur<Terrain>> {
      */
     public boolean partisantsIsEmpty() {
         return partissants.size() == 0;
+    }
+
+    /**
+     * Renvoie le nombre de partisant qui n'a pas été placé par le joueur.
+     */
+    public int getNombreDePartisant() {
+        return partissants.size();
     }
 }

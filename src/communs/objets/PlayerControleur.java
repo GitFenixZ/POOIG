@@ -1,28 +1,25 @@
 package communs.objets;
 
-import communs.PlayGame;
+import communs.PlayGameModel;
 import communs.interfaces.InterfacePlayer;
 
 /**
- * Class modélisant un joueur avec un nom, une main et un score.
- * 
- * P est le type de l'objet que le joueur a dans la main.
- * Exemple : PieceControleur<Integer> dans le domino.
+ * Class controlant un joueur
+ * P est le type des pieces que peut avoir le joueur
  */
-public class Player<P> implements InterfacePlayer<P> {
-    /** Piece qu'a le joueur en main */
-    private P main;
-    /** Nom du joueur */
-    private String name;
-    /** Score actuel du joueur */
-    private int score;
+public class PlayerControleur<P> implements InterfacePlayer<P> {
+    protected PlayerModel<P> model;
+    protected PlayerView<P> view;
 
     /**
      * Retourne un String decrivant le joueur actuel
      */
     @Override
     public String toString() {
-        return "Nom : " + name + " Score : " + score + "\nMain :\n" + main;
+        return view.toString();
+    }
+
+    public PlayerControleur() {
     }
 
     /**
@@ -30,8 +27,10 @@ public class Player<P> implements InterfacePlayer<P> {
      * 
      * @param name initialise le nom du joueur
      */
-    public Player(String name) {
-        this.name = name;
+    public PlayerControleur(String name) {
+        model = new PlayerModel<P>(name);
+        view = new PlayerView<P>();
+        view.setModel(model);
     }
 
     /**
@@ -41,7 +40,7 @@ public class Player<P> implements InterfacePlayer<P> {
      */
     @Override
     public void piocher(Sac<P> sac) {
-        main = sac.tire();
+        model.piocher(sac);
     }
 
     /**
@@ -49,7 +48,7 @@ public class Player<P> implements InterfacePlayer<P> {
      */
     @Override
     public void jeter() {
-        main = null;
+        model.jeter();
     }
 
     /**
@@ -59,23 +58,23 @@ public class Player<P> implements InterfacePlayer<P> {
      */
     @Override
     public void scoreadd(int i) {
-        score += i;
+        model.scoreadd(i);
     }
 
     // Getters
     @Override
     public P getMain() {
-        return main;
+        return model.getMain();
     }
 
     @Override
     public String getName() {
-        return name;
+        return model.getName();
     }
 
     @Override
     public int getscore() {
-        return score;
+        return model.getscore();
     }
 
     /**
@@ -86,8 +85,7 @@ public class Player<P> implements InterfacePlayer<P> {
      * @param plateauControleur Plateau sur lequel on joue en se moment.
      * @return si le robot a pu jouer
      */
-    public void jouer(PlayGame game) {
-        while (!game.getTourSuivant()) {
-        }
+    public void jouer(PlayGameModel game) {
+        model.jouer(game);
     }
 }
