@@ -56,7 +56,7 @@ public class PlayGameModel<V> {
         return tourSuivant;
     }
 
-    public PlayerControleur<PieceControleur<V>> getactuelPlayer() {
+    public PlayerControleur<PieceControleur<V>> getActuelPlayer() {
         return joueurs.get(indice);
     }
 

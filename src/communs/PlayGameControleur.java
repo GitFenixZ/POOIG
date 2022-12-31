@@ -18,8 +18,8 @@ public class PlayGameControleur<V> {
     public PlayGameControleur() {
     }
 
-    public PlayerControleur<PieceControleur<V>> getactuelPlayer() {
-        return model.getactuelPlayer();
+    public PlayerControleur<PieceControleur<V>> getActuelPlayer() {
+        return model.getActuelPlayer();
     }
 
     public void setTourSuivant(boolean tourSuivant) {

@@ -124,12 +124,12 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
         int tours = 0;
         while (!sac.isEmpty() && tours < 10) {
             tours++;
-            if (!((CarcassonnePlayerControleur) getactuelPlayer()).partisantsIsEmpty()) {
+            if (!((CarcassonnePlayerControleur) getActuelPlayer()).partisantsIsEmpty()) {
                 // si le joueur à toujours des partisant, il peut jouer son tour.
-                piocherPiece(getactuelPlayer());
-                System.out.print(getactuelPlayer());
-                if (getactuelPlayer() instanceof CarcassonneBot) {
-                    if (!((CarcassonneBot) getactuelPlayer()).jouer(plateau)) {
+                piocherPiece(getActuelPlayer());
+                System.out.print(getActuelPlayer());
+                if (getActuelPlayer() instanceof CarcassonneBot) {
+                    if (!((CarcassonneBot) getActuelPlayer()).jouer(plateau)) {
                         // fait jouer le bot. Si il ne peut pas jouer la pièce
                         rejouer(); // il rejoue.
                     }
@@ -160,15 +160,15 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
         }
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
-            piocherPiece(getactuelPlayer());
-            System.out.print(getactuelPlayer());
-            if (getactuelPlayer() instanceof CarcassonneBot) {
-                if (!((CarcassonneBot) getactuelPlayer()).jouer(plateau)) {
+            piocherPiece(getActuelPlayer());
+            System.out.print(getActuelPlayer());
+            if (getActuelPlayer() instanceof CarcassonneBot) {
+                if (!((CarcassonneBot) getActuelPlayer()).jouer(plateau)) {
                     // fait jouer le bot. Si il ne peut pas jouer la pièce
                     this.rejouer(); // il rejoue.
                 }
             } else {
-                getactuelPlayer().jouer(this);
+                getActuelPlayer().jouer(this);
             }
             this.nextPlayer();
         }
