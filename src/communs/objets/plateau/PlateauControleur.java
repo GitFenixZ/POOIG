@@ -302,6 +302,9 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         return model.getActuelPosition();
     }
 
+    /**
+     * Regarde si l'on peut placer la piece d'un joueur, a la position actuel
+     */
     public boolean possibleDePlacer(PlayerControleur<PieceControleur<V>> player) {
         return model.possibleDePlacer(player.getMain(), getActuelPosition());
     }

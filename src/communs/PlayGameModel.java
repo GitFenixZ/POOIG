@@ -142,11 +142,18 @@ public class PlayGameModel<V> {
         return plateau.getActuelPosition();
     }
 
+    /**
+     * Regarde si l'on peut placer la piece du joueur actuel, a la position actuel
+     */
     public boolean possibleDePlacer() {
         return plateau.possibleDePlacer(getactuelPlayer());
     }
 
     public boolean finDePartie() {
         return sac.isEmpty();
+    }
+
+    public boolean peutplacer() {
+        return plateau.peutPlacer(getactuelPlayer().getMain()) != null;
     }
 }

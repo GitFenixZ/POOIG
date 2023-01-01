@@ -1,6 +1,5 @@
 package communs.objets;
 
-import communs.PlayGameModel;
 import communs.interfaces.InterfacePlayer;
 
 /**

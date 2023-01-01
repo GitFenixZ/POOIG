@@ -138,7 +138,9 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             if (point.getX() == 0) {
                 ajouterUnCote(Direction.LEFT);
                 point.allerADroite();
-                actuelPosition.allerADroite();
+                if (point != actuelPosition) {
+                    actuelPosition.allerADroite();
+                }
             }
             if (point.getY() == getHauteur() - 1) {
                 ajouterUnCote(Direction.DOWN);
@@ -146,7 +148,9 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             if (point.getY() == 0) {
                 ajouterUnCote(Direction.UP);
                 point.allerEnBas();
-                actuelPosition.allerEnBas();
+                if (point != actuelPosition) {
+                    actuelPosition.allerEnBas();
+                }
             }
         } catch (directionInvalide e) {
         }

@@ -171,6 +171,7 @@ public class PlayGameView<V> extends JPanel {
                 if (model.possibleDePlacer()) {
                     controleur.placerPiece();
                     controleur.nextPlayer();
+                    actualiser();
                 }
             });
 

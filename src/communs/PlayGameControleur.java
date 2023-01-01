@@ -47,6 +47,10 @@ public class PlayGameControleur<V> {
                 } else {
                     rejouer();
                 }
+            } else {
+                if (!model.peutplacer()) {
+                    rejouer();
+                }
             }
             view.actualiser();
         } else {

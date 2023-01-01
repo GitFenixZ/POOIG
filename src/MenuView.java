@@ -1,14 +1,8 @@
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import carcassonne.PlayCarcassonneControleur;
-import domino.PlayDominoControleur;
 
 import java.awt.GridLayout;
 
