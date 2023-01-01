@@ -1,14 +1,9 @@
 package communs.objets.plateau;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.awt.GridLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import communs.exceptions.positionInvalide;

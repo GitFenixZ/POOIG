@@ -1,4 +1,5 @@
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -173,16 +174,21 @@ public class MenuView extends JPanel {
                 infoBot.setText("oui");
             }
         });
+        JColorChooser choixCouleur = new JColorChooser();
+        res.add(choixCouleur);
         JButton valider = new JButton("Valider");
         res.add(valider);
         valider.addActionListener(event -> {
             if (NomPerso.getText().length() != 0) {
                 valider.setEnabled(false);
+                choixCouleur.setEnabled(false);
 
                 if (infoBot.getText().equals("oui")) {
-                    controleur.ajoutBotCarcassonne(NomPerso.getText());
+                    controleur.ajoutBotCarcassonne(NomPerso.getText(),
+                            choixCouleur.getColor());
                 } else {
-                    controleur.ajoutPersoCarcassonne(NomPerso.getText());
+                    controleur.ajoutPersoCarcassonne(NomPerso.getText(),
+                            choixCouleur.getColor());
                 }
                 nombreDeJoueurValide++;
                 if (nombreDeJoueurValide == nombreDeJoueur) {

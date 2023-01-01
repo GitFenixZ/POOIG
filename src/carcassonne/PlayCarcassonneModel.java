@@ -1,7 +1,5 @@
 package carcassonne;
 
-import java.util.Scanner;
-
 import carcassonne.joueurs.CarcassonneBot;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
 import carcassonne.piece.CarcassonnePieceControleur;
@@ -9,6 +7,7 @@ import carcassonne.piece.CarcassonnePieceModel;
 import carcassonne.piece.Terrain;
 import communs.PlayGameModel;
 import communs.objets.plateau.PlateauControleur;
+import java.awt.Color;
 
 /**
  * Class modélisant une partie de carcassonne qui se joue.
@@ -104,12 +103,12 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
 
     }
 
-    public void ajoutPerso(String nom) {
-        joueurs.add(new CarcassonnePlayerControleur(nom, null));
+    public void ajoutPerso(String nom, Color couleur) {
+        joueurs.add(new CarcassonnePlayerControleur(nom, couleur));
     }
 
-    public void ajoutBot(String nom) {
-        joueurs.add(new CarcassonneBot(nom, null));
+    public void ajoutBot(String nom, Color couleur) {
+        joueurs.add(new CarcassonneBot(nom, couleur));
 
     }
 }

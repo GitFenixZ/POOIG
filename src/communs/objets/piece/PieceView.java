@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.GridBagLayout;
 
 import carcassonne.piece.CarcassonnePieceView;
 import communs.interfaces.piece.InterfacePieceView;
@@ -42,7 +43,9 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
                 String res = " ";
                 for (V e : model.getValeurs().get(i)) {
                     if (e != model.getVide()) {
-                        add(new JLabel(e.toString() + " "));
+                        JPanel texte = new JPanel(new GridBagLayout());
+                        texte.add(new JLabel(e.toString() + " "));
+                        add(texte);
                     } else {
                         add(new JLabel(" "));
                     }

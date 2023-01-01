@@ -172,6 +172,8 @@ public class PlayGameView<V> extends JPanel {
                     controleur.placerPiece();
                     controleur.nextPlayer();
                     actualiser();
+                    controleur.allerADroite();// actualise l'affichage de la piece
+                    controleur.allerAGauche();// rudimentaire ...
                 }
             });
 

@@ -234,6 +234,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             player.scoreadd(model.calculePoint(p));
             view.setPiece();
             view.actualiser();
+            player.getMain().getView().revalidate();
         } catch (positionInvalide e) {
         }
     }
