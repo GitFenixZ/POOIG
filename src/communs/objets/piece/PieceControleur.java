@@ -2,6 +2,8 @@ package communs.objets.piece;
 
 import java.util.ArrayList;
 
+import carcassonne.piece.CarcassonnePieceControleur;
+import carcassonne.piece.CarcassonnePieceView;
 import communs.exceptions.directionInvalide;
 import communs.interfaces.piece.InterfacePieceControleur;
 import communs.objets.Direction;
@@ -35,6 +37,7 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
     @Override
     public void setView(PieceView<V> view) {
         this.view = view;
+        view.setimagePiece();
     }
 
     // getters
@@ -95,6 +98,7 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      */
     public void pivotDroite() {
         model.pivotDroite();
+        view.setimagePiece();
     }
 
     @Override
@@ -107,6 +111,7 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      */
     public void pivotGauche() {
         model.pivotGauche();
+        view.setimagePiece();
     }
 
     @Override

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,37 +24,37 @@ import communs.objets.piece.PieceControleur;
  * pourront être placé sur le plateau.
  * Exemple : Integer dans le domino.
  */
-public class PlateauView<V> implements InterfacePlateauView<V> {
+public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
     private PlateauModel<V> model;
-    private final JPanel imagePlateau;
 
     public PlateauView() {
-        imagePlateau = new JPanel();
+        super();
+        setVisible(true);
     }
 
     @Override
     /**
      * Raffraichi l'affichage graphique.
      */
-    public void refreshGridLayout() {
-        imagePlateau.removeAll();
-        imagePlateau.setLayout(new GridLayout(model.getHauteur(), model.getLargeur(), 0, 0));
-        for (ArrayList<PieceControleur<V>> ligne : model.getTableau()) {
-            for (PieceControleur<V> v : ligne) {
-                if (v != null) {
-                    v.getView().getImagePiece().setSize(new Dimension(50, 50));
-                    imagePlateau.add(v.getView().getImagePiece());
-                } else {
-                    imagePlateau.add(new JLabel());
+    public void actualiser() {
+        removeAll();
+        setLayout(new GridLayout(3, 3));
+        PieceControleur<V> p;
+        for (int j = model.getActuelY() - 1; j <= model.getActuelY() + 1; j++) {
+            for (int i = model.getActuelX() - 1; i <= model.getActuelX() + 1; i++) {
+                JPanel piece = new JPanel(new GridLayout());
+                try {
+                    p = model.getPiece(new Point(i, j));
+                    if (p != null) {
+                        piece.add(p.getView());
+                    } else {
+                        piece.setBackground(Color.RED);
+                    }
+                } catch (positionInvalide e) {
+                    piece.setBackground(Color.GREEN);
                 }
+                add(piece);
             }
-        }
-        imagePlateau.validate();
-        imagePlateau.repaint();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-
         }
     }
 
@@ -64,12 +66,8 @@ public class PlateauView<V> implements InterfacePlateauView<V> {
 
     @Override
     public void setPiece() {
-        refreshGridLayout();
-    }
-
-    @Override
-    public JPanel getImagePlateau() {
-        return imagePlateau;
+        actualiser();
+        revalidate();
     }
 
     @Override

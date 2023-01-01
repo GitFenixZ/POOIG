@@ -1,7 +1,5 @@
 package communs.interfaces.plateau;
 
-import javax.swing.JPanel;
-
 import communs.objets.plateau.PlateauModel;
 
 /**
@@ -17,12 +15,10 @@ public interface InterfacePlateauView<V> {
 
     public void setPiece();
 
-    public JPanel getImagePlateau();
-
     /**
      * Raffraichi l'affichage graphique.
      */
-    public void refreshGridLayout();
+    public void actualiser();
 
     /**
      * Creer un String qui represente une partie du plateau.

@@ -1,6 +1,6 @@
 package carcassonne.piece;
 
-import carcassonne.joueurs.CarcassonnePlayer;
+import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 
@@ -12,10 +12,10 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
      * Constructeur
      * Initialise une piece du jeu de carcassonne
      */
-    public CarcassonnePieceControleur(Terrain[][] map) {
+    public CarcassonnePieceControleur(Terrain[][] map, int id) {
         super();
         CarcassonnePieceModel model = new CarcassonnePieceModel(map);
-        CarcassonnePieceView view = new CarcassonnePieceView();
+        CarcassonnePieceView view = new CarcassonnePieceView(id);
         view.setModel(model);
         setModel(model);
         setView(view);
@@ -27,7 +27,19 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
      * @param point  coordonnees auquel sera placer le partisant sur la piece
      * @param player joueur qui va placer un partisant
      */
-    public void placerPartisant(Point point, CarcassonnePlayer player) {
+    public void placerPartisant(Point point, CarcassonnePlayerControleur player) {
         ((CarcassonnePieceModel) getModel()).placerPartisant(point, player);
+    }
+
+    @Override
+    public void pivotDroite() {
+        getModel().pivotDroite();
+        ((CarcassonnePieceView) getView()).pivotDroit();
+    }
+
+    @Override
+    public void pivotGauche() {
+        getModel().pivotGauche();
+        ((CarcassonnePieceView) getView()).pivotGauche();
     }
 }

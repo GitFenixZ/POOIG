@@ -9,7 +9,7 @@ import communs.objets.Direction;
 import communs.objets.Point;
 
 /**
- * Class qui represente un tableau en 2D qui contient des objet de type V et qui
+ * Class qui represente un tableau en 2D qui contient des objet de type P et qui
  * est de taille infini. C'est a dire qui est entendable tant que l'on souhaite.
  * 
  * P est le types des objet qui seront placer dans la tableau.
@@ -17,7 +17,7 @@ import communs.objets.Point;
  */
 public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
-    /** Tableau de jeu en 2D qui contient des V */
+    /** Tableau de jeu en 2D qui contient des P */
     protected ArrayList<ArrayList<P>> tableau;
 
     /** Position ou le tableau est centré a l'affichage */
@@ -138,7 +138,9 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             if (point.getX() == 0) {
                 ajouterUnCote(Direction.LEFT);
                 point.allerADroite();
-                actuelPosition.allerADroite();
+                if (point != actuelPosition) {
+                    actuelPosition.allerADroite();
+                }
             }
             if (point.getY() == getHauteur() - 1) {
                 ajouterUnCote(Direction.DOWN);
@@ -146,7 +148,9 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             if (point.getY() == 0) {
                 ajouterUnCote(Direction.UP);
                 point.allerEnBas();
-                actuelPosition.allerEnBas();
+                if (point != actuelPosition) {
+                    actuelPosition.allerEnBas();
+                }
             }
         } catch (directionInvalide e) {
         }
@@ -161,7 +165,6 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
     public void allerADroite() throws positionInvalide {
         if (actuelPosition.getX() < getLargeur() - 1) {
             actuelPosition.allerADroite();
-            ;
         } else {
             throw new positionInvalide();
         }

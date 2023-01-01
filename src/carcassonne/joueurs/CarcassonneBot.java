@@ -12,7 +12,7 @@ import communs.objets.plateau.PlateauControleur;
  * Class modélisant un Robot capable de jouer au carcassonne de manière très
  * standart.
  */
-public class CarcassonneBot extends CarcassonnePlayer {
+public class CarcassonneBot extends CarcassonnePlayerControleur {
 
     public CarcassonneBot(String name, Color couleur) {
         super(name, couleur);

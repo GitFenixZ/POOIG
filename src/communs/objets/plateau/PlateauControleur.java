@@ -2,10 +2,11 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
+import carcassonne.piece.CarcassonnePieceView;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;
-import communs.objets.Player;
+import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
@@ -35,7 +36,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         model = new PlateauModel<V>(hauteurPiece, largeurPiece);
         view = new PlateauView<V>();
         view.setModel(model);
-        view.refreshGridLayout();
+        view.actualiser();
     }
 
     public PlateauControleur() {
@@ -66,7 +67,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
      *               savoir si le joueur veux placer sa piece.
      */
-    public void placerPiece(Player<PieceControleur<V>> player, Scanner sc) {
+    public void placerPiece(PlayerControleur<PieceControleur<V>> player, Scanner sc) {
         /** valide permet de verifier si la position choisi est valide */
         boolean valide = false;
 
@@ -226,12 +227,13 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @param player joueur qui vas jouer
      * @param point  position sur laquel la piece vas etre placee
      */
-    public void setPiece(Player<PieceControleur<V>> player, Point p) {
+    public void setPiece(PlayerControleur<PieceControleur<V>> player, Point p) {
         try {
             player.getMain().getView().setimagePiece();
             model.setPiece(p, player.getMain());
             player.scoreadd(model.calculePoint(p));
             view.setPiece();
+            view.actualiser();
         } catch (positionInvalide e) {
         }
     }
@@ -250,5 +252,60 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             view.setPiece();
         } catch (positionInvalide e) {
         }
+    }
+
+    /**
+     * Permet de se deplacer d'une colonne sur la droite sur le plateau.
+     */
+    public void allerADroite() {
+        try {
+            model.allerADroite();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Permet de se deplacer d'une colonne sur la gauche sur le plateau.
+     */
+    public void allerAGauche() {
+        try {
+            model.allerAGauche();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Permet de se deplacer d'une ligne vers le bas sur le plateau.
+     */
+    public void allerEnBas() {
+        try {
+            model.allerEnBas();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Permet de se deplacer d'une ligne vers le haut sur le plateau.
+     */
+    public void allerEnHaut() {
+        try {
+            model.allerEnHaut();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    public Point getActuelPosition() {
+        return model.getActuelPosition();
+    }
+
+    /**
+     * Regarde si l'on peut placer la piece d'un joueur, a la position actuel
+     */
+    public boolean possibleDePlacer(PlayerControleur<PieceControleur<V>> player) {
+        return model.possibleDePlacer(player.getMain(), getActuelPosition());
     }
 }

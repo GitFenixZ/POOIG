@@ -1,6 +1,5 @@
 package communs.objets;
 
-import communs.PlayGame;
 import communs.interfaces.InterfacePlayer;
 
 /**
@@ -9,7 +8,7 @@ import communs.interfaces.InterfacePlayer;
  * P est le type de l'objet que le joueur a dans la main.
  * Exemple : PieceControleur<Integer> dans le domino.
  */
-public class Player<P> implements InterfacePlayer<P> {
+public class PlayerModel<P> implements InterfacePlayer<P> {
     /** Piece qu'a le joueur en main */
     private P main;
     /** Nom du joueur */
@@ -18,19 +17,11 @@ public class Player<P> implements InterfacePlayer<P> {
     private int score;
 
     /**
-     * Retourne un String decrivant le joueur actuel
-     */
-    @Override
-    public String toString() {
-        return "Nom : " + name + " Score : " + score + "\nMain :\n" + main;
-    }
-
-    /**
      * Constructeur
      * 
      * @param name initialise le nom du joueur
      */
-    public Player(String name) {
+    public PlayerModel(String name) {
         this.name = name;
     }
 
@@ -76,18 +67,5 @@ public class Player<P> implements InterfacePlayer<P> {
     @Override
     public int getscore() {
         return score;
-    }
-
-    /**
-     * Methode a utiliser pour jouer sans le terminal.
-     * n'affiche aucune informations.
-     * Permet de laisser un joueur jouer.
-     * 
-     * @param plateauControleur Plateau sur lequel on joue en se moment.
-     * @return si le robot a pu jouer
-     */
-    public void jouer(PlayGame game) {
-        while (!game.getTourSuivant()) {
-        }
     }
 }
