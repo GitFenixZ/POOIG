@@ -71,17 +71,17 @@ public class PlayGameView<V> extends JPanel {
     public void actualiser() {
         // Case du Joueur
         pseudo.removeAll();
-        pseudo.add(new JLabel("Joueur :\n" + controleur.getactuelPlayer().getName()));
+        pseudo.add(new JLabel("Joueur :\n" + controleur.getActuelPlayer().getName()));
 
         // Case du Score
         score.removeAll();
-        score.add(new JLabel("Score :\n" + controleur.getactuelPlayer().getscore()));
+        score.add(new JLabel("Score :\n" + controleur.getActuelPlayer().getscore()));
 
         // Case preview
         piece.removeAll();
         piece.setLayout(new GridLayout(1, 1));
-        if (controleur.getactuelPlayer().getMain() != null) {
-            piece.add(controleur.getactuelPlayer().getMain().getView());
+        if (controleur.getActuelPlayer().getMain() != null) {
+            piece.add(controleur.getActuelPlayer().getMain().getView());
         } else {
             piece.removeAll();
         }

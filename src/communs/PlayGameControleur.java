@@ -39,7 +39,7 @@ public class PlayGameControleur<V> {
     public void nextPlayer() {
         if (!model.finDePartie()) {
             model.nextPlayer();
-            PlayerControleur joueurActuel = getactuelPlayer();
+            PlayerControleur joueurActuel = getActuelPlayer();
             view.actualiser();
             if (joueurActuel instanceof CarcassonneBot || joueurActuel instanceof DominoBot) {
                 if (model.jouer(joueurActuel)) {
@@ -54,7 +54,7 @@ public class PlayGameControleur<V> {
             }
             view.actualiser();
         } else {
-            getactuelPlayer().jeter();
+            getActuelPlayer().jeter();
             view.actualiser();
             view.finDePartie();
         }

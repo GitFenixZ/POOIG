@@ -59,12 +59,12 @@ public class PlayGameModel<V> {
      * Met l'indice au joueur suivant
      */
     public void nextPlayer() {
-        getactuelPlayer().jeter();
+        getActuelPlayer().jeter();
         indice++;
         if (indice >= joueurs.size()) {
             indice = 0;
         }
-        getactuelPlayer().piocher(sac);
+        getActuelPlayer().piocher(sac);
 
     }
 
@@ -111,11 +111,11 @@ public class PlayGameModel<V> {
     }
 
     public void pivotDroite() {
-        getactuelPlayer().getMain().pivotDroite();
+        getActuelPlayer().getMain().pivotDroite();
     }
 
     public void pivotGauche() {
-        getactuelPlayer().getMain().pivotGauche();
+        getActuelPlayer().getMain().pivotGauche();
     }
 
     public void allerADroite() {
@@ -135,7 +135,7 @@ public class PlayGameModel<V> {
     }
 
     public void placerPiece() {
-        plateau.setPiece(getactuelPlayer(), plateau.getActuelPosition());
+        plateau.setPiece(getActuelPlayer(), plateau.getActuelPosition());
     }
 
     public Point getActuelPosition() {
@@ -146,7 +146,7 @@ public class PlayGameModel<V> {
      * Regarde si l'on peut placer la piece du joueur actuel, a la position actuel
      */
     public boolean possibleDePlacer() {
-        return plateau.possibleDePlacer(getactuelPlayer());
+        return plateau.possibleDePlacer(getActuelPlayer());
     }
 
     public boolean finDePartie() {
@@ -154,6 +154,6 @@ public class PlayGameModel<V> {
     }
 
     public boolean peutplacer() {
-        return plateau.peutPlacer(getactuelPlayer().getMain()) != null;
+        return plateau.peutPlacer(getActuelPlayer().getMain()) != null;
     }
 }
