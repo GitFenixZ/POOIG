@@ -12,10 +12,10 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
      * Constructeur
      * Initialise une piece du jeu de carcassonne
      */
-    public CarcassonnePieceControleur(Terrain[][] map) {
+    public CarcassonnePieceControleur(Terrain[][] map, int id) {
         super();
         CarcassonnePieceModel model = new CarcassonnePieceModel(map);
-        CarcassonnePieceView view = new CarcassonnePieceView();
+        CarcassonnePieceView view = new CarcassonnePieceView(id);
         view.setModel(model);
         setModel(model);
         setView(view);
@@ -29,5 +29,17 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
      */
     public void placerPartisant(Point point, CarcassonnePlayerControleur player) {
         ((CarcassonnePieceModel) getModel()).placerPartisant(point, player);
+    }
+
+    @Override
+    public void pivotDroite() {
+        getModel().pivotDroite();
+        ((CarcassonnePieceView) getView()).pivotDroit();
+    }
+
+    @Override
+    public void pivotGauche() {
+        getModel().pivotGauche();
+        ((CarcassonnePieceView) getView()).pivotGauche();
     }
 }

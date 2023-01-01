@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import communs.PlayGameControleur;
 import communs.PlayGameView;
+import domino.joueurs.DominoBot;
 
 /**
  * Class modélisant une partie de domino qui se joue.
@@ -13,14 +14,23 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
     /**
      * Constructeur
      * 
-     * @param nombreDePiece  Nombre de piece presente dans le sac pour la partie
-     * @param nombreJoueur   Nombre de joueur qui vont jouer
-     * @param hauteurPlateau Hauteur du plateau de jeu
-     * @param largeurPlateau Largeur du plateau de jeu
+     * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
+     * @param nombreJoueur  Nombre de joueur qui vont jouer
      */
     public PlayDominoControleur(int nombreDePiece, int nombreJoueur, Scanner sc) {
         model = new PlayDominoModel(nombreDePiece, nombreJoueur, sc);
-        view = new PlayGameView<Integer>(model);
+        view = new PlayGameView<Integer>(model, this);
+    }
+
+    /**
+     * Constructeur
+     * 
+     * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
+     * @param nombreJoueur  Nombre de joueur qui vont jouer
+     */
+    public PlayDominoControleur(int nombreDePiece, int nombreJoueur) {
+        model = new PlayDominoModel(nombreDePiece, nombreJoueur);
+        view = new PlayGameView<Integer>(model, this);
     }
 
     /**
@@ -42,6 +52,12 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * Avec interface Graphique
      */
     public void play() {
+        getView().revalidate();
         ((PlayDominoModel) model).play();
+        rejouer();
+    }
+
+    public void ajoutBot(String nom) {
+        ((PlayDominoModel) model).ajoutBot(nom);
     }
 }

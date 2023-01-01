@@ -42,6 +42,23 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
     }
 
     /**
+     * Constructeur
+     * 
+     * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
+     * @param nombreJoueur  Nombre de joueur qui vont jouer
+     */
+    public PlayDominoModel(int nombreDePiece, int nombreJoueur) {
+        super(nombreDePiece);
+
+        // initialise le plateau
+        plateau = new DominoPlateauControleur(5, 5);
+        // remplis le sac de piece de domino
+        for (int i = 0; i < nombreDePiece; i++) {
+            sac.ajouter(new DominoPieceControleur());
+        }
+    }
+
+    /**
      * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
      * dans le sac.
      * 
@@ -57,7 +74,6 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
         String rep = "";
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
-            setTourSuivant(false);
             piocherPiece(getactuelPlayer());
             System.out.print(getactuelPlayer());
             if (getactuelPlayer() instanceof DominoBot) {
@@ -66,7 +82,6 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                     rejouer();
                     ; // il rejoue.
                 } else {
-                    setTourSuivant(true);
                 }
             } else {
                 System.out.println("Pensez vous pouvoir jouer ?");
@@ -76,7 +91,6 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                         System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
                         ((DominoPlateauControleur) plateau).placerPiece(getactuelPlayer(), sc);
                         getactuelPlayer().jeter();
-                        setTourSuivant(true);
                     } else {
                         System.out.println("Vous vous trompez, aucune solution n'est valide!");
                         getactuelPlayer().jeter();
@@ -88,7 +102,6 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                             System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
                             ((DominoPlateauControleur) plateau).placerPiece(getactuelPlayer(), sc);
                             getactuelPlayer().jeter();
-                            setTourSuivant(true);
                         } else {
                             System.out.println("Et oui aucune solution n'est valide.");
                             getactuelPlayer().jeter();
@@ -115,26 +128,39 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
      * Avec interface Graphique
      */
     public void play() {
-        if (!sac.isEmpty()) {
-            plateau.start(sac);
-        }
-        // tant que le sac n'est pas vide
-        while (!sac.isEmpty()) {
-            setTourSuivant(false);
-            piocherPiece(getactuelPlayer());
-            System.out.print(getactuelPlayer());
-            if (getactuelPlayer() instanceof DominoBot) {
-                if (!((DominoBot) getactuelPlayer()).jouerTerminal((DominoPlateauControleur) plateau)) {
-                    // fait jouer le bot. Si il ne peut pas jouer la pièce
-                    this.rejouer(); // il rejoue.
-                } else {
-                    setTourSuivant(true);
-                }
-            } else {
-                getactuelPlayer().jouer(this);
-            }
-            this.nextPlayer();
-        }
-        System.out.println("Bravo  à tous!!!");
+        plateau.start(sac);
+
+        // if (!sac.isEmpty()) {
+        // plateau.start(sac);
+        // }
+        // // tant que le sac n'est pas vide
+        // while (!sac.isEmpty()) {
+        // if (getactuelPlayer().getMain() == null) {
+        // piocherPiece(getactuelPlayer());
+        // }
+        // System.out.print(getactuelPlayer());
+        // if (getactuelPlayer() instanceof DominoBot) {
+        // if (!((DominoBot) getactuelPlayer()).jouerTerminal((DominoPlateauControleur)
+        // plateau)) {
+        // // fait jouer le bot. Si il ne peut pas jouer la pièce
+        // this.rejouer(); // il rejoue.
+        // } else {
+        // setTourSuivant(true);
+        // }
+        // }
+        // if (getTourSuivant()) {
+        // getactuelPlayer().jeter();
+        // this.nextPlayer();
+        // setTourSuivant(false);
+        // }
+        // }
+    }
+
+    public void ajoutBot(String nom) {
+        joueurs.add(new DominoBot(nom));
+    }
+
+    public void jouerBot() {
+        ((DominoBot) getactuelPlayer()).jouer(plateau);
     }
 }

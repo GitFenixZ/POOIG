@@ -1,7 +1,9 @@
 package communs;
 
+import carcassonne.joueurs.CarcassonneBot;
 import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
+import domino.joueurs.DominoBot;
 
 /**
  * Class qui controle une partie de domino qui se joue.
@@ -22,19 +24,12 @@ public class PlayGameControleur<V> {
         return model.getactuelPlayer();
     }
 
-    public void setTourSuivant(boolean tourSuivant) {
-        model.setTourSuivant(tourSuivant);
-    }
-
-    public boolean getTourSuivant() {
-        return model.getTourSuivant();
-    }
-
     public PlayGameModel<V> getModel() {
         return model;
     }
 
     public PlayGameView<V> getView() {
+        view.revalidate();
         return view;
     }
 
@@ -42,7 +37,23 @@ public class PlayGameControleur<V> {
      * Met l'indice au joueur suivant
      */
     public void nextPlayer() {
-        model.nextPlayer();
+        if (!model.finDePartie()) {
+            model.nextPlayer();
+            PlayerControleur joueurActuel = getactuelPlayer();
+            view.actualiser();
+            if (joueurActuel instanceof CarcassonneBot || joueurActuel instanceof DominoBot) {
+                if (model.jouer(joueurActuel)) {
+                    nextPlayer();
+                } else {
+                    rejouer();
+                }
+            }
+            view.actualiser();
+        } else {
+            getactuelPlayer().jeter();
+            view.actualiser();
+            view.finDePartie();
+        }
     }
 
     /**
@@ -50,6 +61,7 @@ public class PlayGameControleur<V> {
      */
     public void rejouer() {
         model.rejouer();
+        nextPlayer();
     }
 
     /**
@@ -59,5 +71,49 @@ public class PlayGameControleur<V> {
      */
     public void piocherPiece(PlayerControleur<PieceControleur<V>> player) {
         model.piocherPiece(player);
+    }
+
+    public void ajoutPerso(String nom) {
+        model.ajoutPerso(nom);
+    }
+
+    public int getNombreDeJoueur() {
+        return model.getNombreDeJoueur();
+    }
+
+    public void pivotDroite() {
+        model.pivotDroite();
+        view.actualiser();
+    }
+
+    public void pivotGauche() {
+        model.pivotGauche();
+        view.actualiser();
+    }
+
+    public void allerADroite() {
+        model.allerADroite();
+        view.actualiser();
+    }
+
+    public void allerAGauche() {
+        model.allerAGauche();
+        view.actualiser();
+    }
+
+    public void allerEnBas() {
+        model.allerEnBas();
+        view.actualiser();
+    }
+
+    public void allerEnHaut() {
+        model.allerEnHaut();
+        view.actualiser();
+    }
+
+    public void placerPiece() {
+        model.placerPiece();
+        view.actualiser();
+        view.revalidate();
     }
 }

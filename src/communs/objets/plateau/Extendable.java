@@ -161,7 +161,6 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
     public void allerADroite() throws positionInvalide {
         if (actuelPosition.getX() < getLargeur() - 1) {
             actuelPosition.allerADroite();
-            ;
         } else {
             throw new positionInvalide();
         }

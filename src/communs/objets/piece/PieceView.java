@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import carcassonne.piece.CarcassonnePieceView;
 import communs.interfaces.piece.InterfacePieceView;
 
 /**
@@ -32,19 +33,23 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
      * Créer un affichage correct pour la fenetre
      */
     public void setimagePiece() {
-        setLayout(new GridLayout(model.getHauteur(), 1));
-        for (int i = 0; i < model.getHauteur(); i++) {
-            String res = " ";
-            for (V e : model.getValeurs().get(i)) {
-                if (e != model.getVide()) {
-                    res += e.toString() + " ";
-                } else {
-                    res += "   ";
+        removeAll();
+        if (this instanceof CarcassonnePieceView) {
+            ((CarcassonnePieceView) this).revalidate();
+        } else {
+            setLayout(new GridLayout(model.getHauteur(), model.getLargeur()));
+            for (int i = 0; i < model.getHauteur(); i++) {
+                String res = " ";
+                for (V e : model.getValeurs().get(i)) {
+                    if (e != model.getVide()) {
+                        add(new JLabel(e.toString() + " "));
+                    } else {
+                        add(new JLabel(" "));
+                    }
                 }
             }
-            add(new JLabel(res));
+            revalidate();
         }
-        revalidate();
     }
 
     // getter

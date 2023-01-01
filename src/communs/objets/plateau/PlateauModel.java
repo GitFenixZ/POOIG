@@ -22,8 +22,6 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     /**
      * Constructeur
      * 
-     * @param hauteur      Hauteur du plateau
-     * @param largeur      Largeur du plateau
      * @param hauteurPiece Hauteur des pieces contenue par le plateau
      * @param largeurPiece Largeur des pieces contenue par le plateau
      */

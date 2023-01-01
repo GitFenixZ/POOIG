@@ -2,6 +2,7 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
+import carcassonne.piece.CarcassonnePieceView;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;
@@ -35,7 +36,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         model = new PlateauModel<V>(hauteurPiece, largeurPiece);
         view = new PlateauView<V>();
         view.setModel(model);
-        view.refreshGridLayout();
+        view.actualiser();
     }
 
     public PlateauControleur() {
@@ -232,6 +233,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             model.setPiece(p, player.getMain());
             player.scoreadd(model.calculePoint(p));
             view.setPiece();
+            view.actualiser();
         } catch (positionInvalide e) {
         }
     }
@@ -250,5 +252,57 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             view.setPiece();
         } catch (positionInvalide e) {
         }
+    }
+
+    /**
+     * Permet de se deplacer d'une colonne sur la droite sur le plateau.
+     */
+    public void allerADroite() {
+        try {
+            model.allerADroite();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Permet de se deplacer d'une colonne sur la gauche sur le plateau.
+     */
+    public void allerAGauche() {
+        try {
+            model.allerAGauche();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Permet de se deplacer d'une ligne vers le bas sur le plateau.
+     */
+    public void allerEnBas() {
+        try {
+            model.allerEnBas();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Permet de se deplacer d'une ligne vers le haut sur le plateau.
+     */
+    public void allerEnHaut() {
+        try {
+            model.allerEnHaut();
+            view.actualiser();
+        } catch (positionInvalide e) {
+        }
+    }
+
+    public Point getActuelPosition() {
+        return model.getActuelPosition();
+    }
+
+    public boolean possibleDePlacer(PlayerControleur<PieceControleur<V>> player) {
+        return model.possibleDePlacer(player.getMain(), getActuelPosition());
     }
 }

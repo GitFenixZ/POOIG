@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -34,17 +36,24 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
     /**
      * Raffraichi l'affichage graphique.
      */
-    public void refreshGridLayout() {
+    public void actualiser() {
         removeAll();
-        setLayout(new GridLayout(model.getHauteur(), model.getLargeur(), 0, 0));
-        for (ArrayList<PieceControleur<V>> ligne : model.getTableau()) {
-            for (PieceControleur<V> v : ligne) {
-                if (v != null) {
-                    v.getView().setSize(new Dimension(50, 50));
-                    add(v.getView());
-                } else {
-                    add(new JLabel());
+        setLayout(new GridLayout(3, 3));
+        PieceControleur<V> p;
+        for (int j = model.getActuelY() - 1; j <= model.getActuelY() + 1; j++) {
+            for (int i = model.getActuelX() - 1; i <= model.getActuelX() + 1; i++) {
+                JPanel piece = new JPanel(new GridLayout());
+                try {
+                    p = model.getPiece(new Point(i, j));
+                    if (p != null) {
+                        piece.add(p.getView());
+                    } else {
+                        piece.setBackground(Color.RED);
+                    }
+                } catch (positionInvalide e) {
+                    piece.setBackground(Color.GREEN);
                 }
+                add(piece);
             }
         }
     }
@@ -57,7 +66,7 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
 
     @Override
     public void setPiece() {
-        refreshGridLayout();
+        actualiser();
         revalidate();
     }
 

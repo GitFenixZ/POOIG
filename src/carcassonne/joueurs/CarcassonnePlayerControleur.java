@@ -15,8 +15,7 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
 
     public CarcassonnePlayerControleur(String name, Color couleur) {
         model = new CarcassonnePlayerModel(name, couleur);
-        view = new CarcasonnePlayerView();
-        view.setModel(model);
+        view = new CarcasonnePlayerView((CarcassonnePlayerModel) model);
     }
 
     /**
@@ -39,5 +38,10 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
      */
     public boolean partisantsIsEmpty() {
         return ((CarcassonnePlayerModel) model).partisantsIsEmpty();
+    }
+
+    @Override
+    public void afficheCarte() {
+        ((CarcasonnePlayerView) view).afficheCarte();
     }
 }

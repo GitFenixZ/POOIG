@@ -2,15 +2,22 @@ package carcassonne.piece;
 
 import communs.objets.piece.PieceView;
 
-import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.awt.Graphics;
 
 public class CarcassonnePieceView extends PieceView<Terrain> {
 
-    public CarcassonnePieceView() {
+    int id;
+    BufferedImage image;
+
+    public CarcassonnePieceView(int i) {
         super();
+        id = i;
     }
 
     @Override
@@ -36,28 +43,58 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         return res;
     }
 
-    @Override
     /**
      * Créer un affichage correct pour la fenetre
      */
     public void setimagePiece() {
         ArrayList<ArrayList<Terrain>> valeurs = getModel().getValeurs();
-        setLayout(new GridLayout(getModel().getHauteur(), 1));
-        for (int i = 0; i < getModel().getHauteur(); i++) {
-            String res = " ";
-            for (int j = 0; j < getModel().getLargeur(); j++) {
-                if (valeurs.get(i).get(j) != getModel().getVide()) {
-                    res += valeurs.get(i).get(j).toString() + " ";
-                } else {
-                    if (j != 0) {
-                        res += valeurs.get(i).get(j - 1).toString() + " ";
-                    } else {
-                        res += valeurs.get(i).get(j + 1).toString() + " ";
-                    }
-                }
-            }
-            add(new JLabel(res));
+        try {
+            image = ImageIO.read(new File("src/carcassonne/Images/Screenshot_" + id + ".png"));
+        } catch (IOException ex) {
         }
+        repaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, this);
+    }
+
+    public void rotateDroit() {
+        BufferedImage buffered = new BufferedImage(image.getHeight(), image.getWidth(),
+                BufferedImage.TYPE_INT_RGB);
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                buffered.setRGB(image.getHeight() - y - 1, x,
+                        image.getRGB(x, y));
+
+            }
+        }
+        image = buffered;
+        paintComponent(getGraphics());
+    }
+
+    public void rotateGauche() {
+        BufferedImage buffered = new BufferedImage(image.getHeight(), image.getWidth(),
+                BufferedImage.TYPE_INT_RGB);
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                buffered.setRGB(y, x, image.getRGB(x, y));
+            }
+        }
+        image = buffered;
+        paintComponent(getGraphics());
+    }
+
+    public void pivotDroit() {
+        rotateDroit();
+        revalidate();
+    }
+
+    public void pivotGauche() {
+        rotateDroit();
+        revalidate();
     }
 
     /**

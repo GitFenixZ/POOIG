@@ -18,7 +18,7 @@ public interface InterfacePlateauView<V> {
     /**
      * Raffraichi l'affichage graphique.
      */
-    public void refreshGridLayout();
+    public void actualiser();
 
     /**
      * Creer un String qui represente une partie du plateau.

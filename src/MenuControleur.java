@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import javax.swing.JFrame;
 
 public class MenuControleur extends JFrame {
@@ -11,17 +13,11 @@ public class MenuControleur extends JFrame {
         view = new MenuView(model);
         view.setControleur(this);
 
-        setSize(600, 600);
+        setSize(780, 580);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         setContentPane(view);
-        /**
-         * Message pour Tony :
-         * faire revalidate() a chaque fois qu'un joueur pose un piece.
-         * Ca actualise les element a afficher sur la fentre.
-         * dans le action Listener de Valider !
-         */
         revalidate();
     }
 
@@ -29,25 +25,53 @@ public class MenuControleur extends JFrame {
         return view;
     }
 
-    public void PlayDomino() {
-        model.PlayDomino();
-        view.removeAll();
-        view.add(model.getGame().getView());
-        view.revalidate();
+    public void initDomino(int nombreDeJoueur) {
+        model.initDomino(nombreDeJoueur);
+        view.initDomino(nombreDeJoueur);
+        revalidate();
     }
 
-    public void PlayDominoTerminale() {
-        model.PlayDominoTerminale();
+    public void playDomino() {
+        view.play();
+        revalidate();
+        model.playDomino();
     }
 
-    public void PlayCarcassonne() {
-        model.PlayCarcassonne();
-        view.removeAll();
-        view.add(model.getGame().getView());
-        view.revalidate();
+    public void playDominoTerminale(int nombreDeJoueur) {
+        Scanner sc = new Scanner(System.in);
+        model.initDominoTerminale(nombreDeJoueur, sc);
+        setVisible(false);
+        model.playDominoTerminale(sc);
+    }
+
+    public void initCarcassonne(int nombreDeJoueur) {
+        model.initCarcassonne(nombreDeJoueur);
+        view.initCarcassonne(nombreDeJoueur);
+        revalidate();
+    }
+
+    public void playCarcassonne() {
+        view.play();
+        model.playCarcassonne();
     }
 
     public static void main(String[] args) {
         new MenuControleur();
+    }
+
+    public void ajoutPersoDomino(String nom) {
+        model.ajoutPersoDomino(nom);
+    }
+
+    public void ajoutPersoCarcassonne(String nom) {
+        model.ajoutPersoCarcassonne(nom);
+    }
+
+    public void ajoutBotDomino(String nom) {
+        model.ajoutBotDomino(nom);
+    }
+
+    public void ajoutBotCarcassonne(String nom) {
+        model.ajoutBotCarcassonne(nom);
     }
 }

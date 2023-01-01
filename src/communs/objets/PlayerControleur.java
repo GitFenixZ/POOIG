@@ -29,8 +29,7 @@ public class PlayerControleur<P> implements InterfacePlayer<P> {
      */
     public PlayerControleur(String name) {
         model = new PlayerModel<P>(name);
-        view = new PlayerView<P>();
-        view.setModel(model);
+        view = new PlayerView<P>(model);
     }
 
     /**
@@ -41,6 +40,7 @@ public class PlayerControleur<P> implements InterfacePlayer<P> {
     @Override
     public void piocher(Sac<P> sac) {
         model.piocher(sac);
+        view.reactualiser();
     }
 
     /**
@@ -59,6 +59,7 @@ public class PlayerControleur<P> implements InterfacePlayer<P> {
     @Override
     public void scoreadd(int i) {
         model.scoreadd(i);
+        view.reactualiser();
     }
 
     // Getters
@@ -75,17 +76,5 @@ public class PlayerControleur<P> implements InterfacePlayer<P> {
     @Override
     public int getscore() {
         return model.getscore();
-    }
-
-    /**
-     * Methode a utiliser pour jouer sans le terminal.
-     * n'affiche aucune informations.
-     * Permet de laisser un joueur jouer.
-     * 
-     * @param plateauControleur Plateau sur lequel on joue en se moment.
-     * @return si le robot a pu jouer
-     */
-    public void jouer(PlayGameModel game) {
-        model.jouer(game);
     }
 }

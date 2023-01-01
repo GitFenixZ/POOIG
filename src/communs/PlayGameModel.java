@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import carcassonne.joueurs.CarcassonneBot;
+import carcassonne.piece.Terrain;
 import communs.objets.PlayerControleur;
+import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
+import domino.joueurs.DominoBot;
 
 /**
  * Class modélisant une partie de domino qui se joue.
@@ -28,10 +32,6 @@ public class PlayGameModel<V> {
      */
     private int indice;
     /**
-     * Préviens si c'st la fin du tour d'un joueur
-     */
-    private boolean tourSuivant;
-    /**
      * Plateau de jeu pour la partie en cours
      */
     protected PlateauControleur<V> plateau;
@@ -45,15 +45,10 @@ public class PlayGameModel<V> {
     public PlayGameModel(int nombreDePiece) {
         sac = new Sac<>(nombreDePiece);
         joueurs = new ArrayList<>();
-        tourSuivant = false;
     }
 
-    public void setTourSuivant(boolean tourSuivant) {
-        this.tourSuivant = tourSuivant;
-    }
-
-    public Boolean getTourSuivant() {
-        return tourSuivant;
+    public ArrayList<PlayerControleur<PieceControleur<V>>> getJoueurs() {
+        return joueurs;
     }
 
     public PlayerControleur<PieceControleur<V>> getactuelPlayer() {
@@ -64,14 +59,28 @@ public class PlayGameModel<V> {
      * Met l'indice au joueur suivant
      */
     public void nextPlayer() {
+        getactuelPlayer().jeter();
         indice++;
         if (indice >= joueurs.size()) {
             indice = 0;
         }
+        getactuelPlayer().piocher(sac);
+
+    }
+
+    public boolean jouer(PlayerControleur joueurActuel) {
+        boolean aReussiAJouer = false;
+        if (joueurActuel instanceof CarcassonneBot) {
+            aReussiAJouer = ((CarcassonneBot) joueurActuel).jouer((PlateauControleur<Terrain>) plateau);
+        }
+        if (joueurActuel instanceof DominoBot) {
+            aReussiAJouer = ((DominoBot) joueurActuel).jouer((PlateauControleur<Integer>) plateau);
+        }
+        return aReussiAJouer;
     }
 
     /**
-     * Met l'indice au joueur précédent.
+     * le joueur jete sa main.
      */
     public void rejouer() {
         indice--;
@@ -89,7 +98,55 @@ public class PlayGameModel<V> {
         player.piocher(sac);
     }
 
+    public void ajoutPerso(String nom) {
+        joueurs.add(new PlayerControleur<PieceControleur<V>>(nom));
+    }
+
+    public int getNombreDeJoueur() {
+        return joueurs.size();
+    }
+
     public JPanel getImagePlateau() {
         return plateau.getView();
+    }
+
+    public void pivotDroite() {
+        getactuelPlayer().getMain().pivotDroite();
+    }
+
+    public void pivotGauche() {
+        getactuelPlayer().getMain().pivotGauche();
+    }
+
+    public void allerADroite() {
+        plateau.allerADroite();
+    }
+
+    public void allerAGauche() {
+        plateau.allerAGauche();
+    }
+
+    public void allerEnBas() {
+        plateau.allerEnBas();
+    }
+
+    public void allerEnHaut() {
+        plateau.allerEnHaut();
+    }
+
+    public void placerPiece() {
+        plateau.setPiece(getactuelPlayer(), plateau.getActuelPosition());
+    }
+
+    public Point getActuelPosition() {
+        return plateau.getActuelPosition();
+    }
+
+    public boolean possibleDePlacer() {
+        return plateau.possibleDePlacer(getactuelPlayer());
+    }
+
+    public boolean finDePartie() {
+        return sac.isEmpty();
     }
 }
