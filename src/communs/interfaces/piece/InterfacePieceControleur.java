@@ -49,7 +49,7 @@ public interface InterfacePieceControleur<V> {
      * Les valeur qui etait en bas seront à gauche.
      * Les valeur qui etait a gauche seront en haut.
      */
-    public void pivotDroite();
+    public void tournerDroite();
 
     /**
      * Methode qui tourne une piece à 90 degrès sur la gauche.
@@ -58,7 +58,7 @@ public interface InterfacePieceControleur<V> {
      * Les valeur qui etait en bas seront à droite.
      * Les valeur qui etait a droite seront en haut.
      */
-    public void pivotGauche();
+    public void tournerGauche();
 
     /**
      * Creer un String avec les elements de la lignes d'indice 'indice' Si ce n'est

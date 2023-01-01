@@ -110,12 +110,12 @@ public class PlayGameModel<V> {
         return plateau.getView();
     }
 
-    public void pivotDroite() {
-        getActuelPlayer().getMain().pivotDroite();
+    public void tournerDroite() {
+        getActuelPlayer().getMain().tournerDroite();
     }
 
-    public void pivotGauche() {
-        getActuelPlayer().getMain().pivotGauche();
+    public void tournerGauche() {
+        getActuelPlayer().getMain().tournerGauche();
     }
 
     public void allerADroite() {

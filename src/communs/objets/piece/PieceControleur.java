@@ -96,8 +96,8 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      * Les valeur qui etait en bas seront à gauche.
      * Les valeur qui etait a gauche seront en haut.
      */
-    public void pivotDroite() {
-        model.pivotDroite();
+    public void tournerDroite() {
+        model.tournerDroite();
         view.setimagePiece();
     }
 
@@ -109,8 +109,8 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      * Les valeur qui etait en bas seront à droite.
      * Les valeur qui etait a droite seront en haut.
      */
-    public void pivotGauche() {
-        model.pivotGauche();
+    public void tournerGauche() {
+        model.tournerGauche();
         view.setimagePiece();
     }
 
