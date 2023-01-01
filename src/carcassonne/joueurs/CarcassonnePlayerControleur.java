@@ -39,9 +39,4 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
     public boolean partisantsIsEmpty() {
         return ((CarcassonnePlayerModel) model).partisantsIsEmpty();
     }
-
-    @Override
-    public void afficheCarte() {
-        ((CarcasonnePlayerView) view).afficheCarte();
-    }
 }

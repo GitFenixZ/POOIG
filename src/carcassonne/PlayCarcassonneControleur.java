@@ -1,7 +1,5 @@
 package carcassonne;
 
-import java.util.Scanner;
-
 import carcassonne.piece.Terrain;
 import communs.PlayGameControleur;
 import communs.PlayGameView;
