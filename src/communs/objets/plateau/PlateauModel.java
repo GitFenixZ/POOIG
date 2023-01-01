@@ -69,7 +69,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
                     if (possibleDePlacer(piece, new Point(j, i))) {
                         // fait pivoter la piece jusqu'a ce qu'elle revienne a sa position de depart.
                         for (int pivot2 = pivot; pivot2 < 4; pivot2++) {
-                            piece.pivotDroite();
+                            piece.tournerDroite();
                         }
                         return true;
                     }
@@ -78,7 +78,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             // si l'on ne peut pas la placer sur le plateau comme tel,
             // on fait pivote la piece puis regarde a nouveau si on peut la placer avec
             // cette nouvelle orientation
-            piece.pivotDroite();
+            piece.tournerDroite();
         }
         return false;
     }
@@ -208,7 +208,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             // si l'on ne peut pas la placer sur le plateau comme tel,
             // on fait pivote la piece puis regarde a nouveau si on peut la placer avec
             // cette nouvelle orientation
-            piece.pivotDroite();
+            piece.tournerDroite();
         }
         return null;
     }

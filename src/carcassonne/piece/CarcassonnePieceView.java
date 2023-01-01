@@ -8,7 +8,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 public class CarcassonnePieceView extends PieceView<Terrain> {
 
@@ -18,6 +21,11 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     public CarcassonnePieceView(int i) {
         super();
         id = i;
+        try {
+            image = ImageIO.read(new File("src/carcassonne/Images/Screenshot_" + id + ".png"));
+        } catch (IOException ex) {
+        }
+        repaint();
     }
 
     @Override
@@ -46,13 +54,8 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     /**
      * Créer un affichage correct pour la fenetre
      */
+    @Override
     public void setimagePiece() {
-        ArrayList<ArrayList<Terrain>> valeurs = getModel().getValeurs();
-        try {
-            image = ImageIO.read(new File("src/carcassonne/Images/Screenshot_" + id + ".png"));
-        } catch (IOException ex) {
-        }
-        repaint();
     }
 
     @Override
@@ -61,39 +64,49 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         g.drawImage(image, 0, 0, this);
     }
 
-    public void rotateDroit() {
-        BufferedImage buffered = new BufferedImage(image.getHeight(), image.getWidth(),
-                BufferedImage.TYPE_INT_RGB);
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                buffered.setRGB(image.getHeight() - y - 1, x,
-                        image.getRGB(x, y));
+    private BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
+        double rads = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
+        int w = img.getWidth();
+        int h = img.getHeight();
+        int newWidth = (int) Math.floor(w * cos + h * sin);
+        int newHeight = (int) Math.floor(h * cos + w * sin);
 
-            }
-        }
-        image = buffered;
-        paintComponent(getGraphics());
+        BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = rotated.createGraphics();
+        AffineTransform at = new AffineTransform();
+        at.translate((newWidth - w) / 2, (newHeight - h) / 2);
+
+        int x = w / 2;
+        int y = h / 2;
+
+        at.rotate(rads, x, y);
+        g2d.setTransform(at);
+        g2d.drawImage(img, 0, 0, this);
+        g2d.setColor(Color.RED);
+        g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
+        g2d.dispose();
+
+        return rotated;
     }
 
-    public void rotateGauche() {
-        BufferedImage buffered = new BufferedImage(image.getHeight(), image.getWidth(),
-                BufferedImage.TYPE_INT_RGB);
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                buffered.setRGB(y, x, image.getRGB(x, y));
-            }
-        }
+    /**
+     * Tourne l'image de la pièce vers la droite à 90°
+     */
+    public void tournerDroite() {
+        BufferedImage buffered = rotateImageByDegrees(image, 90);
         image = buffered;
         paintComponent(getGraphics());
-    }
-
-    public void pivotDroit() {
-        rotateDroit();
         revalidate();
     }
 
-    public void pivotGauche() {
-        rotateDroit();
+    /**
+     * Tourne l'image de la pièce vers la gauche à 90°
+     */
+    public void tournerGauche() {
+        BufferedImage buffered = rotateImageByDegrees(image, -90);
+        image = buffered;
+        paintComponent(getGraphics());
         revalidate();
     }
 

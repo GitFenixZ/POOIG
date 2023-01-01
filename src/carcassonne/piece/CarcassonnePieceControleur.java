@@ -32,14 +32,14 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
     }
 
     @Override
-    public void pivotDroite() {
-        getModel().pivotDroite();
-        ((CarcassonnePieceView) getView()).pivotDroit();
+    public void tournerDroite() {
+        getModel().tournerDroite();
+        ((CarcassonnePieceView) getView()).tournerDroite();
     }
 
     @Override
-    public void pivotGauche() {
-        getModel().pivotGauche();
-        ((CarcassonnePieceView) getView()).pivotGauche();
+    public void tournerGauche() {
+        getModel().tournerGauche();
+        ((CarcassonnePieceView) getView()).tournerGauche();
     }
 }

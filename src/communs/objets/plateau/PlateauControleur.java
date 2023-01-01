@@ -152,10 +152,10 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
                     rotation = PlateauView.demandeDirection(sc, "De quel coté? (droite/gauche)");
                     switch (rotation) {
                         case RIGHT:
-                            player.getMain().pivotDroite();
+                            player.getMain().tournerDroite();
                             break;
                         case LEFT:
-                            player.getMain().pivotGauche();
+                            player.getMain().tournerGauche();
                             break;
                         default:
                             System.out.println("Erreur : reponse invalide.");
