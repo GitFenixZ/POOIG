@@ -1,5 +1,7 @@
 package carcassonne;
 
+import java.util.Scanner;
+
 import carcassonne.joueurs.CarcassonneBot;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
 import carcassonne.piece.CarcassonnePieceControleur;
@@ -96,25 +98,10 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
      * 
      * Avec interface Graphique
      */
+
     public void start() {
         plateau.start(sac);
-        // if (!sac.isEmpty()) {
-        // plateau.start(sac);
-        // }
-        // // tant que le sac n'est pas vide
-        // while (!sac.isEmpty()) {
-        // piocherPiece(getactuelPlayer());
-        // ((CarcassonnePlayerControleur) getactuelPlayer()).afficheCarte();
-        // if (getactuelPlayer() instanceof CarcassonneBot) {
-        // if (!((CarcassonneBot) getactuelPlayer()).jouer(plateau)) {
-        // // fait jouer le bot. Si il ne peut pas jouer la pièce
-        // this.rejouer(); // il rejoue.
-        // }
-        // } else {
-        // getactuelPlayer().jouer(this);
-        // }
-        // this.nextPlayer();
-        // }
+
     }
 
     public void ajoutPerso(String nom) {
@@ -123,5 +110,6 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
 
     public void ajoutBot(String nom) {
         joueurs.add(new CarcassonneBot(nom, null));
+
     }
 }
