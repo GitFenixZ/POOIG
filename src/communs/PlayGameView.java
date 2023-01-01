@@ -149,9 +149,9 @@ public class PlayGameView<V> extends JPanel {
             c.weighty = 1.0;
             c.fill = GridBagConstraints.BOTH;
             int x, y; // for clarity
-            makeButton("RotateLeft", x = 0, y = 0).addActionListener(event -> controleur.pivotGauche());
+            makeButton("RotateLeft", x = 0, y = 0).addActionListener(event -> controleur.tournerGauche());
 
-            makeButton("RotateRight", x = 2, y = 0).addActionListener(event -> controleur.pivotDroite());
+            makeButton("RotateRight", x = 2, y = 0).addActionListener(event -> controleur.tournerDroite());
 
             makeButton("UpLeft", x = 0, y = 1).addActionListener(event -> {
                 controleur.allerAGauche();

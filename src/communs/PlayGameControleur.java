@@ -85,13 +85,13 @@ public class PlayGameControleur<V> {
         return model.getNombreDeJoueur();
     }
 
-    public void pivotDroite() {
-        model.pivotDroite();
+    public void tournerDroite() {
+        model.tournerDroite();
         view.actualiser();
     }
 
-    public void pivotGauche() {
-        model.pivotGauche();
+    public void tournerGauche() {
+        model.tournerGauche();
         view.actualiser();
     }
 
