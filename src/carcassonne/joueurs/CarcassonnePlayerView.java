@@ -9,13 +9,9 @@ import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -81,25 +77,21 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
 
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
 
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
 
             }
         });

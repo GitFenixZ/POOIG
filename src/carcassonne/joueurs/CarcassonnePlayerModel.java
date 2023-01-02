@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import carcassonne.partisan.PartisanControleur;
-import carcassonne.piece.CarcassonnePieceControleur;
 import carcassonne.piece.Terrain;
 import communs.objets.PlayerModel;
-import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 
 /**
