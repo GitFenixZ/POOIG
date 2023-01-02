@@ -18,7 +18,8 @@ public class MenuControleur extends JFrame {
         view = new MenuView(model);
         view.setControleur(this);
 
-        setSize(780, 580);
+        setSize(800, 600);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -72,10 +73,6 @@ public class MenuControleur extends JFrame {
         model.playCarcassonne();
     }
 
-    public static void main(String[] args) {
-        new MenuControleur();
-    }
-
     public void ajoutPersoDomino(String nom) {
         model.ajoutPersoDomino(nom);
     }
@@ -91,4 +88,9 @@ public class MenuControleur extends JFrame {
     public void ajoutBotCarcassonne(String nom, Color couleur) {
         model.ajoutBotCarcassonne(nom, couleur);
     }
+
+    public static void main(String[] args) {
+        new MenuControleur();
+    }
+
 }

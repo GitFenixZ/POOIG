@@ -76,7 +76,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
             for (int j = 0; j < piece.get(0).size(); j++) {
                 if (piece.get(i).get(j) != null) {
                     g.setColor(piece.get(i).get(j).getCouleur());
-                    g.fillRect(j * getHeight() / piece.get(j).size(), i * getHeight() / piece.get(j).size(), 10, 10);
+                    g.fillRect(j * getWidth() / piece.get(j).size(), i * getHeight() / piece.size(), 10, 10);
                 }
             }
         }
