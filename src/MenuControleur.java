@@ -58,7 +58,7 @@ public class MenuControleur extends JFrame {
     public void initCarcassonne(int nombreDeJoueur) {
         setTitle("Carcassonne Game !");
         try {
-            Image image = ImageIO.read(new File("src/images/Carcassonne.png"));
+            Image image = ImageIO.read(new File("src/images/carcassonne.png"));
             setIconImage(image);
         } catch (IOException ex) {
         }
