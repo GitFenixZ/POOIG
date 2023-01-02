@@ -1,9 +1,11 @@
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 /**
@@ -30,7 +32,7 @@ public class MenuView extends JPanel {
         JButton playDomino = new JButton("Domino");
         JButton playCarcassonne = new JButton("Carcassonne");
 
-        JTextArea questionNombreDeJoueur = new JTextArea("Combien de joueur voulez vous ?");
+        JLabel questionNombreDeJoueur = new JLabel("Combien de joueur voulez vous ?");
         JTextField nombreDeJoueur = new JTextField(15);
 
         setLayout(new GridLayout(2, 3));
@@ -113,7 +115,7 @@ public class MenuView extends JPanel {
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
         a.add(new JLabel("Pseudo : "));
-        JTextField NomPerso = new JTextField("Joueur" + i);
+        JLabel NomPerso = new JLabel("Joueur" + i);
         a.add(NomPerso);
         res.add(a);
         JPanel b = new JPanel();
@@ -152,7 +154,7 @@ public class MenuView extends JPanel {
 
     public JPanel ajoutPersoCarcassonne(int i) {
         JPanel res = new JPanel();
-        res.setLayout(new GridLayout(3, 1));
+        res.setLayout(new GridLayout(4, 1));
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
         a.add(new JLabel("Pseudo : "));
@@ -173,16 +175,23 @@ public class MenuView extends JPanel {
                 infoBot.setText("oui");
             }
         });
+        Color[] couleurs = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA, Color.CYAN,
+                Color.ORANGE };
+        JComboBox<Color> choixCouleur = new JComboBox<Color>(couleurs);
+        res.add(choixCouleur);
         JButton valider = new JButton("Valider");
         res.add(valider);
         valider.addActionListener(event -> {
             if (NomPerso.getText().length() != 0) {
                 valider.setEnabled(false);
+                choixCouleur.setEnabled(false);
 
                 if (infoBot.getText().equals("oui")) {
-                    controleur.ajoutBotCarcassonne(NomPerso.getText());
+                    controleur.ajoutBotCarcassonne(NomPerso.getText(),
+                            (Color) choixCouleur.getSelectedItem());
                 } else {
-                    controleur.ajoutPersoCarcassonne(NomPerso.getText());
+                    controleur.ajoutPersoCarcassonne(NomPerso.getText(),
+                            (Color) choixCouleur.getSelectedItem());
                 }
                 nombreDeJoueurValide++;
                 if (nombreDeJoueurValide == nombreDeJoueur) {

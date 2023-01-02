@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
 public class MenuControleur extends JFrame {
     private MenuModel model;
@@ -26,6 +31,12 @@ public class MenuControleur extends JFrame {
     }
 
     public void initDomino(int nombreDeJoueur) {
+        setTitle("Domino Game !");
+        try {
+            Image image = ImageIO.read(new File("src/images/domino.png"));
+            setIconImage(image);
+        } catch (IOException ex) {
+        }
         model.initDomino(nombreDeJoueur);
         view.initDomino(nombreDeJoueur);
         revalidate();
@@ -38,13 +49,19 @@ public class MenuControleur extends JFrame {
     }
 
     public void playDominoTerminale(int nombreDeJoueur) {
+        setVisible(false);
         Scanner sc = new Scanner(System.in);
         model.initDominoTerminale(nombreDeJoueur, sc);
-        setVisible(false);
         model.playDominoTerminale(sc);
     }
 
     public void initCarcassonne(int nombreDeJoueur) {
+        setTitle("Carcassonne Game !");
+        try {
+            Image image = ImageIO.read(new File("src/images/carcassonne.png"));
+            setIconImage(image);
+        } catch (IOException ex) {
+        }
         model.initCarcassonne(nombreDeJoueur);
         view.initCarcassonne(nombreDeJoueur);
         revalidate();
@@ -63,15 +80,15 @@ public class MenuControleur extends JFrame {
         model.ajoutPersoDomino(nom);
     }
 
-    public void ajoutPersoCarcassonne(String nom) {
-        model.ajoutPersoCarcassonne(nom);
+    public void ajoutPersoCarcassonne(String nom, Color couleur) {
+        model.ajoutPersoCarcassonne(nom, couleur);
     }
 
     public void ajoutBotDomino(String nom) {
         model.ajoutBotDomino(nom);
     }
 
-    public void ajoutBotCarcassonne(String nom) {
-        model.ajoutBotCarcassonne(nom);
+    public void ajoutBotCarcassonne(String nom, Color couleur) {
+        model.ajoutBotCarcassonne(nom, couleur);
     }
 }

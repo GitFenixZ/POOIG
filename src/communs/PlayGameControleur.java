@@ -20,7 +20,7 @@ public class PlayGameControleur<V> {
     public PlayGameControleur() {
     }
 
-    public PlayerControleur<PieceControleur<V>> getActuelPlayer() {
+    public PlayerControleur getActuelPlayer() {
         return model.getActuelPlayer();
     }
 
@@ -119,5 +119,17 @@ public class PlayGameControleur<V> {
         model.placerPiece();
         view.actualiser();
         view.revalidate();
+    }
+
+    /**
+     * Methode a appliquer après que l'on souhaite savoir ou le partisant sera placé
+     * pour Carcassonne.
+     */
+    public void postPartisan() {
+        view.activerBoutonPlacer();
+        nextPlayer();
+        view.actualiser();
+        allerADroite();// actualise l'affichage de la piece
+        allerAGauche();// rudimentaire ...
     }
 }

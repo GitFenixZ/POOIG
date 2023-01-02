@@ -3,6 +3,7 @@ import java.util.Scanner;
 import carcassonne.PlayCarcassonneControleur;
 import communs.PlayGameControleur;
 import domino.PlayDominoControleur;
+import java.awt.Color;
 
 /**
  * Class permetant l'éxécution des parties.
@@ -42,16 +43,16 @@ public class MenuModel {
         ((PlayDominoControleur) game).ajoutPerso(nom);
     }
 
-    public void ajoutPersoCarcassonne(String nom) {
-        ((PlayCarcassonneControleur) game).ajoutPerso(nom);
+    public void ajoutPersoCarcassonne(String nom, Color couleur) {
+        ((PlayCarcassonneControleur) game).ajoutPerso(nom, couleur);
     }
 
     public void ajoutBotDomino(String nom) {
         ((PlayDominoControleur) game).ajoutBot(nom);
     }
 
-    public void ajoutBotCarcassonne(String nom) {
-        ((PlayCarcassonneControleur) game).ajoutBot(nom);
+    public void ajoutBotCarcassonne(String nom, Color couleur) {
+        ((PlayCarcassonneControleur) game).ajoutBot(nom, couleur);
     }
 
     public PlayGameControleur getGame() {

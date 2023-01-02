@@ -2,7 +2,6 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
-import carcassonne.piece.CarcassonnePieceView;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;
@@ -234,6 +233,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
             player.scoreadd(model.calculePoint(p));
             view.setPiece();
             view.actualiser();
+            player.getMain().getView().revalidate();
         } catch (positionInvalide e) {
         }
     }

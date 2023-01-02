@@ -3,6 +3,7 @@ package carcassonne;
 import carcassonne.piece.Terrain;
 import communs.PlayGameControleur;
 import communs.PlayGameView;
+import java.awt.Color;
 
 /**
  * Class controlant une partie de carcassonne qui se joue.
@@ -29,11 +30,11 @@ public class PlayCarcassonneControleur extends PlayGameControleur<Terrain> {
         rejouer();
     }
 
-    public void ajoutPerso(String nom) {
-        ((PlayCarcassonneModel) model).ajoutPerso(nom);
+    public void ajoutPerso(String nom, Color couleur) {
+        ((PlayCarcassonneModel) model).ajoutPerso(nom, couleur);
     }
 
-    public void ajoutBot(String nom) {
-        ((PlayCarcassonneModel) model).ajoutBot(nom);
+    public void ajoutBot(String nom, Color couleur) {
+        ((PlayCarcassonneModel) model).ajoutBot(nom, couleur);
     }
 }

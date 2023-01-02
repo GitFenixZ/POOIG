@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import carcassonne.PlayCarcassonneControleur;
+import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
 
@@ -45,15 +47,15 @@ public class PlayGameView<V> extends JPanel {
         sideBar = new JPanel(new GridLayout(4, 1));
 
         // Case du Joueur
-        pseudo = ajouterCase("Joueur : \n", Color.GREEN, sideBar);
+        pseudo = ajouterCase("Joueur : \n", Color.GRAY, sideBar);
 
         // Case du Score
-        score = ajouterCase("Score :\n", Color.BLUE, sideBar);
+        score = ajouterCase("Score :\n", Color.GRAY, sideBar);
 
         // Case preview
         piece = new JPanel();
         piece.setLayout(new GridLayout(1, 1));
-        piece.setBackground(Color.RED);
+        piece.setBackground(Color.GRAY);
         sideBar.add(piece);
 
         // Case des commandes directionnelles + rotations
@@ -81,7 +83,7 @@ public class PlayGameView<V> extends JPanel {
         piece.removeAll();
         piece.setLayout(new GridLayout(1, 1));
         if (controleur.getActuelPlayer().getMain() != null) {
-            piece.add(controleur.getActuelPlayer().getMain().getView());
+            piece.add(((PieceControleur) controleur.getActuelPlayer().getMain()).getView());
         } else {
             piece.removeAll();
         }
@@ -101,7 +103,7 @@ public class PlayGameView<V> extends JPanel {
     public void finDePartie() {
         JFrame finDePartie = new JFrame();
         JPanel panel = new JPanel(new GridLayout(model.getNombreDeJoueur() + 2, 1));
-        commandButtons.getCommandsPane().getComponent(6).setEnabled(false);
+        desactiverBoutonPlacer();
         piece.removeAll();
         piece.revalidate();
         revalidate();
@@ -170,8 +172,13 @@ public class PlayGameView<V> extends JPanel {
             makeButton("Place", x = 1, y = 2).addActionListener(event -> {
                 if (model.possibleDePlacer()) {
                     controleur.placerPiece();
-                    controleur.nextPlayer();
-                    actualiser();
+                    if (controleur.getActuelPlayer() instanceof CarcassonnePlayerControleur) {
+                        ((CarcassonnePlayerControleur) controleur.getActuelPlayer())
+                                .placerPartisant((PlayCarcassonneControleur) controleur);
+                        desactiverBoutonPlacer();
+                    } else {
+                        controleur.postPartisan();
+                    }
                 }
             });
 
@@ -191,4 +198,11 @@ public class PlayGameView<V> extends JPanel {
         }
     }
 
+    public void desactiverBoutonPlacer() {
+        commandButtons.getCommandsPane().getComponent(6).setEnabled(false);
+    }
+
+    public void activerBoutonPlacer() {
+        commandButtons.getCommandsPane().getComponent(6).setEnabled(true);
+    }
 }

@@ -2,8 +2,6 @@ package communs.objets.piece;
 
 import java.util.ArrayList;
 
-import carcassonne.piece.CarcassonnePieceControleur;
-import carcassonne.piece.CarcassonnePieceView;
 import communs.exceptions.directionInvalide;
 import communs.interfaces.piece.InterfacePieceControleur;
 import communs.objets.Direction;

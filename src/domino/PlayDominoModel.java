@@ -27,7 +27,7 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
         plateau = new DominoPlateauControleur(5, 5);
         // intialise les joueurs
         for (int i = 0; i < nombreJoueur; i++) {
-            System.out.println("Est ce une joueur ?");
+            System.out.println("Est ce une joueur ? (oui / non)");
             if (sc.nextLine().equals("oui")) {
                 System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
                 joueurs.add(new PlayerControleur<PieceControleur<Integer>>(sc.nextLine()));
@@ -84,7 +84,7 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                 } else {
                 }
             } else {
-                System.out.println("Pensez vous pouvoir jouer ?");
+                System.out.println("Pensez vous pouvoir jouer ? (oui / non)");
                 rep = sc.nextLine();
                 if (rep.equals("oui")) {
                     if (((DominoPlateauControleur) plateau).possibleDePlacer(getActuelPlayer().getMain())) {

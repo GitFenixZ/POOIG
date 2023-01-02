@@ -1,14 +1,10 @@
 package communs.objets.plateau;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.awt.GridLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import communs.exceptions.positionInvalide;
@@ -38,20 +34,23 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
      */
     public void actualiser() {
         removeAll();
-        setLayout(new GridLayout(3, 3));
+        setLayout(new GridLayout(5, 5));
         PieceControleur<V> p;
-        for (int j = model.getActuelY() - 1; j <= model.getActuelY() + 1; j++) {
-            for (int i = model.getActuelX() - 1; i <= model.getActuelX() + 1; i++) {
+        for (int j = model.getActuelY() - 2; j <= model.getActuelY() + 2; j++) {
+            for (int i = model.getActuelX() - 2; i <= model.getActuelX() + 2; i++) {
                 JPanel piece = new JPanel(new GridLayout());
                 try {
                     p = model.getPiece(new Point(i, j));
                     if (p != null) {
                         piece.add(p.getView());
                     } else {
-                        piece.setBackground(Color.RED);
+                        piece.setBackground(Color.DARK_GRAY);
                     }
                 } catch (positionInvalide e) {
-                    piece.setBackground(Color.GREEN);
+                    piece.setBackground(Color.DARK_GRAY);
+                }
+                if (i == model.getActuelX() && j == model.getActuelY()) {
+                    piece.setBackground(Color.BLACK);
                 }
                 add(piece);
             }

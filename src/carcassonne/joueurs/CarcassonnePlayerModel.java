@@ -3,7 +3,7 @@ package carcassonne.joueurs;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import carcassonne.Partissant;
+import carcassonne.partisan.PartisanControleur;
 import carcassonne.piece.Terrain;
 import communs.objets.PlayerModel;
 import communs.objets.piece.PieceControleur;
@@ -20,21 +20,21 @@ public class CarcassonnePlayerModel extends PlayerModel<PieceControleur<Terrain>
     /**
      * Partisant pas encore placer sur le plateau de l'équipe
      */
-    private ArrayList<Partissant> partissants;
+    private ArrayList<PartisanControleur> partissants;
 
     public CarcassonnePlayerModel(String name, Color couleur) {
         super(name);
         this.couleur = couleur;
-        partissants = new ArrayList<Partissant>();
+        partissants = new ArrayList<PartisanControleur>();
         for (int i = 0; i < 8; i++) {
-            partissants.add(new Partissant(couleur));
+            partissants.add(new PartisanControleur(couleur));
         }
     }
 
     /**
      * Prends un partisant de la collection.
      */
-    public Partissant peekPartisant() {
+    public PartisanControleur peekPartisant() {
         return partissants.remove(0);
     }
 

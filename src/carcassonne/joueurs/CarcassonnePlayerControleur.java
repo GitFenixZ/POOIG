@@ -2,9 +2,12 @@ package carcassonne.joueurs;
 
 import java.awt.Color;
 
-import carcassonne.Partissant;
+import carcassonne.PlayCarcassonneControleur;
+import carcassonne.partisan.PartisanControleur;
+import carcassonne.piece.CarcassonnePieceControleur;
 import carcassonne.piece.Terrain;
 import communs.objets.PlayerControleur;
+import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 
 /**
@@ -15,7 +18,8 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
 
     public CarcassonnePlayerControleur(String name, Color couleur) {
         model = new CarcassonnePlayerModel(name, couleur);
-        view = new CarcasonnePlayerView((CarcassonnePlayerModel) model);
+        view = new CarcassonnePlayerView((CarcassonnePlayerModel) model);
+        view.setControleur(this);
     }
 
     /**
@@ -23,13 +27,13 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
      */
     @Override
     public String toString() {
-        return ((CarcasonnePlayerView) view).toString();
+        return ((CarcassonnePlayerView) view).toString();
     }
 
     /**
      * Prends un partisant de la collection.
      */
-    public Partissant peekPartisant() {
+    public PartisanControleur peekPartisant() {
         return ((CarcassonnePlayerModel) model).peekPartisant();
     }
 
@@ -38,5 +42,13 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
      */
     public boolean partisantsIsEmpty() {
         return ((CarcassonnePlayerModel) model).partisantsIsEmpty();
+    }
+
+    public void placerPartisant(PlayCarcassonneControleur game) {
+        ((CarcassonnePlayerView) view).placerPartisant(this, game);
+    }
+
+    public void placerPartisant(Point p) {
+        ((CarcassonnePieceControleur) getMain()).placerPartisant(p, this);
     }
 }
