@@ -26,7 +26,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         super();
         id = i;
         try {
-            image = ImageIO.read(new File("src/carcassonne/Images/Screenshot_" + id + ".png"));
+            image = ImageIO.read(new File("src/carcassonne/images/Screenshot_" + id + ".png"));
         } catch (IOException ex) {
         }
         repaint();

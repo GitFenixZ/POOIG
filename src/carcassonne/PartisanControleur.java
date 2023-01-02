@@ -5,14 +5,14 @@ import java.awt.Color;
 /**
  * Modélise un partisant
  */
-public class Partissant {
+public class PartisanControleur {
 
     /**
      * Couleur du partisant.
      */
     private Color couleur;
 
-    public Partissant(Color couleur) {
+    public PartisanControleur(Color couleur) {
         this.couleur = couleur;
     }
 }
