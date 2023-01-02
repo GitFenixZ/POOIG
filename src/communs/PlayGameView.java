@@ -103,7 +103,7 @@ public class PlayGameView<V> extends JPanel {
     public void finDePartie() {
         JFrame finDePartie = new JFrame();
         JPanel panel = new JPanel(new GridLayout(model.getNombreDeJoueur() + 2, 1));
-        commandButtons.getCommandsPane().getComponent(6).setEnabled(false);
+        desactiverBoutonPlacer();
         piece.removeAll();
         piece.revalidate();
         revalidate();
@@ -175,11 +175,9 @@ public class PlayGameView<V> extends JPanel {
                     if (controleur.getActuelPlayer() instanceof CarcassonnePlayerControleur) {
                         ((CarcassonnePlayerControleur) controleur.getActuelPlayer())
                                 .placerPartisant((PlayCarcassonneControleur) controleur);
+                        desactiverBoutonPlacer();
                     } else {
-                        controleur.nextPlayer();
-                        actualiser();
-                        controleur.allerADroite();// actualise l'affichage de la piece
-                        controleur.allerAGauche();// rudimentaire ...
+                        controleur.postPartisan();
                     }
                 }
             });
@@ -200,4 +198,11 @@ public class PlayGameView<V> extends JPanel {
         }
     }
 
+    public void desactiverBoutonPlacer() {
+        commandButtons.getCommandsPane().getComponent(6).setEnabled(false);
+    }
+
+    public void activerBoutonPlacer() {
+        commandButtons.getCommandsPane().getComponent(6).setEnabled(true);
+    }
 }

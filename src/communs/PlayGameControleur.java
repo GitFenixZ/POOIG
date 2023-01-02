@@ -126,6 +126,7 @@ public class PlayGameControleur<V> {
      * pour Carcassonne.
      */
     public void postPartisan() {
+        view.activerBoutonPlacer();
         nextPlayer();
         view.actualiser();
         allerADroite();// actualise l'affichage de la piece
