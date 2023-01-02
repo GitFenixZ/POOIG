@@ -12,6 +12,7 @@ import communs.objets.piece.PieceControleur;
  */
 public class PlayerView<P> extends JPanel {
     private PlayerModel<P> model;
+    private PlayerControleur<P> controleur;
 
     public PlayerView() {
     }
@@ -31,6 +32,14 @@ public class PlayerView<P> extends JPanel {
 
     public void setModel(PlayerModel<P> model) {
         this.model = model;
+    }
+
+    public void setControleur(PlayerControleur<P> controleur) {
+        this.controleur = controleur;
+    }
+
+    public PlayerControleur<P> getControleur() {
+        return controleur;
     }
 
     /**

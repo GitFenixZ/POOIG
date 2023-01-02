@@ -2,7 +2,6 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
-import carcassonne.piece.CarcassonnePieceView;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;

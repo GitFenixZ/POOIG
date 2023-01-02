@@ -42,4 +42,8 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
         getModel().tournerGauche();
         ((CarcassonnePieceView) getView()).tournerGauche();
     }
+
+    public int getId() {
+        return ((CarcassonnePieceView) getView()).getId();
+    }
 }

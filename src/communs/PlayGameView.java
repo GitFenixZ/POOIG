@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import carcassonne.PlayCarcassonneControleur;
+import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
 
@@ -81,7 +83,7 @@ public class PlayGameView<V> extends JPanel {
         piece.removeAll();
         piece.setLayout(new GridLayout(1, 1));
         if (controleur.getActuelPlayer().getMain() != null) {
-            piece.add(controleur.getActuelPlayer().getMain().getView());
+            piece.add(((PieceControleur) controleur.getActuelPlayer().getMain()).getView());
         } else {
             piece.removeAll();
         }
@@ -170,10 +172,15 @@ public class PlayGameView<V> extends JPanel {
             makeButton("Place", x = 1, y = 2).addActionListener(event -> {
                 if (model.possibleDePlacer()) {
                     controleur.placerPiece();
-                    controleur.nextPlayer();
-                    actualiser();
-                    controleur.allerADroite();// actualise l'affichage de la piece
-                    controleur.allerAGauche();// rudimentaire ...
+                    if (controleur.getActuelPlayer() instanceof CarcassonnePlayerControleur) {
+                        ((CarcassonnePlayerControleur) controleur.getActuelPlayer())
+                                .placerPartisant((PlayCarcassonneControleur) controleur);
+                    } else {
+                        controleur.nextPlayer();
+                        actualiser();
+                        controleur.allerADroite();// actualise l'affichage de la piece
+                        controleur.allerAGauche();// rudimentaire ...
+                    }
                 }
             });
 

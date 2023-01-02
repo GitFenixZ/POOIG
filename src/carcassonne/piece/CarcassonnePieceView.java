@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import carcassonne.partisan.PartisanControleur;
 
@@ -31,6 +32,18 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         repaint();
     }
 
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     @Override
     /**
      * Getter d'une ligne du tableau sous form de String
@@ -52,13 +65,6 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
             }
         }
         return res;
-    }
-
-    /**
-     * Créer un affichage correct pour la fenetre
-     */
-    @Override
-    public void setimagePiece() {
     }
 
     @Override

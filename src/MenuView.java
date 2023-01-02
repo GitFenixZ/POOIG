@@ -1,6 +1,4 @@
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,7 +32,7 @@ public class MenuView extends JPanel {
         JButton playDomino = new JButton("Domino");
         JButton playCarcassonne = new JButton("Carcassonne");
 
-        JTextArea questionNombreDeJoueur = new JTextArea("Combien de joueur voulez vous ?");
+        JLabel questionNombreDeJoueur = new JLabel("Combien de joueur voulez vous ?");
         JTextField nombreDeJoueur = new JTextField(15);
 
         setLayout(new GridLayout(2, 3));
@@ -117,7 +115,7 @@ public class MenuView extends JPanel {
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
         a.add(new JLabel("Pseudo : "));
-        JTextField NomPerso = new JTextField("Joueur" + i);
+        JLabel NomPerso = new JLabel("Joueur" + i);
         a.add(NomPerso);
         res.add(a);
         JPanel b = new JPanel();
