@@ -1,10 +1,13 @@
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 /**
@@ -153,7 +156,7 @@ public class MenuView extends JPanel {
 
     public JPanel ajoutPersoCarcassonne(int i) {
         JPanel res = new JPanel();
-        res.setLayout(new GridLayout(3, 1));
+        res.setLayout(new GridLayout(4, 1));
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
         a.add(new JLabel("Pseudo : "));
@@ -174,7 +177,9 @@ public class MenuView extends JPanel {
                 infoBot.setText("oui");
             }
         });
-        JColorChooser choixCouleur = new JColorChooser();
+        Color[] couleurs = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.PINK, Color.MAGENTA, Color.CYAN,
+                Color.ORANGE };
+        JComboBox<Color> choixCouleur = new JComboBox<Color>(couleurs);
         res.add(choixCouleur);
         JButton valider = new JButton("Valider");
         res.add(valider);
@@ -185,10 +190,10 @@ public class MenuView extends JPanel {
 
                 if (infoBot.getText().equals("oui")) {
                     controleur.ajoutBotCarcassonne(NomPerso.getText(),
-                            choixCouleur.getColor());
+                            (Color) choixCouleur.getSelectedItem());
                 } else {
                     controleur.ajoutPersoCarcassonne(NomPerso.getText(),
-                            choixCouleur.getColor());
+                            (Color) choixCouleur.getSelectedItem());
                 }
                 nombreDeJoueurValide++;
                 if (nombreDeJoueurValide == nombreDeJoueur) {

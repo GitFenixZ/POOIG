@@ -2,7 +2,7 @@ package carcassonne.piece;
 
 import java.util.ArrayList;
 
-import carcassonne.Partissant;
+import carcassonne.partisan.PartisanControleur;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceModel;
@@ -15,7 +15,7 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
         /**
          * Seconde representation de la pièce ou l'on pourra placer un partisant.
          */
-        private ArrayList<ArrayList<Partissant>> partisant;
+        private ArrayList<ArrayList<PartisanControleur>> partisan;
 
         // valeur a utiliser. Comme ça on peut modifier les pièces comme on veut, on
         // aura juste a modifier ça aussi.
@@ -24,14 +24,18 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
 
         CarcassonnePieceModel(Terrain[][] map) {
                 super(5, 5, Terrain.NONE);
-                partisant = new ArrayList<ArrayList<Partissant>>();
+                partisan = new ArrayList<ArrayList<PartisanControleur>>();
                 for (int i = 0; i < getLargeur(); i++) {
-                        partisant.add(new ArrayList<Partissant>());
+                        partisan.add(new ArrayList<PartisanControleur>());
                         for (int j = 0; j < getLargeur(); j++) {
                                 valeurs.get(i).set(j, map[i][j]);
-                                partisant.get(i).add(null);
+                                partisan.get(i).add(null);
                         }
                 }
+        }
+
+        public ArrayList<ArrayList<PartisanControleur>> getPartisan() {
+                return partisan;
         }
 
         /**
@@ -42,7 +46,7 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
          */
         public void placerPartisant(Point point, CarcassonnePlayerControleur player) {
                 if (!player.partisantsIsEmpty()) {
-                        partisant.get(point.getY()).set(point.getX(), player.peekPartisant());
+                        partisan.get(point.getY()).set(point.getX(), player.peekPartisant());
                 }
         }
 

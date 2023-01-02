@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+
+import carcassonne.partisan.PartisanControleur;
+
 import java.io.IOException;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -61,7 +64,16 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        ArrayList<ArrayList<PartisanControleur>> piece = ((CarcassonnePieceModel) getModel()).getPartisan();
+        for (int i = 0; i < piece.size(); i++) {
+            for (int j = 0; j < piece.get(0).size(); j++) {
+                if (piece.get(i).get(j) != null) {
+                    g.setColor(piece.get(i).get(j).getCouleur());
+                    g.fillRect(j * getHeight() / piece.get(j).size(), i * getHeight() / piece.get(j).size(), 10, 10);
+                }
+            }
+        }
     }
 
     private BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
@@ -83,7 +95,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         at.rotate(rads, x, y);
         g2d.setTransform(at);
         g2d.drawImage(img, 0, 0, this);
-        g2d.setColor(Color.RED);
+        g2d.setColor(Color.DARK_GRAY);
         g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
         g2d.dispose();
 

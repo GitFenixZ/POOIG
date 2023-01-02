@@ -1,7 +1,12 @@
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class MenuControleur extends JFrame {
     private MenuModel model;
@@ -27,6 +32,12 @@ public class MenuControleur extends JFrame {
     }
 
     public void initDomino(int nombreDeJoueur) {
+        setTitle("Domino Game !");
+        try {
+            Image image = ImageIO.read(new File("src/images/domino.png"));
+            setIconImage(image);
+        } catch (IOException ex) {
+        }
         model.initDomino(nombreDeJoueur);
         view.initDomino(nombreDeJoueur);
         revalidate();
@@ -46,6 +57,12 @@ public class MenuControleur extends JFrame {
     }
 
     public void initCarcassonne(int nombreDeJoueur) {
+        setTitle("Carcassonne Game !");
+        try {
+            Image image = ImageIO.read(new File("src/images/Carcassonne.png"));
+            setIconImage(image);
+        } catch (IOException ex) {
+        }
         model.initCarcassonne(nombreDeJoueur);
         view.initCarcassonne(nombreDeJoueur);
         revalidate();

@@ -2,7 +2,7 @@ package carcassonne.joueurs;
 
 import java.awt.Color;
 
-import carcassonne.Partissant;
+import carcassonne.partisan.PartisanControleur;
 import carcassonne.piece.Terrain;
 import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
@@ -29,7 +29,7 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
     /**
      * Prends un partisant de la collection.
      */
-    public Partissant peekPartisant() {
+    public PartisanControleur peekPartisant() {
         return ((CarcassonnePlayerModel) model).peekPartisant();
     }
 

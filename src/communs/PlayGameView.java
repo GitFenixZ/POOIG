@@ -45,15 +45,15 @@ public class PlayGameView<V> extends JPanel {
         sideBar = new JPanel(new GridLayout(4, 1));
 
         // Case du Joueur
-        pseudo = ajouterCase("Joueur : \n", Color.GREEN, sideBar);
+        pseudo = ajouterCase("Joueur : \n", Color.GRAY, sideBar);
 
         // Case du Score
-        score = ajouterCase("Score :\n", Color.BLUE, sideBar);
+        score = ajouterCase("Score :\n", Color.GRAY, sideBar);
 
         // Case preview
         piece = new JPanel();
         piece.setLayout(new GridLayout(1, 1));
-        piece.setBackground(Color.RED);
+        piece.setBackground(Color.GRAY);
         sideBar.add(piece);
 
         // Case des commandes directionnelles + rotations
