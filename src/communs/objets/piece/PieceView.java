@@ -2,8 +2,11 @@ package communs.objets.piece;
 
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import java.awt.Color;
 import java.awt.GridBagLayout;
 
 import communs.interfaces.piece.InterfacePieceView;
@@ -41,6 +44,7 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
                 if (e != model.getVide()) {
                     JPanel texte = new JPanel(new GridBagLayout());
                     texte.add(new JLabel(e.toString() + " "));
+                    texte.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     add(texte);
                 } else {
                     add(new JLabel(" "));
