@@ -18,9 +18,20 @@ import java.awt.geom.AffineTransform;
 
 public class CarcassonnePieceView extends PieceView<Terrain> {
 
+    /**
+     * numero permettant d'identifier l'image
+     */
     int id;
+    /**
+     * image qui doit être affiche sur le JPanel
+     */
     BufferedImage image;
 
+    /**
+     * Contructeur permettant d'initialiser la vue de la piece
+     * 
+     * @param i numero permettant d'identifier l'image.
+     */
     public CarcassonnePieceView(int i) {
         super();
         id = i;
@@ -44,29 +55,6 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     }
 
     @Override
-    /**
-     * Getter d'une ligne du tableau sous form de String
-     * 
-     * @param indice indice de la ligne voulu
-     * @return un String representant une ligne du tableau
-     */
-    public String getligne(int indice) {
-        String res = " ";
-        for (int i = 0; i < getModel().getValeurs().size(); i++) {
-            if (getModel().getValeurs().get(indice).get(i) != getModel().getVide()) {
-                res += (getModel().getValeurs().get(indice).get(i)).toString() + " ";
-            } else {
-                if (i == 0) {
-                    res += (getModel().getValeurs().get(indice).get(i + 1)).toString() + " ";
-                } else {
-                    res += (getModel().getValeurs().get(indice).get(i - 1)).toString() + " ";
-                }
-            }
-        }
-        return res;
-    }
-
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
@@ -81,11 +69,17 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         }
     }
 
-    private BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
+    /**
+     * Methode permettant de faire rotate l'image sur son centre dans le sens
+     * horaire.
+     * 
+     * @param angle angle que l'on souhaite tourner.
+     */
+    private void rotateImageByDegrees(double angle) {
         double rads = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
-        int w = img.getWidth();
-        int h = img.getHeight();
+        int w = image.getWidth();
+        int h = image.getHeight();
         int newWidth = (int) Math.floor(w * cos + h * sin);
         int newHeight = (int) Math.floor(h * cos + w * sin);
 
@@ -99,45 +93,27 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
 
         at.rotate(rads, x, y);
         g2d.setTransform(at);
-        g2d.drawImage(img, 0, 0, this);
+        g2d.drawImage(image, 0, 0, this);
         g2d.setColor(Color.DARK_GRAY);
         g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
         g2d.dispose();
-
-        return rotated;
     }
 
     /**
-     * Tourne l'image de la pièce vers la droite à 90°
+     * Tourne l'image de la pièce dans le sens horaire à 90°
      */
     public void tournerDroite() {
-        BufferedImage buffered = rotateImageByDegrees(image, 90);
-        image = buffered;
+        rotateImageByDegrees(90);
         paintComponent(getGraphics());
         revalidate();
     }
 
     /**
-     * Tourne l'image de la pièce vers la gauche à 90°
+     * Tourne l'image de la pièce dans le sens trigonometrique à 90°
      */
     public void tournerGauche() {
-        BufferedImage buffered = rotateImageByDegrees(image, -90);
-        image = buffered;
+        rotateImageByDegrees(-90);
         paintComponent(getGraphics());
         revalidate();
-    }
-
-    /**
-     * retourne un String représentant une pièce.
-     * C'est a dire un String composé de plusieurs lignes avec tout les valeur de a
-     * pièce. Et des espace la ou il faut.
-     */
-    @Override
-    public String toString() {
-        String res = "";
-        for (int i = 0; i < getModel().getValeurs().size(); i++) {
-            res += getligne(i) + "\n";
-        }
-        return res;
     }
 }

@@ -3,10 +3,13 @@ package carcassonne;
 import java.awt.Color;
 
 /**
- * Modélise un partisan
+ * Class representant un partisant
  */
 public class Partisan {
 
+    /**
+     * Couleur
+     */
     private Color couleur;
 
     public Partisan(Color couleur) {

@@ -22,6 +22,12 @@ public class CarcassonnePlayerModel extends PlayerModel<PieceControleur<Terrain>
      */
     private ArrayList<Partisan> partissants;
 
+    /**
+     * Contructeur du model du player
+     * 
+     * @param name    pseudo du joueur
+     * @param couleur couleur des meaples.
+     */
     public CarcassonnePlayerModel(String name, Color couleur) {
         super(name);
         this.couleur = couleur;

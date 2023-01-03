@@ -15,9 +15,9 @@ import java.awt.Color;
 public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
     /**
      * Constructeur
+     * Contruit une partie de Carcassonne
      * 
      * @param nombreJoueur Nombre de joueur qui vont jouer
-     * @param sc           scanner qui lit les entrées
      */
     public PlayCarcassonneModel(int nombreJoueur) {
         super(72);
@@ -102,10 +102,22 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
 
     }
 
+    /**
+     * ajoute une personnage aux joueurs de la partie
+     * 
+     * @param nom     pseudo du personnage a ajouter
+     * @param couleur couleur que l'équipe du personnage
+     */
     public void ajoutPerso(String nom, Color couleur) {
         joueurs.add(new CarcassonnePlayerControleur(nom, couleur));
     }
 
+    /**
+     * ajoute une robot aux joueurs de la partie
+     * 
+     * @param nom     pseudo du robot a ajouter
+     * @param couleur couleur que l'équipe du robot
+     */
     public void ajoutBot(String nom, Color couleur) {
         joueurs.add(new CarcassonneBot(nom, couleur));
 

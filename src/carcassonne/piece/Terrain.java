@@ -25,27 +25,4 @@ public enum Terrain {
     public int getValeur() {
         return valeur;
     }
-
-    /**
-     * Methode qui permet d'obtenir un symbole l'affichage
-     */
-    @Override
-    public String toString() {
-        switch (this) {
-            case ABBAYE:
-                return "A";
-            case QUARTIER:
-                return "Q";
-            case QUARTIERBOUCLIER:
-                return "B";
-            case CARREFOUR:
-                return "+";
-            case CHEMIN:
-                return "¤";
-            case PRE:
-                return "P";
-            default:
-                return " ";
-        }
-    }
 }

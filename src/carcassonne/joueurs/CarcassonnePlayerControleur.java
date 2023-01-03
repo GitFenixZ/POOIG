@@ -16,6 +16,12 @@ import communs.objets.piece.PieceControleur;
 
 public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleur<Terrain>> {
 
+    /**
+     * Contructeur d'un player
+     * 
+     * @param name    pseudo du joueur.
+     * @param couleur couleur des meaples.
+     */
     public CarcassonnePlayerControleur(String name, Color couleur) {
         model = new CarcassonnePlayerModel(name, couleur);
         view = new CarcassonnePlayerView((CarcassonnePlayerModel) model);

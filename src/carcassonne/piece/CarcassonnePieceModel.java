@@ -8,7 +8,7 @@ import communs.objets.Point;
 import communs.objets.piece.PieceModel;
 
 /**
- * Modelise le model des piece de plateau de carcassonne.
+ * Model des piece de plateau de carcassonne.
  */
 public class CarcassonnePieceModel extends PieceModel<Terrain> {
 
@@ -17,14 +17,26 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
          */
         private ArrayList<ArrayList<Partisan>> partisan;
 
+        /**
+         * Constructeur
+         * initialise une piece de carcasonne
+         * 
+         * @param map piece qui doit être representé.
+         */
         CarcassonnePieceModel(Terrain[][] map) {
                 super(5, 5, Terrain.NONE);
                 partisan = new ArrayList<ArrayList<Partisan>>();
+                /**
+                 * Initialise les partie de terrain de la piece
+                 */
                 for (int i = 0; i < getLargeur(); i++) {
                         for (int j = 0; j < getLargeur(); j++) {
                                 valeurs.get(i).set(j, map[i][j]);
                         }
                 }
+                /**
+                 * initialise le tableau de partisant, qui est plus grand, car plus précis.
+                 */
                 for (int i = 0; i < 30; i++) {
                         partisan.add(new ArrayList<Partisan>());
                         for (int j = 0; j < 30; j++) {
@@ -33,14 +45,17 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
                 }
         }
 
+        /**
+         * @return le tableau de partisants.
+         */
         public ArrayList<ArrayList<Partisan>> getPartisan() {
                 return partisan;
         }
 
         /**
-         * Place un partisant du joueur au coordoonee du point
+         * Place un partisan du joueur au coordoonee du point
          * 
-         * @param point  coordonnees auquel sera placer le partisant sur la piece
+         * @param point  coordonnees auquel sera placer le partisan sur la piece
          * @param player joueur qui va placer un partisant
          */
         public void placerPartisant(Point point, CarcassonnePlayerControleur player) {
@@ -52,6 +67,9 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
         /**
          * Methode qui compare si deux coté son campatibles.
          * Deux coté sont compatible si ils ont la même valeurs.
+         * Les valeurs sont un numéro atribué a chaque type de terrain.
+         * 
+         * @return si les deux coté sont plassable a coté.
          */
         @Override
         protected boolean compare(ArrayList<Terrain> cote1, ArrayList<Terrain> cote2) {

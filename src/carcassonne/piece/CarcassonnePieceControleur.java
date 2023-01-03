@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import carcassonne.Partisan;
 
 /**
- * Modelise le controleur des piece de plateau de carcassonne.
+ * Controleur des piece de plateau de carcassonne.
  */
 public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
     /**
      * Constructeur
      * Initialise une piece du jeu de carcassonne
+     * 
+     * @param map information de la piece dans le model.
+     * @param id  numéro de l'image de la piece.
      */
     public CarcassonnePieceControleur(Terrain[][] map, int id) {
         super();
@@ -33,22 +36,34 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
         ((CarcassonnePieceModel) getModel()).placerPartisant(point, player);
     }
 
+    /**
+     * Tourne dans le sens horaire la piece du joueur
+     */
     @Override
     public void tournerDroite() {
         getModel().tournerDroite();
         ((CarcassonnePieceView) getView()).tournerDroite();
     }
 
+    /**
+     * Tourne dans le sens trigonometrique la piece du joueur
+     */
     @Override
     public void tournerGauche() {
         getModel().tournerGauche();
         ((CarcassonnePieceView) getView()).tournerGauche();
     }
 
+    /**
+     * @return le numero d'identification de l'image de la piece.
+     */
     public int getId() {
         return ((CarcassonnePieceView) getView()).getId();
     }
 
+    /**
+     * @return le tableau de partisant qui est sur la piece.
+     */
     public ArrayList<ArrayList<Partisan>> getPartisan() {
         return ((CarcassonnePieceModel) getModel()).getPartisan();
     }

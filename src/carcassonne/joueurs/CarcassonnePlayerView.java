@@ -33,9 +33,9 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
     }
 
     /**
-     * Affiches les informations d'un joueur
+     * Constructeur de la playerView
      * 
-     * @param model
+     * @param model model que devra suivre la view.
      */
     public CarcassonnePlayerView(CarcassonnePlayerModel model) {
         super();
@@ -50,8 +50,7 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
     /**
      * Methode permettant de placer un partisant sur une tuile.
      * 
-     * @param player joueur qui doit
-     * @param game
+     * @param game partie en tain d'être joué
      */
     public void placerPartisant(PlayCarcassonneControleur game) {
         // ouvre une nouvelle fenetre.
@@ -90,7 +89,7 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
                                         ((CarcassonnePieceControleur) getModel().getMain()).getPartisan().size()
                                                 * e.getY()
                                                 / pieceView.getHeight()));
-                game.postPartisan();
+                game.postPartisan();// permet au joueur suivant de jouer.
             }
 
             @Override
@@ -116,7 +115,7 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
         JButton passer = new JButton("passer");
         passer.addActionListener(event -> {
             frame.dispose();
-            game.postPartisan();
+            game.postPartisan();// permet au joueur suivant de jouer.
         });
         panel.add(new JLabel());
         panel.add(texte1);

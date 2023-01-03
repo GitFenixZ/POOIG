@@ -30,10 +30,22 @@ public class PlayCarcassonneControleur extends PlayGameControleur<Terrain> {
         rejouer();
     }
 
+    /**
+     * ajoute une personnage aux joueurs de la partie
+     * 
+     * @param nom     pseudo du personnage a ajouter
+     * @param couleur couleur que l'équipe du personnage
+     */
     public void ajoutPerso(String nom, Color couleur) {
         ((PlayCarcassonneModel) model).ajoutPerso(nom, couleur);
     }
 
+    /**
+     * ajoute une robot aux joueurs de la partie
+     * 
+     * @param nom     pseudo du robot a ajouter
+     * @param couleur couleur que l'équipe du robot
+     */
     public void ajoutBot(String nom, Color couleur) {
         ((PlayCarcassonneModel) model).ajoutBot(nom, couleur);
     }

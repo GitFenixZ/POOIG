@@ -14,6 +14,12 @@ import communs.objets.plateau.PlateauControleur;
  */
 public class CarcassonneBot extends CarcassonnePlayerControleur {
 
+    /**
+     * Contructeur du bot
+     * 
+     * @param name    pseudo du bot
+     * @param couleur couleur de ses meaples
+     */
     public CarcassonneBot(String name, Color couleur) {
         super(name, couleur);
     }
