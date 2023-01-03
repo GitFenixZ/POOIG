@@ -1,12 +1,13 @@
-package communs.objets;
+package communs.objets.player;
 
-import communs.interfaces.InterfacePlayer;
+import communs.interfaces.player.InterfacePlayerControleur;
+import communs.objets.Sac;
 
 /**
  * Class controlant un joueur
  * P est le type des pieces que peut avoir le joueur
  */
-public class PlayerControleur<P> implements InterfacePlayer<P> {
+public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
     protected PlayerModel<P> model;
     protected PlayerView<P> view;
 
@@ -39,7 +40,7 @@ public class PlayerControleur<P> implements InterfacePlayer<P> {
     @Override
     public void piocher(Sac<P> sac) {
         model.piocher(sac);
-        view.reactualiser();
+        view.actualiser();
     }
 
     /**
@@ -58,7 +59,7 @@ public class PlayerControleur<P> implements InterfacePlayer<P> {
     @Override
     public void scoreadd(int i) {
         model.scoreadd(i);
-        view.reactualiser();
+        view.actualiser();
     }
 
     // Getters

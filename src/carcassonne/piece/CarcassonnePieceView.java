@@ -121,17 +121,11 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         revalidate();
     }
 
-    /**
-     * retourne un String représentant une pièce.
-     * C'est a dire un String composé de plusieurs lignes avec tout les valeur de a
-     * pièce. Et des espace la ou il faut.
-     */
     @Override
-    public String toString() {
-        String res = "";
-        for (int i = 0; i < getModel().getValeurs().size(); i++) {
-            res += getligne(i) + "\n";
-        }
-        return res;
+    /**
+     * permet de ne pas changer la vue de la piece par celle de domino
+     */
+    public void setimagePiece() {
+        revalidate();
     }
 }

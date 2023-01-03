@@ -6,9 +6,9 @@ import carcassonne.Partisan;
 import carcassonne.PlayCarcassonneControleur;
 import carcassonne.piece.CarcassonnePieceControleur;
 import carcassonne.piece.Terrain;
-import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Controleur d'une joueur de carcassonne met en liens la vue et le model.

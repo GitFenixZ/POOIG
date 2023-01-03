@@ -1,8 +1,8 @@
 package communs;
 
 import carcassonne.joueurs.CarcassonneBot;
-import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 import domino.joueurs.DominoBot;
 
 /**
@@ -20,10 +20,6 @@ public class PlayGameControleur<V> {
     public PlayGameControleur() {
     }
 
-    public PlayerControleur getActuelPlayer() {
-        return model.getActuelPlayer();
-    }
-
     public PlayGameModel<V> getModel() {
         return model;
     }
@@ -34,7 +30,14 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * Met l'indice au joueur suivant
+     * @return je joueur qui est en train de jouer son tour.
+     */
+    public PlayerControleur getActuelPlayer() {
+        return model.getActuelPlayer();
+    }
+
+    /**
+     * fait jouer le prochain joueur.
      */
     public void nextPlayer() {
         if (!model.finDePartie()) {
@@ -61,7 +64,7 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * Met l'indice au joueur précédent.
+     * refait jouer le joueur
      */
     public void rejouer() {
         model.rejouer();
@@ -77,24 +80,43 @@ public class PlayGameControleur<V> {
         model.piocherPiece(player);
     }
 
+    /**
+     * Ajoute un joueur a la partie.
+     * 
+     * @param nom pseudo du joueur.
+     */
     public void ajoutPerso(String nom) {
         model.ajoutPerso(nom);
     }
 
+    /**
+     * @return le nombre de joueur enregister dans la partie.
+     */
     public int getNombreDeJoueur() {
         return model.getNombreDeJoueur();
     }
 
+    /**
+     * tourne la piece qui est dans la maun joueur actuel dans le sens horaire de
+     * 90°.
+     */
     public void tournerDroite() {
         model.tournerDroite();
         view.actualiser();
     }
 
+    /**
+     * tourne la piece qui est dans la maun joueur actuel dans le sens
+     * trigonometrique de 90°.
+     */
     public void tournerGauche() {
         model.tournerGauche();
         view.actualiser();
     }
 
+    /**
+     * fait deplacer le joueur sur le plateau dans la direction indiqué.
+     */
     public void allerADroite() {
         model.allerADroite();
         view.actualiser();
@@ -115,6 +137,9 @@ public class PlayGameControleur<V> {
         view.actualiser();
     }
 
+    /**
+     * Place la piece du joueur actuel sur le plateau.
+     */
     public void placerPiece() {
         model.placerPiece();
         view.actualiser();
@@ -124,6 +149,7 @@ public class PlayGameControleur<V> {
     /**
      * Methode a appliquer après que l'on souhaite savoir ou le partisant sera placé
      * pour Carcassonne.
+     * Permet de continuer la partie, après qu'un partisan ai été placé.
      */
     public void postPartisan() {
         view.activerBoutonPlacer();

@@ -3,9 +3,9 @@ package domino;
 import java.util.Scanner;
 
 import communs.PlayGameModel;
-import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauView;
+import communs.objets.player.PlayerControleur;
 import domino.joueurs.DominoBot;
 import domino.piece.DominoPieceControleur;
 import domino.plateau.DominoPlateauControleur;

@@ -4,9 +4,9 @@ import carcassonne.PlayCarcassonneControleur;
 import carcassonne.piece.CarcassonnePieceControleur;
 import carcassonne.piece.CarcassonnePieceView;
 import carcassonne.piece.Terrain;
-import communs.objets.PlayerView;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerView;
 
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;

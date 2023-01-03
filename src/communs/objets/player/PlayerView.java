@@ -1,16 +1,17 @@
-package communs.objets;
+package communs.objets.player;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.GridLayout;
 
+import communs.interfaces.player.InterfacePlayerView;
 import communs.objets.piece.PieceControleur;
 
 /**
  * Vue du joueur.
  */
-public class PlayerView<P> extends JPanel {
+public class PlayerView<P> extends JPanel implements InterfacePlayerView {
     private PlayerModel<P> model;
     private PlayerControleur<P> controleur;
 
@@ -51,9 +52,10 @@ public class PlayerView<P> extends JPanel {
     }
 
     /**
-     * reactualise les infos d'un joueur dans son affichage.
+     * Reactualise les infos d'un joueur dans son affichage.
      */
-    public void reactualiser() {
+    @Override
+    public void actualiser() {
         removeAll();
         setLayout(new GridLayout(2, 1));
         JPanel a = new JPanel();
@@ -63,5 +65,4 @@ public class PlayerView<P> extends JPanel {
         add(((PieceControleur) getModel().getMain()).getView());
         revalidate();
     }
-
 }

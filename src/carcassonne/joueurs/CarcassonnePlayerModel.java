@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import carcassonne.Partisan;
 import carcassonne.piece.Terrain;
-import communs.objets.PlayerModel;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerModel;
 
 /**
  * Class modélisant un joueur de carcassonne

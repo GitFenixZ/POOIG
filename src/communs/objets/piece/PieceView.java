@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 
-import carcassonne.piece.CarcassonnePieceView;
 import communs.interfaces.piece.InterfacePieceView;
 
 /**
@@ -31,28 +30,24 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
 
     @Override
     /**
-     * Créer un affichage correct pour la fenetre
+     * Créer un affichage de la piece correct pour la fenetre.
+     * Et l''actualise.
      */
     public void setimagePiece() {
         removeAll();
-        if (this instanceof CarcassonnePieceView) {
-            ((CarcassonnePieceView) this).revalidate();
-        } else {
-            setLayout(new GridLayout(model.getHauteur(), model.getLargeur()));
-            for (int i = 0; i < model.getHauteur(); i++) {
-                String res = " ";
-                for (V e : model.getValeurs().get(i)) {
-                    if (e != model.getVide()) {
-                        JPanel texte = new JPanel(new GridBagLayout());
-                        texte.add(new JLabel(e.toString() + " "));
-                        add(texte);
-                    } else {
-                        add(new JLabel(" "));
-                    }
+        setLayout(new GridLayout(model.getHauteur(), model.getLargeur()));
+        for (int i = 0; i < model.getHauteur(); i++) {
+            for (V e : model.getValeurs().get(i)) {
+                if (e != model.getVide()) {
+                    JPanel texte = new JPanel(new GridBagLayout());
+                    texte.add(new JLabel(e.toString() + " "));
+                    add(texte);
+                } else {
+                    add(new JLabel(" "));
                 }
             }
-            revalidate();
         }
+        revalidate();
     }
 
     // getter

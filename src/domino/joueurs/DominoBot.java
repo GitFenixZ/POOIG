@@ -1,9 +1,9 @@
 package domino.joueurs;
 
-import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Class modélisant un Robot capable de jouer au domino de manière très
