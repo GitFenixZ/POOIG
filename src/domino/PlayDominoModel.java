@@ -125,10 +125,18 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
         plateau.start(sac);
     }
 
+    /**
+     * Ajout un robots a liste des joueurs de la partie actuel.
+     * 
+     * @param nom pseudo du robot
+     */
     public void ajoutBot(String nom) {
         joueurs.add(new DominoBot(nom));
     }
 
+    /**
+     * fait jouer un tour au robot joueur actuel
+     */
     public void jouerBot() {
         ((DominoBot) getActuelPlayer()).jouer(plateau);
     }
