@@ -23,8 +23,7 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
         super(72);
 
         // initialise le plateau
-        plateau = new PlateauControleur<Terrain>(CarcassonnePieceModel.hauteurPiece,
-                CarcassonnePieceModel.largeurPiece);
+        plateau = new PlateauControleur<Terrain>(5, 5);
 
         // remplis le sac de piece de Carcassonne
         for (int i = 0; i < 9; i++) {

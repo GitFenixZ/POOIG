@@ -71,7 +71,11 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
                 frame.dispose();
                 ((CarcassonnePlayerControleur) getControleur())
                         .placerPartisant(
-                                new Point(5 * e.getX() / pieceView.getWidth(), 5 * e.getY() / pieceView.getHeight()));
+                                new Point(
+                                        ((CarcassonnePieceControleur) player.getMain()).getPartisan().size() * e.getX()
+                                                / pieceView.getWidth(),
+                                        ((CarcassonnePieceControleur) player.getMain()).getPartisan().size() * e.getY()
+                                                / pieceView.getHeight()));
                 game.postPartisan();
             }
 

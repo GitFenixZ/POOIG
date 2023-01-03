@@ -19,7 +19,7 @@ public class MenuControleur extends JFrame {
         view.setControleur(this);
 
         setSize(800, 600);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);

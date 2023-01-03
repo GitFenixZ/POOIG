@@ -1,11 +1,15 @@
-package carcassonne.partisan;
+package carcassonne;
 
 import java.awt.Color;
 
-public class PartisanModel {
+/**
+ * Modélise un partisan
+ */
+public class Partisan {
+
     private Color couleur;
 
-    PartisanModel(Color couleur) {
+    public Partisan(Color couleur) {
         this.couleur = couleur;
     }
 

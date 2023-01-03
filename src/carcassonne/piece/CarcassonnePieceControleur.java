@@ -3,6 +3,8 @@ package carcassonne.piece;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
+import java.util.ArrayList;
+import carcassonne.Partisan;
 
 /**
  * Modelise le controleur des piece de plateau de carcassonne.
@@ -45,5 +47,9 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
 
     public int getId() {
         return ((CarcassonnePieceView) getView()).getId();
+    }
+
+    public ArrayList<ArrayList<Partisan>> getPartisan() {
+        return ((CarcassonnePieceModel) getModel()).getPartisan();
     }
 }

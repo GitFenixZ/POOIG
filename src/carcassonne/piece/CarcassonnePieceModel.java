@@ -2,7 +2,7 @@ package carcassonne.piece;
 
 import java.util.ArrayList;
 
-import carcassonne.partisan.PartisanControleur;
+import carcassonne.Partisan;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
 import communs.objets.Point;
 import communs.objets.piece.PieceModel;
@@ -15,26 +15,25 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
         /**
          * Seconde representation de la pièce ou l'on pourra placer un partisant.
          */
-        private ArrayList<ArrayList<PartisanControleur>> partisan;
-
-        // valeur a utiliser. Comme ça on peut modifier les pièces comme on veut, on
-        // aura juste a modifier ça aussi.
-        public static final int largeurPiece = 5;
-        public static final int hauteurPiece = 5;
+        private ArrayList<ArrayList<Partisan>> partisan;
 
         CarcassonnePieceModel(Terrain[][] map) {
                 super(5, 5, Terrain.NONE);
-                partisan = new ArrayList<ArrayList<PartisanControleur>>();
+                partisan = new ArrayList<ArrayList<Partisan>>();
                 for (int i = 0; i < getLargeur(); i++) {
-                        partisan.add(new ArrayList<PartisanControleur>());
                         for (int j = 0; j < getLargeur(); j++) {
                                 valeurs.get(i).set(j, map[i][j]);
+                        }
+                }
+                for (int i = 0; i < 30; i++) {
+                        partisan.add(new ArrayList<Partisan>());
+                        for (int j = 0; j < 30; j++) {
                                 partisan.get(i).add(null);
                         }
                 }
         }
 
-        public ArrayList<ArrayList<PartisanControleur>> getPartisan() {
+        public ArrayList<ArrayList<Partisan>> getPartisan() {
                 return partisan;
         }
 

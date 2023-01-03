@@ -7,9 +7,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
-import carcassonne.partisan.PartisanControleur;
+import carcassonne.Partisan;
 
 import java.io.IOException;
 import java.awt.Color;
@@ -71,7 +70,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        ArrayList<ArrayList<PartisanControleur>> piece = ((CarcassonnePieceModel) getModel()).getPartisan();
+        ArrayList<ArrayList<Partisan>> piece = ((CarcassonnePieceModel) getModel()).getPartisan();
         for (int i = 0; i < piece.size(); i++) {
             for (int j = 0; j < piece.get(0).size(); j++) {
                 if (piece.get(i).get(j) != null) {
