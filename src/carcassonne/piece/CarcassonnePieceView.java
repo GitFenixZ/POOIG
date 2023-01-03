@@ -70,16 +70,16 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     }
 
     /**
-     * Methode permettant de faire rotate l'image sur son centre dans le sens
-     * horaire.
+     * Methode permettant de faire rotate une image.
      * 
      * @param angle angle que l'on souhaite tourner.
+     * @return
      */
-    private void rotateImageByDegrees(double angle) {
+    private BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
         double rads = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
-        int w = image.getWidth();
-        int h = image.getHeight();
+        int w = img.getWidth();
+        int h = img.getHeight();
         int newWidth = (int) Math.floor(w * cos + h * sin);
         int newHeight = (int) Math.floor(h * cos + w * sin);
 
@@ -93,27 +93,45 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
 
         at.rotate(rads, x, y);
         g2d.setTransform(at);
-        g2d.drawImage(image, 0, 0, this);
+        g2d.drawImage(img, 0, 0, this);
         g2d.setColor(Color.DARK_GRAY);
         g2d.drawRect(0, 0, newWidth - 1, newHeight - 1);
         g2d.dispose();
+
+        return rotated;
     }
 
     /**
-     * Tourne l'image de la pièce dans le sens horaire à 90°
+     * Tourne l'image de la pièce dans le sent horaire à 90°
      */
     public void tournerDroite() {
-        rotateImageByDegrees(90);
+        BufferedImage buffered = rotateImageByDegrees(image, 90);
+        image = buffered;
         paintComponent(getGraphics());
         revalidate();
     }
 
     /**
-     * Tourne l'image de la pièce dans le sens trigonometrique à 90°
+     * Tourne l'image de la pièce dans le sens trigonométrique à 90°
      */
     public void tournerGauche() {
-        rotateImageByDegrees(-90);
+        BufferedImage buffered = rotateImageByDegrees(image, -90);
+        image = buffered;
         paintComponent(getGraphics());
         revalidate();
+    }
+
+    /**
+     * retourne un String représentant une pièce.
+     * C'est a dire un String composé de plusieurs lignes avec tout les valeur de a
+     * pièce. Et des espace la ou il faut.
+     */
+    @Override
+    public String toString() {
+        String res = "";
+        for (int i = 0; i < getModel().getValeurs().size(); i++) {
+            res += getligne(i) + "\n";
+        }
+        return res;
     }
 }
