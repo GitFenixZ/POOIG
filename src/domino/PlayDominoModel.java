@@ -5,6 +5,7 @@ import java.util.Scanner;
 import communs.PlayGameModel;
 import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
+import communs.objets.plateau.PlateauView;
 import domino.joueurs.DominoBot;
 import domino.piece.DominoPieceControleur;
 import domino.plateau.DominoPlateauControleur;
@@ -26,10 +27,9 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
         // initialise le plateau
         plateau = new DominoPlateauControleur(5, 5);
         // intialise les joueurs
-        for (int i = 0; i < nombreJoueur; i++) {
-            System.out.println("Est ce une joueur ? (oui / non)");
-            if (sc.nextLine().equals("oui")) {
-                System.out.println("Comment s'appel le joueur " + (i + 1) + " ?");
+        for (int i = 1; i <= nombreJoueur; i++) {
+            if (PlateauView.demandeBoolean(sc, "Est ce une joueur ? (oui / non)")) {
+                System.out.println("Comment s'appel le joueur " + i + " ?");
                 joueurs.add(new PlayerControleur<PieceControleur<Integer>>(sc.nextLine()));
             } else {
                 joueurs.add(new DominoBot("Joueur" + i));
@@ -71,7 +71,6 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
             plateau.start(sac);
         }
         System.out.println(plateau);
-        String rep = "";
         // tant que le sac n'est pas vide
         while (!sac.isEmpty()) {
             piocherPiece(getActuelPlayer());
@@ -81,12 +80,9 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                     // fait jouer le bot. Si il ne peut pas jouer la pièce
                     rejouer();
                     ; // il rejoue.
-                } else {
                 }
             } else {
-                System.out.println("Pensez vous pouvoir jouer ? (oui / non)");
-                rep = sc.nextLine();
-                if (rep.equals("oui")) {
+                if (PlateauView.demandeBoolean(sc, "Pensez vous pouvoir jouer ? (oui / non)")) {
                     if (((DominoPlateauControleur) plateau).possibleDePlacer(getActuelPlayer().getMain())) {
                         System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
                         ((DominoPlateauControleur) plateau).placerPiece(getActuelPlayer(), sc);
@@ -97,16 +93,14 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                         rejouer();// il rejoue.
                     }
                 } else {
-                    if (rep.equals("non")) {
-                        if (((DominoPlateauControleur) plateau).possibleDePlacer(getActuelPlayer().getMain())) {
-                            System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
-                            ((DominoPlateauControleur) plateau).placerPiece(getActuelPlayer(), sc);
-                            getActuelPlayer().jeter();
-                        } else {
-                            System.out.println("Et oui aucune solution n'est valide.");
-                            getActuelPlayer().jeter();
-                            rejouer();// il rejoue.
-                        }
+                    if (((DominoPlateauControleur) plateau).possibleDePlacer(getActuelPlayer().getMain())) {
+                        System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
+                        ((DominoPlateauControleur) plateau).placerPiece(getActuelPlayer(), sc);
+                        getActuelPlayer().jeter();
+                    } else {
+                        System.out.println("Et oui aucune solution n'est valide.");
+                        getActuelPlayer().jeter();
+                        rejouer();// il rejoue.
                     }
                 }
             }

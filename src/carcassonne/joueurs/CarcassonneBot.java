@@ -10,7 +10,7 @@ import communs.objets.plateau.PlateauControleur;
 
 /**
  * Class modélisant un Robot capable de jouer au carcassonne de manière très
- * standart.
+ * simple.
  */
 public class CarcassonneBot extends CarcassonnePlayerControleur {
 
@@ -19,7 +19,7 @@ public class CarcassonneBot extends CarcassonnePlayerControleur {
     }
 
     /**
-     * Methode a utiliser pour jouer le tout d'un robot.
+     * Methode a utiliser pour jouer le tour d'un robot.
      * 
      * @param plateauControleur Plateau sur lequel on joue en se moment.
      * @return si le robot a pu jouer

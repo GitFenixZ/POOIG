@@ -47,7 +47,14 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
         revalidate();
     }
 
-    public void placerPartisant(CarcassonnePlayerControleur player, PlayCarcassonneControleur game) {
+    /**
+     * Methode permettant de placer un partisant sur une tuile.
+     * 
+     * @param player joueur qui doit
+     * @param game
+     */
+    public void placerPartisant(PlayCarcassonneControleur game) {
+        // ouvre une nouvelle fenetre.
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
@@ -55,16 +62,21 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
         JLabel texte1 = new JLabel("Voulez vous placer un partisant ? (Cliqué ou vous voulez)");
         JLabel texte2 = new JLabel("(Cliqué ou vous voulez)");
 
-        // créer une copy de la view de la piece du joueur actuel que nomme pieceView
+        // créer une copy de la view de la piece du joueur actuel : pieceView
+        // Evite les problèmes d'affichage d'un Jpanel blanc.
         CarcassonnePieceView pieceView = new CarcassonnePieceView(
-                ((CarcassonnePieceControleur) player.getMain()).getId());
+                ((CarcassonnePieceControleur) getModel().getMain()).getId());
 
-        pieceView.setImage(((CarcassonnePieceView) player.getMain().getView()).getImage());
+        pieceView.setImage(((CarcassonnePieceView) getModel().getMain().getView()).getImage());
 
-        pieceView.setModel(((CarcassonnePieceControleur) player.getMain()).getModel());
+        pieceView.setModel(((CarcassonnePieceControleur) getModel().getMain()).getModel());
 
         pieceView.revalidate();
 
+        /**
+         * Ajout de la posibilité de cliqué à l'endroit de piece que l'on souhaite pour
+         * pouvoir placer le partisant.
+         */
         pieceView.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -72,9 +84,11 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
                 ((CarcassonnePlayerControleur) getControleur())
                         .placerPartisant(
                                 new Point(
-                                        ((CarcassonnePieceControleur) player.getMain()).getPartisan().size() * e.getX()
+                                        ((CarcassonnePieceControleur) getModel().getMain()).getPartisan().size()
+                                                * e.getX()
                                                 / pieceView.getWidth(),
-                                        ((CarcassonnePieceControleur) player.getMain()).getPartisan().size() * e.getY()
+                                        ((CarcassonnePieceControleur) getModel().getMain()).getPartisan().size()
+                                                * e.getY()
                                                 / pieceView.getHeight()));
                 game.postPartisan();
             }

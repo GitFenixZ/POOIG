@@ -33,20 +33,21 @@ public class CarcassonnePlayerModel extends PlayerModel<PieceControleur<Terrain>
 
     /**
      * Prends un partisant de la collection.
+     * le retire du lot.
      */
     public Partisan peekPartisant() {
         return partissants.remove(0);
     }
 
     /**
-     * Verifie si la liste des partisant contient toujours des pièces.
+     * Verifie si la liste des partisant est vide (le joueur n'a plus de partisant).
      */
     public boolean partisantsIsEmpty() {
         return partissants.size() == 0;
     }
 
     /**
-     * Renvoie le nombre de partisant qui n'a pas été placé par le joueur.
+     * Renvoie le nombre de partisant qui sont encore dans la main du joueur.
      */
     public int getNombreDePartisant() {
         return partissants.size();
