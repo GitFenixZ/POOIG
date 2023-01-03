@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.awt.GridLayout;
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import communs.exceptions.positionInvalide;
@@ -52,6 +53,8 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
                 if (i == model.getActuelX() && j == model.getActuelY()) {
                     piece.setBackground(Color.BLACK);
                 }
+                piece.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
                 add(piece);
             }
         }
