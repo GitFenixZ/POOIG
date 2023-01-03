@@ -14,11 +14,12 @@ import javax.swing.SwingConstants;
 
 import carcassonne.PlayCarcassonneControleur;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
-import communs.objets.PlayerControleur;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Vue d'une partie
+ * V est le type des valeur présente sur les pièces du jeu.
  */
 public class PlayGameView<V> extends JPanel {
     private PlayGameModel<V> model;
@@ -47,10 +48,10 @@ public class PlayGameView<V> extends JPanel {
         sideBar = new JPanel(new GridLayout(4, 1));
 
         // Case du Joueur
-        pseudo = ajouterCase("Joueur : \n", Color.GRAY, sideBar);
+        pseudo = ajouterCase("Joueur : \n", Color.GRAY);
 
         // Case du Score
-        score = ajouterCase("Score :\n", Color.GRAY, sideBar);
+        score = ajouterCase("Score :\n", Color.GRAY);
 
         // Case preview
         piece = new JPanel();
@@ -70,6 +71,9 @@ public class PlayGameView<V> extends JPanel {
         add(model.getImagePlateau(), BorderLayout.CENTER);
     }
 
+    /**
+     * actualise l'affichage de la game.
+     */
     public void actualiser() {
         // Case du Joueur
         pseudo.removeAll();
@@ -91,7 +95,10 @@ public class PlayGameView<V> extends JPanel {
         sideBar.revalidate();
     }
 
-    private JPanel ajouterCase(String content, Color c, JPanel sideBar) {
+    /**
+     * ajoute une case a la sideBar à gauche de l'affichage
+     */
+    private JPanel ajouterCase(String content, Color c) {
         JPanel panel = new JPanel();
         panel.setBackground(c);
         JLabel label = new JLabel(content, SwingConstants.CENTER);
@@ -100,6 +107,10 @@ public class PlayGameView<V> extends JPanel {
         return panel;
     }
 
+    /**
+     * A la fin de la partie affiche une nouvelle fenetre avec toutes les
+     * explications
+     */
     public void finDePartie() {
         JFrame finDePartie = new JFrame();
         JPanel panel = new JPanel(new GridLayout(model.getNombreDeJoueur() + 2, 1));
@@ -119,7 +130,6 @@ public class PlayGameView<V> extends JPanel {
         finDePartie.setContentPane(panel);
         finDePartie.setVisible(true);
         revalidate();
-        // setVisible(false);
     }
 
     private class CommandButtons {
@@ -198,10 +208,16 @@ public class PlayGameView<V> extends JPanel {
         }
     }
 
+    /**
+     * desactive le bouton pour placer des pieces.
+     */
     public void desactiverBoutonPlacer() {
         commandButtons.getCommandsPane().getComponent(6).setEnabled(false);
     }
 
+    /**
+     * active le bouton pour placer des pieces.
+     */
     public void activerBoutonPlacer() {
         commandButtons.getCommandsPane().getComponent(6).setEnabled(true);
     }

@@ -1,14 +1,14 @@
-package communs.interfaces;
+package communs.interfaces.player;
 
 import communs.objets.Sac;
 
 /**
- * Interface du player. L'un des joueur qui joue la partie.
+ * Interface du controleur d'un player. L'un des joueur qui joue la partie.
  * 
  * P est le type de l'objet que le joueur a dans la main.
  * Exemple : PieceControleur<Integer> dans le domino.
  */
-public interface InterfacePlayer<P> {
+public interface InterfacePlayerControleur<P> {
     /**
      * Methode qui fait piocher un joueur dans un sac
      * 

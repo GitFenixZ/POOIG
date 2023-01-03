@@ -2,7 +2,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import java.awt.Color;
@@ -61,6 +60,12 @@ public class MenuView extends JPanel {
         });
     }
 
+    /**
+     * Verifie si un String contient bien un entier et uniquement un entier.
+     * 
+     * @param s string a verifier
+     * @return si le string est un nombre
+     */
     public boolean integer(String s) {
         if (s.length() == 0) {
             return false;
@@ -73,12 +78,23 @@ public class MenuView extends JPanel {
         return Integer.valueOf(s) > 1;
     }
 
+    /**
+     * initialise une partie de jeu et permet de choisir les options de chaque
+     * joueur.
+     * 
+     * @param nombreDeJoueur nombre de joueur qui jouerons la parties
+     */
     public void init(int nombreDeJoueur) {
         this.nombreDeJoueur = nombreDeJoueur;
         removeAll();
         setLayout(new GridLayout(1, nombreDeJoueur));
     }
 
+    /**
+     * initialise une partie de domino
+     * 
+     * @param nombreDeJoueur nombre de joueur qui jouerons la parties
+     */
     public void initDomino(int nombreDeJoueur) {
         init(nombreDeJoueur);
         for (int i = 0; i < nombreDeJoueur; i++) {
@@ -87,6 +103,11 @@ public class MenuView extends JPanel {
         revalidate();
     }
 
+    /**
+     * initialise une partie de domino dans le terminal
+     * 
+     * @param nombreDeJoueur nombre de joueur qui jouerons la parties
+     */
     public void playDominoTerminale(int nombreDeJoueur) {
         init(nombreDeJoueur);
         for (int i = 0; i < nombreDeJoueur; i++) {
@@ -95,6 +116,11 @@ public class MenuView extends JPanel {
         revalidate();
     }
 
+    /**
+     * initialise une partie de carcassonne
+     * 
+     * @param nombreDeJoueur nombre de joueur qui jouerons la parties
+     */
     public void initCarcassonne(int nombreDeJoueur) {
         init(nombreDeJoueur);
         for (int i = 0; i < nombreDeJoueur; i++) {
@@ -103,12 +129,18 @@ public class MenuView extends JPanel {
         revalidate();
     }
 
+    /**
+     * lance la partie
+     */
     public void play() {
         removeAll();
         add(model.getGame().getView());
         revalidate();
     }
 
+    /**
+     * Ajoute un Jpanel qui permet de choisir les options d'un personnages
+     */
     public JPanel ajoutPersoDomino(int i) {
         JPanel res = new JPanel();
         res.setLayout(new GridLayout(3, 1));
@@ -152,6 +184,9 @@ public class MenuView extends JPanel {
         return res;
     }
 
+    /**
+     * Ajoute un Jpanel qui permet de choisir les options d'un personnages
+     */
     public JPanel ajoutPersoCarcassonne(int i) {
         JPanel res = new JPanel();
         res.setLayout(new GridLayout(4, 1));

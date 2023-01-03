@@ -6,6 +6,9 @@ import communs.objets.plateau.PlateauModel;
 import domino.piece.DominoPieceControleur;
 import communs.exceptions.positionInvalide;
 
+/**
+ * Class modélisant le controleur du plateau du jeu de domino.
+ */
 public class DominoPlateauModel extends PlateauModel<Integer> {
     DominoPlateauModel(int hauteurPiece, int largeurPiece) {
         super(hauteurPiece, largeurPiece);

@@ -7,9 +7,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
-import carcassonne.partisan.PartisanControleur;
+import carcassonne.Partisan;
 
 import java.io.IOException;
 import java.awt.Color;
@@ -19,9 +18,20 @@ import java.awt.geom.AffineTransform;
 
 public class CarcassonnePieceView extends PieceView<Terrain> {
 
+    /**
+     * numero permettant d'identifier l'image
+     */
     int id;
+    /**
+     * image qui doit être affiche sur le JPanel
+     */
     BufferedImage image;
 
+    /**
+     * Contructeur permettant d'initialiser la vue de la piece
+     * 
+     * @param i numero permettant d'identifier l'image.
+     */
     public CarcassonnePieceView(int i) {
         super();
         id = i;
@@ -45,33 +55,10 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     }
 
     @Override
-    /**
-     * Getter d'une ligne du tableau sous form de String
-     * 
-     * @param indice indice de la ligne voulu
-     * @return un String representant une ligne du tableau
-     */
-    public String getligne(int indice) {
-        String res = " ";
-        for (int i = 0; i < getModel().getValeurs().size(); i++) {
-            if (getModel().getValeurs().get(indice).get(i) != getModel().getVide()) {
-                res += (getModel().getValeurs().get(indice).get(i)).toString() + " ";
-            } else {
-                if (i == 0) {
-                    res += (getModel().getValeurs().get(indice).get(i + 1)).toString() + " ";
-                } else {
-                    res += (getModel().getValeurs().get(indice).get(i - 1)).toString() + " ";
-                }
-            }
-        }
-        return res;
-    }
-
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        ArrayList<ArrayList<PartisanControleur>> piece = ((CarcassonnePieceModel) getModel()).getPartisan();
+        ArrayList<ArrayList<Partisan>> piece = ((CarcassonnePieceModel) getModel()).getPartisan();
         for (int i = 0; i < piece.size(); i++) {
             for (int j = 0; j < piece.get(0).size(); j++) {
                 if (piece.get(i).get(j) != null) {
@@ -82,6 +69,12 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         }
     }
 
+    /**
+     * Methode permettant de faire rotate une image.
+     * 
+     * @param angle angle que l'on souhaite tourner.
+     * @return
+     */
     private BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
         double rads = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
@@ -109,7 +102,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     }
 
     /**
-     * Tourne l'image de la pièce vers la droite à 90°
+     * Tourne l'image de la pièce dans le sent horaire à 90°
      */
     public void tournerDroite() {
         BufferedImage buffered = rotateImageByDegrees(image, 90);
@@ -119,7 +112,7 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     }
 
     /**
-     * Tourne l'image de la pièce vers la gauche à 90°
+     * Tourne l'image de la pièce dans le sens trigonométrique à 90°
      */
     public void tournerGauche() {
         BufferedImage buffered = rotateImageByDegrees(image, -90);
@@ -128,17 +121,11 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
         revalidate();
     }
 
-    /**
-     * retourne un String représentant une pièce.
-     * C'est a dire un String composé de plusieurs lignes avec tout les valeur de a
-     * pièce. Et des espace la ou il faut.
-     */
     @Override
-    public String toString() {
-        String res = "";
-        for (int i = 0; i < getModel().getValeurs().size(); i++) {
-            res += getligne(i) + "\n";
-        }
-        return res;
+    /**
+     * permet de ne pas changer la vue de la piece par celle de domino
+     */
+    public void setimagePiece() {
+        revalidate();
     }
 }

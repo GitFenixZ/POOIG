@@ -5,10 +5,10 @@ import java.util.Scanner;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;
-import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Class permtant de modéliser le controleur du plateau permettant les

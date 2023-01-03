@@ -56,6 +56,11 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
         rejouer();
     }
 
+    /**
+     * Ajout un robots a liste des joueurs de la partie actuel.
+     * 
+     * @param nom pseudo du robot
+     */
     public void ajoutBot(String nom) {
         ((PlayDominoModel) model).ajoutBot(nom);
     }

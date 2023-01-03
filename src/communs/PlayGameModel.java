@@ -6,11 +6,11 @@ import javax.swing.JPanel;
 
 import carcassonne.joueurs.CarcassonneBot;
 import carcassonne.piece.Terrain;
-import communs.objets.PlayerControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
+import communs.objets.player.PlayerControleur;
 import domino.joueurs.DominoBot;
 
 /**
@@ -56,7 +56,8 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Met l'indice au joueur suivant
+     * Met l'indice au joueur suivant, et le fait piocher permet au joueur suivant
+     * de jouer.
      */
     public void nextPlayer() {
         getActuelPlayer().jeter();
@@ -68,6 +69,12 @@ public class PlayGameModel<V> {
 
     }
 
+    /**
+     * fait jouer un bot
+     * 
+     * @param joueurActuel bot a faire jouer.
+     * @return si le bot a reussi a jouer.
+     */
     public boolean jouer(PlayerControleur joueurActuel) {
         boolean aReussiAJouer = false;
         if (joueurActuel instanceof CarcassonneBot) {
@@ -80,7 +87,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * le joueur jete sa main.
+     * fait rejouer un joueur
      */
     public void rejouer() {
         indice--;
@@ -98,18 +105,30 @@ public class PlayGameModel<V> {
         player.piocher(sac);
     }
 
+    /**
+     * Permet d'ajouter un joueur a liste des joueurs.
+     */
     public void ajoutPerso(String nom) {
         joueurs.add(new PlayerControleur<PieceControleur<V>>(nom));
     }
 
+    /**
+     * Permet de savoir combiens il y a de personne dans les joueurs.
+     */
     public int getNombreDeJoueur() {
         return joueurs.size();
     }
 
+    /**
+     * Permet de recuperer la view du plateau.
+     */
     public JPanel getImagePlateau() {
         return plateau.getView();
     }
 
+    /**
+     * permet de faire tourner la piece du joueur actuel dans le sens demande.
+     */
     public void tournerDroite() {
         getActuelPlayer().getMain().tournerDroite();
     }
@@ -118,6 +137,9 @@ public class PlayGameModel<V> {
         getActuelPlayer().getMain().tournerGauche();
     }
 
+    /**
+     * permet de deplacer la vue du plateau dans le sens demandé.
+     */
     public void allerADroite() {
         plateau.allerADroite();
     }
@@ -134,10 +156,19 @@ public class PlayGameModel<V> {
         plateau.allerEnHaut();
     }
 
+    /**
+     * Permet de placer la piece du joueur qui est en train de jouer a la position
+     * actuel du plateau.
+     */
     public void placerPiece() {
         plateau.setPiece(getActuelPlayer(), plateau.getActuelPosition());
     }
 
+    /**
+     * Permet d'obtenir la position sur laquel est centrée la vue du plateau.
+     * 
+     * @return
+     */
     public Point getActuelPosition() {
         return plateau.getActuelPosition();
     }
@@ -149,11 +180,21 @@ public class PlayGameModel<V> {
         return plateau.possibleDePlacer(getActuelPlayer());
     }
 
+    /**
+     * Regarde si c'est la fin de la partie.
+     * Quand le sac est vide.
+     */
     public boolean finDePartie() {
         return sac.isEmpty();
     }
 
+    /**
+     * Regarde si la piece du joueur actuel est plaçable un a un endroit sur plateau
+     * avec la configuration actuel.
+     * 
+     * @return si la piece a une position ou l'on peut la placer
+     */
     public boolean peutplacer() {
-        return plateau.peutPlacer(getActuelPlayer().getMain()) != null;
+        return plateau.possibleDePlacer(getActuelPlayer().getMain());
     }
 }

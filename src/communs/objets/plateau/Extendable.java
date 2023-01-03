@@ -256,7 +256,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
     }
 
     /**
-     * Methode qui extends
+     * Methode qui extends le tableau
      */
     private void ajouterUnCoteDroit() {
         for (ArrayList<P> ligne : tableau) {

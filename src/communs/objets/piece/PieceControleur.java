@@ -12,6 +12,7 @@ import communs.objets.Direction;
  * 
  * V est le types des valeur qui apparaissent sur la pièce.
  * Exemple : Integer dans le domino.
+ * Exemple : Terrain dans carcassonne
  */
 public class PieceControleur<V> implements InterfacePieceControleur<V> {
     private PieceModel<V> model;
