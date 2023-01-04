@@ -59,6 +59,14 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         return view.toString();
     }
 
+    /**
+     * Methode qui demande au joueur si il pense pouvoir jouer. Si il ne peut pas
+     * alors il repioche, si il peut, la methode l'invite a chercher.
+     * 
+     * @param sc     scanner qui attends les reponses au questions
+     * @param player player joueur qui est en train de jouer
+     * @return si le joueur peut jouer ou non
+     */
     public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player) {
         return view.pensezVousPouvoirJouer(sc, player);
     }
