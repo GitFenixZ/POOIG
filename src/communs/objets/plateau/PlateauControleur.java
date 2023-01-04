@@ -2,7 +2,6 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
-import communs.PlayGameControleur;
 import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;

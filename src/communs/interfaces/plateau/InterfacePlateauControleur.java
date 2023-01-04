@@ -2,7 +2,6 @@ package communs.interfaces.plateau;
 
 import java.util.Scanner;
 
-import communs.PlayGameControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;

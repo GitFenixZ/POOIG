@@ -21,7 +21,7 @@ public class MenuModel {
      * @param nombreDeJoueur nombre de joueur qui vont jouer.
      */
     public void initDomino(int nombreDeJoueur) {
-        game = new PlayDominoControleur(5 * nombreDeJoueur, nombreDeJoueur);
+        game = new PlayDominoControleur(10 * nombreDeJoueur, nombreDeJoueur);
     }
 
     /**
@@ -38,7 +38,7 @@ public class MenuModel {
      * @param nombreDeJoueur nombre de joueur qui vont jouer.
      */
     public void initDominoTerminale(int nombreDeJoueur, Scanner sc) {
-        game = new PlayDominoControleur(5 * nombreDeJoueur, nombreDeJoueur, sc);
+        game = new PlayDominoControleur(10 * nombreDeJoueur, nombreDeJoueur, sc);
     }
 
     /**

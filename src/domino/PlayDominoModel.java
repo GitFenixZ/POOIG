@@ -2,7 +2,6 @@ package domino;
 
 import java.util.Scanner;
 
-import communs.PlayGameControleur;
 import communs.PlayGameModel;
 import communs.objets.piece.PieceControleur;
 import communs.objets.player.PlayerControleur;
