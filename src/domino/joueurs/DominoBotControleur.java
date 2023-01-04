@@ -7,7 +7,7 @@ import communs.objets.player.PlayerControleur;
 import communs.objets.player.PlayerView;
 
 /**
- * Class modélisant un Robot capable de jouer au domino de manière très
+ * Class controlant un Robot capable de jouer au domino de manière très
  * standart.
  */
 public class DominoBotControleur extends PlayerControleur<PieceControleur<Integer>> implements Bot<Integer> {
