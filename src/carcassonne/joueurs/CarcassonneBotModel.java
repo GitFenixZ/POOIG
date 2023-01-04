@@ -7,6 +7,9 @@ import communs.objets.plateau.PlateauControleur;
 import java.awt.Color;
 import java.util.Random;
 
+/**
+ * Modelise un robot qui peut jouer a carcassonne.
+ */
 public class CarcassonneBotModel extends CarcassonnePlayerModel {
 
     CarcassonneBotModel(String nom, Color couleur) {

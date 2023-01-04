@@ -5,6 +5,9 @@ import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 import communs.objets.player.PlayerModel;
 
+/**
+ * Modelise un robot qui peut jouer a domino.
+ */
 public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
     DominoBotModel(String nom) {
         super(nom);

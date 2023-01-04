@@ -7,7 +7,7 @@ import communs.interfaces.player.Bot;
 import communs.objets.plateau.PlateauControleur;
 
 /**
- * Class modélisant un Robot capable de jouer au carcassonne de manière très
+ * Class controlant un Robot capable de jouer au carcassonne de manière très
  * simple.
  */
 public class CarcassonneBotControleur extends CarcassonnePlayerControleur implements Bot<Terrain> {
