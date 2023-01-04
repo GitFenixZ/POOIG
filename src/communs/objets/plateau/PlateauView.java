@@ -84,19 +84,23 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
      * les affiches.
      */
     public void afficher() {
-        String res = "-".repeat((model.getLargeurPiece() * 2 + 2) * (3) + 1) + "\n";
+        String res = "-".repeat((model.getLargeurPiece() * 2 + 2) * (5) + 1) + "\n";
 
-        for (int j = model.getActuelY() - 1; j <= model.getActuelY() + 1; j++) {
+        for (int j = model.getActuelY() - 2; j <= model.getActuelY() + 2; j++) {
             for (int k = 0; k < model.getHauteurPiece(); k++) {
                 res += "|";
-                for (int i = model.getActuelX() - 1; i <= model.getActuelX() + 1; i++) {
+                for (int i = model.getActuelX() - 2; i <= model.getActuelX() + 2; i++) {
                     try {
                         Point point = new Point(i, j);
                         if (model.getPiece(point) != null) {
                             res += model.getPiece(point).getligne(k)
                                     + "|";
                         } else {
-                            res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
+                            if (i == model.getActuelX() && j == model.getActuelY()) {
+                                res += "+".repeat(model.getLargeurPiece() * 2 + 1) + "|";
+                            } else {
+                                res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
+                            }
                         }
                     } catch (positionInvalide e) {
                         res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
@@ -104,10 +108,9 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
                 }
                 res += "\n";
             }
-            res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (3) + 1)
+            res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (5) + 1)
                     + "\n";
         }
-        System.out.println(model.getActuelPosition());
         System.out.println(res);
     }
 
