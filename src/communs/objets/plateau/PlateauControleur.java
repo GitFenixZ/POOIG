@@ -119,8 +119,6 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
                     } catch (directionInvalide e) {
                         view.deplacement(deplacement);// affiche l'erreur
                     }
-                } else {
-                    demandeDeplacement = false;
                 }
             }
 
@@ -140,8 +138,6 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
                     } catch (directionInvalide e) {
                         view.erreurReponseInvalide(); // affiche l'erreur
                     }
-                } else {
-                    demandeRotation = false;
                 }
             }
 
