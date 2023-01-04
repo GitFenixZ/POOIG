@@ -37,7 +37,7 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * @param sc lit la reponse de l'utilisateur
      */
     public void initPlayerTerminal(Scanner sc, int nombreDeJoueur) {
-        ((PlayDominoView) view).initialisationJoueur(sc, nombreDeJoueur);
+        ((PlayDominoView) view).initialisationJoueur(nombreDeJoueur, sc);
     }
 
     /**

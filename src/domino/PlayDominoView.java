@@ -12,7 +12,7 @@ public class PlayDominoView extends PlayGameView<Integer> implements Demander {
         super(model, controleur);
     }
 
-    public void initialisationJoueur(Scanner sc, int nombreDeJoueur) {
+    public void initialisationJoueur(int nombreDeJoueur, Scanner sc) {
         // intialise les joueurs
         for (int i = 1; i <= nombreDeJoueur; i++) {
             if (demandeBoolean(sc, "Est ce une joueur ? (oui / non)")) {
