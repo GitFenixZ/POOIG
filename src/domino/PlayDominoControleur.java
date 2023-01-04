@@ -51,7 +51,7 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * Avec interface Graphique
      */
     public void play() {
-        getView().revalidate();
+        view.revalidate();
         ((PlayDominoModel) model).play();
         rejouer();
     }

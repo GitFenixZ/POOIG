@@ -26,15 +26,7 @@ public class DominoBotControleur extends PlayerControleur<PieceControleur<Intege
      * @return si le robot a pu jouer
      */
     public boolean jouerTerminal(PlateauControleur<Integer> plateauControleur) {
-        Point position = plateauControleur.peutPlacer(getMain());
-        if (position != null) {
-            plateauControleur.setPiece(this, position);
-            System.out.println("Le bot " + getName() + " a joué.");
-            return true;
-        } else {
-            System.out.println("Le bot " + getName() + " n'a pas pu jouer.");
-            return false;
-        }
+        return ((DominoBotModel) model).jouerTerminal(plateauControleur, this);
     }
 
     /**

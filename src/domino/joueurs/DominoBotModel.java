@@ -11,6 +11,26 @@ public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
     }
 
     /**
+     * Methode a utiliser pour jouer dans le terminal.
+     * Affiche les informations importante.
+     * 
+     * @param plateauControleur Plateau sur lequel on joue en se moment.
+     * @return si le robot a pu jouer
+     */
+    public boolean jouerTerminal(PlateauControleur<Integer> plateauControleur,
+            DominoBotControleur controleurBotDomino) {
+        Point position = plateauControleur.peutPlacer(getMain());
+        if (position != null) {
+            plateauControleur.setPiece(controleurBotDomino, position);
+            System.out.println("Le bot " + getName() + " a joué.");
+            return true;
+        } else {
+            System.out.println("Le bot " + getName() + " n'a pas pu jouer.");
+            return false;
+        }
+    }
+
+    /**
      * Methode a utiliser pour jouer sans le terminal.
      * n'affiche aucune informations.
      * Permet de faire jouer un joueur automatiquement.
