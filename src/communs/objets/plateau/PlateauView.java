@@ -75,7 +75,8 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
     /**
      * Répète le string n fois,
      * Cette fonction a été crée parce que la fonction String.repeat(int n)
-     * n'existe pas en Java 11
+     * n'existe pas en Java 10 qui est la version utilisée par
+     * les machines du SCRIPT
      *
      * @param s Le string
      * @param n Le nombre de répétitions
@@ -83,12 +84,13 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
      * @return Le String s répété n fois
      */
     private static String repeatString(String s, int n) {
-	if (n < 0) return null;
-	String res = "";
-	for (int i = 0; i < n; i++) {
-	    res += s;
-	}
-	return res;
+        if (n < 0)
+            return null;
+        String res = "";
+        for (int i = 0; i < n; i++) {
+            res += s;
+        }
+        return res;
     }
 
     @Override
@@ -161,7 +163,8 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
                         if (model.getPiece(point) != null) {
                             affichage[i * model.getHauteurPiece() + k] += model.getPiece(point).getligne(k) + "|";
                         } else {
-                            affichage[i * model.getHauteurPiece() + k] += repeatString(" ",model.getLargeurPiece() * 2 + 1)
+                            affichage[i * model.getHauteurPiece() + k] += repeatString(" ",
+                                    model.getLargeurPiece() * 2 + 1)
                                     + "|";
                         }
                     } catch (positionInvalide e) {
@@ -169,12 +172,12 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
                 }
             }
         }
-        String res = repeatString("-",(model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
+        String res = repeatString("-", (model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
                 + "\n";
         for (int i = 0; i < affichage.length; i++) {
             res += "|" + affichage[i] + "\n";
             if (i % model.getHauteurPiece() == model.getHauteurPiece() - 1) {
-                res += repeatString("-",(model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
+                res += repeatString("-", (model.getLargeurPiece() * model.getLargeur() + model.getLargeur()) * 2 + 1)
                         + "\n";
             }
         }
