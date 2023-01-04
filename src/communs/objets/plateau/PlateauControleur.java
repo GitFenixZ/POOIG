@@ -245,13 +245,10 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     @Override
     public void start(Sac<PieceControleur<V>> sac) {
-        try {
-            PieceControleur<V> piece = sac.tire();
-            piece.getView().setimagePiece();
-            model.setPiece(new Point(0, 0), piece);
-            view.setPiece();
-        } catch (positionInvalide e) {
-        }
+        PieceControleur<V> piece = sac.tire();
+        piece.getView().setimagePiece();
+        model.start(sac);
+        view.setPiece();
     }
 
     /**

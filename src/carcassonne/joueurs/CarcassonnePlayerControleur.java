@@ -16,6 +16,9 @@ import communs.objets.player.PlayerControleur;
 
 public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleur<Terrain>> {
 
+    CarcassonnePlayerControleur() {
+    }
+
     /**
      * Contructeur d'un player
      * 

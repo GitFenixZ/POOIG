@@ -1,17 +1,21 @@
 package domino.joueurs;
 
+import communs.interfaces.player.Bot;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 import communs.objets.player.PlayerControleur;
+import communs.objets.player.PlayerView;
 
 /**
  * Class modélisant un Robot capable de jouer au domino de manière très
  * standart.
  */
-public class DominoBot extends PlayerControleur<PieceControleur<Integer>> {
-    public DominoBot(String name) {
-        super(name);
+public class DominoBotControleur extends PlayerControleur<PieceControleur<Integer>> implements Bot<Integer> {
+    public DominoBotControleur(String name) {
+        super();
+        model = new DominoBotModel(name);
+        view = new PlayerView<PieceControleur<Integer>>(model);
     }
 
     /**
@@ -41,13 +45,8 @@ public class DominoBot extends PlayerControleur<PieceControleur<Integer>> {
      * @param plateauControleur Plateau sur lequel on joue en se moment.
      * @return si le robot a pu jouer
      */
+    @Override
     public boolean jouer(PlateauControleur<Integer> plateauControleur) {
-        Point position = plateauControleur.peutPlacer(getMain());
-        if (position != null) {
-            plateauControleur.setPiece(this, position);
-            return true;
-        } else {
-            return false;
-        }
+        return ((DominoBotModel) model).jouer(plateauControleur, this);
     }
 }

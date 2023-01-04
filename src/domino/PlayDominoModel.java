@@ -6,7 +6,7 @@ import communs.PlayGameModel;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauView;
 import communs.objets.player.PlayerControleur;
-import domino.joueurs.DominoBot;
+import domino.joueurs.DominoBotControleur;
 import domino.piece.DominoPieceControleur;
 import domino.plateau.DominoPlateauControleur;
 
@@ -32,7 +32,7 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
                 System.out.println("Comment s'appel le joueur " + i + " ?");
                 joueurs.add(new PlayerControleur<PieceControleur<Integer>>(sc.nextLine()));
             } else {
-                joueurs.add(new DominoBot("Joueur" + i));
+                joueurs.add(new DominoBotControleur("Joueur" + i));
             }
         }
         // remplis le sac de piece de domino
@@ -75,8 +75,8 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
         while (!sac.isEmpty()) {
             piocherPiece(getActuelPlayer());
             System.out.print(getActuelPlayer());
-            if (getActuelPlayer() instanceof DominoBot) {
-                if (!((DominoBot) getActuelPlayer()).jouerTerminal((DominoPlateauControleur) plateau)) {
+            if (getActuelPlayer() instanceof DominoBotControleur) {
+                if (!((DominoBotControleur) getActuelPlayer()).jouerTerminal((DominoPlateauControleur) plateau)) {
                     // fait jouer le bot. Si il ne peut pas jouer la pièce
                     rejouer();
                     ; // il rejoue.
@@ -131,13 +131,13 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
      * @param nom pseudo du robot
      */
     public void ajoutBot(String nom) {
-        joueurs.add(new DominoBot(nom));
+        joueurs.add(new DominoBotControleur(nom));
     }
 
     /**
      * fait jouer un tour au robot joueur actuel
      */
     public void jouerBot() {
-        ((DominoBot) getActuelPlayer()).jouer(plateau);
+        ((DominoBotControleur) getActuelPlayer()).jouer(plateau);
     }
 }

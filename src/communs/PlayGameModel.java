@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import carcassonne.joueurs.CarcassonneBot;
+import carcassonne.joueurs.CarcassonneBotControleur;
 import carcassonne.piece.Terrain;
+import communs.interfaces.player.Bot;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 import communs.objets.player.PlayerControleur;
-import domino.joueurs.DominoBot;
+import domino.joueurs.DominoBotControleur;
 
 /**
  * Class modélisant une partie de domino qui se joue.
@@ -75,15 +76,8 @@ public class PlayGameModel<V> {
      * @param joueurActuel bot a faire jouer.
      * @return si le bot a reussi a jouer.
      */
-    public boolean jouer(PlayerControleur joueurActuel) {
-        boolean aReussiAJouer = false;
-        if (joueurActuel instanceof CarcassonneBot) {
-            aReussiAJouer = ((CarcassonneBot) joueurActuel).jouer((PlateauControleur<Terrain>) plateau);
-        }
-        if (joueurActuel instanceof DominoBot) {
-            aReussiAJouer = ((DominoBot) joueurActuel).jouer((PlateauControleur<Integer>) plateau);
-        }
-        return aReussiAJouer;
+    public boolean jouer(Bot<V> joueurActuel) {
+        return joueurActuel.jouer(plateau);
     }
 
     /**

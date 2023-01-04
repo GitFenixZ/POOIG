@@ -3,34 +3,38 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
 /**
- * 
+ * Controleur qui s'occupe du Menu.
  */
-public class MenuControleur extends JFrame {
+public class MenuControleur {
     private MenuModel model;
     private MenuView view;
+    private JFrame frame;
 
     /**
      * constructeur initialise la fenetre et lance le jeu.
      */
     public MenuControleur() {
-        super("Menu");
+        EventQueue.invokeLater(() -> {
+            frame = new JFrame("Menu");
 
-        model = new MenuModel();
-        view = new MenuView(model);
-        view.setControleur(this);
+            model = new MenuModel();
+            view = new MenuView(model);
+            view.setControleur(this);
 
-        setSize(800, 600);
-        setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setContentPane(view);
-        revalidate();
+            frame.setSize(800, 600);
+            frame.setResizable(true);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            frame.setContentPane(view);
+            frame.revalidate();
+        });
     }
 
     public MenuView getView() {
@@ -43,15 +47,15 @@ public class MenuControleur extends JFrame {
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
     public void initDomino(int nombreDeJoueur) {
-        setTitle("Domino Game !");
+        frame.setTitle("Domino Game !");
         try {
             Image image = ImageIO.read(new File("src/images/domino.png"));
-            setIconImage(image);
+            frame.setIconImage(image);
         } catch (IOException ex) {
         }
         model.initDomino(nombreDeJoueur);
         view.initDomino(nombreDeJoueur);
-        revalidate();
+        frame.revalidate();
     }
 
     /**
@@ -59,7 +63,7 @@ public class MenuControleur extends JFrame {
      */
     public void playDomino() {
         view.play();
-        revalidate();
+        frame.revalidate();
         model.playDomino();
     }
 
@@ -69,7 +73,7 @@ public class MenuControleur extends JFrame {
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
     public void playDominoTerminale(int nombreDeJoueur) {
-        setVisible(false);
+        frame.setVisible(false);
         Scanner sc = new Scanner(System.in);
         model.initDominoTerminale(nombreDeJoueur, sc);
         model.playDominoTerminale(sc);
@@ -81,15 +85,15 @@ public class MenuControleur extends JFrame {
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
     public void initCarcassonne(int nombreDeJoueur) {
-        setTitle("Carcassonne Game !");
+        frame.setTitle("Carcassonne Game !");
         try {
             Image image = ImageIO.read(new File("src/images/carcassonne.png"));
-            setIconImage(image);
+            frame.setIconImage(image);
         } catch (IOException ex) {
         }
         model.initCarcassonne(nombreDeJoueur);
         view.initCarcassonne(nombreDeJoueur);
-        revalidate();
+        frame.revalidate();
     }
 
     /**
