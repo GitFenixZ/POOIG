@@ -147,7 +147,7 @@ public class MenuView extends JPanel {
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
         a.add(new JLabel("Pseudo : "));
-        JLabel NomPerso = new JLabel("Joueur" + i);
+        JTextField NomPerso = new JTextField("Joueur" + i);
         a.add(NomPerso);
         res.add(a);
         JPanel b = new JPanel();
@@ -169,6 +169,8 @@ public class MenuView extends JPanel {
         valider.addActionListener(event -> {
             if (NomPerso.getText().length() != 0) {
                 valider.setEnabled(false);
+                bot.setEnabled(false);
+                NomPerso.setEnabled(false);
 
                 if (infoBot.getText().equals("oui")) {
                     controleur.ajoutBotDomino(NomPerso.getText());
@@ -219,7 +221,9 @@ public class MenuView extends JPanel {
         valider.addActionListener(event -> {
             if (NomPerso.getText().length() != 0) {
                 valider.setEnabled(false);
+                bot.setEnabled(false);
                 choixCouleur.setEnabled(false);
+                NomPerso.setEnabled(false);
 
                 if (infoBot.getText().equals("oui")) {
                     controleur.ajoutBotCarcassonne(NomPerso.getText(),
