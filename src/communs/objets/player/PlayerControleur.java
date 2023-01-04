@@ -59,7 +59,6 @@ public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
     @Override
     public void scoreadd(int i) {
         model.scoreadd(i);
-        view.actualiser();
     }
 
     // Getters

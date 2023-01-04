@@ -1,6 +1,11 @@
 package communs.interfaces.plateau;
 
+import java.util.Scanner;
+
+import communs.objets.Direction;
+import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauModel;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Interface de la vue du Plateau de jeu.
@@ -26,5 +31,31 @@ public interface InterfacePlateauView<V> {
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
      */
-    public String afficher();
+    public void afficher();
+
+    /**
+     * Methode qui permet de mettre un message d'erreur en fonction du deplacement
+     * effectué.
+     * 
+     * @param deplacement deplacement qui est realise
+     */
+    public void deplacement(Direction deplacement);
+
+    /**
+     * Affiche le plateau et la main d'un joueur
+     * 
+     * @param player joueur dont il faut afficher la main
+     */
+    public void affichePlateauEtJoueur(PlayerControleur<PieceControleur<V>> player);
+
+    /**
+     * Methode qui demande au joueur si il pense pouvoir jouer.
+     * Si il ne peut pas alors il repioche, si il peut, la methode l'invite a
+     * chercher.
+     * 
+     * @param sc     scanner qui attends les reponses au questions
+     * @param player joueur qui est en train de jouer
+     * @return si le joueur peut jouer ou non
+     */
+    public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player);
 }

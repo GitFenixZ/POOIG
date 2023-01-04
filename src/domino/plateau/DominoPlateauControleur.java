@@ -10,7 +10,7 @@ public class DominoPlateauControleur extends PlateauControleur<Integer> {
     public DominoPlateauControleur(int hauteurPiece, int largeurPiece) {
         super();
         model = new DominoPlateauModel(hauteurPiece, largeurPiece);
-        view = new PlateauView<Integer>();
+        view = new PlateauView<Integer>(this);
         view.setModel(model);
     }
 }

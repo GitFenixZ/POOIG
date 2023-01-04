@@ -1,6 +1,6 @@
 package carcassonne;
 
-import carcassonne.joueurs.CarcassonneBot;
+import carcassonne.joueurs.CarcassonneBotControleur;
 import carcassonne.joueurs.CarcassonnePlayerControleur;
 import carcassonne.piece.CarcassonnePieceControleur;
 import carcassonne.piece.CarcassonnePieceModel;
@@ -119,7 +119,7 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
      * @param couleur couleur que l'équipe du robot
      */
     public void ajoutBot(String nom, Color couleur) {
-        joueurs.add(new CarcassonneBot(nom, couleur));
+        joueurs.add(new CarcassonneBotControleur(nom, couleur));
 
     }
 }

@@ -1,9 +1,8 @@
 package communs;
 
-import carcassonne.joueurs.CarcassonneBot;
+import communs.interfaces.player.Bot;
 import communs.objets.piece.PieceControleur;
 import communs.objets.player.PlayerControleur;
-import domino.joueurs.DominoBot;
 
 /**
  * Class qui controle une partie de domino qui se joue.
@@ -44,8 +43,8 @@ public class PlayGameControleur<V> {
             model.nextPlayer();
             PlayerControleur joueurActuel = getActuelPlayer();
             view.actualiser();
-            if (joueurActuel instanceof CarcassonneBot || joueurActuel instanceof DominoBot) {
-                if (model.jouer(joueurActuel)) {
+            if (joueurActuel instanceof Bot) {
+                if (model.jouer((Bot) joueurActuel)) {
                     nextPlayer();
                 } else {
                     rejouer();
