@@ -4,15 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import carcassonne.joueurs.CarcassonneBotControleur;
-import carcassonne.piece.Terrain;
 import communs.interfaces.player.Bot;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 import communs.objets.player.PlayerControleur;
-import domino.joueurs.DominoBotControleur;
 
 /**
  * Class modélisant une partie de domino qui se joue.

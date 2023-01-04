@@ -1,7 +1,6 @@
 package domino.joueurs;
 
 import communs.interfaces.player.Bot;
-import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
 import communs.objets.player.PlayerControleur;
