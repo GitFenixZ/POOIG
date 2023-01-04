@@ -239,6 +239,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @throws positionInvalide  si l'on sort du tableau
      * @throws directionInvalide Actuel
      */
+    @Override
     public void deplacement(Direction deplacement) throws positionInvalide, directionInvalide {
         try {
             switch (deplacement) {
@@ -268,6 +269,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @param player joueur qui fait tourner sa piece.
      * @throws directionInvalide si la direction n'est ni LEFT ni RIGHT.
      */
+    @Override
     public void rotation(Direction sens, PlayerControleur<PieceControleur<V>> player) throws directionInvalide {
         switch (sens) {
             case RIGHT:

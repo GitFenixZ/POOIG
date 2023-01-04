@@ -27,6 +27,7 @@ public class PlayerView<P> extends JPanel implements InterfacePlayerView {
         add(a);
     }
 
+    // getters setters
     public PlayerModel<P> getModel() {
         return model;
     }

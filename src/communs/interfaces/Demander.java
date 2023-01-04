@@ -49,4 +49,11 @@ public interface Demander {
                 return demandeBoolean(sc, question);
         }
     }
+
+    /**
+     * Affiche un message d'erreure
+     */
+    public default void erreurReponseInvalide() {
+        System.out.println("Erreur : reponse invalide.");
+    }
 }

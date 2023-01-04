@@ -7,7 +7,6 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import communs.PlayGameControleur;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.Demander;
 import communs.interfaces.plateau.InterfacePlateauView;
@@ -152,6 +151,13 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
         return res;
     }
 
+    /**
+     * Methode qui permet de mettre un message d'erreur en fonction du deplacement
+     * effectué.
+     * 
+     * @param deplacement deplacement qui est realise
+     */
+    @Override
     public void deplacement(Direction deplacement) {
         switch (deplacement) {
             case RIGHT:
@@ -172,10 +178,12 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
         }
     }
 
-    public void erreurReponseInvalide() {
-        System.out.println("Erreur : reponse invalide.");
-    }
-
+    /**
+     * Affiche le plateau et la main d'un joueur
+     * 
+     * @param player joueur dont il faut afficher la main
+     */
+    @Override
     public void affichePlateauEtJoueur(PlayerControleur<PieceControleur<V>> player) {
         // affiche la partie du plateau ou l'on est.
         afficher();
@@ -183,6 +191,16 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
         System.out.println(player.getMain());
     }
 
+    /**
+     * Methode qui demande au joueur si il pense pouvoir jouer.
+     * Si il ne peut pas alors il repioche, si il peut, la methode l'invite a
+     * chercher.
+     * 
+     * @param sc     scanner qui attends les reponses au questions
+     * @param player joueur qui est en train de jouer
+     * @return si le joueur peut jouer ou non
+     */
+    @Override
     public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player) {
         if (demandeBoolean(sc, "Pensez vous pouvoir jouer ? (oui / non)")) {
             if (controleur.possibleDePlacer(player.getMain())) {
