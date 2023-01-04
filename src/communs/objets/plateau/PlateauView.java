@@ -1,18 +1,20 @@
 package communs.objets.plateau;
 
-import java.util.Scanner;
-
 import java.awt.GridLayout;
+import java.util.Scanner;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import communs.PlayGameControleur;
 import communs.exceptions.positionInvalide;
+import communs.interfaces.Demander;
 import communs.interfaces.plateau.InterfacePlateauView;
 import communs.objets.Direction;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Class modélisant la vue du plateau
@@ -21,12 +23,14 @@ import communs.objets.piece.PieceControleur;
  * pourront être placé sur le plateau.
  * Exemple : Integer dans le domino.
  */
-public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
+public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, Demander {
     private PlateauModel<V> model;
+    private PlateauControleur<V> controleur;
 
-    public PlateauView() {
+    public PlateauView(PlateauControleur<V> controleur) {
         super();
         setVisible(true);
+        this.controleur = controleur;
     }
 
     @Override
@@ -79,49 +83,32 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
      */
-    public String afficher() {
-        String res = "";
+    public void afficher() {
+        String res = "-".repeat((model.getLargeurPiece() * 2 + 2) * (3) + 1) + "\n";
 
-        int xdepart = 0;
-        int xfin = 3;
-        int ydepart = 0;
-        int yfin = 3;
-        if (model.getActuelX() == 0) {
-            xdepart++;
-        }
-        if (model.getActuelX() == model.getLargeur() - 1) {
-            xfin--;
-        }
-        if (model.getActuelY() == 0) {
-            ydepart++;
-        }
-        if (model.getActuelY() == model.getHauteur() - 1) {
-            yfin--;
-        }
-
-        res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (xfin - xdepart) + 1) + "\n";
-
-        for (int y = ydepart; y < yfin; y++) {
-            for (int i = 0; i < model.getLargeurPiece(); i++) {
+        for (int j = model.getActuelY() - 1; j <= model.getActuelY() + 1; j++) {
+            for (int k = 0; k < model.getHauteurPiece(); k++) {
                 res += "|";
-                for (int x = xdepart; x < xfin; x++) {
+                for (int i = model.getActuelX() - 1; i <= model.getActuelX() + 1; i++) {
                     try {
-                        Point point = new Point(model.getActuelX() + x - 1, model.getActuelY() + y - 1);
+                        Point point = new Point(i, j);
                         if (model.getPiece(point) != null) {
-                            res += model.getPiece(point).getligne(i)
+                            res += model.getPiece(point).getligne(k)
                                     + "|";
                         } else {
                             res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
                         }
                     } catch (positionInvalide e) {
+                        res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
                     }
                 }
                 res += "\n";
             }
-            res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (xfin - xdepart) + 1)
+            res += "-".repeat((model.getLargeurPiece() * 2 + 2) * (3) + 1)
                     + "\n";
         }
-        return res;
+        System.out.println(model.getActuelPosition());
+        System.out.println(res);
     }
 
     /**
@@ -162,48 +149,56 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
         return res;
     }
 
-    /**
-     * Methode qui permet de demander une direction dans le terminal.
-     * 
-     * @param sc       System.in permettra de lire la reponse de l'utilisateur
-     * @param question La question qui vas être posee.
-     * @return retourn le cote correpondant a la reponse.
-     */
-    public static Direction demandeDirection(Scanner sc, String question) {
-        System.out.println(question);
-        String demande = sc.nextLine();
-        switch (demande.toUpperCase()) {
-            case "DROITE":
-                return Direction.RIGHT;
-            case "GAUCHE":
-                return Direction.LEFT;
-            case "HAUT":
-                return Direction.UP;
-            case "BAS":
-                return Direction.DOWN;
+    public void deplacement(Direction deplacement) {
+        switch (deplacement) {
+            case RIGHT:
+                System.out.println("Erreur : vous ne pouvez pas vous deplacer à droite.");
+                break;
+            case LEFT:
+                System.out.println("Erreur : vous ne pouvez pas vous deplacer à gauche.");
+                break;
+            case UP:
+                System.out.println("Erreur : vous ne pouvez pas vous deplacer en haut.");
+                break;
+            case DOWN:
+                System.out.println("Erreur : vous ne pouvez pas vous deplacer en bas.");
+                break;
             default:
-                return Direction.ACTUEL;
+                System.out.println("Erreur : reponse invalide.");
+                break;
         }
     }
 
-    /**
-     * Methode qui permet de demander un boolean.
-     * 
-     * @param sc       System.in permettra de lire la reponse de l'utilisateur
-     * @param question La question qui vas être posee.
-     * @return retourn le boolean correpondant a la reponse.
-     */
-    public static boolean demandeBoolean(Scanner sc, String question) {
-        System.out.println(question);
-        String demande = sc.nextLine();
-        switch (demande.toUpperCase()) {
-            case "OUI":
+    public void erreurReponseInvalide() {
+        System.out.println("Erreur : reponse invalide.");
+    }
+
+    public void affichePlateauEtJoueur(PlayerControleur<PieceControleur<V>> player) {
+        // affiche la partie du plateau ou l'on est.
+        afficher();
+        // affiche la main du joueur
+        System.out.println(player.getMain());
+    }
+
+    public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player) {
+        if (demandeBoolean(sc, "Pensez vous pouvoir jouer ? (oui / non)")) {
+            if (controleur.possibleDePlacer(player.getMain())) {
+                System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
+                controleur.placerPiece(player, sc);
                 return true;
-            case "NON":
+            } else {
+                System.out.println("Vous vous trompez, aucune solution n'est valide!");
                 return false;
-            default:
-                System.out.println("Erreur : réponse invalide.");
-                return demandeBoolean(sc, question);
+            }
+        } else {
+            if (controleur.possibleDePlacer(player.getMain())) {
+                System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
+                controleur.placerPiece(player, sc);
+                return true;
+            } else {
+                System.out.println("Et oui aucune solution n'est valide.");
+                return false;
+            }
         }
     }
 }

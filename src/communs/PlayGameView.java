@@ -39,6 +39,14 @@ public class PlayGameView<V> extends JPanel {
         this.controleur = controleur;
     }
 
+    public PlayGameControleur<V> getControleur() {
+        return controleur;
+    }
+
+    public PlayGameModel<V> getModel() {
+        return model;
+    }
+
     public PlayGameView(PlayGameModel<V> model, PlayGameControleur<V> controleur) {
         super(new BorderLayout());
         this.model = model;
@@ -123,7 +131,7 @@ public class PlayGameView<V> extends JPanel {
             panel.add(new JLabel("*" + p.getName() + " : " + p.getscore()));
         }
         JButton ok = new JButton("Ok");
-        ok.addActionListener(event -> finDePartie.dispose());
+        ok.addActionListener(event -> System.exit(0));
         panel.add(ok);
         finDePartie.setSize(500, 200);
         finDePartie.setLocationRelativeTo(null);

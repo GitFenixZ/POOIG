@@ -3,7 +3,6 @@ package domino;
 import java.util.Scanner;
 
 import communs.PlayGameControleur;
-import communs.PlayGameView;
 
 /**
  * Class modélisant une partie de domino qui se joue.
@@ -17,8 +16,8 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * @param nombreJoueur  Nombre de joueur qui vont jouer
      */
     public PlayDominoControleur(int nombreDePiece, int nombreJoueur, Scanner sc) {
-        model = new PlayDominoModel(nombreDePiece, nombreJoueur, sc);
-        view = new PlayGameView<Integer>(model, this);
+        model = new PlayDominoModel(nombreDePiece, nombreJoueur);
+        view = new PlayDominoView(model, this);
     }
 
     /**
@@ -29,7 +28,16 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      */
     public PlayDominoControleur(int nombreDePiece, int nombreJoueur) {
         model = new PlayDominoModel(nombreDePiece, nombreJoueur);
-        view = new PlayGameView<Integer>(model, this);
+        view = new PlayDominoView(model, this);
+    }
+
+    /**
+     * Initialise la liste de joueur pour la partie en mode terminal
+     * 
+     * @param sc lit la reponse de l'utilisateur
+     */
+    public void initPlayerTerminal(Scanner sc, int nombreDeJoueur) {
+        ((PlayDominoView) view).initialisationJoueur(sc, nombreDeJoueur);
     }
 
     /**
@@ -38,10 +46,10 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * 
      * Se joue dans le termianal.
      * 
-     * @param sc System.in permettra de lire la reponse de l'utilisateur
+     * @param sc lit la reponse de l'utilisateur
      */
     public void playTerminal(Scanner sc) {
-        ((PlayDominoModel) model).playTerminal(sc);
+        ((PlayDominoModel) model).playTerminal(sc, this);
     }
 
     /**

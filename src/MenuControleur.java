@@ -76,7 +76,7 @@ public class MenuControleur {
         frame.setVisible(false);
         Scanner sc = new Scanner(System.in);
         model.initDominoTerminale(nombreDeJoueur, sc);
-        model.playDominoTerminale(sc);
+        model.playDominoTerminale(sc, nombreDeJoueur);
     }
 
     /**

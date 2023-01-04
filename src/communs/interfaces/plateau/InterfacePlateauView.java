@@ -26,5 +26,5 @@ public interface InterfacePlateauView<V> {
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
      */
-    public String afficher();
+    public void afficher();
 }

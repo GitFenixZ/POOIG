@@ -46,8 +46,8 @@ public class MenuModel {
      * 
      * @param sc lit l'entree
      */
-    public void playDominoTerminale(Scanner sc) {
-        ((PlayDominoControleur) game).playTerminal(sc);
+    public void playDominoTerminale(Scanner sc, int nombreDeJoueur) {
+        ((PlayDominoControleur) game).initPlayerTerminal(sc, nombreDeJoueur);
     }
 
     /**

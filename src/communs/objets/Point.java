@@ -66,4 +66,8 @@ public class Point implements InterfacePoint {
         y--;
     }
 
+    @Override
+    public String toString() {
+        return "(" + x + ";" + y + ")";
+    }
 }

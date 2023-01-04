@@ -2,6 +2,7 @@ package communs.interfaces.plateau;
 
 import java.util.Scanner;
 
+import communs.PlayGameControleur;
 import communs.objets.Point;
 import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
@@ -38,7 +39,7 @@ public interface InterfacePlateauControleur<V> {
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
      */
-    public String afficher();
+    public void afficher();
 
     /**
      * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
