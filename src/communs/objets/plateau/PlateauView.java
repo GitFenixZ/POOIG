@@ -84,12 +84,11 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V> {
      */
     private static String repeatString(String s, int n) {
 	if (n < 0) return null;
-	if (n == 0) return "";
 	String res = "";
 	for (int i = 0; i < n; i++) {
 	    res += s;
 	}
-	return s;
+	return res;
     }
 
     @Override
