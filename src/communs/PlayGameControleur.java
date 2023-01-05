@@ -36,7 +36,6 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * TODO: Check pourquoi peutPlacer dans PlayGameControleur
      * fait jouer le prochain joueur.
      */
     public void nextPlayer() {
@@ -51,7 +50,7 @@ public class PlayGameControleur<V> {
                     rejouer();
                 }
             } else {
-                if (!model.peutplacer()) {
+                if (!model.existePlacement()) {
                     rejouer();
                 }
             }

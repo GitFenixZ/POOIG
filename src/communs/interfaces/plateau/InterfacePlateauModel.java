@@ -32,14 +32,13 @@ public interface InterfacePlateauModel<V> {
     public int calculePoint(Point point);
 
     /**
-     * TODO: rename existeEmplacement
      * Verifie si il est possible de placer la piece quelque parts sur la plateau
      * 
      * @param piece Piece a placer
      * @return si il y a un endroit sur le plateau ou l'on peut placer la piece en
      *         respectant les regles.
      */
-    public boolean possibleDePlacer(PieceControleur<V> piece);
+    public boolean existePlacement(PieceControleur<V> piece);
 
     /**
      * Regarde si l'on peut placer une piece a de certaine coordonnee
@@ -56,7 +55,7 @@ public interface InterfacePlateauModel<V> {
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public Point peutPlacer(PieceControleur<V> piece);
+    public Point getEmplacementPossible(PieceControleur<V> piece);
 
     /**
      * Methode qui permet d'initialiser le plateau avec un pièce en son centre.

@@ -17,7 +17,7 @@ public class CarcassonneBotModel extends CarcassonnePlayerModel {
     }
 
     public boolean jouer(PlateauControleur<Terrain> plateauControleur, CarcassonneBotControleur botActuelControleur) {
-        Point position = plateauControleur.peutPlacer(getMain());
+        Point position = plateauControleur.getEmplacementPossible(getMain());
         if (position != null) {
             plateauControleur.setPiece(botActuelControleur, position);
             Random rd = new Random();

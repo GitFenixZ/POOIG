@@ -25,12 +25,12 @@ public interface InterfacePlateauControleur<V> {
     public void placerPiece(PlayerControleur<PieceControleur<V>> player, Scanner sc);
 
     /**
-     * Verifie si on peut placer une piece a l'emplacement actuel
+     * Verifie si il est possible de placer la piece quelque parts sur la plateau
      * 
      * @param piece piece que l'on veut placer
      * @return si on peut placer la piece ici.
      */
-    public boolean possibleDePlacer(PieceControleur<V> piece);
+    public boolean existePlacement(PieceControleur<V> piece);
 
     /**
      * Creer un String qui represente une partie du plateau.
@@ -53,7 +53,7 @@ public interface InterfacePlateauControleur<V> {
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public Point peutPlacer(PieceControleur<V> piece);
+    public Point getEmplacementPossible(PieceControleur<V> piece);
 
     /**
      * Permet a un joueur de placer une pièce ou il le veut.

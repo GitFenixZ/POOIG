@@ -165,7 +165,6 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * TODO: Check ambiguïté des noms et différence
      * Regarde si l'on peut placer la piece du joueur actuel, a la position actuel
      */
     public boolean possibleDePlacer() {
@@ -181,13 +180,12 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * TODO: Check ambiguïté des noms et différence
      * Regarde si la piece du joueur actuel est plaçable un a un endroit sur plateau
      * avec la configuration actuel.
      * 
      * @return si la piece a une position ou l'on peut la placer
      */
-    public boolean peutplacer() {
-        return plateau.possibleDePlacer(getActuelPlayer().getMain());
+    public boolean existePlacement() {
+        return plateau.existePlacement(getActuelPlayer().getMain());
     }
 }

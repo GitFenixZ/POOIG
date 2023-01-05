@@ -58,20 +58,19 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
 
     @Override
     /**
-     * TODO: renommer existeEmplacement
      * Verifie si il est possible de placer la piece quelque parts sur la plateau
      * 
      * @param piece Piece a placer
      * @return si il y a un endroit sur le plateau ou l'on peut placer la piece en
      *         respectant les regles.
      */
-    public boolean possibleDePlacer(PieceControleur<V> piece) {
+    public boolean existePlacement(PieceControleur<V> piece) {
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
                     // regarde si l'on peu placer la piece a ses coordonnee
                     if (possibleDePlacer(piece, new Point(j, i))) {
-                        // fait pivoter la piece jusqu'a ce qu'elle revienne a sa position de depart.
+                        // fait pivoter la piece jusqu'a ce qu'elle revienne dans son sens de depart.
                         for (int pivot2 = pivot; pivot2 < 4; pivot2++) {
                             piece.tournerDroite();
                         }
@@ -195,12 +194,12 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     /**
      * Utilisé pour placer une piece pour le robot
      * Donnes un coordonnée ou l'on peut placer la piece.
-     * TODO: check noms peutPlacer (bot) et possibleDePlacer (joueur)
+     * Et rotate la piece dans le bon sens pour la placer a la position indiqué.
      * 
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public Point peutPlacer(PieceControleur<V> piece) {
+    public Point getEmplacementPossible(PieceControleur<V> piece) {
         // Pas besoin de repivoter à la fin
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
