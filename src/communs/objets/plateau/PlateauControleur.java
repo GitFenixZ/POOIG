@@ -2,6 +2,7 @@ package communs.objets.plateau;
 
 import java.util.Scanner;
 
+import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauControleur;
 import communs.objets.Direction;
@@ -33,7 +34,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     public PlateauControleur(int hauteurPiece, int largeurPiece) {
         model = new PlateauModel<V>(hauteurPiece, largeurPiece);
-        view = new PlateauView<V>();
+        view = new PlateauView<V>(this);
         view.setModel(model);
         view.actualiser();
     }
@@ -58,10 +59,23 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         return view.toString();
     }
 
-    @Override
+    /**
+     * Methode qui demande au joueur si il pense pouvoir jouer. Si il ne peut pas
+     * alors il repioche, si il peut, la methode l'invite a chercher.
+     * 
+     * @param sc     scanner qui attends les reponses au questions
+     * @param player player joueur qui est en train de jouer
+     * @return si le joueur peut jouer ou non
+     */
+    public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player) {
+        return view.pensezVousPouvoirJouer(sc, player);
+    }
+
+    // @Override
     /**
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
+     * @param game   partie qui se joue
      * @param player Joueur qui place sa piece
      * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
      *               savoir si le joueur veux placer sa piece.
@@ -85,103 +99,61 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
         // boucle qui continue tant que le choix fait par le joueurs est invalide
         while (!valide) {
-
             demandeDeplacement = true;
             // boucle qui demande le deplacement voulu par le joueur
             while (demandeDeplacement) {
 
                 // affiche la partie du plateau ou l'on est.
-                System.out.println(view.afficher());
-                // affiche la main du joueur
-                System.out.println(player.getMain());
+                // et la main du joueur
+                view.affichePlateauEtJoueur(player);
 
-                demandeDeplacement = PlateauView.demandeBoolean(sc,
+                demandeDeplacement = view.demandeBoolean(sc,
                         "Voulez vous vous deplacer sur le plateau? (oui/non)");
-                if (demandeDeplacement) {
-                    deplacement = PlateauView.demandeDirection(sc, "De quel coté? (haut/bas/droite/gauche)");
-                    switch (deplacement) {
-                        case RIGHT:
-                            try {
-                                model.allerADroite();
-                            } catch (positionInvalide e) {
-                                System.out.println("Erreur : vous ne pouvez pas vous deplacer à droite.");
-                            }
-                            break;
-                        case LEFT:
-                            try {
-                                model.allerAGauche();
-                            } catch (positionInvalide e) {
-                                System.out.println("Erreur : vous ne pouvez pas vous deplacer à gauche.");
-                            }
-                            break;
-                        case UP:
-                            try {
 
-                                model.allerEnHaut();
-                            } catch (positionInvalide e) {
-                                System.out.println("Erreur : vous ne pouvez pas vous deplacer en haut.");
-                            }
-                            break;
-                        case DOWN:
-                            try {
-                                model.allerEnBas();
-                            } catch (positionInvalide e) {
-                                System.out.println("Erreur : vous ne pouvez pas vous deplacer en bas.");
-                            }
-                            break;
-                        default:
-                            System.out.println("Erreur : reponse invalide.");
-                            break;
+                if (demandeDeplacement) {
+                    deplacement = view.demandeDirection(sc, "De quel coté? (haut/bas/droite/gauche)");
+                    try {
+                        model.deplacement(deplacement);
+                    } catch (positionInvalide e) {
+                        view.deplacement(deplacement);// affiche l'erreur
+                    } catch (directionInvalide e) {
+                        view.deplacement(deplacement);// affiche l'erreur
                     }
-                } else {
-                    demandeDeplacement = false;
                 }
             }
+
             demandeRotation = true;
             // boucle qui demande la rotation voulu par le joueur
             while (demandeRotation) {
 
                 // affiche la partie du plateau ou l'on est.
-                System.out.println(view.afficher());
-                // affiche la main du joueur
-                System.out.println(player.getMain());
+                // et la main du joueur
+                view.affichePlateauEtJoueur(player);
 
-                demandeRotation = PlateauView.demandeBoolean(sc, "Voulez vous pivotez la pièce ? (oui/non)");
+                demandeRotation = view.demandeBoolean(sc, "Voulez vous pivotez la pièce ? (oui/non)");
                 if (demandeRotation) {
-                    rotation = PlateauView.demandeDirection(sc, "De quel coté? (droite/gauche)");
-                    switch (rotation) {
-                        case RIGHT:
-                            player.getMain().tournerDroite();
-                            break;
-                        case LEFT:
-                            player.getMain().tournerGauche();
-                            break;
-                        default:
-                            System.out.println("Erreur : reponse invalide.");
-                            break;
+                    rotation = view.demandeDirection(sc, "De quel coté? (droite/gauche)");
+                    try {
+                        model.rotation(rotation, player);
+                    } catch (directionInvalide e) {
+                        view.erreurReponseInvalide(); // affiche l'erreur
                     }
-                } else {
-                    demandeRotation = false;
                 }
             }
-            placerPiece = PlateauView.demandeBoolean(sc, "Voulez vous placer la pièce ici ?(oui/non)");
+
+            placerPiece = view.demandeBoolean(sc, "Voulez vous placer la pièce ici ?(oui/non)");
             if (placerPiece) {
-                // verifie si la position est valide
-                valide = model.possibleDePlacer(player.getMain(), model.getActuelPosition());
-                if (!valide) {
-                    System.out.println("Erreur : position utilisé invalide.");
-                } else {
-                    // place la piece a la position demande.
-                    try {
-                        model.setPiece(model.getActuelPosition(), player.getMain());
-                    } catch (positionInvalide e) {
-                        // si il rencontre un problème lors du depot de la pièce (ne doit jamais arrivé)
-                        valide = false;
-                        System.out.println("Erreur : position utilisé invalide.");
-                    }
+                // essaye de placer la piece a la position demande.
+                try {
+                    model.setPiece(model.getActuelPosition(), player.getMain());
+                    valide = true;
+                } catch (positionInvalide e) {
+                    view.erreurReponseInvalide();
                 }
             }
         }
+
+        player.jeter();
         // On ajoute les points gagne au joueur
         player.scoreadd(model.calculePoint(model.getActuelPosition()));
     }
@@ -204,8 +176,8 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
      */
-    public String afficher() {
-        return view.afficher();
+    public void afficher() {
+        view.afficher();
     }
 
     @Override
@@ -245,13 +217,10 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     @Override
     public void start(Sac<PieceControleur<V>> sac) {
-        try {
-            PieceControleur<V> piece = sac.tire();
-            piece.getView().setimagePiece();
-            model.setPiece(new Point(0, 0), piece);
-            view.setPiece();
-        } catch (positionInvalide e) {
-        }
+        PieceControleur<V> piece = sac.tire();
+        piece.getView().setimagePiece();
+        model.start(sac);
+        view.setPiece();
     }
 
     /**

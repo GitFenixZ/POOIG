@@ -3,15 +3,14 @@ package domino.joueurs;
 import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 import communs.objets.plateau.PlateauControleur;
-import communs.objets.player.PlayerControleur;
+import communs.objets.player.PlayerModel;
 
 /**
- * Class modélisant un Robot capable de jouer au domino de manière très
- * standart.
+ * Modelise un robot qui peut jouer a domino.
  */
-public class DominoBot extends PlayerControleur<PieceControleur<Integer>> {
-    public DominoBot(String name) {
-        super(name);
+public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
+    DominoBotModel(String nom) {
+        super(nom);
     }
 
     /**
@@ -21,10 +20,11 @@ public class DominoBot extends PlayerControleur<PieceControleur<Integer>> {
      * @param plateauControleur Plateau sur lequel on joue en se moment.
      * @return si le robot a pu jouer
      */
-    public boolean jouerTerminal(PlateauControleur<Integer> plateauControleur) {
+    public boolean jouerTerminal(PlateauControleur<Integer> plateauControleur,
+            DominoBotControleur controleurBotDomino) {
         Point position = plateauControleur.peutPlacer(getMain());
         if (position != null) {
-            plateauControleur.setPiece(this, position);
+            plateauControleur.setPiece(controleurBotDomino, position);
             System.out.println("Le bot " + getName() + " a joué.");
             return true;
         } else {
@@ -41,10 +41,10 @@ public class DominoBot extends PlayerControleur<PieceControleur<Integer>> {
      * @param plateauControleur Plateau sur lequel on joue en se moment.
      * @return si le robot a pu jouer
      */
-    public boolean jouer(PlateauControleur<Integer> plateauControleur) {
+    public boolean jouer(PlateauControleur<Integer> plateauControleur, DominoBotControleur controleurBotDomino) {
         Point position = plateauControleur.peutPlacer(getMain());
         if (position != null) {
-            plateauControleur.setPiece(this, position);
+            plateauControleur.setPiece(controleurBotDomino, position);
             return true;
         } else {
             return false;

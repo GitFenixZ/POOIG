@@ -1,10 +1,13 @@
 package communs.objets.plateau;
 
+import communs.exceptions.directionInvalide;
 import communs.exceptions.positionInvalide;
 import communs.interfaces.plateau.InterfacePlateauModel;
 import communs.objets.Direction;
 import communs.objets.Point;
+import communs.objets.Sac;
 import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Class modélisant le plateau de jeu. C'est un tableau de tableau de piece.
@@ -211,5 +214,72 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             piece.tournerDroite();
         }
         return null;
+    }
+
+    /**
+     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * 
+     * @param sac sac du quel est tiré la pièce.
+     */
+    @Override
+    public void start(Sac<PieceControleur<V>> sac) {
+        try {
+            PieceControleur<V> piece = sac.tire();
+            piece.getView().setimagePiece();
+            setPiece(new Point(0, 0), piece);
+        } catch (positionInvalide e) {
+        }
+    }
+
+    /**
+     * Methode qui permet de deplacer le centre du plateau (la position ou l'on est
+     * en se moment)
+     * 
+     * @param deplacement la direction dans laquel on veut aller.
+     * @throws positionInvalide  si l'on sort du tableau
+     * @throws directionInvalide Actuel
+     */
+    @Override
+    public void deplacement(Direction deplacement) throws positionInvalide, directionInvalide {
+        try {
+            switch (deplacement) {
+                case RIGHT:
+                    allerADroite();
+                    break;
+                case LEFT:
+                    allerAGauche();
+                    break;
+                case UP:
+                    allerEnHaut();
+                    break;
+                case DOWN:
+                    allerEnBas();
+                default:
+                    throw new directionInvalide();
+            }
+        } catch (positionInvalide e) {
+            throw new positionInvalide();
+        }
+    }
+
+    /**
+     * Methode qui permet de rotater une piece.
+     * 
+     * @param sens   sens dans le quel on veur tourner la piece.
+     * @param player joueur qui fait tourner sa piece.
+     * @throws directionInvalide si la direction n'est ni LEFT ni RIGHT.
+     */
+    @Override
+    public void rotation(Direction sens, PlayerControleur<PieceControleur<V>> player) throws directionInvalide {
+        switch (sens) {
+            case RIGHT:
+                player.getMain().tournerDroite();
+                break;
+            case LEFT:
+                player.getMain().tournerGauche();
+                break;
+            default:
+                throw new directionInvalide();
+        }
     }
 }
