@@ -73,6 +73,8 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
                 for (int j = 0; j < getLargeur(); j++) {
                     // regarde si l'on peu placer la piece a ses coordonnee
                     if (possibleDePlacer(piece, new Point(j, i))) {
+                        // TODO: faire une méthode pour reset la rotation pour alléger la fonction
+                        // - ou sinon travailler avec une copie de pièce pour éviter de reset
                         // fait pivoter la piece jusqu'a ce qu'elle revienne dans son sens de depart.
                         for (int pivot2 = pivot; pivot2 < 4; pivot2++) {
                             piece.tournerDroite();
