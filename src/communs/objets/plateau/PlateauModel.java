@@ -57,14 +57,17 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     }
 
     @Override
+
     /**
-     * Verifie si il est possible de placer la piece quelque parts sur la plateau
+     * Vérifie s'il existe un emplacement sur le plateau où
+     * on peut poser la pièce
+     * tout en respectant les règles
      * 
-     * @param piece Piece a placer
-     * @return si il y a un endroit sur le plateau ou l'on peut placer la piece en
-     *         respectant les regles.
+     * @param piece La piece que l'on veut placer
+     * @return true s'il existe un emplacement;
+     *         false sinon
      */
-    public boolean existePlacement(PieceControleur<V> piece) {
+    public boolean existeEmplacement(PieceControleur<V> piece) {
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {

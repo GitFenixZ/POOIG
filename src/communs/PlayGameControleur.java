@@ -50,7 +50,7 @@ public class PlayGameControleur<V> {
                     rejouer();
                 }
             } else {
-                if (!model.existePlacement()) {
+                if (!model.existeEmplacement()) {
                     rejouer();
                 }
             }
