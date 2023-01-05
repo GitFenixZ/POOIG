@@ -182,6 +182,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
     @Override
     /**
+     * TODO: Revoir les conventions de nommage
      * Donnes un coordonnée ou l'on peut placer la piece.
      * 
      * @param piece Piece a placer

@@ -165,6 +165,7 @@ public class PlayGameModel<V> {
     }
 
     /**
+     * TODO: Check ambiguïté des noms et différence
      * Regarde si l'on peut placer la piece du joueur actuel, a la position actuel
      */
     public boolean possibleDePlacer() {
@@ -180,6 +181,7 @@ public class PlayGameModel<V> {
     }
 
     /**
+     * TODO: Check ambiguïté des noms et différence
      * Regarde si la piece du joueur actuel est plaçable un a un endroit sur plateau
      * avec la configuration actuel.
      * 

@@ -32,6 +32,7 @@ public interface InterfacePlateauModel<V> {
     public int calculePoint(Point point);
 
     /**
+     * TODO: rename existeEmplacement
      * Verifie si il est possible de placer la piece quelque parts sur la plateau
      * 
      * @param piece Piece a placer

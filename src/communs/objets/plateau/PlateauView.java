@@ -225,6 +225,7 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
     @Override
     public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player) {
         if (demandeBoolean(sc, "Pensez vous pouvoir jouer ? (oui / non)")) {
+            // TODO: Faire attention propagation au renommage en existeEmplacement
             if (controleur.possibleDePlacer(player.getMain())) {
                 System.out.println("Oui ! Vous avez effectivement une ou plusieurs solutions.");
                 controleur.placerPiece(player, sc);
@@ -234,6 +235,7 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
                 return false;
             }
         } else {
+            // TODO: Faire attention propagation au renommage en existeEmplacement
             if (controleur.possibleDePlacer(player.getMain())) {
                 System.out.println("Cherchez bien ! Car il y a une ou des solutions!");
                 controleur.placerPiece(player, sc);

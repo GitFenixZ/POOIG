@@ -36,6 +36,7 @@ public class PlayGameControleur<V> {
     }
 
     /**
+     * TODO: Check pourquoi peutPlacer dans PlayGameControleur
      * fait jouer le prochain joueur.
      */
     public void nextPlayer() {

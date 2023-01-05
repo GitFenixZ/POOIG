@@ -58,6 +58,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
 
     @Override
     /**
+     * TODO: renommer existeEmplacement
      * Verifie si il est possible de placer la piece quelque parts sur la plateau
      * 
      * @param piece Piece a placer
@@ -192,12 +193,15 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
 
     @Override
     /**
+     * Utilisé pour placer une piece pour le robot
      * Donnes un coordonnée ou l'on peut placer la piece.
+     * TODO: check noms peutPlacer (bot) et possibleDePlacer (joueur)
      * 
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
     public Point peutPlacer(PieceControleur<V> piece) {
+        // Pas besoin de repivoter à la fin
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
