@@ -1,48 +1,79 @@
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
 /**
  * Class permettant de voir une partis
  */
-public class MenuView extends JPanel {
-    private MenuModel model;
+public class MenuView extends JFrame {
     private MenuControleur controleur;
+
+    private JPanel menu;
 
     private int nombreDeJoueurValide;
     private int nombreDeJoueur;
 
+    MenuView() {
+        super("Menu");
+        nombreDeJoueurValide = 0;
+        initMenu();
+        initFrame();
+
+    }
+
+    // Setter
     public void setControleur(MenuControleur controleur) {
         this.controleur = controleur;
     }
 
-    MenuView(MenuModel model) {
-        super();
-        this.model = model;
+    private void initFrame() {
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setContentPane(menu);
+        pack();
+        setVisible(true);
+        revalidate();
+    }
 
-        nombreDeJoueurValide = 0;
+    /**
+     * Initialise le menu
+     */
+    private void initMenu() {
+        menu.setLayout(new CardLayout());
+
+        JPanel card1 = new JPanel();
+
+        JLabel questionNombreDeJoueur = new JLabel("Combien de joueur voulez vous ?");
+        JTextField nombreDeJoueur = new JTextField(15);
+
+        card1.add(questionNombreDeJoueur);
+        card1.add(nombreDeJoueur);
+
+        JPanel card2 = new JPanel();
 
         JButton playDominoTerminal = new JButton("Domino Terminal");
         JButton playDomino = new JButton("Domino");
         JButton playCarcassonne = new JButton("Carcassonne");
 
-        JLabel questionNombreDeJoueur = new JLabel("Combien de joueur voulez vous ?");
-        JTextField nombreDeJoueur = new JTextField(15);
+        card2.add(playDominoTerminal);
+        card2.add(playDomino);
+        card2.add(playCarcassonne);
 
-        setLayout(new GridLayout(2, 3));
+        menu.add(card2);
+        menu.add(card1);
 
-        add(questionNombreDeJoueur);
-        add(nombreDeJoueur);
-        add(new JLabel());
-        add(playDominoTerminal);
-        add(playDomino);
-        add(playCarcassonne);
-
+        // TODO: Gérer l'ordre d'appel des fonctions et leur emplacement pour lancer
+        // chaque partie
         playDominoTerminal.addActionListener(event -> {
             if (integer(nombreDeJoueur.getText())) {
                 controleur.playDominoTerminale(Integer.valueOf(nombreDeJoueur.getText()));
@@ -240,4 +271,5 @@ public class MenuView extends JPanel {
         });
         return res;
     }
+
 }

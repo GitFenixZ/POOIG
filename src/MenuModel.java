@@ -11,8 +11,10 @@ import java.awt.Color;
 
 public class MenuModel {
     private PlayGameControleur game;
+    private MenuView view;
 
-    MenuModel() {
+    MenuModel(MenuView view) {
+        this.view = view;
     }
 
     /**
