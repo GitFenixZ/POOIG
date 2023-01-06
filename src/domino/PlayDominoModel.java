@@ -31,56 +31,6 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
     }
 
     /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
-     * dans le sac.
-     * 
-     * Se joue dans le termianal.
-     * 
-     * @param sc System.in permettra de lire la reponse de l'utilisateur
-     */
-    public void playTerminal(Scanner sc, PlayDominoControleur controleur) {
-        if (!sac.isEmpty()) {
-            plateau.start(sac);
-        }
-        plateau.afficher();
-        // tant que le sac n'est pas vide
-        while (!sac.isEmpty()) {
-            piocherPiece(getActuelPlayer());
-            System.out.print(getActuelPlayer());
-            if (getActuelPlayer() instanceof DominoBotControleur) {
-                if (!((DominoBotControleur) getActuelPlayer()).jouerTerminal((DominoPlateauControleur) plateau)) {
-                    // fait jouer le bot. Si il ne peut pas jouer la pièce
-                    rejouer();
-                    ; // il rejoue.
-                }
-            } else {
-                if (!plateau.pensezVousPouvoirJouer(sc, getActuelPlayer())) {
-                    rejouer();
-                }
-            }
-            nextPlayer();
-            plateau.afficher();
-        }
-        System.out.println("Bravo  à tous!!!");
-
-        // affiche les score de tout le monde
-        for (PlayerControleur<PieceControleur<Integer>> p : joueurs) {
-            System.out.println(p.getName() + " : " + p.getscore());
-        }
-        System.exit(0);
-    }
-
-    /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
-     * dans le sac.
-     * 
-     * Avec interface Graphique
-     */
-    public void play() {
-        plateau.start(sac);
-    }
-
-    /**
      * Ajout un robots a liste des joueurs de la partie actuel.
      * 
      * @param nom pseudo du robot
@@ -94,5 +44,17 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
      */
     public void jouerBot() {
         ((DominoBotControleur) getActuelPlayer()).jouer(plateau);
+    }
+
+    /**
+     * Place la pièce qu'a le player dans sa main sur le plateau.
+     * 
+     * @param game   partie qui se joue
+     * @param player Joueur qui place sa piece
+     * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
+     *               savoir si le joueur veux placer sa piece.
+     */
+    public void pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<Integer>> player) {
+        plateau.pensezVousPouvoirJouer(sc, player);
     }
 }

@@ -71,7 +71,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         return view.pensezVousPouvoirJouer(sc, player);
     }
 
-    // @Override
+    @Override
     /**
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
@@ -221,8 +221,6 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      */
     @Override
     public void start(Sac<PieceControleur<V>> sac) {
-        PieceControleur<V> piece = sac.tire();
-        piece.getView().setimagePiece();
         model.start(sac);
         view.setPiece();
     }

@@ -34,7 +34,8 @@ public class MenuModel {
      * plus de piece dans le sac.
      */
     public void playDomino() {
-        ((PlayDominoControleur) game).play();
+        game.play();
+        game.rejouer();
     }
 
     /**
@@ -42,17 +43,8 @@ public class MenuModel {
      * 
      * @param nombreDeJoueur nombre de joueur qui vont jouer.
      */
-    public void initDominoTerminale(int nombreDeJoueur) {
-        game = new PlayDominoControleur(10 * nombreDeJoueur);
-    }
-
-    /**
-     * lance une partie de domino dans le terminal.
-     * 
-     * @param sc lit l'entree
-     */
-    public void playDominoTerminale(Scanner sc, int nombreDeJoueur) {
-        ((PlayDominoControleur) game).initPlayerTerminal(sc, nombreDeJoueur);
+    public void initDominoTerminale(Scanner sc, int nombreDeJoueur) {
+        game = new PlayDominoControleur(sc, 10 * nombreDeJoueur, nombreDeJoueur);
     }
 
     /**
@@ -67,7 +59,8 @@ public class MenuModel {
      * plus de piece dans le sac.
      */
     public void playCarcassonne() {
-        ((PlayCarcassonneControleur) game).play();
+        game.play();
+        game.rejouer();
     }
 
     /**
