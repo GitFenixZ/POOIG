@@ -33,10 +33,10 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
 
     @Override
     /**
-     * Créer un affichage de la piece correct pour la fenetre.
+     * Créer un affichage de la pièce correct pour la fenêtre.
      * Et l''actualise.
      */
-    public void setimagePiece() {
+    public void setImagePiece() {
         removeAll();
         setLayout(new GridLayout(model.getHauteur(), model.getLargeur()));
         for (int i = 0; i < model.getHauteur(); i++) {
@@ -64,9 +64,9 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
      * Getter d'une ligne du tableau sous form de String
      * 
      * @param indice indice de la ligne voulu
-     * @return un String representant une ligne du tableau
+     * @return un String représentant une ligne du tableau
      */
-    public String getligne(int indice) {
+    public String getLigne(int indice) {
         String res = " ";
         for (V e : model.getValeurs().get(indice)) {
             if (e != model.getVide()) {
@@ -87,7 +87,7 @@ public class PieceView<V> extends JPanel implements InterfacePieceView<V> {
     public String toString() {
         String res = "";
         for (int i = 0; i < model.getValeurs().size(); i++) {
-            res += getligne(i) + "\n";
+            res += getLigne(i) + "\n";
         }
         return res;
     }

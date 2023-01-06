@@ -27,7 +27,7 @@ public class PlayerModel<P> implements InterfacePlayerModel<P> {
     }
 
     /**
-     * Methode qui fait piocher un joueur dans un sac
+     * Méthode qui fait piocher un joueur dans un sac
      * 
      * @param sac Sac dans lequel pioche le joueur.
      */
@@ -37,7 +37,7 @@ public class PlayerModel<P> implements InterfacePlayerModel<P> {
     }
 
     /**
-     * Methode qui supprime la main d'un joueur.
+     * Méthode qui supprime la main d'un joueur.
      */
     @Override
     public void jeter() {
@@ -50,7 +50,7 @@ public class PlayerModel<P> implements InterfacePlayerModel<P> {
      * @param i Valeur a ajouter au score
      */
     @Override
-    public void scoreadd(int i) {
+    public void scoreAdd(int i) {
         score += i;
     }
 
@@ -66,7 +66,7 @@ public class PlayerModel<P> implements InterfacePlayerModel<P> {
     }
 
     @Override
-    public int getscore() {
+    public int getScore() {
         return score;
     }
 }

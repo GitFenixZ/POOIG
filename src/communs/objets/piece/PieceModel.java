@@ -214,7 +214,7 @@ public class PieceModel<V> implements InterfacePieceModel<V> {
     }
 
     /**
-     * Methode qui compare si deux coté son campatibles
+     * Méthode qui compare si deux coté son campatibles
      */
     protected boolean compare(ArrayList<V> cote1, ArrayList<V> cote2) {
         if (cote1.size() != cote2.size()) {
@@ -230,7 +230,7 @@ public class PieceModel<V> implements InterfacePieceModel<V> {
 
     @Override
     /**
-     * Methode qui tourne une piece à 90 degrès sur la droite.
+     * Méthode qui tourne une piece à 90 degrès sur la droite.
      * Les valeur qui etait en haut seront à droite.
      * Les valeur qui etait a droite seront en bas.
      * Les valeur qui etait en bas seront à gauche.
@@ -254,7 +254,7 @@ public class PieceModel<V> implements InterfacePieceModel<V> {
 
     @Override
     /**
-     * Methode qui tourne une piece à 90 degrès sur la gauche.
+     * Méthode qui tourne une piece à 90 degrès sur la gauche.
      * Les valeur qui etait en haut seront à gauche.
      * Les valeur qui etait a gauche seront en bas.
      * Les valeur qui etait en bas seront à droite.

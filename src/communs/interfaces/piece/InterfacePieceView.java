@@ -5,7 +5,7 @@ import communs.objets.piece.PieceModel;
 /**
  * Interface de la vue des Pieces.
  * 
- * V represente le type des valeurs qui apparait sur les pièces du jeu.
+ * V représente le type des valeurs qui apparait sur les pièces du jeu.
  * Exemple : Integer dans le domino.
  */
 public interface InterfacePieceView<V> {
@@ -13,9 +13,9 @@ public interface InterfacePieceView<V> {
     public void setModel(PieceModel<V> model);
 
     /**
-     * Créer un affichage correct pour la fenetre
+     * Créer un affichage correct pour la fenêtre
      */
-    public void setimagePiece();
+    public void setImagePiece();
 
     public PieceModel<V> getModel();
 
@@ -25,5 +25,5 @@ public interface InterfacePieceView<V> {
      * @param indice indice de la ligne voulu
      * @return un String representant une ligne du tableau
      */
-    public String getligne(int indice);
+    public String getLigne(int indice);
 }

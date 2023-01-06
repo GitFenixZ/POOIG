@@ -23,10 +23,10 @@ public interface InterfacePlateauModel<V> {
     public int getLargeurPiece();
 
     /**
-     * Methode qui permet de calculer le nombre de point que repporte une piece
+     * Méthode qui permet de calculer le nombre de point que repporte une piece
      * quand elle vient d'être placer.
      * 
-     * @param point position sur laquel la piece a ete placee
+     * @param point position sur laquelle la piece a ete placee
      * @return le nombre de point que la piece fait gagner
      */
     public int calculePoint(Point point);
@@ -43,10 +43,10 @@ public interface InterfacePlateauModel<V> {
     public boolean existeEmplacement(PieceControleur<V> piece);
 
     /**
-     * Regarde si l'on peut placer une piece a de certaine coordonnee
+     * Regarde si l'on peut placer une piece a de certaine coordonnées
      * 
      * @param piece Piece a placer
-     * @param point position sur laquel on veut essayer de placer la piece
+     * @param point position sur laquelle on veut essayer de placer la piece
      * @return si c'est possible de placer la piece en respcetant les regles.
      */
     public boolean possibleDePlacer(PieceControleur<V> piece, Point point);
@@ -60,24 +60,24 @@ public interface InterfacePlateauModel<V> {
     public Point getEmplacementPossible(PieceControleur<V> piece);
 
     /**
-     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * Méthode qui permet d'initialiser le plateau avec un pièce en son centre.
      * 
      * @param sac sac du quel est tiré la pièce.
      */
     public void start(Sac<PieceControleur<V>> sac);
 
     /**
-     * Methode qui permet de deplacer le centre du plateau (la position ou l'on est
+     * Méthode qui permet de déplacer le centre du plateau (la position ou l'on est
      * en se moment)
      * 
-     * @param deplacement la direction dans laquel on veut aller.
+     * @param deplacement la direction dans laquelle on veut aller.
      * @throws positionInvalide  si l'on sort du tableau
      * @throws directionInvalide Actuel
      */
     public void deplacement(Direction deplacement) throws positionInvalide, directionInvalide;
 
     /**
-     * Methode qui permet de rotater une piece.
+     * Méthode qui permet de tourner une piece.
      * 
      * @param sens   sens dans le quel on veur tourner la piece.
      * @param player joueur qui fait tourner sa piece.

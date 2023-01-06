@@ -18,7 +18,7 @@ import communs.objets.player.PlayerControleur;
 
 public class PlayGameModel<V> {
     /**
-     * Sac de piece de la partie
+     * Sac de pièce de la partie
      */
     protected Sac<PieceControleur<V>> sac;
     /**
@@ -37,7 +37,7 @@ public class PlayGameModel<V> {
     /**
      * Constructeur
      * 
-     * @param nombreDePiece Nombre de piece presente dans le sac pour la
+     * @param nombreDePiece Nombre de pièce présente dans le sac pour la
      *                      partie
      */
     public PlayGameModel(int nombreDePiece) {
@@ -54,7 +54,8 @@ public class PlayGameModel<V> {
     }
 
     public int getNombreDePiece() {
-        if (sac == null) return -1;
+        if (sac == null)
+            return -1;
         return sac.getNombreDePiece();
     }
 
@@ -75,7 +76,7 @@ public class PlayGameModel<V> {
      * fait jouer un bot
      * 
      * @param joueurActuel bot a faire jouer.
-     * @return si le bot a reussi a jouer.
+     * @return si le bot a réussi a jouer.
      */
     public boolean jouer(Bot<V> joueurActuel) {
         return joueurActuel.jouer(plateau);
@@ -92,7 +93,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Methode qui permet de faire piocher un joueur dans le sac
+     * Méthode qui permet de faire piocher un joueur dans le sac
      * 
      * @param player joueur a faire piocher
      */
@@ -108,21 +109,21 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Permet de savoir combiens il y a de personne dans les joueurs.
+     * Permet de savoir combien il y a de personne dans les joueurs.
      */
     public int getNombreDeJoueur() {
         return joueurs.size();
     }
 
     /**
-     * Permet de recuperer la view du plateau.
+     * Permet de récupérer la view du plateau.
      */
     public JPanel getImagePlateau() {
         return plateau.getView();
     }
 
     /**
-     * permet de faire tourner la piece du joueur actuel dans le sens demande.
+     * permet de faire tourner la pièce du joueur actuel dans le sens demande.
      */
     public void tournerDroite() {
         getActuelPlayer().getMain().tournerDroite();
@@ -133,7 +134,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * permet de deplacer la vue du plateau dans le sens demandé.
+     * permet de déplacer la vue du plateau dans le sens demandé.
      */
     public void allerADroite() {
         plateau.allerADroite();
@@ -152,7 +153,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Permet de placer la piece du joueur qui est en train de jouer a la position
+     * Permet de placer la pièce du joueur qui est en train de jouer a la position
      * actuel du plateau.
      */
     public void placerPiece() {
@@ -160,7 +161,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Permet d'obtenir la position sur laquel est centrée la vue du plateau.
+     * Permet d'obtenir la position sur laquelle est centrée la vue du plateau.
      * 
      * @return
      */
@@ -169,7 +170,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Regarde si l'on peut placer la piece du joueur actuel, a la position actuel
+     * Regarde si l'on peut placer la pièce du joueur actuel, a la position actuel
      */
     public boolean possibleDePlacer() {
         return plateau.possibleDePlacer(getActuelPlayer());
@@ -196,7 +197,7 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * Lance une partie complete. Du début jusqu'a ce qu'il n'y ai plus de pièce
      * dans le sac.
      * 
      * Avec interface Graphique

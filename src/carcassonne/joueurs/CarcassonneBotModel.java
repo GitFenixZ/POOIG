@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.util.Random;
 
 /**
- * Modelise un robot qui peut jouer a carcassonne.
+ * Modélise un robot qui peut jouer a carcassonne.
  */
 public class CarcassonneBotModel extends CarcassonnePlayerModel {
 
@@ -21,13 +21,13 @@ public class CarcassonneBotModel extends CarcassonnePlayerModel {
         if (position != null) {
             plateauControleur.setPiece(botActuelControleur, position);
             Random rd = new Random();
-            // Veut-il placer un partisant
-            if (!partisantsIsEmpty() && rd.nextInt(2) == 0) { // si 0, il place un partissant aléatoirement sur la
-                                                              // pièce.
-                ((CarcassonnePieceControleur) getMain()).placerPartisant(
+            // Veut-il placer un partisan
+            if (!partisansIsEmpty() && rd.nextInt(2) == 0) { // si 0, il place un partisan aléatoirement sur la
+                                                             // pièce.
+                ((CarcassonnePieceControleur) getMain()).placerpartisan(
                         new Point(rd.nextInt(getMain().getLargeur()), rd.nextInt(getMain().getHauteur())),
                         botActuelControleur);
-            } // si 1 il ne place pas de partisant
+            } // si 1 il ne place pas de partisan
             return true;
         } else {
             return false;

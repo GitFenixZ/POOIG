@@ -12,10 +12,10 @@ import carcassonne.Partisan;
 public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
     /**
      * Constructeur
-     * Initialise une piece du jeu de carcassonne
+     * Initialise une pièce du jeu de carcassonne
      * 
-     * @param map information de la piece dans le model.
-     * @param id  numéro de l'image de la piece.
+     * @param map information de la pièce dans le model.
+     * @param id  numéro de l'image de la pièce.
      */
     public CarcassonnePieceControleur(Terrain[][] map, int id) {
         super();
@@ -27,17 +27,17 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
     }
 
     /**
-     * Place un partisant du joueur au coordoonee du point
+     * Place un partisan du joueur aux coordonnée du point
      * 
-     * @param point  coordonnees auquel sera placer le partisant sur la piece
-     * @param player joueur qui va placer un partisant
+     * @param point  coordonnées auquel sera placer le partisan sur la pièce
+     * @param player joueur qui va placer un partisan
      */
-    public void placerPartisant(Point point, CarcassonnePlayerControleur player) {
-        ((CarcassonnePieceModel) getModel()).placerPartisant(point, player);
+    public void placerpartisan(Point point, CarcassonnePlayerControleur player) {
+        ((CarcassonnePieceModel) getModel()).placerPartisan(point, player);
     }
 
     /**
-     * Tourne dans le sens horaire la piece du joueur
+     * Tourne la pièce du joueur dans le sens horaire
      */
     @Override
     public void tournerDroite() {
@@ -46,7 +46,7 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
     }
 
     /**
-     * Tourne dans le sens trigonometrique la piece du joueur
+     * Tourne la pièce du joueur dans le sens anti-horaire
      */
     @Override
     public void tournerGauche() {
@@ -55,14 +55,14 @@ public class CarcassonnePieceControleur extends PieceControleur<Terrain> {
     }
 
     /**
-     * @return le numero d'identification de l'image de la piece.
+     * @return le numéro d'identification de l'image de la pièce.
      */
     public int getId() {
         return ((CarcassonnePieceView) getView()).getId();
     }
 
     /**
-     * @return le tableau de partisant qui est sur la piece.
+     * @return le tableau de partisan qui est sur la pièce.
      */
     public ArrayList<ArrayList<Partisan>> getPartisan() {
         return ((CarcassonnePieceModel) getModel()).getPartisan();

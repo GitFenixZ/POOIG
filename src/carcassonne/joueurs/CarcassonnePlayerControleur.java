@@ -20,7 +20,7 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
     }
 
     /**
-     * Contructeur d'un player
+     * Constructeur d'un player
      * 
      * @param name    pseudo du joueur.
      * @param couleur couleur des partisans.
@@ -40,36 +40,36 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
     }
 
     /**
-     * Prends un partisant de la collection et le retire.
+     * Prends un partisan de la collection et le retire.
      */
-    public Partisan peekPartisant() {
-        return ((CarcassonnePlayerModel) model).peekPartisant();
+    public Partisan peekpartisan() {
+        return ((CarcassonnePlayerModel) model).peekPartisan();
     }
 
     /**
-     * Verifie si la liste des partisant contient toujours des pièces.
+     * Verifie si la liste des partisan contient toujours des pièces.
      */
-    public boolean partisantsIsEmpty() {
-        return ((CarcassonnePlayerModel) model).partisantsIsEmpty();
+    public boolean partisansIsEmpty() {
+        return ((CarcassonnePlayerModel) model).partisansIsEmpty();
     }
 
     /**
-     * Methode permettant d'afficher la fenetre donnant accès au joueur la
-     * posibilité de placer un partisant sur la piece du joueur qui est en train de
+     * Méthode permettant d'afficher la fenêtre donnant accès au joueur la
+     * posibilité de placer un partisan sur la piece du joueur qui est en train de
      * jouer.
      * 
      * @param game parti qui est en cours.
      */
-    public void placerPartisant(PlayCarcassonneControleur game) {
-        ((CarcassonnePlayerView) view).placerPartisant(game);
+    public void placerpartisan(PlayCarcassonneControleur game) {
+        ((CarcassonnePlayerView) view).placerPartisan(game);
     }
 
     /**
-     * Place un partisant au point p du joueur actuel
+     * Place un partisan au point p du joueur actuel
      * 
-     * @param p point sur lequel on place le partisant
+     * @param p point sur lequel on place le partisan
      */
-    public void placerPartisant(Point p) {
-        ((CarcassonnePieceControleur) getMain()).placerPartisant(p, this);
+    public void placerpartisan(Point p) {
+        ((CarcassonnePieceControleur) getMain()).placerpartisan(p, this);
     }
 }

@@ -32,7 +32,7 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
     /**
      * Initialise la liste de joueur pour la partie en mode terminal
      * 
-     * @param sc lit la reponse de l'utilisateur
+     * @param sc lit la réponse de l'utilisateur
      */
     public void initPlayerTerminal(Scanner sc, int nombreDeJoueur) {
         ((PlayDominoTerminalView) view).initialisationJoueur(nombreDeJoueur, sc);
@@ -51,9 +51,9 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
      * @param game   partie qui se joue
-     * @param player Joueur qui place sa piece
-     * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
-     *               savoir si le joueur veux placer sa piece.
+     * @param player Joueur qui place sa pièce
+     * @param sc     System.in permettra de lire la réponse de l'utilisateur et de
+     *               savoir si le joueur veux placer sa pièce.
      */
     public void pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<Integer>> player) {
         ((PlayDominoModel) model).pensezVousPouvoirJouer(sc, player);

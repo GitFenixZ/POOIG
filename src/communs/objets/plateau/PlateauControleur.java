@@ -12,8 +12,8 @@ import communs.objets.piece.PieceControleur;
 import communs.objets.player.PlayerControleur;
 
 /**
- * Class permtant de modéliser le controleur du plateau permettant les
- * interractions vue modèle.
+ * Class permettant de modéliser le contrôleur du plateau permettant les
+ * interactions vue modèle.
  * 
  * V est le types des valeurs qui apparaissent sur les pièces qui
  * pourront être placé sur le plateau.
@@ -60,10 +60,10 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     }
 
     /**
-     * Methode qui demande au joueur si il pense pouvoir jouer. Si il ne peut pas
-     * alors il repioche, si il peut, la methode l'invite a chercher.
+     * Méthode qui demande au joueur si il pense pouvoir jouer. Si il ne peut pas
+     * alors il re-pioche, si il peut, la méthode l'invite a chercher.
      * 
-     * @param sc     scanner qui attends les reponses au questions
+     * @param sc     scanner qui attends les réponses au questions
      * @param player player joueur qui est en train de jouer
      * @return si le joueur peut jouer ou non
      */
@@ -77,22 +77,22 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
      * @param game   partie qui se joue
-     * @param player Joueur qui place sa piece
-     * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
-     *               savoir si le joueur veux placer sa piece.
+     * @param player Joueur qui place sa pièce
+     * @param sc     System.in permettra de lire la réponse de l'utilisateur et de
+     *               savoir si le joueur veux placer sa pièce.
      */
     public void placerPiece(PlayerControleur<PieceControleur<V>> player, Scanner sc) {
         /** valide permet de verifier si la position choisi est valide */
         boolean valide = false;
 
         /**
-         * demandeDeplacement permet de savoir si le player souhaite se deplacer sur le
+         * demandeDeplacement permet de savoir si le player souhaite se déplacer sur le
          * plateau
          */
         boolean demandeDeplacement;
         Direction deplacement = Direction.ACTUEL;
         /**
-         * demandeRotation permet de savoir si le player souhaite rotater sa piece
+         * demandeRotation permet de savoir si le player souhaite tourner sa piece
          */
         boolean demandeRotation;
         Direction rotation = Direction.ACTUEL;
@@ -101,7 +101,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
         // boucle qui continue tant que le choix fait par le joueurs est invalide
         while (!valide) {
             demandeDeplacement = true;
-            // boucle qui demande le deplacement voulu par le joueur
+            // boucle qui demande le déplacement voulu par le joueur
             while (demandeDeplacement) {
 
                 // affiche la partie du plateau ou l'on est.
@@ -109,7 +109,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
                 view.affichePlateauEtJoueur(player);
 
                 demandeDeplacement = view.demandeBoolean(sc,
-                        "Voulez vous vous deplacer sur le plateau? (oui/non)");
+                        "Voulez vous vous déplacer sur le plateau? (oui/non)");
 
                 if (demandeDeplacement) {
                     deplacement = view.demandeDirection(sc, "De quel coté? (haut/bas/droite/gauche)");
@@ -144,7 +144,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
             placerPiece = view.demandeBoolean(sc, "Voulez vous placer la pièce ici ?(oui/non)");
             if (placerPiece) {
-                // essaye de placer la piece a la position demande.
+                // essaye de placer la pièce a la position demande.
                 try {
                     model.setPiece(model.getActuelPosition(), player.getMain());
                     valide = true;
@@ -156,7 +156,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
         player.jeter();
         // On ajoute les points gagne au joueur
-        player.scoreadd(model.calculePoint(model.getActuelPosition()));
+        player.scoreAdd(model.calculePoint(model.getActuelPosition()));
     }
 
     @Override
@@ -165,7 +165,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * on peut poser la pièce
      * tout en respectant les règles
      * 
-     * @param piece La piece que l'on veut placer
+     * @param piece La pièce que l'on veut placer
      * @return true s'il existe un emplacement;
      *         false sinon
      */
@@ -175,10 +175,10 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
     @Override
     /**
-     * Creer un String qui represente une partie du plateau.
-     * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la
-     * position ou l'on est. Si il y a des piece dans les positions affichees, cela
-     * les affiches.
+     * Créer un String qui représente une partie du plateau.
+     * Les 8 positions adjacentes à l'endroit du plateau où l'on est ainsi que la
+     * position ou l'on est.
+     * Si il y a des pièce dans les positions affichées, cela les affiches.
      */
     public void afficher() {
         view.afficher();
@@ -186,8 +186,8 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
     @Override
     /**
-     * Donnes un coordonnée ou l'on peut placer la piece.
-     * Et rotate la piece dans le bon sens pour la placer a la position indiqué.
+     * Donne une coordonnée où l'on peut placer la pièce.
+     * Et rotate la pièce dans le bon sens pour la placer a la position indiqué.
      * 
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
@@ -201,13 +201,13 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * Permet a un joueur de placer une pièce ou il le veut.
      * 
      * @param player joueur qui vas jouer
-     * @param point  position sur laquel la piece vas etre placee
+     * @param point  position sur laquelle la piece vas être placée
      */
     public void setPiece(PlayerControleur<PieceControleur<V>> player, Point p) {
         try {
-            player.getMain().getView().setimagePiece();
+            player.getMain().getView().setImagePiece();
             model.setPiece(p, player.getMain());
-            player.scoreadd(model.calculePoint(p));
+            player.scoreAdd(model.calculePoint(p));
             view.setPiece();
             view.actualiser();
             player.getMain().getView().revalidate();
@@ -216,7 +216,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     }
 
     /**
-     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * Méthode qui permet d'initialiser le plateau avec un pièce en son centre.
      * 
      * @param sac sac du quel est tiré la pièce.
      */
@@ -227,7 +227,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     }
 
     /**
-     * Permet de se deplacer d'une colonne sur la droite sur le plateau.
+     * Permet de se déplacer d'une colonne sur la droite sur le plateau.
      */
     public void allerADroite() {
         try {
@@ -238,7 +238,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     }
 
     /**
-     * Permet de se deplacer d'une colonne sur la gauche sur le plateau.
+     * Permet de se déplacer d'une colonne sur la gauche sur le plateau.
      */
     public void allerAGauche() {
         try {
@@ -249,7 +249,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     }
 
     /**
-     * Permet de se deplacer d'une ligne vers le bas sur le plateau.
+     * Permet de se déplacer d'une ligne vers le bas sur le plateau.
      */
     public void allerEnBas() {
         try {
@@ -260,7 +260,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     }
 
     /**
-     * Permet de se deplacer d'une ligne vers le haut sur le plateau.
+     * Permet de se déplacer d'une ligne vers le haut sur le plateau.
      */
     public void allerEnHaut() {
         try {

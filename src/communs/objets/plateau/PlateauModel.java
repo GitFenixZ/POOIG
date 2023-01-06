@@ -10,7 +10,7 @@ import communs.objets.piece.PieceControleur;
 import communs.objets.player.PlayerControleur;
 
 /**
- * Class modélisant le plateau de jeu. C'est un tableau de tableau de piece.
+ * Class modélisant le plateau de jeu. C'est un tableau de tableau de pièce.
  * 
  * V est le types des valeurs qui apparaissent sur les pièces qui
  * pourront être placé sur le plateau.
@@ -47,10 +47,10 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
 
     @Override
     /**
-     * Methode qui permet de calculer le nombre de point que repporte une piece.
+     * Méthode qui permet de calculer le nombre de point que rapporte une pièce.
      * 
-     * @param point position de la piece
-     * @return le nombre de point que la piece fait gagner
+     * @param point position de la pièce
+     * @return le nombre de point que la pièce fait gagner
      */
     public int calculePoint(Point point) {
         return 0;
@@ -63,7 +63,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * on peut poser la pièce
      * tout en respectant les règles
      * 
-     * @param piece La piece que l'on veut placer
+     * @param piece La pièce que l'on veut placer
      * @return true s'il existe un emplacement;
      *         false sinon
      */
@@ -71,7 +71,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
-                    // regarde si l'on peu placer la piece a ses coordonnee
+                    // regarde si l'on peu placer la piece a ses coordonnées
                     if (possibleDePlacer(piece, new Point(j, i))) {
                         // fait pivoter la piece jusqu'a ce qu'elle revienne dans son sens de depart.
                         for (int pivot2 = pivot; pivot2 < 4; pivot2++) {
@@ -91,14 +91,14 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
 
     @Override
     /**
-     * Regarde si l'on peut placer une piece a de certaine coordonnee
+     * Regarde si l'on peut placer une piece a de certaines coordonnées
      * 
      * @param piece Piece a placer
      * @param point Position ou l'on souhaite essayer de placer la piece.
-     * @return si c'est possible de placer la piece en respcetant les regles.
+     * @return si c'est possible de placer la piece en respectant les règles.
      */
     public boolean possibleDePlacer(PieceControleur<V> piece, Point point) {
-        // si il y a deja une piece a cette emplacement ce n'est pas possible
+        // si il y a déjà une piece a cette emplacement ce n'est pas possible
         try {
             if (getPiece(point) != null) {
                 return false;
@@ -121,7 +121,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
             Point gauche = new Point(point.getX() - 1, point.getY());
             ;
 
-            // si chaque cote adjacent et soit vide soit possede un cote adjacent commun a
+            // si chaque cote adjacent et soit vide soit possède un cote adjacent commun a
             // la piece.
             try {
                 if (getPiece(haut) == null || piece.comparer(Direction.UP, getPiece(haut))) {
@@ -156,11 +156,12 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
                 cote4 = true;
             }
 
-            // Aucun cote ne pose probleme au reglement. De plus il y a au moins une piece
-            // qui est
-            // adjacente a celle que je suis en train de pauser. En effet si il n'y a pas de
-            // piece a cote. Cela veut dire que je ne pose pas une piece en fonction de ses
-            // voisins mais qu'elle est independante des autres.
+            // Aucun côte ne pose problème aux règles.
+            // De plus, il y a au moins une piece qui est adjacente a
+            // celle que je suis en train de poser.
+            // En effet si il n'y a pas de piece a cote, cela veut dire que
+            // je ne pose pas une piece en fonction de ses
+            // voisins mais qu'elle est indépendante des autres.
             if (cote1 && cote2 && cote3 && cote4) {
                 try {
                     if (getPiece(haut) != null) {
@@ -203,11 +204,11 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
      * @return des coordonnée ou l'on peut placer la pièce
      */
     public Point getEmplacementPossible(PieceControleur<V> piece) {
-        // Pas besoin de repivoter à la fin
+        // Pas besoin de re-pivoter à la fin
         for (int pivot = 0; pivot < 4; pivot++) {
             for (int i = 0; i < getHauteur(); i++) {
                 for (int j = 0; j < getLargeur(); j++) {
-                    // regarde si l'on peu placer la piece a ses coordonnee
+                    // regarde si l'on peu placer la piece a ses coordonnées
                     Point res = new Point(j, i);
                     if (possibleDePlacer(piece, res)) {
                         return res;
@@ -223,7 +224,7 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     }
 
     /**
-     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * Méthode qui permet d'initialiser le plateau avec un pièce en son centre.
      * 
      * @param sac sac du quel est tiré la pièce.
      */
@@ -231,17 +232,17 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     public void start(Sac<PieceControleur<V>> sac) {
         try {
             PieceControleur<V> piece = sac.tire();
-            piece.getView().setimagePiece();
+            piece.getView().setImagePiece();
             setPiece(new Point(0, 0), piece);
         } catch (positionInvalide e) {
         }
     }
 
     /**
-     * Methode qui permet de deplacer le centre du plateau (la position ou l'on est
+     * Méthode qui permet de déplacer le centre du plateau (la position ou l'on est
      * en se moment)
      * 
-     * @param deplacement la direction dans laquel on veut aller.
+     * @param deplacement la direction dans laquelle on veut aller.
      * @throws positionInvalide  si l'on sort du tableau
      * @throws directionInvalide Actuel
      */
@@ -269,9 +270,9 @@ public class PlateauModel<V> extends Extendable<PieceControleur<V>> implements I
     }
 
     /**
-     * Methode qui permet de rotater une piece.
+     * Méthode qui permet de tourner une piece.
      * 
-     * @param sens   sens dans le quel on veur tourner la piece.
+     * @param sens   sens dans le quel on veut tourner la piece.
      * @param player joueur qui fait tourner sa piece.
      * @throws directionInvalide si la direction n'est ni LEFT ni RIGHT.
      */

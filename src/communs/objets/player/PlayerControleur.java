@@ -4,15 +4,15 @@ import communs.interfaces.player.InterfacePlayerControleur;
 import communs.objets.Sac;
 
 /**
- * Class controlant un joueur
- * P est le type des pieces que peut avoir le joueur
+ * Class contrôlant un joueur
+ * P est le type des pièces que peut avoir le joueur
  */
 public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
     protected PlayerModel<P> model;
     protected PlayerView<P> view;
 
     /**
-     * Retourne un String decrivant le joueur actuel
+     * Retourne un String décrivant le joueur actuel
      */
     @Override
     public String toString() {
@@ -33,7 +33,7 @@ public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
     }
 
     /**
-     * Methode qui fait piocher un joueur dans un sac
+     * Méthode qui fait piocher un joueur dans un sac
      * 
      * @param sac Sac dans lequel pioche le joueur.
      */
@@ -44,7 +44,7 @@ public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
     }
 
     /**
-     * Methode qui supprime la main d'un joueur.
+     * Méthode qui supprime la main d'un joueur.
      */
     @Override
     public void jeter() {
@@ -57,8 +57,8 @@ public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
      * @param i Valeur a ajouter au score
      */
     @Override
-    public void scoreadd(int i) {
-        model.scoreadd(i);
+    public void scoreAdd(int i) {
+        model.scoreAdd(i);
     }
 
     // Getters
@@ -73,7 +73,7 @@ public class PlayerControleur<P> implements InterfacePlayerControleur<P> {
     }
 
     @Override
-    public int getscore() {
-        return model.getscore();
+    public int getScore() {
+        return model.getScore();
     }
 }

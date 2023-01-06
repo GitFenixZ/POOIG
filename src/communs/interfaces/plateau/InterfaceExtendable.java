@@ -10,7 +10,7 @@ import communs.objets.Point;
 /**
  * Interface qui permet d'etendre un tableau en 2D.
  * 
- * P represente le type des des element qui seront placer dans le tableau.
+ * P représente le type des des element qui seront placer dans le tableau.
  * Exemple : PieceControleur<Integer> pour le domino.
  * Est généralisé pour répondre a un problème plus grands.
  */
@@ -57,28 +57,28 @@ public interface InterfaceExtendable<P> {
     public void setPiece(Point point, P piece) throws positionInvalide;
 
     /**
-     * Permet de se deplacer d'une colonne sur la droite sur le tableau.
+     * Permet de se déplacer d'une colonne sur la droite sur le tableau.
      * 
      * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
     public void allerADroite() throws positionInvalide;
 
     /**
-     * Permet de se deplacer d'une colonne sur la gauche sur le tableau.
+     * Permet de se déplacer d'une colonne sur la gauche sur le tableau.
      * 
      * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
     public void allerAGauche() throws positionInvalide;
 
     /**
-     * Permet de se deplacer d'une ligne vers le bas sur le tableau.
+     * Permet de se déplacer d'une ligne vers le bas sur le tableau.
      * 
      * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
     public void allerEnBas() throws positionInvalide;
 
     /**
-     * Permet de se deplacer d'une ligne vers le haut sur le tableau.
+     * Permet de se déplacer d'une ligne vers le haut sur le tableau.
      * 
      * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */

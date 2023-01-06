@@ -9,14 +9,14 @@ package communs.interfaces;
 public interface InterfaceSac<P> {
 
     /**
-     * Methode qui tire une piece aleatoire dans le sac
+     * Méthode qui tire une piece aleatoire dans le sac
      * 
      * @return un piece du sac
      */
     public P tire();
 
     /**
-     * Methode qui ajoute une piece dans le sac
+     * Méthode qui ajoute une piece dans le sac
      */
     public void ajouter(P piece);
 

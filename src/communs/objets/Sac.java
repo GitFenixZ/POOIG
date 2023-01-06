@@ -6,7 +6,7 @@ import java.util.Random;
 import communs.interfaces.InterfaceSac;
 
 /**
- * Class modélisant un sac, qui contient des pieces, et dans le quel on peut
+ * Class modélisant un sac, qui contient des pièces, et dans le quel on peut
  * tirer aléatoirement.
  * 
  * P est le type des objets dans le sac.
@@ -15,18 +15,18 @@ import communs.interfaces.InterfaceSac;
 
 public class Sac<P> implements InterfaceSac<P> {
     /**
-     * Contenur du sac
+     * Sac qui contient les pièces
      */
     private ArrayList<P> sac;
     /**
-     * Capacite de piece que peut contenur le sac
+     * Capacité de pièces que peut contenir le sac
      */
     private int nombreDePieceMax;
 
     /**
      * Constructeur
      * 
-     * @param nombreDePieceMax Capacite de piece que peut contenur le sac
+     * @param nombreDePieceMax Capacité de pièce que peut contenir le sac
      */
     public Sac(int nombreDePieceMax) {
         sac = new ArrayList<P>();
@@ -34,9 +34,9 @@ public class Sac<P> implements InterfaceSac<P> {
     }
 
     /**
-     * Methode qui tire une piece aleatoire dans le sac
+     * Méthode qui tire une pièce aléatoire dans le sac
      * 
-     * @return un piece du sac
+     * @return une pièce du sac
      */
     @Override
     public P tire() {
@@ -51,7 +51,7 @@ public class Sac<P> implements InterfaceSac<P> {
     }
 
     /**
-     * Methode qui ajoute une piece dans le sac
+     * Méthode qui ajoute une pièce dans le sac
      */
     @Override
     public void ajouter(P piece) {
@@ -59,7 +59,7 @@ public class Sac<P> implements InterfaceSac<P> {
     }
 
     /**
-     * @return le nombre de piece dans le sac en se moment
+     * @return le nombre de pièce dans le sac en se moment
      */
     @Override
     public int getNombreDePiece() {

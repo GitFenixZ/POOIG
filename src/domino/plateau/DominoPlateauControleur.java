@@ -4,7 +4,7 @@ import communs.objets.plateau.PlateauControleur;
 import communs.objets.plateau.PlateauView;
 
 /**
- * Class controlant le plateau du jeu de domino.
+ * Class contrôlant le plateau du jeu de domino.
  */
 public class DominoPlateauControleur extends PlateauControleur<Integer> {
     public DominoPlateauControleur(int hauteurPiece, int largeurPiece) {

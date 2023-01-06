@@ -18,13 +18,13 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
     /**
      * Constructeur
      * 
-     * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
+     * @param nombreDePiece Nombre de pièce présente dans le sac pour la partie
      */
     public PlayDominoModel(int nombreDePiece) {
         super(nombreDePiece);
         // initialise le plateau
         plateau = new DominoPlateauControleur(5, 5);
-        // remplis le sac de piece de domino
+        // remplis le sac de pièce de domino
         for (int i = 0; i < nombreDePiece; i++) {
             sac.ajouter(new DominoPieceControleur());
         }
@@ -50,9 +50,9 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
      * Place la pièce qu'a le player dans sa main sur le plateau.
      * 
      * @param game   partie qui se joue
-     * @param player Joueur qui place sa piece
-     * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
-     *               savoir si le joueur veux placer sa piece.
+     * @param player Joueur qui place sa pièce
+     * @param sc     System.in permettra de lire la réponse de l'utilisateur et de
+     *               savoir si le joueur veux placer sa pièce.
      */
     public void pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<Integer>> player) {
         plateau.pensezVousPouvoirJouer(sc, player);

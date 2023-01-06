@@ -10,14 +10,14 @@ import communs.objets.Sac;
  */
 public interface InterfacePlayerControleur<P> {
     /**
-     * Methode qui fait piocher un joueur dans un sac
+     * Méthode qui fait piocher un joueur dans un sac
      * 
      * @param sac Sac dans lequel pioche le joueur.
      */
     public void piocher(Sac<P> sac);
 
     /**
-     * Methode qui supprime la main d'un joueur.
+     * Méthode qui supprime la main d'un joueur.
      */
     public void jeter();
 
@@ -26,12 +26,12 @@ public interface InterfacePlayerControleur<P> {
      * 
      * @param i Valeur a ajouter au score
      */
-    public void scoreadd(int i);
+    public void scoreAdd(int i);
 
     // Getters
     public P getMain();
 
     public String getName();
 
-    public int getscore();
+    public int getScore();
 }
