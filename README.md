@@ -1,5 +1,7 @@
 # Introduction
 
+Ce projet a été réalisé par ARROUS Thomas (22114626) et SOAN Tony Ly (22107803)
+
 Ce fichier est un fichier d'informations destiné à des utilisateurs souhaitant lancer notre projet.
 
 ## Configuration requise
