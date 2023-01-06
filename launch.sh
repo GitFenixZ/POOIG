@@ -16,7 +16,7 @@ run (){
 
     echo "Launching..."
 
-    java -cp bin/ MenuControleur
+    java -cp bin/ Menu
 
 }
 
