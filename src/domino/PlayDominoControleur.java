@@ -9,12 +9,8 @@ import communs.PlayGameControleur;
  */
 
 public class PlayDominoControleur extends PlayGameControleur<Integer> {
-
     /**
      * Constructeur
-     * 
-     * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
-     * @param nombreJoueur  Nombre de joueur qui vont jouer
      */
     public PlayDominoControleur(int nombreDePiece) {
         model = new PlayDominoModel(nombreDePiece);

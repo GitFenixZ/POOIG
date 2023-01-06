@@ -63,7 +63,7 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
             sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quatroze, 14));
         }
         for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quize, 15));
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quinze, 15));
         }
         for (int i = 0; i < 2; i++) {
             sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.seize, 16));

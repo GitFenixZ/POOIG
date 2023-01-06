@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -158,7 +159,11 @@ public class PlayGameView<V> extends JPanel {
         JButton makeButton(String name, int x, int y) {
             c.gridx = x;
             c.gridy = y;
-            JButton button = new JButton(name);
+
+            JButton button = new JButton();
+            ImageIcon image = new ImageIcon("src/images/" + name + ".png");
+            button.setIcon(image);
+
             commandsPane.add(button, c);
             return button;
         }

@@ -1,61 +1,105 @@
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import communs.PlayGameView;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 /**
  * Class permettant de voir une partis
  */
-public class MenuView extends JPanel {
+public class MenuView extends JFrame {
+    private MenuControleur controller;
     private MenuModel model;
-    private MenuControleur controleur;
+
+    private JPanel pane;
 
     private int nombreDeJoueurValide;
     private int nombreDeJoueur;
 
-    public void setControleur(MenuControleur controleur) {
-        this.controleur = controleur;
+    MenuView(MenuControleur controller, MenuModel model) {
+        super("Menu");
+        this.model = model;
+        this.controller = controller;
+        nombreDeJoueurValide = 0;
+        initMenu();
+        initFrame();
+
     }
 
-    MenuView(MenuModel model) {
-        super();
-        this.model = model;
+    private void initFrame() {
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(pane);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        revalidate();
+    }
 
-        nombreDeJoueurValide = 0;
+    /**
+     * Initialise le menu
+     */
+    private void initMenu() {
+
+        JPanel card1 = new JPanel();
+
+        JLabel questionNombreDeJoueur = new JLabel("Combien de joueur voulez vous ?");
+        JTextField entreeNombreDeJoueur = new JTextField(15);
+
+        card1.add(questionNombreDeJoueur);
+        card1.add(entreeNombreDeJoueur);
+
+        JPanel card2 = new JPanel();
 
         JButton playDominoTerminal = new JButton("Domino Terminal");
         JButton playDomino = new JButton("Domino");
         JButton playCarcassonne = new JButton("Carcassonne");
 
-        JLabel questionNombreDeJoueur = new JLabel("Combien de joueur voulez vous ?");
-        JTextField nombreDeJoueur = new JTextField(15);
+        card2.add(playDominoTerminal);
+        card2.add(playDomino);
+        card2.add(playCarcassonne);
 
-        setLayout(new GridLayout(2, 3));
+        JPanel cards = new JPanel();
+        cards.setLayout(new GridLayout(2, 1));
+        cards.add(card1);
+        cards.add(card2);
 
-        add(questionNombreDeJoueur);
-        add(nombreDeJoueur);
-        add(new JLabel());
-        add(playDominoTerminal);
-        add(playDomino);
-        add(playCarcassonne);
+        pane = new JPanel();
+        pane.setLayout(new GridLayout(1, 1));
+        pane.add(cards);
+        // Ajout des ActionListeners adapté pour chaque bouton
 
+        // Lance le jeu de domino version terminal si on clique sur le bouton
         playDominoTerminal.addActionListener(event -> {
-            if (integer(nombreDeJoueur.getText())) {
-                controleur.playDominoTerminale(Integer.valueOf(nombreDeJoueur.getText()));
+            if (estStringEntier(entreeNombreDeJoueur.getText())) {
+                int nbJoueurs = Integer.valueOf(entreeNombreDeJoueur.getText());
+                setVisible(false);
+                controller.playDominoTerminale(nbJoueurs);
             }
         });
+
+        // Lance le jeu de domino version GUI si on clique sur le bouton
         playDomino.addActionListener(event -> {
-            if (integer(nombreDeJoueur.getText())) {
-                controleur.initDomino(Integer.valueOf(nombreDeJoueur.getText()));
+            if (estStringEntier(entreeNombreDeJoueur.getText())) {
+                int nbJoueurs = Integer.valueOf(entreeNombreDeJoueur.getText());
+                controller.prepareDomino(nbJoueurs);
+                revalidate();
             }
         });
+
+        // Lance le jeu de Carcassonne version GUI si on clique sur le bouton
         playCarcassonne.addActionListener(event -> {
-            if (integer(nombreDeJoueur.getText())) {
-                controleur.initCarcassonne(Integer.valueOf(nombreDeJoueur.getText()));
+            if (estStringEntier(entreeNombreDeJoueur.getText())) {
+                int nbJoueurs = Integer.valueOf(entreeNombreDeJoueur.getText());
+                controller.prepareCarcassonne(nbJoueurs);
+                revalidate();
             }
         });
     }
@@ -66,7 +110,7 @@ public class MenuView extends JPanel {
      * @param s string a verifier
      * @return si le string est un nombre
      */
-    public boolean integer(String s) {
+    public boolean estStringEntier(String s) {
         if (s.length() == 0) {
             return false;
         }
@@ -75,74 +119,67 @@ public class MenuView extends JPanel {
                 return false;
             }
         }
-        return Integer.valueOf(s) > 1;
+        int nb = Integer.valueOf(s);
+        return 1 < nb && nb <= 8;
     }
 
     /**
-     * initialise une partie de jeu et permet de choisir les options de chaque
-     * joueur.
+     * Initialise le layout du panneau de paramètres
      * 
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
-    public void init(int nombreDeJoueur) {
+    public void initLayout(int nombreDeJoueur) {
         this.nombreDeJoueur = nombreDeJoueur;
-        removeAll();
-        setLayout(new GridLayout(1, nombreDeJoueur));
+        pane.removeAll();
+        pane.setLayout(new GridLayout(1, nombreDeJoueur));
     }
 
     /**
-     * initialise une partie de domino
+     * Initialise le panneau de paramètres de Domino
      * 
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
-    public void initDomino(int nombreDeJoueur) {
-        init(nombreDeJoueur);
+    public void initPanelParametresDomino(int nombreDeJoueur) {
+        initLayout(nombreDeJoueur);
         for (int i = 0; i < nombreDeJoueur; i++) {
-            add(ajoutPersoDomino(i));
+            pane.add(ajoutPanelPersoDomino(i));
         }
         revalidate();
     }
 
     /**
-     * initialise une partie de domino dans le terminal
+     * Initialise le panneau de paramètres de Carcassonne
      * 
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
-    public void playDominoTerminale(int nombreDeJoueur) {
-        init(nombreDeJoueur);
+    public void initPanelParametresCarcassonne(int nombreDeJoueur) {
+        initLayout(nombreDeJoueur);
         for (int i = 0; i < nombreDeJoueur; i++) {
-            add(ajoutPersoDomino(i));
+            pane.add(ajoutPanelPersoCarcassonne(i));
         }
         revalidate();
     }
 
     /**
-     * initialise une partie de carcassonne
+     * Lance la partie graphique avec la view du jeu adapté
      * 
-     * @param nombreDeJoueur nombre de joueur qui jouerons la parties
+     * @param gameView la view de la fenetre du jeu qu'on lance
      */
-    public void initCarcassonne(int nombreDeJoueur) {
-        init(nombreDeJoueur);
-        for (int i = 0; i < nombreDeJoueur; i++) {
-            add(ajoutPersoCarcassonne(i));
-        }
+    public void play(PlayGameView gameView) {
+        pane.removeAll();
+        pane.add(gameView);
+        // pack();
+        setSize(new Dimension(995, 800));
+        setLocationRelativeTo(null);
         revalidate();
     }
 
     /**
-     * lance la partie
+     * Ajoute un JPanel qui permet de choisir les options d'un personnage
      */
-    public void play() {
-        removeAll();
-        add(model.getGame().getView());
-        revalidate();
-    }
-
-    /**
-     * Ajoute un Jpanel qui permet de choisir les options d'un personnages
-     */
-    public JPanel ajoutPersoDomino(int i) {
+    public JPanel ajoutPanelPersoDomino(int i) {
         JPanel res = new JPanel();
+
         res.setLayout(new GridLayout(3, 1));
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
@@ -173,13 +210,15 @@ public class MenuView extends JPanel {
                 NomPerso.setEnabled(false);
 
                 if (infoBot.getText().equals("oui")) {
-                    controleur.ajoutBotDomino(NomPerso.getText());
+                    controller.ajoutBotDomino(NomPerso.getText());
                 } else {
-                    controleur.ajoutPersoDomino(NomPerso.getText());
+                    controller.ajoutPersoDomino(NomPerso.getText());
                 }
+                // Si tous les joueurs ont validé, on lance le jeu
                 nombreDeJoueurValide++;
                 if (nombreDeJoueurValide == nombreDeJoueur) {
-                    ((MenuControleur) controleur).playDomino();
+                    controller.playDomino();
+
                 }
             }
         });
@@ -187,10 +226,11 @@ public class MenuView extends JPanel {
     }
 
     /**
-     * Ajoute un Jpanel qui permet de choisir les options d'un personnages
+     * Ajoute un JPanel qui permet de choisir les options d'un personnage
      */
-    public JPanel ajoutPersoCarcassonne(int i) {
+    public JPanel ajoutPanelPersoCarcassonne(int i) {
         JPanel res = new JPanel();
+
         res.setLayout(new GridLayout(4, 1));
         JPanel a = new JPanel();
         a.setLayout(new GridLayout(1, 2));
@@ -226,18 +266,20 @@ public class MenuView extends JPanel {
                 NomPerso.setEnabled(false);
 
                 if (infoBot.getText().equals("oui")) {
-                    controleur.ajoutBotCarcassonne(NomPerso.getText(),
+                    controller.ajoutBotCarcassonne(NomPerso.getText(),
                             (Color) choixCouleur.getSelectedItem());
                 } else {
-                    controleur.ajoutPersoCarcassonne(NomPerso.getText(),
+                    controller.ajoutPersoCarcassonne(NomPerso.getText(),
                             (Color) choixCouleur.getSelectedItem());
                 }
+                // Si tous les joueurs ont validé, on lance le jeu
                 nombreDeJoueurValide++;
                 if (nombreDeJoueurValide == nombreDeJoueur) {
-                    ((MenuControleur) controleur).playCarcassonne();
+                    controller.playCarcassonne();
                 }
             }
         });
         return res;
     }
+
 }

@@ -15,6 +15,11 @@ public class MenuModel {
     MenuModel() {
     }
 
+    // Getter
+    public PlayGameControleur getGame() {
+        return game;
+    }
+
     /**
      * initialise une partie de domino
      * 
@@ -103,8 +108,4 @@ public class MenuModel {
         ((PlayCarcassonneControleur) game).ajoutBot(nom, couleur);
     }
 
-    // getter
-    public PlayGameControleur getGame() {
-        return game;
-    }
 }

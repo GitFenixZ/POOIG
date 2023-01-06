@@ -8,6 +8,7 @@ import communs.objets.Point;
 import communs.objets.piece.PieceControleur;
 import communs.objets.player.PlayerView;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -57,11 +58,11 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
         // ouvre une nouvelle fenetre.
         EventQueue.invokeLater(() -> {
             JFrame frame = new JFrame();
-            frame.setSize(600, 600);
+            frame.setSize(200, 260);
+            frame.setResizable(false);
             frame.setLocationRelativeTo(null);
-            JPanel panel = new JPanel(new GridLayout(4, 3));
+            JPanel panel = new JPanel(new BorderLayout());
             JLabel texte1 = new JLabel("Voulez vous placer un partisant ? (Cliqué ou vous voulez)");
-            JLabel texte2 = new JLabel("(Cliqué ou vous voulez)");
 
             // créer une copy de la view de la piece du joueur actuel : pieceView
             // Evite les problèmes d'affichage d'un Jpanel blanc.
@@ -119,18 +120,9 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
                 frame.dispose();
                 game.postPartisan();// permet au joueur suivant de jouer.
             });
-            panel.add(new JLabel());
-            panel.add(texte1);
-            panel.add(new JLabel());
-            panel.add(new JLabel());
-            panel.add(texte2);
-            panel.add(new JLabel());
-            panel.add(new JLabel());
-            panel.add(pieceView);
-            panel.add(new JLabel());
-            panel.add(new JLabel());
-            panel.add(passer);
-            panel.add(new JLabel());
+            panel.add(texte1, BorderLayout.NORTH);
+            panel.add(pieceView, BorderLayout.CENTER);
+            panel.add(passer, BorderLayout.SOUTH);
             frame.setContentPane(panel);
             frame.setVisible(true);
         });

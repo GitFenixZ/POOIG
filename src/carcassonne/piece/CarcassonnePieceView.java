@@ -107,7 +107,10 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     public void tournerDroite() {
         BufferedImage buffered = rotateImageByDegrees(image, 90);
         image = buffered;
-        paintComponent(getGraphics());
+        // System.out.println(getGraphics() == null);
+        // add(new JLabel());
+        // paintComponent(getGraphics());
+        repaint();
         revalidate();
     }
 
@@ -117,7 +120,10 @@ public class CarcassonnePieceView extends PieceView<Terrain> {
     public void tournerGauche() {
         BufferedImage buffered = rotateImageByDegrees(image, -90);
         image = buffered;
-        paintComponent(getGraphics());
+        // System.out.println(getGraphics() == null);
+        // add(new JLabel());
+        // paintComponent(getGraphics());
+        repaint();
         revalidate();
     }
 
