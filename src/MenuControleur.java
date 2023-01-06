@@ -75,7 +75,7 @@ public class MenuControleur {
     public void playDominoTerminale(int nombreDeJoueur) {
         frame.setVisible(false);
         Scanner sc = new Scanner(System.in);
-        model.initDominoTerminale(nombreDeJoueur, sc);
+        model.initDominoTerminale(nombreDeJoueur);
         model.playDominoTerminale(sc, nombreDeJoueur);
     }
 
@@ -91,7 +91,7 @@ public class MenuControleur {
             frame.setIconImage(image);
         } catch (IOException ex) {
         }
-        model.initCarcassonne(nombreDeJoueur);
+        model.initCarcassonne();
         view.initCarcassonne(nombreDeJoueur);
         frame.revalidate();
     }

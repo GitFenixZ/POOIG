@@ -9,16 +9,6 @@ import communs.PlayGameControleur;
  */
 
 public class PlayDominoControleur extends PlayGameControleur<Integer> {
-    /**
-     * Constructeur
-     * 
-     * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
-     * @param nombreJoueur  Nombre de joueur qui vont jouer
-     */
-    public PlayDominoControleur(int nombreDePiece, int nombreJoueur, Scanner sc) {
-        model = new PlayDominoModel(nombreDePiece, nombreJoueur);
-        view = new PlayDominoView(model, this);
-    }
 
     /**
      * Constructeur
@@ -26,8 +16,8 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
      * @param nombreJoueur  Nombre de joueur qui vont jouer
      */
-    public PlayDominoControleur(int nombreDePiece, int nombreJoueur) {
-        model = new PlayDominoModel(nombreDePiece, nombreJoueur);
+    public PlayDominoControleur(int nombreDePiece) {
+        model = new PlayDominoModel(nombreDePiece);
         view = new PlayDominoView(model, this);
     }
 

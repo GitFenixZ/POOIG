@@ -19,9 +19,8 @@ public class PlayDominoModel extends PlayGameModel<Integer> {
      * Constructeur
      * 
      * @param nombreDePiece Nombre de piece presente dans le sac pour la partie
-     * @param nombreJoueur  Nombre de joueur qui vont jouer
      */
-    public PlayDominoModel(int nombreDePiece, int nombreJoueur) {
+    public PlayDominoModel(int nombreDePiece) {
         super(nombreDePiece);
         // initialise le plateau
         plateau = new DominoPlateauControleur(5, 5);
