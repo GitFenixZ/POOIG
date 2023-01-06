@@ -17,12 +17,12 @@ public class CarcassonneBotModel extends CarcassonnePlayerModel {
     }
 
     public boolean jouer(PlateauControleur<Terrain> plateauControleur, CarcassonneBotControleur botActuelControleur) {
-        Point position = plateauControleur.peutPlacer(getMain());
+        Point position = plateauControleur.getEmplacementPossible(getMain());
         if (position != null) {
             plateauControleur.setPiece(botActuelControleur, position);
             Random rd = new Random();
             // Veut-il placer un partisant
-            if (rd.nextInt(2) == 0 && !partisantsIsEmpty()) { // si 0, il place un partissant aléatoirement sur la
+            if (!partisantsIsEmpty() && rd.nextInt(2) == 0) { // si 0, il place un partissant aléatoirement sur la
                                                               // pièce.
                 ((CarcassonnePieceControleur) getMain()).placerPartisant(
                         new Point(rd.nextInt(getMain().getLargeur()), rd.nextInt(getMain().getHauteur())),

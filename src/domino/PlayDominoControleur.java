@@ -11,7 +11,6 @@ import communs.PlayGameControleur;
 public class PlayDominoControleur extends PlayGameControleur<Integer> {
     /**
      * Constructeur
-     * 
      */
     public PlayDominoControleur(int nombreDePiece) {
         model = new PlayDominoModel(nombreDePiece);

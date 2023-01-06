@@ -11,7 +11,6 @@ import java.awt.Color;
 public class PlayCarcassonneControleur extends PlayGameControleur<Terrain> {
     /**
      * Constructeur
-     * 
      */
     public PlayCarcassonneControleur() {
         model = new PlayCarcassonneModel();

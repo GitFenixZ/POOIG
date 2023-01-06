@@ -22,7 +22,7 @@ public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
      */
     public boolean jouerTerminal(PlateauControleur<Integer> plateauControleur,
             DominoBotControleur controleurBotDomino) {
-        Point position = plateauControleur.peutPlacer(getMain());
+        Point position = plateauControleur.getEmplacementPossible(getMain());
         if (position != null) {
             plateauControleur.setPiece(controleurBotDomino, position);
             System.out.println("Le bot " + getName() + " a joué.");
@@ -42,7 +42,7 @@ public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
      * @return si le robot a pu jouer
      */
     public boolean jouer(PlateauControleur<Integer> plateauControleur, DominoBotControleur controleurBotDomino) {
-        Point position = plateauControleur.peutPlacer(getMain());
+        Point position = plateauControleur.getEmplacementPossible(getMain());
         if (position != null) {
             plateauControleur.setPiece(controleurBotDomino, position);
             return true;

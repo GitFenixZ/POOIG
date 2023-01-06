@@ -16,7 +16,6 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
     /**
      * Constructeur
      * Contruit une partie de Carcassonne
-     * 
      */
     public PlayCarcassonneModel() {
         super(72);

@@ -57,7 +57,6 @@ public class MenuModel {
 
     /**
      * initialise une partie de Carcassonne.
-     * 
      */
     public void initCarcassonne() {
         game = new PlayCarcassonneControleur();

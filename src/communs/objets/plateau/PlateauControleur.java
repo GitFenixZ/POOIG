@@ -160,13 +160,16 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
 
     @Override
     /**
-     * Verifie si on peut placer une piece a l'emplacement actuel
+     * Vérifie s'il existe un emplacement sur le plateau où
+     * on peut poser la pièce
+     * tout en respectant les règles
      * 
-     * @param piece piece que l'on veut placer
-     * @return si on peut placer la piece ici.
+     * @param piece La piece que l'on veut placer
+     * @return true s'il existe un emplacement;
+     *         false sinon
      */
-    public boolean possibleDePlacer(PieceControleur<V> piece) {
-        return model.possibleDePlacer(piece);
+    public boolean existeEmplacement(PieceControleur<V> piece) {
+        return model.existeEmplacement(piece);
     }
 
     @Override
@@ -183,12 +186,13 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
     @Override
     /**
      * Donnes un coordonnée ou l'on peut placer la piece.
+     * Et rotate la piece dans le bon sens pour la placer a la position indiqué.
      * 
      * @param piece Piece a placer
      * @return des coordonnée ou l'on peut placer la pièce
      */
-    public Point peutPlacer(PieceControleur<V> piece) {
-        return model.peutPlacer(piece);
+    public Point getEmplacementPossible(PieceControleur<V> piece) {
+        return model.getEmplacementPossible(piece);
     }
 
     @Override
