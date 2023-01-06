@@ -6,7 +6,6 @@ import communs.PlayGameControleur;
 import communs.PlayGameModel;
 import communs.PlayGameView;
 import communs.interfaces.Demander;
-import communs.objets.plateau.PlateauView;
 
 public class PlayDominoTerminalView extends PlayGameView<Integer> implements Demander {
     PlayDominoTerminalView(PlayGameModel<Integer> model, PlayGameControleur<Integer> controleur) {
@@ -27,12 +26,12 @@ public class PlayDominoTerminalView extends PlayGameView<Integer> implements Dem
             }
         }
         ((PlayDominoControleur) getControleur()).play();
-        ((PlateauView) ((PlayDominoModel) getModel()).getImagePlateau()).afficher();
         getControleur().rejouer();
     }
 
     @Override
     public void actualiser() {
         ((PlayDominoControleur) getControleur()).pensezVousPouvoirJouer(sc, getModel().getActuelPlayer());
+        getControleur().nextPlayer();
     }
 }

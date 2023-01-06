@@ -68,6 +68,7 @@ public class PlateauControleur<V> implements InterfacePlateauControleur<V> {
      * @return si le joueur peut jouer ou non
      */
     public boolean pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<V>> player) {
+        view.affichePlateauEtJoueur(player);
         return view.pensezVousPouvoirJouer(sc, player);
     }
 
