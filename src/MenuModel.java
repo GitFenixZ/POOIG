@@ -15,13 +15,18 @@ public class MenuModel {
     MenuModel() {
     }
 
+    // Getter
+    public PlayGameControleur getGame() {
+        return game;
+    }
+
     /**
      * initialise une partie de domino
      * 
      * @param nombreDeJoueur nombre de joueur qui vont jouer.
      */
     public void initDomino(int nombreDeJoueur) {
-        game = new PlayDominoControleur(10 * nombreDeJoueur, nombreDeJoueur);
+        game = new PlayDominoControleur(10 * nombreDeJoueur);
     }
 
     /**
@@ -37,8 +42,8 @@ public class MenuModel {
      * 
      * @param nombreDeJoueur nombre de joueur qui vont jouer.
      */
-    public void initDominoTerminale(int nombreDeJoueur, Scanner sc) {
-        game = new PlayDominoControleur(10 * nombreDeJoueur, nombreDeJoueur, sc);
+    public void initDominoTerminale(int nombreDeJoueur) {
+        game = new PlayDominoControleur(10 * nombreDeJoueur);
     }
 
     /**
@@ -53,10 +58,9 @@ public class MenuModel {
     /**
      * initialise une partie de Carcassonne.
      * 
-     * @param nombreDeJoueur nombre de joueur qui vont jouer.
      */
-    public void initCarcassonne(int nombreDeJoueur) {
-        game = new PlayCarcassonneControleur(3);
+    public void initCarcassonne() {
+        game = new PlayCarcassonneControleur();
     }
 
     /**
@@ -105,8 +109,4 @@ public class MenuModel {
         ((PlayCarcassonneControleur) game).ajoutBot(nom, couleur);
     }
 
-    // getter
-    public PlayGameControleur getGame() {
-        return game;
-    }
 }

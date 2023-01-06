@@ -17,9 +17,8 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
      * Constructeur
      * Contruit une partie de Carcassonne
      * 
-     * @param nombreJoueur Nombre de joueur qui vont jouer
      */
-    public PlayCarcassonneModel(int nombreJoueur) {
+    public PlayCarcassonneModel() {
         super(72);
 
         // initialise le plateau
@@ -65,7 +64,7 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
             sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quatroze, 14));
         }
         for (int i = 0; i < 3; i++) {
-            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quize, 15));
+            sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.quinze, 15));
         }
         for (int i = 0; i < 2; i++) {
             sac.ajouter(new CarcassonnePieceControleur(CarcassonnePieceModel.seize, 16));
