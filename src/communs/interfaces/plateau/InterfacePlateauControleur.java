@@ -25,12 +25,15 @@ public interface InterfacePlateauControleur<V> {
     public void placerPiece(PlayerControleur<PieceControleur<V>> player, Scanner sc);
 
     /**
-     * Verifie si il est possible de placer la piece quelque parts sur la plateau
+     * Vérifie s'il existe un emplacement sur le plateau où
+     * on peut poser la pièce
+     * tout en respectant les règles
      * 
-     * @param piece piece que l'on veut placer
-     * @return si on peut placer la piece ici.
+     * @param piece La piece que l'on veut placer
+     * @return true s'il existe un emplacement;
+     *         false sinon
      */
-    public boolean existePlacement(PieceControleur<V> piece);
+    public boolean existeEmplacement(PieceControleur<V> piece);
 
     /**
      * Creer un String qui represente une partie du plateau.

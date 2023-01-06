@@ -180,12 +180,14 @@ public class PlayGameModel<V> {
     }
 
     /**
-     * Regarde si la piece du joueur actuel est plaçable un a un endroit sur plateau
-     * avec la configuration actuel.
+     * Vérifie s'il existe un emplacement sur le plateau où
+     * on peut poser la pièce du joueur actuel
+     * tout en respectant les règles
      * 
-     * @return si la piece a une position ou l'on peut la placer
+     * @return true s'il existe un emplacement;
+     *         false sinon
      */
-    public boolean existePlacement() {
-        return plateau.existePlacement(getActuelPlayer().getMain());
+    public boolean existeEmplacement() {
+        return plateau.existeEmplacement(getActuelPlayer().getMain());
     }
 }
