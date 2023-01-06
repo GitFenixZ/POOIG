@@ -2,19 +2,19 @@
 
 compile (){
 
-    echo "Compiling..."
+    echo "[COMPILATION]..."
 
     find -name "*.java" > sources.txt
     javac -d bin @sources.txt
     rm sources.txt
 
-    echo "Done!"
+    echo "[COMPILATION TERMINÉE]!"
 
 }
 
 run (){
 
-    echo "Launching..."
+    echo "[LANCEMENT]..."
 
     java -cp bin/ Menu
 
