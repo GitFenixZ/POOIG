@@ -12,10 +12,9 @@ public class PlayCarcassonneControleur extends PlayGameControleur<Terrain> {
     /**
      * Constructeur
      * 
-     * @param nombreJoueur Nombre de joueur qui vont jouer
      */
-    public PlayCarcassonneControleur(int nombreJoueur) {
-        model = new PlayCarcassonneModel(nombreJoueur);
+    public PlayCarcassonneControleur() {
+        model = new PlayCarcassonneModel();
         view = new PlayGameView<Terrain>(model, this);
     }
 
