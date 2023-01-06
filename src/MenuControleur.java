@@ -53,6 +53,7 @@ public class MenuControleur {
         model.initDomino(nombreDeJoueur);
         view.initPanelParametresDomino(nombreDeJoueur);
         view.pack();
+        view.setLocationRelativeTo(null);
         view.revalidate();
     }
 
@@ -79,6 +80,7 @@ public class MenuControleur {
         model.initCarcassonne();
         view.initPanelParametresCarcassonne(nombreDeJoueur);
         view.pack();
+        view.setLocationRelativeTo(null);
         view.revalidate();
     }
 
