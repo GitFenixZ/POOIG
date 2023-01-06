@@ -12,7 +12,7 @@ La commande `bash` vient généralement avec des OS UNIX, si vous êtes sur Wind
 
 ## Instructions
 
-Pour démarrer le jeu, depuis le dossier POOIG, utilisez la commande `$ bash launch.sh`.
+Pour démarrer le jeu, depuis le dossier `ARROUSThomas-SOANTonyLy`, utilisez la commande `$ bash launch.sh`.
 
 Après avoir exécuté la commande ci-dessus, une fenêtre appraitra sur votre écran.
 
