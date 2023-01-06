@@ -32,9 +32,9 @@ public class MenuControleur {
      * 
      * @param nombreDeJoueur nombre de joueur qui jouerons la parties
      */
-    public void prepareDominoTerminale(int nombreDeJoueur) {
+    public void prepareDominoTerminal(int nombreDeJoueur) {
         Scanner sc = new Scanner(System.in);
-        model.initDominoTerminale(sc, nombreDeJoueur);
+        model.initDominoTerminal(sc, nombreDeJoueur);
     }
 
     /**
