@@ -53,6 +53,11 @@ public class PlayGameModel<V> {
         return joueurs.get(indice);
     }
 
+    public int getNombreDePiece() {
+        if (sac == null) return -1;
+        return sac.getNombreDePiece();
+    }
+
     /**
      * Met l'indice au joueur suivant, et le fait piocher permet au joueur suivant
      * de jouer.

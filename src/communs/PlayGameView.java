@@ -2,6 +2,7 @@ package communs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -27,8 +28,8 @@ public class PlayGameView<V> extends JPanel {
     private PlayGameControleur<V> controleur;
 
     private JPanel sideBar;
-    private JPanel pseudo;
-    private JPanel score;
+    private JPanel infoJoueur;
+    private JPanel infoSac;
     private JPanel piece;
     private CommandButtons commandButtons;
 
@@ -53,14 +54,37 @@ public class PlayGameView<V> extends JPanel {
         this.model = model;
         this.controleur = controleur;
 
+        // La police pour les JLabels
+        Font font = new Font("Helvetica", Font.PLAIN, 16);
+
         // La barre d'infos
         sideBar = new JPanel(new GridLayout(4, 1));
 
-        // Case du Joueur
-        pseudo = ajouterCase("Joueur : \n", Color.GRAY);
+        // Case d'informations
+        // infoJoueur = ajouterCase("Joueur: ", Color.GRAY);
+        infoJoueur = new JPanel();
+        infoJoueur.setLayout(new GridLayout(2, 1));
+        infoJoueur.setBackground(Color.GRAY);
 
-        // Case du Score
-        score = ajouterCase("Score :\n", Color.GRAY);
+        JPanel top = new JPanel(new GridBagLayout());
+        top.setBackground(Color.GRAY);
+        JLabel joueurLabel = new JLabel("Joueur: ");
+        joueurLabel.setFont(font);
+        top.add(joueurLabel);
+
+        JPanel bot = new JPanel(new GridBagLayout());
+        bot.setBackground(Color.GRAY);
+        JLabel scoreLabel = new JLabel("Score: ");
+        scoreLabel.setFont(font);
+        bot.add(scoreLabel);
+
+        infoJoueur.add(top);
+        infoJoueur.add(bot);
+        sideBar.add(infoJoueur);
+
+        // Case du Sac
+        infoSac = ajouterCase("Pieces restantes: ", Color.GRAY, font);
+        sideBar.add(infoSac);
 
         // Case preview
         piece = new JPanel();
@@ -80,17 +104,33 @@ public class PlayGameView<V> extends JPanel {
         add(model.getImagePlateau(), BorderLayout.CENTER);
     }
 
+    private void updateLabelJoueur(int i, String s) {
+        JPanel panel = (JPanel) infoJoueur.getComponent(i);
+        JLabel label = (JLabel) panel.getComponent(0);
+        label.setText(s);
+    }
+
+    private void updateLabelSac(String s) {
+        JLabel label = (JLabel) infoSac.getComponent(0);
+        label.setText(s);
+    }
+
     /**
      * actualise l'affichage de la game.
      */
     public void actualiser() {
-        // Case du Joueur
-        pseudo.removeAll();
-        pseudo.add(new JLabel("Joueur :\n" + controleur.getActuelPlayer().getName()));
+        // Case d'informations
+        // infoJoueur.removeAll();
+        // infoJoueur.add(new JLabel("Joueur :\n" +
+        // controleur.getActuelPlayer().getName()));
+        // Update Label Score
+        updateLabelJoueur(0, "Joueur: " + controleur.getActuelPlayer().getName());
+        // Update Label Score
+        updateLabelJoueur(1, "Score: " + controleur.getActuelPlayer().getscore());
 
-        // Case du Score
-        score.removeAll();
-        score.add(new JLabel("Score :\n" + controleur.getActuelPlayer().getscore()));
+        // Case du Sac
+        // infoSac.removeAll();
+        updateLabelSac("Pieces restantes: " + model.getNombreDePiece());
 
         // Case preview
         piece.removeAll();
@@ -107,10 +147,11 @@ public class PlayGameView<V> extends JPanel {
     /**
      * ajoute une case a la sideBar à gauche de l'affichage
      */
-    private JPanel ajouterCase(String content, Color c) {
+    private JPanel ajouterCase(String content, Color c, Font font) {
         JPanel panel = new JPanel();
         panel.setBackground(c);
         JLabel label = new JLabel(content, SwingConstants.CENTER);
+        label.setFont(font);
         panel.add(label);
         sideBar.add(panel);
         return panel;
