@@ -6,7 +6,9 @@ Ce fichier est un fichier d'informations destiné à des utilisateurs souhaitant
 
 ## Configuration requise
 
-Avant tout, assurez vous d'avoir la version 11 de Java.
+Avant tout, assurez vous d'avoir la version 11 de Java et d'avoir accès à la commande `bash`.
+
+La commande `bash` vient généralement avec des OS UNIX, si vous êtes sur Windows utilisez Git Bash.
 
 ## Instructions
 
