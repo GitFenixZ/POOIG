@@ -99,36 +99,24 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] trois =
-                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                        Terrain.QUARTIERBOUCLIER, Terrain.NONE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.PRE,
-                                                        Terrain.PRE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.PRE, Terrain.CHEMIN,
-                                                        Terrain.CHEMIN },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.CHEMIN, Terrain.CHEMIN,
-                                                        Terrain.PRE },
+                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.NONE },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.PRE,Terrain.PRE },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.PRE, Terrain.CHEMIN,Terrain.CHEMIN },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.CHEMIN, Terrain.CHEMIN,Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] quatre =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.CHEMIN, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.CHEMIN, Terrain.QUARTIER,Terrain.QUARTIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] cinq =
-                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                        Terrain.QUARTIERBOUCLIER, Terrain.NONE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.PRE,
-                                                        Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER },
+                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.NONE },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.PRE,Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] six =
@@ -141,8 +129,8 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
         public static Terrain[][] sept =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
                                         { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.PRE, Terrain.CHEMIN, Terrain.CHEMIN },
-                                        { Terrain.PRE, Terrain.CHEMIN, Terrain.CARREFOUR, Terrain.CHEMIN, Terrain.PRE },
+                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CARREFOUR, Terrain.CHEMIN, Terrain.CHEMIN },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] huit =
@@ -155,34 +143,29 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
         public static Terrain[][] neuf =
                         /* */ { { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE },
                                         { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CARREFOUR, Terrain.CHEMIN,
-                                                        Terrain.CHEMIN },
+                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CARREFOUR, Terrain.CHEMIN,Terrain.CHEMIN },
                                         { Terrain.PRE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] dix =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
-                                        { Terrain.PRE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.PRE },
-                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
+                                        { Terrain.PRE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.PRE },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.QUARTIER, Terrain.PRE, Terrain.PRE },
                                         { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] onze =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
-                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.QUARTIER },
-                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.QUARTIER },
-                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
+                                        { Terrain.QUARTIER, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
+                                        { Terrain.QUARTIER, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] douze =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.PRE, Terrain.PRE, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.PRE, Terrain.QUARTIER,Terrain.QUARTIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] treize =
@@ -195,33 +178,28 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
         public static Terrain[][] quatroze =
                         /* */ { { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE },
                                         { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.PRE, Terrain.PRE, Terrain.ABBAYE, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.PRE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.PRE },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.ABBAYE, Terrain.CHEMIN, Terrain.PRE },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.CHEMIN, Terrain.CHEMIN, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
-        public static Terrain[][] quize =
+        public static Terrain[][] quinze =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.PRE,
-                                                        Terrain.PRE },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.PRE, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.QUARTIER, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
+                                        { Terrain.PRE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.QUARTIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] seize =
                         /* */ { { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] dixsept =
                         /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
                                         { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CHEMIN,
-                                                        Terrain.CHEMIN },
+                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CHEMIN,Terrain.CHEMIN },
                                         { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
@@ -234,65 +212,43 @@ public class CarcassonnePieceModel extends PieceModel<Terrain> {
 
         public static Terrain[][] dixneuf =
                         /* */ { { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
+                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER,Terrain.QUARTIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] vingt =
-                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                        Terrain.QUARTIERBOUCLIER, Terrain.NONE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.CHEMIN,
-                                                        Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER },
+                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.NONE },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.CHEMIN,Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] vingtun =
-                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                        Terrain.QUARTIERBOUCLIER, Terrain.NONE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
-                                        { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.QUARTIERBOUCLIER, Terrain.NONE } };
+                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.NONE },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.NONE } };
 
         public static Terrain[][] vingtdeux =
                         /* */ { { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE },
                                         { Terrain.PRE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.PRE },
-                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CARREFOUR, Terrain.CHEMIN,
-                                                        Terrain.CHEMIN },
+                                        { Terrain.CHEMIN, Terrain.CHEMIN, Terrain.CARREFOUR, Terrain.CHEMIN,Terrain.CHEMIN },
                                         { Terrain.PRE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.PRE },
                                         { Terrain.NONE, Terrain.PRE, Terrain.CHEMIN, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] vingttrois =
-                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                        Terrain.QUARTIERBOUCLIER, Terrain.NONE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,
-                                                        Terrain.PRE,
-                                                        Terrain.PRE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.PRE,
-                                                        Terrain.PRE },
-                                        { Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.PRE, Terrain.PRE,
-                                                        Terrain.PRE },
+                        /* */ { { Terrain.NONE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER, Terrain.NONE },
+                                        { Terrain.PRE, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.QUARTIERBOUCLIER,Terrain.QUARTIERBOUCLIER },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE,Terrain.QUARTIERBOUCLIER },
                                         { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
 
         public static Terrain[][] vingtquatre =
-                        /* */ { { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.PRE, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.PRE, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.QUARTIER, Terrain.QUARTIER, Terrain.PRE, Terrain.QUARTIER,
-                                                        Terrain.QUARTIER },
-                                        { Terrain.NONE, Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.NONE } };
+                        /* */ { { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE,Terrain.PRE },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE,Terrain.PRE },
+                                        { Terrain.PRE, Terrain.PRE, Terrain.PRE, Terrain.PRE,Terrain.PRE },
+                                        { Terrain.NONE, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.QUARTIER, Terrain.NONE } };
 }
