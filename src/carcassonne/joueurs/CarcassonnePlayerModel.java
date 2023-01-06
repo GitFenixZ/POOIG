@@ -26,7 +26,7 @@ public class CarcassonnePlayerModel extends PlayerModel<PieceControleur<Terrain>
      * Contructeur du model du player
      * 
      * @param name    pseudo du joueur
-     * @param couleur couleur des meaples.
+     * @param couleur couleur des partisans.
      */
     public CarcassonnePlayerModel(String name, Color couleur) {
         super(name);

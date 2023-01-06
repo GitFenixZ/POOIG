@@ -23,7 +23,7 @@ public class CarcassonnePlayerControleur extends PlayerControleur<PieceControleu
      * Contructeur d'un player
      * 
      * @param name    pseudo du joueur.
-     * @param couleur couleur des meaples.
+     * @param couleur couleur des partisans.
      */
     public CarcassonnePlayerControleur(String name, Color couleur) {
         model = new CarcassonnePlayerModel(name, couleur);

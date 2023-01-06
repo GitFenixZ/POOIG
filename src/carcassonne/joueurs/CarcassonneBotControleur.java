@@ -16,7 +16,7 @@ public class CarcassonneBotControleur extends CarcassonnePlayerControleur implem
      * Contructeur du bot
      * 
      * @param name    pseudo du bot
-     * @param couleur couleur de ses meaples
+     * @param couleur couleur de ses partisans
      */
     public CarcassonneBotControleur(String name, Color couleur) {
         super();
