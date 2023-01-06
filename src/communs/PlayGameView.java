@@ -66,12 +66,14 @@ public class PlayGameView<V> extends JPanel {
         infoJoueur.setLayout(new GridLayout(2, 1));
         infoJoueur.setBackground(Color.GRAY);
 
+        // La case du joueur
         JPanel top = new JPanel(new GridBagLayout());
         top.setBackground(Color.GRAY);
         JLabel joueurLabel = new JLabel("Joueur: ");
         joueurLabel.setFont(font);
         top.add(joueurLabel);
 
+        // La case du score
         JPanel bot = new JPanel(new GridBagLayout());
         bot.setBackground(Color.GRAY);
         JLabel scoreLabel = new JLabel("Score: ");
@@ -80,10 +82,12 @@ public class PlayGameView<V> extends JPanel {
 
         infoJoueur.add(top);
         infoJoueur.add(bot);
+
+        // Ajoute les infos du joueur sur la barre de gauche
         sideBar.add(infoJoueur);
 
         // Case du Sac
-        infoSac = ajouterCase("Pieces restantes: ", Color.GRAY, font);
+        infoSac = ajouterCase("Pièces restantes: ", Color.GRAY, font);
         sideBar.add(infoSac);
 
         // Case preview
@@ -100,7 +104,6 @@ public class PlayGameView<V> extends JPanel {
         add(sideBar, BorderLayout.WEST);
 
         // Plateau de jeu
-
         add(model.getImagePlateau(), BorderLayout.CENTER);
     }
 
@@ -120,17 +123,13 @@ public class PlayGameView<V> extends JPanel {
      */
     public void actualiser() {
         // Case d'informations
-        // infoJoueur.removeAll();
-        // infoJoueur.add(new JLabel("Joueur :\n" +
-        // controleur.getActuelPlayer().getName()));
         // Update Label Score
         updateLabelJoueur(0, "Joueur: " + controleur.getActuelPlayer().getName());
         // Update Label Score
-        updateLabelJoueur(1, "Score: " + controleur.getActuelPlayer().getscore());
+        updateLabelJoueur(1, "Score: " + controleur.getActuelPlayer().getScore());
 
         // Case du Sac
-        // infoSac.removeAll();
-        updateLabelSac("Pieces restantes: " + model.getNombreDePiece());
+        updateLabelSac("Pièces restantes: " + model.getNombreDePiece());
 
         // Case preview
         piece.removeAll();
@@ -158,7 +157,7 @@ public class PlayGameView<V> extends JPanel {
     }
 
     /**
-     * A la fin de la partie affiche une nouvelle fenetre avec toutes les
+     * A la fin de la partie affiche une nouvelle fenêtre avec toutes les
      * explications
      */
     public void finDePartie() {
@@ -170,7 +169,7 @@ public class PlayGameView<V> extends JPanel {
         revalidate();
         panel.add(new JLabel("Bravo a tous :"));
         for (PlayerControleur<PieceControleur<V>> p : model.getJoueurs()) {
-            panel.add(new JLabel("*" + p.getName() + " : " + p.getscore()));
+            panel.add(new JLabel("*" + p.getName() + " : " + p.getScore()));
         }
         JButton ok = new JButton("Ok");
         ok.addActionListener(event -> System.exit(0));
@@ -214,7 +213,7 @@ public class PlayGameView<V> extends JPanel {
             c.weightx = 1.0;
             c.weighty = 1.0;
             c.fill = GridBagConstraints.BOTH;
-            int x, y; // for clarity
+            int x, y; // pour plus de clarté
             makeButton("RotateLeft", x = 0, y = 0).addActionListener(event -> controleur.tournerGauche());
 
             makeButton("RotateRight", x = 2, y = 0).addActionListener(event -> controleur.tournerDroite());
@@ -238,7 +237,7 @@ public class PlayGameView<V> extends JPanel {
                     controleur.placerPiece();
                     if (controleur.getActuelPlayer() instanceof CarcassonnePlayerControleur) {
                         ((CarcassonnePlayerControleur) controleur.getActuelPlayer())
-                                .placerPartisant((PlayCarcassonneControleur) controleur);
+                                .placerpartisan((PlayCarcassonneControleur) controleur);
                         desactiverBoutonPlacer();
                     } else {
                         controleur.postPartisan();

@@ -23,7 +23,7 @@ public class PlayerView<P> extends JPanel implements InterfacePlayerView {
         setLayout(new GridLayout(2, 1));
         JPanel a = new JPanel();
         a.add(new JLabel(model.getName()));
-        a.add(new JLabel("" + model.getscore()));
+        a.add(new JLabel("" + model.getScore()));
         add(a);
     }
 
@@ -49,11 +49,11 @@ public class PlayerView<P> extends JPanel implements InterfacePlayerView {
      */
     @Override
     public String toString() {
-        return "Nom : " + model.getName() + " Score : " + model.getscore() + "\nMain :\n" + model.getMain();
+        return "Nom : " + model.getName() + " Score : " + model.getScore() + "\nMain :\n" + model.getMain();
     }
 
     /**
-     * Reactualise les infos d'un joueur dans son affichage.
+     * Réactualise les infos d'un joueur dans son affichage.
      */
     @Override
     public void actualiser() {
@@ -61,7 +61,7 @@ public class PlayerView<P> extends JPanel implements InterfacePlayerView {
         setLayout(new GridLayout(2, 1));
         JPanel a = new JPanel();
         a.add(new JLabel(model.getName()));
-        a.add(new JLabel("" + model.getscore()));
+        a.add(new JLabel("" + model.getScore()));
         add(a);
         add(((PieceControleur) getModel().getMain()).getView());
         revalidate();

@@ -25,13 +25,13 @@ import javax.swing.JPanel;
 public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> {
 
     /**
-     * Retourne un String decrivant le joueur actuel
+     * Retourne un String décrivant le joueur actuel
      */
     @Override
     public String toString() {
-        return "Nom : " + getModel().getName() + " Score : " + getModel().getscore() + " Et a "
-                + ((CarcassonnePlayerModel) getModel()).getNombreDePartisant()
-                + " partisants.\nPièce en main :\n" + ((CarcassonnePieceControleur) getModel().getMain());
+        return "Nom : " + getModel().getName() + " Score : " + getModel().getScore() + " Et a "
+                + ((CarcassonnePlayerModel) getModel()).getNombreDePartisan()
+                + " partisans.\nPièce en main :\n" + ((CarcassonnePieceControleur) getModel().getMain());
     }
 
     /**
@@ -50,16 +50,16 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
     }
 
     /**
-     * Methode permettant de placer un partisant sur une tuile.
+     * Méthode permettant de placer un partisan sur une tuile.
      * 
      * @param game partie en tain d'être joué
      */
-    public void placerPartisant(PlayCarcassonneControleur game) {
-        // ouvre une nouvelle fenetre.
+    public void placerPartisan(PlayCarcassonneControleur game) {
+        // ouvre une nouvelle fenêtre.
         EventQueue.invokeLater(() -> {
             JFrame frame = new JFrame();
-            // Empeche la fermeture de la fenêtre de placement de partisan
-            frame.setDefaultCloseOperation(0); 
+            // Empêche la fermeture de la fenêtre de placement de partisan
+            frame.setDefaultCloseOperation(0);
             frame.setSize(200, 260);
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
@@ -70,8 +70,8 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
             panelTexte.add(texte1);
             panelTexte.add(texte2);
 
-            // créer une copy de la view de la piece du joueur actuel : pieceView
-            // Evite les problèmes d'affichage d'un Jpanel blanc.
+            // créer une copy de la view de la pièce du joueur actuel : pieceView
+            // Évite les problèmes d'affichage d'un JPanel blanc.
             CarcassonnePieceView pieceView = new CarcassonnePieceView(
                     ((CarcassonnePieceControleur) getModel().getMain()).getId());
 
@@ -82,15 +82,15 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
             pieceView.revalidate();
 
             /**
-             * Ajout de la posibilité de cliqué à l'endroit de piece que l'on souhaite pour
-             * pouvoir placer le partisant.
+             * Ajout de la possibilité de cliqué à l'endroit de piece que l'on souhaite pour
+             * pouvoir placer le partisan.
              */
             pieceView.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     frame.dispose();
                     ((CarcassonnePlayerControleur) getControleur())
-                            .placerPartisant(
+                            .placerpartisan(
                                     new Point(
                                             ((CarcassonnePieceControleur) getModel().getMain()).getPartisan().size()
                                                     * e.getX()

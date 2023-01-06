@@ -6,7 +6,7 @@ import communs.objets.plateau.PlateauControleur;
 import communs.objets.player.PlayerModel;
 
 /**
- * Modelise un robot qui peut jouer a domino.
+ * Modélise un robot qui peut jouer a domino.
  */
 public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
     DominoBotModel(String nom) {
@@ -14,7 +14,7 @@ public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
     }
 
     /**
-     * Methode a utiliser pour jouer dans le terminal.
+     * Méthode a utiliser pour jouer dans le terminal.
      * Affiche les informations importante.
      * 
      * @param plateauControleur Plateau sur lequel on joue en se moment.
@@ -34,7 +34,7 @@ public class DominoBotModel extends PlayerModel<PieceControleur<Integer>> {
     }
 
     /**
-     * Methode a utiliser pour jouer sans le terminal.
+     * Méthode a utiliser pour jouer sans le terminal.
      * n'affiche aucune informations.
      * Permet de faire jouer un joueur automatiquement.
      * 

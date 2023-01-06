@@ -8,9 +8,9 @@ import communs.objets.piece.PieceModel;
 import communs.objets.piece.PieceView;
 
 /**
- * Interface du controleur des Pieces.
+ * Interface du contrôleur des pièces.
  * 
- * V represente le type des valeurs qui apparait sur les pièces du jeu.
+ * V représente le type des valeurs qui apparaît sur les pièces du jeu.
  * Exemple : Integer dans le domino.
  */
 public interface InterfacePieceControleur<V> {
@@ -43,32 +43,32 @@ public interface InterfacePieceControleur<V> {
     public boolean comparer(Direction cote, PieceControleur<V> piece);
 
     /**
-     * Methode qui tourne une piece à 90 degrès sur la droite.
-     * Les valeur qui etait en haut seront à droite.
-     * Les valeur qui etait a droite seront en bas.
-     * Les valeur qui etait en bas seront à gauche.
-     * Les valeur qui etait a gauche seront en haut.
+     * Méthode qui tourne une piece à 90 degrés sur la droite.
+     * Les valeur qui était en haut seront à droite.
+     * Les valeur qui était a droite seront en bas.
+     * Les valeur qui était en bas seront à gauche.
+     * Les valeur qui était a gauche seront en haut.
      */
     public void tournerDroite();
 
     /**
-     * Methode qui tourne une piece à 90 degrès sur la gauche.
-     * Les valeur qui etait en haut seront à gauche.
-     * Les valeur qui etait a gauche seront en bas.
-     * Les valeur qui etait en bas seront à droite.
-     * Les valeur qui etait a droite seront en haut.
+     * Méthode qui tourne une piece à 90 degrés sur la gauche.
+     * Les valeur qui était en haut seront à gauche.
+     * Les valeur qui était a gauche seront en bas.
+     * Les valeur qui était en bas seront à droite.
+     * Les valeur qui était a droite seront en haut.
      */
     public void tournerGauche();
 
     /**
-     * Creer un String avec les elements de la lignes d'indice 'indice' Si ce n'est
-     * pas la premiere ou la dernière ligne, elle mettera des espaces à la places de
+     * Crée un String avec les elements de la lignes d'indice 'indice' Si ce n'est
+     * pas la première ou la dernière ligne, elle mettra des espaces à la places de
      * endroit ou il n'y a pas de numéro.
-     * Si c'est la premiere ou la derniere ligne elle fera un string avec tout les
+     * Si c'est la première ou la dernière ligne elle fera un string avec tout les
      * valeurs.
      * 
-     * @param indice indice de la ligne a recuperer
+     * @param indice indice de la ligne à récupérer
      * @return une String avec les element de la ligne indice
      */
-    public String getligne(int indice);
+    public String getLigne(int indice);
 }

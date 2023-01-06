@@ -3,7 +3,7 @@ package carcassonne;
 import java.awt.Color;
 
 /**
- * Class representant un partisant
+ * Class représentant un partisan
  */
 public class Partisan {
 

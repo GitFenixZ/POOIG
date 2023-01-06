@@ -5,7 +5,7 @@ import communs.objets.piece.PieceControleur;
 import communs.objets.player.PlayerControleur;
 
 /**
- * Class qui controle une partie de domino qui se joue.
+ * Class qui contrôle une partie de domino qui se joue.
  * V est le type des valeur présente sur les pièces du jeu.
  */
 
@@ -71,7 +71,7 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * Methode qui permet de faire piocher un joueur dans le sac
+     * Méthode qui permet de faire piocher un joueur dans le sac
      * 
      * @param player joueur a faire piocher
      */
@@ -89,14 +89,14 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * @return le nombre de joueur enregister dans la partie.
+     * @return le nombre de joueur enregistrées dans la partie.
      */
     public int getNombreDeJoueur() {
         return model.getNombreDeJoueur();
     }
 
     /**
-     * tourne la piece qui est dans la maun joueur actuel dans le sens horaire de
+     * tourne la pièce qui est dans la main joueur actuel dans le sens horaire de
      * 90°.
      */
     public void tournerDroite() {
@@ -105,8 +105,8 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * tourne la piece qui est dans la maun joueur actuel dans le sens
-     * trigonometrique de 90°.
+     * tourne la pièce qui est dans la main joueur actuel dans le sens
+     * horaire de 90°.
      */
     public void tournerGauche() {
         model.tournerGauche();
@@ -114,7 +114,7 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * fait deplacer le joueur sur le plateau dans la direction indiqué.
+     * fait déplacer le joueur sur le plateau dans la direction indiquée.
      */
     public void allerADroite() {
         model.allerADroite();
@@ -137,7 +137,7 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * Place la piece du joueur actuel sur le plateau.
+     * Place la pièce du joueur actuel sur le plateau.
      */
     public void placerPiece() {
         model.placerPiece();
@@ -146,7 +146,7 @@ public class PlayGameControleur<V> {
     }
 
     /**
-     * Methode a appliquer après que l'on souhaite savoir ou le partisant sera placé
+     * Méthode a appliquer après que l'on souhaite savoir ou le partisan sera placé
      * pour Carcassonne.
      * Permet de continuer la partie, après qu'un partisan ai été placé.
      */
@@ -154,12 +154,12 @@ public class PlayGameControleur<V> {
         view.activerBoutonPlacer();
         nextPlayer();
         view.actualiser();
-        allerADroite();// actualise l'affichage de la piece
-        allerAGauche();// rudimentaire ...
+        allerADroite();// actualise l'affichage de la pièce
+        allerAGauche();// rudimentaire ... ne pas supprimer
     }
 
     /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * Lance une partie complete. Du début jusqu'a ce qu'il n'y ai plus de pièce
      * dans le sac.
      * 
      * Avec interface Graphique

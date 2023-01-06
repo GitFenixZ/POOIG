@@ -163,7 +163,7 @@ public class MenuView extends JFrame {
     /**
      * Lance la partie graphique avec la view du jeu adapté
      * 
-     * @param gameView la view de la fenetre du jeu qu'on lance
+     * @param gameView la view de la fenêtre du jeu qu'on lance
      */
     public void play(PlayGameView gameView) {
         pane.removeAll();

@@ -6,7 +6,7 @@ import communs.objets.Direction;
 
 public interface Demander {
     /**
-     * Methode qui permet de demander une direction dans le terminal.
+     * Méthode qui permet de demander une direction dans le terminal.
      * 
      * @param sc       System.in permettra de lire la reponse de l'utilisateur
      * @param question La question qui vas être posee.
@@ -30,7 +30,7 @@ public interface Demander {
     }
 
     /**
-     * Methode qui permet de demander un boolean.
+     * Méthode qui permet de demander un boolean.
      * 
      * @param sc       System.in permettra de lire la reponse de l'utilisateur
      * @param question La question qui vas être posee.

@@ -34,27 +34,30 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
 
     @Override
     /**
-     * Raffraichi l'affichage graphique.
+     * Rafraîchi l'affichage graphique.
      */
     public void actualiser() {
         removeAll();
         setLayout(new GridLayout(5, 5));
         PieceControleur<V> p;
+
+        // pour toutes les pièces autour de notre position dans un rayon de 2 cases
         for (int j = model.getActuelY() - 2; j <= model.getActuelY() + 2; j++) {
             for (int i = model.getActuelX() - 2; i <= model.getActuelX() + 2; i++) {
+
                 JPanel piece = new JPanel(new GridLayout());
                 try {
                     p = model.getPiece(new Point(i, j));
                     if (p != null) {
-                        piece.add(p.getView());
+                        piece.add(p.getView()); // ajoute la représentation de la pièce
                     } else {
-                        piece.setBackground(Color.DARK_GRAY);
+                        piece.setBackground(Color.DARK_GRAY); // rend la pièce grisée
                     }
                 } catch (positionInvalide e) {
-                    piece.setBackground(Color.DARK_GRAY);
+                    piece.setBackground(Color.DARK_GRAY); // rend la pièce grisée
                 }
                 if (i == model.getActuelX() && j == model.getActuelY()) {
-                    piece.setBackground(Color.BLACK);
+                    piece.setBackground(Color.BLACK); // noirci le centre pour se repérer
                 }
                 piece.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -98,22 +101,28 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
 
     @Override
     /**
-     * Creer un String qui represente une partie du plateau.
+     * Crée un String qui représente une partie du plateau.
      * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la
-     * position ou l'on est. Si il y a des piece dans les positions affichees, cela
+     * position ou l'on est. Si il y a des piece dans les positions affichées, cela
      * les affiches.
      */
     public void afficher() {
-        String res = "-".repeat((model.getLargeurPiece() * 2 + 2) * (5) + 1) + "\n";
+        String res = repeatString("-", (model.getLargeurPiece() * 2 + 2) * (5) + 1) + "\n";
 
+        // Parcourt les lignes du plateau
         for (int j = model.getActuelY() - 2; j <= model.getActuelY() + 2; j++) {
+
+            // Parcourt les lignes des pièces du plateau de la ligne actuelle
             for (int k = 0; k < model.getHauteurPiece(); k++) {
                 res += "|";
+
+                // Parcourt les colonnes
                 for (int i = model.getActuelX() - 2; i <= model.getActuelX() + 2; i++) {
+
                     try {
                         Point point = new Point(i, j);
                         if (model.getPiece(point) != null) {
-                            res += model.getPiece(point).getligne(k)
+                            res += model.getPiece(point).getLigne(k)
                                     + "|";
                         } else {
                             if (i == model.getActuelX() && j == model.getActuelY()) {
@@ -123,7 +132,7 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
                             }
                         }
                     } catch (positionInvalide e) {
-                        res += " ".repeat(model.getLargeurPiece() * 2 + 1) + "|";
+                        res += repeatString(" ", model.getLargeurPiece() * 2 + 1) + "|";
                     }
                 }
                 res += "\n";
@@ -141,8 +150,14 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
     @Override
     public String toString() {
         String[] affichage = new String[model.getHauteur() * model.getHauteurPiece()];
+
+        // Parcourt les lignes du plateau
         for (int i = 0; i < model.getHauteur(); i++) {
+
+            // Parcourt les colonnes du plateau
             for (int j = 0; j < model.getLargeur(); j++) {
+
+                // Parcourt les lignes de la piece
                 for (int k = 0; k < model.getHauteurPiece(); k++) {
                     if (affichage[i * model.getHauteurPiece() + k] == null) {
                         affichage[i * model.getHauteurPiece() + k] = "";
@@ -150,7 +165,7 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
                     try {
                         Point point = new Point(j, i);
                         if (model.getPiece(point) != null) {
-                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(point).getligne(k) + "|";
+                            affichage[i * model.getHauteurPiece() + k] += model.getPiece(point).getLigne(k) + "|";
                         } else {
                             affichage[i * model.getHauteurPiece() + k] += repeatString(" ",
                                     model.getLargeurPiece() * 2 + 1)
@@ -174,7 +189,7 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
     }
 
     /**
-     * Methode qui permet de mettre un message d'erreur en fonction du deplacement
+     * Méthode qui permet de mettre un message d'erreur en fonction du deplacement
      * effectué.
      * 
      * @param deplacement deplacement qui est realise
@@ -183,16 +198,16 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
     public void deplacement(Direction deplacement) {
         switch (deplacement) {
             case RIGHT:
-                System.out.println("Erreur : vous ne pouvez pas vous deplacer à droite.");
+                System.out.println("Erreur : vous ne pouvez pas vous déplacer à droite.");
                 break;
             case LEFT:
-                System.out.println("Erreur : vous ne pouvez pas vous deplacer à gauche.");
+                System.out.println("Erreur : vous ne pouvez pas vous déplacer à gauche.");
                 break;
             case UP:
-                System.out.println("Erreur : vous ne pouvez pas vous deplacer en haut.");
+                System.out.println("Erreur : vous ne pouvez pas vous déplacer en haut.");
                 break;
             case DOWN:
-                System.out.println("Erreur : vous ne pouvez pas vous deplacer en bas.");
+                System.out.println("Erreur : vous ne pouvez pas vous déplacer en bas.");
                 break;
             default:
                 System.out.println("Erreur : reponse invalide.");
@@ -214,11 +229,11 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
     }
 
     /**
-     * Methode qui demande au joueur si il pense pouvoir jouer.
-     * Si il ne peut pas alors il repioche, si il peut, la methode l'invite a
+     * Méthode qui demande au joueur si il pense pouvoir jouer.
+     * Si il ne peut pas alors il re-pioche, si il peut, la Méthode l'invite a
      * chercher.
      * 
-     * @param sc     scanner qui attends les reponses au questions
+     * @param sc     scanner qui attends les réponses au questions
      * @param player joueur qui est en train de jouer
      * @return si le joueur peut jouer ou non
      */

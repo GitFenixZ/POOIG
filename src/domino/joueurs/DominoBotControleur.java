@@ -7,8 +7,8 @@ import communs.objets.player.PlayerControleur;
 import communs.objets.player.PlayerView;
 
 /**
- * Class controlant un Robot capable de jouer au domino de manière très
- * standart.
+ * Class contrôlant un Robot capable de jouer au domino de manière très
+ * standard.
  */
 public class DominoBotControleur extends PlayerControleur<PieceControleur<Integer>> implements Bot<Integer> {
     public DominoBotControleur(String name) {
@@ -18,7 +18,7 @@ public class DominoBotControleur extends PlayerControleur<PieceControleur<Intege
     }
 
     /**
-     * Methode a utiliser pour jouer dans le terminal.
+     * Méthode a utiliser pour jouer dans le terminal.
      * Affiche les informations importante.
      * 
      * @param plateauControleur Plateau sur lequel on joue en se moment.
@@ -29,7 +29,7 @@ public class DominoBotControleur extends PlayerControleur<PieceControleur<Intege
     }
 
     /**
-     * Methode a utiliser pour jouer sans le terminal.
+     * Méthode a utiliser pour jouer sans le terminal.
      * n'affiche aucune informations.
      * Permet de faire jouer un joueur automatiquement.
      * 

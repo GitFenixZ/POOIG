@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Controleur qui s'occupe du Menu.
+ * Contrôleur qui s'occupe du Menu.
  */
 public class MenuControleur {
     private MenuModel model;

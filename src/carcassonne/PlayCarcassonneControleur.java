@@ -6,7 +6,7 @@ import communs.PlayGameView;
 import java.awt.Color;
 
 /**
- * Class controlant une partie de carcassonne qui se joue.
+ * Class contrôlant une partie de carcassonne qui se joue.
  */
 public class PlayCarcassonneControleur extends PlayGameControleur<Terrain> {
     /**

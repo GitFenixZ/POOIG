@@ -3,7 +3,7 @@ package communs.objets;
 import communs.interfaces.InterfacePoint;
 
 /**
- * Répresente un point avec deux coordonnées.
+ * Représente un point avec deux coordonnées.
  */
 public class Point implements InterfacePoint {
     private int x;
@@ -36,7 +36,7 @@ public class Point implements InterfacePoint {
 
     @Override
     /**
-     * Permet de se deplacer le point a droite.
+     * Permet de se déplacer le point a droite.
      */
     public void allerADroite() {
         x++;
@@ -44,7 +44,7 @@ public class Point implements InterfacePoint {
 
     @Override
     /**
-     * Permet de se deplacer le point a gauche.
+     * Permet de se déplacer le point a gauche.
      */
     public void allerAGauche() {
         x--;
@@ -52,7 +52,7 @@ public class Point implements InterfacePoint {
 
     @Override
     /**
-     * Permet de se deplacer le point en bas.
+     * Permet de se déplacer le point en bas.
      */
     public void allerEnBas() {
         y++;
@@ -60,7 +60,7 @@ public class Point implements InterfacePoint {
 
     @Override
     /**
-     * Permet de se deplacer le point en haut.
+     * Permet de se déplacer le point en haut.
      */
     public void allerEnHaut() {
         y--;

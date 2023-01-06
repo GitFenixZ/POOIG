@@ -36,7 +36,7 @@ public interface InterfacePlateauControleur<V> {
     public boolean existeEmplacement(PieceControleur<V> piece);
 
     /**
-     * Creer un String qui represente une partie du plateau.
+     * Crée un String qui représente une partie du plateau.
      * Les 8 position adjacente a l'endroit du plateau ou l'on est ainsi que la
      * position ou l'on est. Si il y a des piece dans les positions affichees, cela
      * les affiches.
@@ -44,7 +44,7 @@ public interface InterfacePlateauControleur<V> {
     public void afficher();
 
     /**
-     * Methode qui permet d'initialiser le plateau avec un pièce en son centre.
+     * Méthode qui permet d'initialiser le plateau avec un pièce en son centre.
      * 
      * @param sac sac du quel est tiré la pièce.
      */

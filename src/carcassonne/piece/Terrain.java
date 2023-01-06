@@ -1,7 +1,7 @@
 package carcassonne.piece;
 
 /**
- * Enumeration representant les types de lieux que l'on peut retrouver sur une
+ * Enumeration représentant les types de lieux que l'on peut retrouver sur une
  * carte de jeu de carcassonne.
  */
 public enum Terrain {
@@ -14,7 +14,7 @@ public enum Terrain {
     NONE(5);
 
     /**
-     * si deux terrains ont la même valeurs, alors ils peuvent etre mit cote a cote.
+     * si deux terrains ont la même valeurs, alors ils peuvent être mit cote a cote.
      */
     private int valeur;
 

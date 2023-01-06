@@ -1,7 +1,8 @@
 package communs.exceptions;
 
 /**
- * Class qui represente un exception si la direction donner dans une methode n'a
+ * Class qui représente une exception si la direction donnée dans une méthode
+ * n'a
  * pas de sens.
  */
 public class directionInvalide extends Exception {

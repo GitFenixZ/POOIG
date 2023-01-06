@@ -6,7 +6,7 @@ import domino.PlayDominoControleur;
 import java.awt.Color;
 
 /**
- * Class permetant l'éxécution des parties.
+ * Class permettant l’exécution des parties.
  */
 
 public class MenuModel {
@@ -30,8 +30,8 @@ public class MenuModel {
     }
 
     /**
-     * Lance une partie complete de domino. Du debut jusqu'a ce qu'il n'y ai
-     * plus de piece dans le sac.
+     * Lance une partie complete de domino. Du début jusqu'a ce qu'il n'y ai
+     * plus de pièce dans le sac.
      */
     public void playDomino() {
         game.play();
@@ -55,8 +55,8 @@ public class MenuModel {
     }
 
     /**
-     * Lance une partie complete de carcassonne. Du debut jusqu'a ce qu'il n'y ai
-     * plus de piece dans le sac.
+     * Lance une partie complete de carcassonne. Du début jusqu'a ce qu'il n'y ai
+     * plus de pièce dans le sac.
      */
     public void playCarcassonne() {
         game.play();

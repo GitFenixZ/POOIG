@@ -15,22 +15,22 @@ public interface InterfacePoint {
     public void setY(int y);
 
     /**
-     * Permet de se deplacer le point a droite.
+     * Permet de se déplacer le point a droite.
      */
     public void allerADroite();
 
     /**
-     * Permet de se deplacer le point a gauche.
+     * Permet de se déplacer le point a gauche.
      */
     public void allerAGauche();
 
     /**
-     * Permet de se deplacer le point en bas.
+     * Permet de se déplacer le point en bas.
      */
     public void allerEnBas();
 
     /**
-     * Permet de se deplacer le point en haut.
+     * Permet de se déplacer le point en haut.
      */
     public void allerEnHaut();
 

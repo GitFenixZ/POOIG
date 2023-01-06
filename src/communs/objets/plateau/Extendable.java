@@ -9,7 +9,7 @@ import communs.objets.Direction;
 import communs.objets.Point;
 
 /**
- * Class qui represente un tableau en 2D qui contient des objet de type P et qui
+ * Class qui représente un tableau en 2D qui contient des objet de type P et qui
  * est de taille infini. C'est a dire qui est entendable tant que l'on souhaite.
  * 
  * P est le types des objet qui seront placer dans la tableau.
@@ -96,12 +96,12 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Getter permettant d'obtenir la piece à la position point du
+     * Getter permettant d'obtenir la pièce à la position point du
      * plateau.
      * 
-     * @param point position que l'on soihaite
-     * @return la piece de position point
-     * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
+     * @param point position que l'on souhaite
+     * @return la pièce de position point
+     * @throws positionInvalide Si la valeur les coordonnées sont à l’extérieur du
      *                          tableau.
      */
     public P getPiece(Point point) throws positionInvalide {
@@ -113,12 +113,12 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Setter permettant de placer la piece le point p du
+     * Setter permettant de placer la pièce le point p du
      * plateau.
      * 
-     * @param point position sur laquel la piece vas etre placee
+     * @param point position sur laquelle la pièce vas être placée
      * @param piece La piece a placer
-     * @throws positionInvalide Si la valeur les coorodonnees sont a l'exterieure du
+     * @throws positionInvalide Si la valeur les coordonnées sont a l’extérieur du
      *                          tableau.
      */
     public void setPiece(Point point, P piece) throws positionInvalide {
@@ -128,7 +128,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
         tableau.get(point.getY()).set(point.getX(), piece);
         /*
          * Tableau infini :
-         * Si la piece est pose sur un cote. On elargie la tableau sur ce cote en
+         * Si la piece est pose sur un cote. On élargie la tableau sur ce cote en
          * question.
          */
         try {
@@ -158,7 +158,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Permet de se deplacer d'une colonne sur la droite sur le plateau.
+     * Permet de se déplacer d'une colonne sur la droite sur le plateau.
      * 
      * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
@@ -172,7 +172,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Permet de se deplacer d'une colonne sur la gauche sur le plateau.
+     * Permet de se déplacer d'une colonne sur la gauche sur le plateau.
      * 
      * @throws positionInvalide Si la valeur de actuelX sort du tableau.
      */
@@ -186,7 +186,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Permet de se deplacer d'une ligne vers le bas sur le plateau.
+     * Permet de se déplacer d'une ligne vers le bas sur le plateau.
      * 
      * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
@@ -200,7 +200,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Permet de se deplacer d'une ligne vers le haut sur le plateau.
+     * Permet de se déplacer d'une ligne vers le haut sur le plateau.
      * 
      * @throws positionInvalide Si la valeur de actuelY sort du tableau.
      */
@@ -214,7 +214,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Verifie si le tableau est vide
+     * Vérifie si le tableau est vide
      * 
      * @return true si le tableau est vide,false si il y a au moins une piece.
      */
@@ -231,7 +231,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
 
     @Override
     /**
-     * Permet d'etendre le tableau du plateau dans une direction donnee
+     * Permet d’étendre le tableau du plateau dans une direction donnée
      * 
      * @param dir cote que l'on souhaite agrandir.
      * @throws directionInvalide Si la direction est ACTUEL
@@ -256,7 +256,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
     }
 
     /**
-     * Methode qui extends le tableau
+     * Méthode qui extends le tableau
      */
     private void ajouterUnCoteDroit() {
         for (ArrayList<P> ligne : tableau) {
@@ -269,10 +269,10 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
             // ajouter un element a la fin de chaque ligne
             ligne.add(null);
             for (int i = getLargeur() - 1; i > 0; i--) {
-                // deplacer tout les element vers la droite
+                // déplacer tout les element vers la droite
                 ligne.set(i, ligne.get(i - 1));
             }
-            // supprimer le premiere element
+            // supprimer le premier element
             ligne.set(0, null);
         }
     }
@@ -280,7 +280,7 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
     private void ajouterUnCoteBas() {
         // ajouter une ligne a la fin du plateau
         tableau.add(new ArrayList<P>());
-        // remplir cette ligne d'autant de colone qu'il faut
+        // remplir cette ligne d'autant de colonne qu'il faut
         for (int i = 0; i < getLargeur(); i++) {
             tableau.get(tableau.size() - 1).add(null);
         }
@@ -294,11 +294,11 @@ public abstract class Extendable<P> implements InterfaceExtendable<P> {
         for (int i = 0; i < getLargeur(); i++) {
             newLine.add(null);
         }
-        // deplacer tout les lignes sur les lignes du dessous
+        // déplacer toutes les lignes sur les lignes du dessous
         for (int i = getHauteur() - 1; i > 0; i--) {
             tableau.set(i, tableau.get(i - 1));
         }
-        // remplacer la ligne du debut par une ligne vide
+        // remplacer la ligne du début par une ligne vide
         tableau.set(0, newLine);
     }
 }

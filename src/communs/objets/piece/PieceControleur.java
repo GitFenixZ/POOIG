@@ -36,7 +36,7 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
     @Override
     public void setView(PieceView<V> view) {
         this.view = view;
-        view.setimagePiece();
+        view.setImagePiece();
     }
 
     // getters
@@ -89,7 +89,7 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
 
     @Override
     /**
-     * Methode qui tourne une piece à 90 degrès sur la droite.
+     * Méthode qui tourne une piece à 90 degrès sur la droite.
      * Les valeur qui etait en haut seront à droite.
      * Les valeur qui etait a droite seront en bas.
      * Les valeur qui etait en bas seront à gauche.
@@ -97,12 +97,12 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      */
     public void tournerDroite() {
         model.tournerDroite();
-        view.setimagePiece();
+        view.setImagePiece();
     }
 
     @Override
     /**
-     * Methode qui tourne une piece à 90 degrès sur la gauche.
+     * Méthode qui tourne une piece à 90 degrès sur la gauche.
      * Les valeur qui etait en haut seront à gauche.
      * Les valeur qui etait a gauche seront en bas.
      * Les valeur qui etait en bas seront à droite.
@@ -110,12 +110,12 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      */
     public void tournerGauche() {
         model.tournerGauche();
-        view.setimagePiece();
+        view.setImagePiece();
     }
 
     @Override
     /**
-     * Creer un String avec les elements de la lignes d'indice 'indice' Si ce n'est
+     * Crée un String avec les elements de la lignes d'indice 'indice' Si ce n'est
      * pas la premiere ou la dernière ligne, elle mettera des espaces à la places de
      * endroit ou il n'y a pas de numéro.
      * Si c'est la premiere ou la derniere ligne elle fera un string avec tout les
@@ -124,8 +124,8 @@ public class PieceControleur<V> implements InterfacePieceControleur<V> {
      * @param indice indice de la ligne a recuperer
      * @return une String avec les element de la ligne indice
      */
-    public String getligne(int indice) {
-        return view.getligne(indice);
+    public String getLigne(int indice) {
+        return view.getLigne(indice);
     }
 
     @Override
