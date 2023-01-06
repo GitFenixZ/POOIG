@@ -58,6 +58,8 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
         // ouvre une nouvelle fenetre.
         EventQueue.invokeLater(() -> {
             JFrame frame = new JFrame();
+            // Empeche la fermeture de la fenêtre de placement de partisan
+            frame.setDefaultCloseOperation(0); 
             frame.setSize(200, 260);
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);

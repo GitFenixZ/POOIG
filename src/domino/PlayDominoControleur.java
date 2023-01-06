@@ -3,6 +3,9 @@ package domino;
 import java.util.Scanner;
 
 import communs.PlayGameControleur;
+import communs.PlayGameView;
+import communs.objets.piece.PieceControleur;
+import communs.objets.player.PlayerControleur;
 
 /**
  * Class modélisant une partie de domino qui se joue.
@@ -14,7 +17,16 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      */
     public PlayDominoControleur(int nombreDePiece) {
         model = new PlayDominoModel(nombreDePiece);
-        view = new PlayDominoView(model, this);
+        view = new PlayGameView<Integer>(model, this);
+    }
+
+    /**
+     * Constructeur
+     */
+    public PlayDominoControleur(Scanner sc, int nombreDePiece, int nombreDeJoueur) {
+        model = new PlayDominoModel(nombreDePiece);
+        view = new PlayDominoTerminalView(model, this);
+        initPlayerTerminal(sc, nombreDeJoueur);
     }
 
     /**
@@ -23,31 +35,7 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      * @param sc lit la reponse de l'utilisateur
      */
     public void initPlayerTerminal(Scanner sc, int nombreDeJoueur) {
-        ((PlayDominoView) view).initialisationJoueur(nombreDeJoueur, sc);
-    }
-
-    /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
-     * dans le sac.
-     * 
-     * Se joue dans le termianal.
-     * 
-     * @param sc lit la reponse de l'utilisateur
-     */
-    public void playTerminal(Scanner sc) {
-        ((PlayDominoModel) model).playTerminal(sc, this);
-    }
-
-    /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
-     * dans le sac.
-     * 
-     * Avec interface Graphique
-     */
-    public void play() {
-        view.revalidate();
-        ((PlayDominoModel) model).play();
-        rejouer();
+        ((PlayDominoTerminalView) view).initialisationJoueur(nombreDeJoueur, sc);
     }
 
     /**
@@ -57,5 +45,17 @@ public class PlayDominoControleur extends PlayGameControleur<Integer> {
      */
     public void ajoutBot(String nom) {
         ((PlayDominoModel) model).ajoutBot(nom);
+    }
+
+    /**
+     * Place la pièce qu'a le player dans sa main sur le plateau.
+     * 
+     * @param game   partie qui se joue
+     * @param player Joueur qui place sa piece
+     * @param sc     System.in permettra de lire la reponse de l'utilisateur et de
+     *               savoir si le joueur veux placer sa piece.
+     */
+    public void pensezVousPouvoirJouer(Scanner sc, PlayerControleur<PieceControleur<Integer>> player) {
+        ((PlayDominoModel) model).pensezVousPouvoirJouer(sc, player);
     }
 }

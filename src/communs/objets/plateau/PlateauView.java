@@ -209,8 +209,8 @@ public class PlateauView<V> extends JPanel implements InterfacePlateauView<V>, D
     public void affichePlateauEtJoueur(PlayerControleur<PieceControleur<V>> player) {
         // affiche la partie du plateau ou l'on est.
         afficher();
-        // affiche la main du joueur
-        System.out.println(player.getMain());
+        // affiche les infos du joueur
+        System.out.println(player);
     }
 
     /**

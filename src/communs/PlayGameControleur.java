@@ -42,7 +42,6 @@ public class PlayGameControleur<V> {
         if (!model.finDePartie()) {
             model.nextPlayer();
             PlayerControleur joueurActuel = getActuelPlayer();
-            view.actualiser();
             if (joueurActuel instanceof Bot) {
                 if (model.jouer((Bot) joueurActuel)) {
                     nextPlayer();
@@ -52,9 +51,10 @@ public class PlayGameControleur<V> {
             } else {
                 if (!model.existeEmplacement()) {
                     rejouer();
+                } else {
+                    view.actualiser();
                 }
             }
-            view.actualiser();
         } else {
             getActuelPlayer().jeter();
             view.actualiser();
@@ -156,5 +156,16 @@ public class PlayGameControleur<V> {
         view.actualiser();
         allerADroite();// actualise l'affichage de la piece
         allerAGauche();// rudimentaire ...
+    }
+
+    /**
+     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * dans le sac.
+     * 
+     * Avec interface Graphique
+     */
+    public void play() {
+        view.revalidate();
+        model.play();
     }
 }

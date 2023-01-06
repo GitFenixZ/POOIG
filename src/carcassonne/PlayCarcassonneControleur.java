@@ -18,17 +18,6 @@ public class PlayCarcassonneControleur extends PlayGameControleur<Terrain> {
     }
 
     /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
-     * dans le sac.
-     * 
-     * Avec interface Graphique
-     */
-    public void play() {
-        ((PlayCarcassonneModel) model).start();
-        rejouer();
-    }
-
-    /**
      * ajoute une personnage aux joueurs de la partie
      * 
      * @param nom     pseudo du personnage a ajouter

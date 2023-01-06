@@ -53,6 +53,11 @@ public class PlayGameModel<V> {
         return joueurs.get(indice);
     }
 
+    public int getNombreDePiece() {
+        if (sac == null) return -1;
+        return sac.getNombreDePiece();
+    }
+
     /**
      * Met l'indice au joueur suivant, et le fait piocher permet au joueur suivant
      * de jouer.
@@ -64,7 +69,6 @@ public class PlayGameModel<V> {
             indice = 0;
         }
         getActuelPlayer().piocher(sac);
-
     }
 
     /**
@@ -190,4 +194,15 @@ public class PlayGameModel<V> {
     public boolean existeEmplacement() {
         return plateau.existeEmplacement(getActuelPlayer().getMain());
     }
+
+    /**
+     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
+     * dans le sac.
+     * 
+     * Avec interface Graphique
+     */
+    public void play() {
+        plateau.start(sac);
+    }
+
 }

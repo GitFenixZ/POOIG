@@ -81,7 +81,7 @@ public class MenuView extends JFrame {
             if (estStringEntier(entreeNombreDeJoueur.getText())) {
                 int nbJoueurs = Integer.valueOf(entreeNombreDeJoueur.getText());
                 setVisible(false);
-                controller.playDominoTerminale(nbJoueurs);
+                controller.prepareDominoTerminal(nbJoueurs);
             }
         });
 

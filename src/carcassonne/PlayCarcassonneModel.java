@@ -89,18 +89,6 @@ public class PlayCarcassonneModel extends PlayGameModel<Terrain> {
     }
 
     /**
-     * Lance une partie complete. Du debut jusqu'a ce qu'il n'y ai plus de piece
-     * dans le sac.
-     * 
-     * Avec interface Graphique
-     */
-
-    public void start() {
-        plateau.start(sac);
-
-    }
-
-    /**
      * ajoute une personnage aux joueurs de la partie
      * 
      * @param nom     pseudo du personnage a ajouter
