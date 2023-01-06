@@ -57,7 +57,6 @@ public class PlayGameControleur<V> {
             }
         } else {
             getActuelPlayer().jeter();
-            view.actualiser();
             view.finDePartie();
         }
     }
