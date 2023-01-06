@@ -62,7 +62,11 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
             JPanel panel = new JPanel(new BorderLayout());
-            JLabel texte1 = new JLabel("Voulez vous placer un partisant ? (Cliqué ou vous voulez)");
+            JPanel panelTexte = new JPanel(new GridLayout(2, 1));
+            JLabel texte1 = new JLabel("Placez un partisan :");
+            JLabel texte2 = new JLabel("Cliquez ou vous voulez");
+            panelTexte.add(texte1);
+            panelTexte.add(texte2);
 
             // créer une copy de la view de la piece du joueur actuel : pieceView
             // Evite les problèmes d'affichage d'un Jpanel blanc.
@@ -120,7 +124,7 @@ public class CarcassonnePlayerView extends PlayerView<PieceControleur<Terrain>> 
                 frame.dispose();
                 game.postPartisan();// permet au joueur suivant de jouer.
             });
-            panel.add(texte1, BorderLayout.NORTH);
+            panel.add(panelTexte, BorderLayout.NORTH);
             panel.add(pieceView, BorderLayout.CENTER);
             panel.add(passer, BorderLayout.SOUTH);
             frame.setContentPane(panel);
